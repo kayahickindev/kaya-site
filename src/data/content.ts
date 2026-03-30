@@ -111,10 +111,10 @@ export const siteConfig = {
   timeline: [
     {
       company: "MyFutureSelf",
-      role: "Founder & Builder",
-      period: "2024 — Present",
+      role: "Co-Founder, CTO",
+      period: "Jan 2025 — Present",
       description:
-        "Building an AI-powered personal development app. 19,000+ downloads, 1,200+ paying subscribers, ~$30k revenue in first 4 months. Designed and built the product end to end.",
+        "Building an AI app that helps users create their future self and become that person through personalized guidance, accountability, and action. 19,000+ downloads, 1,200+ paying subscribers, ~$30k revenue in first 4 months. Designed and built the product end to end.",
       active: true,
     },
     {
@@ -127,19 +127,19 @@ export const siteConfig = {
     },
     {
       company: "Appointra",
-      role: "Founder",
-      period: "2023 — Present",
+      role: "Co-Founder",
+      period: "Jun 2024 — Feb 2025",
       description:
-        "B2B lead generation business serving startups in major US markets. Profitable from early operations.",
-      active: true,
+        "Built a B2B lead generation agency that used AI and outbound systems to generate pipeline and book qualified meetings for clients.",
+      active: false,
     },
     {
       company: "LeadBoost Pro",
-      role: "Founder",
-      period: "2022 — Present",
+      role: "Co-Founder",
+      period: "Jan 2023 — Jun 2024",
       description:
-        "Started a marketing and web development consultancy during freshman year. Profitable from month one.",
-      active: true,
+        "Built a marketing, web development, and consulting business focused on helping small businesses grow through stronger digital presence, customer acquisition, and better systems.",
+      active: false,
     },
   ],
 
