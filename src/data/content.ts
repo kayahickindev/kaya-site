@@ -112,14 +112,14 @@ export const siteConfig = {
     {
       company: "MyFutureSelf",
       role: "Founder & Builder",
-      period: "2024 to Present",
+      period: "2024 — Present",
       description:
         "Building an AI-powered personal development app. 19,000+ downloads, 1,235 paying subscribers, ~$30k revenue in first 4 months. Designed and built the product end to end.",
       active: true,
     },
     {
       company: "RedHawk Business Accelerator",
-      role: "Winner, Miami University",
+      role: "Winner — Miami University",
       period: "April 2025",
       description:
         "Won the university's competitive business accelerator program for MyFutureSelf.",
@@ -128,7 +128,7 @@ export const siteConfig = {
     {
       company: "Appointra",
       role: "Founder",
-      period: "2023 to Present",
+      period: "2023 — Present",
       description:
         "B2B lead generation business serving startups in major US markets. Profitable from early operations.",
       active: true,
@@ -136,7 +136,7 @@ export const siteConfig = {
     {
       company: "LeadBoost Pro",
       role: "Founder",
-      period: "2022 to Present",
+      period: "2022 — Present",
       description:
         "Started a marketing and web development consultancy during freshman year. Profitable from month one.",
       active: true,
