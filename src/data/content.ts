@@ -130,7 +130,7 @@ export const siteConfig = {
       role: "Co-Founder",
       period: "Jun 2024 — Feb 2025",
       description:
-        "Built a B2B lead generation agency serving small to mid-sized companies in major US markets. Used AI and outbound systems to generate pipeline and book qualified meetings for clients. Reached $20k MRR.",
+        "Built a B2B lead generation agency for startups in San Francisco, Chicago, and New York. Generated millions in pipeline value and booked hundreds of qualified meetings using AI-powered outbound systems. Reached $20k MRR.",
       active: false,
     },
     {
@@ -138,7 +138,7 @@ export const siteConfig = {
       role: "Co-Founder",
       period: "Jan 2023 — Jun 2024",
       description:
-        "Built a marketing, web development, and consulting business focused on helping small businesses grow through stronger digital presence, customer acquisition, and better systems.",
+        "Built a marketing, web development, and consulting business focused on helping small, underrepresented businesses and our local community grow through stronger digital presence, customer acquisition, and better systems.",
       active: false,
     },
   ],
