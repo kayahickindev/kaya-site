@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { siteConfig } from "@/data/content";
 import { FadeIn } from "@/lib/animations";
 
@@ -30,12 +30,6 @@ function LinkedInIcon({ size = 18 }: { size?: number }) {
 
 const contactLinks = [
   {
-    icon: Mail,
-    label: "Email",
-    href: siteConfig.social.email,
-    display: "hello@kayahickin.com",
-  },
-  {
     icon: GitHubIcon,
     label: "GitHub",
     href: siteConfig.social.github,
@@ -45,13 +39,13 @@ const contactLinks = [
     icon: TwitterIcon,
     label: "X / Twitter",
     href: siteConfig.social.twitter,
-    display: "Coming soon",
+    display: "@KayaHickin",
   },
   {
     icon: LinkedInIcon,
     label: "LinkedIn",
     href: siteConfig.social.linkedin,
-    display: "Coming soon",
+    display: "kayahickin",
   },
   {
     icon: ExternalLink,
@@ -75,27 +69,8 @@ export function Contact() {
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          {/* Email CTA — full width */}
-          <a
-            href={siteConfig.social.email}
-            className="flex items-center justify-center gap-4 p-5 rounded-xl border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500 bg-neutral-50/50 dark:bg-neutral-900/30 transition-all duration-200 group mb-4"
-          >
-            <div className="p-2.5 rounded-lg bg-neutral-100 dark:bg-neutral-800/50 text-neutral-500 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors duration-200">
-              <Mail size={18} />
-            </div>
-            <div>
-              <p className="text-sm font-medium text-neutral-900 dark:text-white">
-                Email
-              </p>
-              <p className="text-sm text-neutral-500">hello@kayahickin.com</p>
-            </div>
-          </a>
-
-          {/* Remaining links — balanced 2x2 grid */}
           <div className="grid sm:grid-cols-2 gap-3">
-            {contactLinks
-              .filter((link) => link.label !== "Email")
-              .map(({ icon: Icon, label, href, display }) => (
+            {contactLinks.map(({ icon: Icon, label, href, display }) => (
                 <a
                   key={label}
                   href={href}

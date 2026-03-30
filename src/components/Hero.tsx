@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Mail } from "lucide-react";
 import { siteConfig } from "@/data/content";
 
 function GitHubIcon({ size = 18 }: { size?: number }) {
@@ -33,7 +32,6 @@ const socials = [
   { icon: GitHubIcon, href: siteConfig.social.github, label: "GitHub" },
   { icon: TwitterIcon, href: siteConfig.social.twitter, label: "X / Twitter" },
   { icon: LinkedInIcon, href: siteConfig.social.linkedin, label: "LinkedIn" },
-  { icon: Mail, href: siteConfig.social.email, label: "Email" },
 ];
 
 const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];

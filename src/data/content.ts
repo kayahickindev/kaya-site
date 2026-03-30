@@ -161,9 +161,9 @@ export const siteConfig = {
 
   social: {
     github: "https://github.com/kayahickindev",
-    twitter: "#",
-    linkedin: "#",
-    email: "mailto:hello@kayahickin.com",
+    twitter: "https://x.com/KayaHickin",
+    linkedin: "https://www.linkedin.com/in/kayahickin/",
+    email: "",
     myfutureself: "https://myfutureselfapp.com/",
   },
 

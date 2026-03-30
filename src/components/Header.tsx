@@ -41,7 +41,7 @@ export function Header() {
           href="#"
           className="text-lg font-semibold tracking-tight text-neutral-900 dark:text-white"
         >
-          Kaya<span className="text-neutral-400">.</span>
+          Kaya Hickin<span className="text-neutral-400">.</span>
         </a>
 
         {/* Desktop nav */}
