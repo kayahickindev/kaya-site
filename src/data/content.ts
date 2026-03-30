@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Kaya Hickin",
   title: "Founder, Builder, Operator",
-  url: "https://kayahickin.com",
+  url: "https://www.kayahickin.com",
 
   seo: {
     title: "Kaya Hickin | Founder, Builder, Operator",

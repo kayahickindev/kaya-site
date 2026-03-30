@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { Providers } from "./providers";
 import "./globals.css";
 import { siteConfig } from "@/data/content";
@@ -24,11 +25,13 @@ export const metadata: Metadata = {
     url: siteConfig.url,
     siteName: siteConfig.name,
     type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.seo.title,
     description: siteConfig.seo.description,
+    images: ["/opengraph-image"],
   },
 };
 
@@ -45,6 +48,7 @@ export default function RootLayout({
     >
       <body className="min-h-dvh bg-white dark:bg-[#050505] text-neutral-900 dark:text-neutral-100 font-sans antialiased">
         <Providers>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );
