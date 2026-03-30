@@ -49,6 +49,16 @@ export function Metrics() {
             <MetricCard key={metric.label} {...metric} delay={i * 0.1} />
           ))}
         </div>
+
+        {/* Recognition callout */}
+        {siteConfig.recognition && (
+          <FadeIn delay={0.4}>
+            <p className="mt-10 text-center text-sm font-medium text-neutral-500 dark:text-neutral-500 tracking-wide">
+              <span className="mr-2">&#127942;</span>
+              {siteConfig.recognition}
+            </p>
+          </FadeIn>
+        )}
       </div>
     </section>
   );

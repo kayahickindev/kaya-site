@@ -26,13 +26,39 @@ export const siteConfig = {
     { value: 3, label: "Profitable Companies", prefix: "", suffix: "", format: false },
   ],
 
+  recognition: "Winner — RedHawk Business Accelerator, Miami University 2025",
+
   about: {
     heading: "About Me",
     paragraphs: [
-      "I've been starting companies since my freshman year of college. Three so far — all profitable. I don't wait for permission to build.",
-      "Right now, I'm all-in on MyFutureSelf, an AI app that helps ambitious people create a vivid picture of their future self and then actually become that person through personalized guidance, accountability, and action. I built most of it myself — product, design, frontend, backend, prompts, analytics, and systems.",
-      "I'm graduating from Miami University in May 2026 with a degree in Marketing and a minor in Entrepreneurship. After that, I'm heading to San Francisco to be closer to the people and energy that push things forward.",
-      "I care deeply about AI, consumer products, behavior change, and building things that make a real difference in people's lives.",
+      "I started my first company freshman year because I wanted to see if I could actually build something people would pay for. Turns out I could — so I kept going.",
+      "My main focus right now is MyFutureSelf, an AI app that helps people get clear on who they want to become and then do the work to get there. I designed and built most of it myself — the product, the frontend, the backend, the prompt systems, all of it.",
+      "I'm finishing up at Miami University this spring — Marketing degree, Entrepreneurship minor — and heading to San Francisco after graduation.",
+      "Most of my time goes toward thinking about how AI can make consumer products that change real behavior, not just engagement metrics.",
+    ],
+    sidebar: [
+      { label: "Location", value: "SF-bound (currently Ohio)" },
+      { label: "Education", value: "Miami University, May 2026", detail: "Marketing + Entrepreneurship Minor" },
+      { label: "Focus", value: "AI, Consumer Products, Behavior Change" },
+      { label: "Other interests", value: "Fitness, hiking, reading, podcasts" },
+    ],
+  },
+
+  techStack: {
+    heading: "What I Build With",
+    items: [
+      "Swift",
+      "SwiftUI",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "Firebase",
+      "OpenAI API",
+      "Claude API",
+      "Tailwind CSS",
+      "Python",
+      "Git",
     ],
   },
 
@@ -122,41 +148,48 @@ export const siteConfig = {
     url: "https://github.com/kayahickindev",
     heading: "I Ship Constantly",
     description:
-      "Beyond my main products, I've developed autonomous software engineer workflows using AI coding tools to accelerate development across everything I build. I move fast and push code daily.",
+      "I build with AI-assisted workflows and ship fast. Most of my work lives across Swift/SwiftUI for iOS and React/Next.js for web, with OpenAI and Claude APIs powering the AI layers. I push code daily.",
   },
 
-  interests: {
-    heading: "Beyond the Code",
+  whatsNext: {
+    heading: "Where I'm Headed",
     items: [
-      "AI & Machine Learning",
-      "Fitness & Nutrition",
-      "Personal Development",
-      "Hiking & Backpacking",
-      "Reading",
-      "Podcasts",
-      "Consumer Products",
-      "Behavior Change",
+      {
+        title: "Moving to San Francisco",
+        description: "This summer. To be around the people and companies pushing things forward.",
+      },
+      {
+        title: "Scaling MyFutureSelf",
+        description: "Focused on retention, AI depth, and building something people use every day — not just download once.",
+      },
+      {
+        title: "Finding a co-founder",
+        description: "The right technical partner to take MFS from a strong start to something much bigger.",
+      },
+      {
+        title: "Exploring accelerator programs",
+        description: "Actively looking at YC and other programs for the next stage of growth.",
+      },
     ],
   },
 
   cofounder: {
     heading: "Looking for a Technical Co-Founder",
     description:
-      "I'm looking for someone who's all-in. A high-agency, low-ego, technically exceptional full-stack engineer who moves fast, ships relentlessly, and wants to build something massive.",
+      "MyFutureSelf has real traction and I need a technical partner to help turn it into something much bigger. Someone who can own the engineering — infrastructure, scale, AI systems — while I drive product, design, and growth.",
     qualities: [
-      "Technically exceptional — you can architect and build production systems end to end",
-      "High agency — you don't wait to be told what to do",
-      "Low ego — you care about the outcome, not who gets credit",
-      "Moves fast — you ship in days, not months",
-      "Ambitious — you want to build something that matters at scale",
+      "You can architect and ship production systems end to end",
+      "You move fast — you'd rather ship and iterate than plan forever",
+      "You care about the outcome, not who gets credit",
+      "You want to build a product that millions of people actually use",
     ],
-    cta: "If this sounds like you, let's talk.",
+    cta: "If this sounds like you, reach out. Let's talk.",
   },
 
   contact: {
     heading: "Let's Build Something",
     description:
-      "I'm always open to connecting with serious builders, technical co-founders, and investors who think big. If you're working on something ambitious or want to join forces, reach out.",
+      "If you're a builder, investor, or someone working on something ambitious — I'd love to connect.",
   },
 
   social: {

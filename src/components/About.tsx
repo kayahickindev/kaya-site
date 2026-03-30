@@ -32,33 +32,19 @@ export function About() {
                 Quick Facts
               </h3>
               <div className="space-y-5">
-                <div>
-                  <p className="text-sm text-neutral-500 mb-1">Location</p>
-                  <p className="text-sm font-medium text-neutral-900 dark:text-white">
-                    SF-bound (currently Ohio)
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-neutral-500 mb-1">Education</p>
-                  <p className="text-sm font-medium text-neutral-900 dark:text-white">
-                    Miami University, May 2026
-                  </p>
-                  <p className="text-xs text-neutral-500 mt-0.5">
-                    Marketing + Entrepreneurship Minor
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-neutral-500 mb-1">Focus</p>
-                  <p className="text-sm font-medium text-neutral-900 dark:text-white">
-                    AI, Consumer Products, Behavior Change
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-neutral-500 mb-1">Companies</p>
-                  <p className="text-sm font-medium text-neutral-900 dark:text-white">
-                    3 started, all profitable
-                  </p>
-                </div>
+                {siteConfig.about.sidebar.map((item) => (
+                  <div key={item.label}>
+                    <p className="text-sm text-neutral-500 mb-1">{item.label}</p>
+                    <p className="text-sm font-medium text-neutral-900 dark:text-white">
+                      {item.value}
+                    </p>
+                    {"detail" in item && item.detail && (
+                      <p className="text-xs text-neutral-500 mt-0.5">
+                        {item.detail}
+                      </p>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </FadeIn>
