@@ -21,7 +21,7 @@ export const siteConfig = {
 
   metrics: [
     { value: 19000, label: "App Downloads", prefix: "", suffix: "+", format: true },
-    { value: 1235, label: "Paying Subscribers", prefix: "", suffix: "", format: true },
+    { value: 1200, label: "Paying Subscribers", prefix: "", suffix: "+", format: true },
     { value: 30, label: "Revenue (First 4 Mo.)", prefix: "$", suffix: "k+", format: false },
     { value: 3, label: "Profitable Companies", prefix: "", suffix: "", format: false },
   ],
@@ -114,7 +114,7 @@ export const siteConfig = {
       role: "Founder & Builder",
       period: "2024 — Present",
       description:
-        "Building an AI-powered personal development app. 19,000+ downloads, 1,235 paying subscribers, ~$30k revenue in first 4 months. Designed and built the product end to end.",
+        "Building an AI-powered personal development app. 19,000+ downloads, 1,200+ paying subscribers, ~$30k revenue in first 4 months. Designed and built the product end to end.",
       active: true,
     },
     {
