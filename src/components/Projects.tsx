@@ -103,7 +103,7 @@ export function Projects() {
             Things I&apos;ve Built
           </h2>
           <p className="text-neutral-500 dark:text-neutral-500 mb-12 max-w-xl">
-            Products, businesses, and tools — all shipped and generating revenue.
+            Products, businesses, and tools. All shipped and generating revenue.
           </p>
         </FadeIn>
 

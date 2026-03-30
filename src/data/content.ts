@@ -4,7 +4,7 @@ export const siteConfig = {
   url: "https://kayahickin.com",
 
   seo: {
-    title: "Kaya Hickin — Founder, Builder, Operator",
+    title: "Kaya Hickin | Founder, Builder, Operator",
     description:
       "Building MyFutureSelf, an AI app with 19,000+ downloads. Three profitable companies since freshman year. Looking for an exceptional technical co-founder.",
   },
@@ -12,7 +12,7 @@ export const siteConfig = {
   hero: {
     headline: "I build products that move people forward.",
     description:
-      "I've started three profitable companies since freshman year and I'm currently building MyFutureSelf — an AI app with 19,000+ downloads helping people become who they want to be. I design, code, and ship.",
+      "I've started three profitable companies since freshman year and I'm currently building MyFutureSelf, an AI app with 19,000+ downloads helping people become who they want to be. I design, code, and ship.",
     cta: {
       primary: { text: "View My Work", href: "#projects" },
       secondary: { text: "Get in Touch", href: "#contact" },
@@ -21,19 +21,19 @@ export const siteConfig = {
 
   metrics: [
     { value: 19000, label: "App Downloads", prefix: "", suffix: "+", format: true },
-    { value: 565, label: "Paying Subscribers", prefix: "", suffix: "", format: false },
+    { value: 1235, label: "Paying Subscribers", prefix: "", suffix: "", format: true },
     { value: 30, label: "Revenue (First 4 Mo.)", prefix: "$", suffix: "k+", format: false },
     { value: 3, label: "Profitable Companies", prefix: "", suffix: "", format: false },
   ],
 
-  recognition: "Winner — RedHawk Business Accelerator, Miami University 2025",
+  recognition: "Winner, RedHawk Business Accelerator, Miami University 2025",
 
   about: {
     heading: "About Me",
     paragraphs: [
-      "I started my first company freshman year because I wanted to see if I could actually build something people would pay for. Turns out I could — so I kept going.",
-      "My main focus right now is MyFutureSelf, an AI app that helps people get clear on who they want to become and then do the work to get there. I designed and built most of it myself — the product, the frontend, the backend, the prompt systems, all of it.",
-      "I'm finishing up at Miami University this spring — Marketing degree, Entrepreneurship minor — and heading to San Francisco after graduation.",
+      "I started my first company freshman year because I wanted to see if I could actually build something people would pay for. Turns out I could, so I kept going.",
+      "My main focus right now is MyFutureSelf, an AI app that helps people create a vivid version of their future self and then become that person through personalized guidance, accountability, and action. I designed and built most of it myself: the product, the frontend, the backend, the prompt systems, all of it.",
+      "I'm finishing up at Miami University this spring with a Marketing degree and an Entrepreneurship minor, then heading to San Francisco after graduation.",
       "Most of my time goes toward thinking about how AI can make consumer products that change real behavior, not just engagement metrics.",
     ],
     sidebar: [
@@ -112,14 +112,14 @@ export const siteConfig = {
     {
       company: "MyFutureSelf",
       role: "Founder & Builder",
-      period: "2024 — Present",
+      period: "2024 to Present",
       description:
-        "Building an AI-powered personal development app. 19,000+ downloads, 565 paying subscribers, ~$30k revenue in first 4 months. Designed and built the product end to end.",
+        "Building an AI-powered personal development app. 19,000+ downloads, 1,235 paying subscribers, ~$30k revenue in first 4 months. Designed and built the product end to end.",
       active: true,
     },
     {
       company: "RedHawk Business Accelerator",
-      role: "Winner — Miami University",
+      role: "Winner, Miami University",
       period: "April 2025",
       description:
         "Won the university's competitive business accelerator program for MyFutureSelf.",
@@ -128,7 +128,7 @@ export const siteConfig = {
     {
       company: "Appointra",
       role: "Founder",
-      period: "2023 — Present",
+      period: "2023 to Present",
       description:
         "B2B lead generation business serving startups in major US markets. Profitable from early operations.",
       active: true,
@@ -136,7 +136,7 @@ export const siteConfig = {
     {
       company: "LeadBoost Pro",
       role: "Founder",
-      period: "2022 — Present",
+      period: "2022 to Present",
       description:
         "Started a marketing and web development consultancy during freshman year. Profitable from month one.",
       active: true,
@@ -160,15 +160,15 @@ export const siteConfig = {
       },
       {
         title: "Scaling MyFutureSelf",
-        description: "Focused on retention, AI depth, and building something people use every day — not just download once.",
+        description: "Focused on retention, AI depth, and building something people use every day, not just download once.",
       },
       {
         title: "Finding a co-founder",
         description: "The right technical partner to take MFS from a strong start to something much bigger.",
       },
       {
-        title: "Exploring accelerator programs",
-        description: "Actively looking at YC and other programs for the next stage of growth.",
+        title: "Raising and accelerating",
+        description: "Exploring early-stage funding and accelerator programs to fuel the next stage of growth.",
       },
     ],
   },
@@ -176,10 +176,10 @@ export const siteConfig = {
   cofounder: {
     heading: "Looking for a Technical Co-Founder",
     description:
-      "MyFutureSelf has real traction and I need a technical partner to help turn it into something much bigger. Someone who can own the engineering — infrastructure, scale, AI systems — while I drive product, design, and growth.",
+      "MyFutureSelf has real traction and I need a technical partner to help turn it into something much bigger. Someone who can own the engineering, the infrastructure, the scale, the AI systems, while I drive product, design, and growth.",
     qualities: [
       "You can architect and ship production systems end to end",
-      "You move fast — you'd rather ship and iterate than plan forever",
+      "You move fast and would rather ship and iterate than plan forever",
       "You care about the outcome, not who gets credit",
       "You want to build a product that millions of people actually use",
     ],
@@ -189,7 +189,7 @@ export const siteConfig = {
   contact: {
     heading: "Let's Build Something",
     description:
-      "If you're a builder, investor, or someone working on something ambitious — I'd love to connect.",
+      "If you're a builder, investor, or someone working on something ambitious, I'd love to connect.",
   },
 
   social: {
