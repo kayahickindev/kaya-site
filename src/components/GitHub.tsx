@@ -30,7 +30,7 @@ function ContributionGrid({ data }: { data: GitHubData | null }) {
   }
 
   // Take the last 20 weeks (140 days) for a compact view
-  const recent = data.contributions.slice(-140);
+  const recent = data.contributions.slice(-224);
 
   // Group into weeks (7 days each)
   const weeks: ContributionDay[][] = [];
@@ -39,7 +39,7 @@ function ContributionGrid({ data }: { data: GitHubData | null }) {
   }
 
   return (
-    <div className="overflow-x-auto pb-2">
+    <div className="overflow-x-auto pb-2 flex justify-center">
       <div
         className="inline-grid gap-[3px]"
         style={{
@@ -51,7 +51,7 @@ function ContributionGrid({ data }: { data: GitHubData | null }) {
           week.map((day, di) => (
             <div
               key={`${wi}-${di}`}
-              className="w-[11px] h-[11px] rounded-[2px] transition-colors duration-200"
+              className="w-[13px] h-[13px] rounded-[2px] transition-colors duration-200"
               style={{
                 backgroundColor: `var(--gh-${day.level})`,
               }}
@@ -70,7 +70,7 @@ function ContributionGrid({ data }: { data: GitHubData | null }) {
 
 function ContributionSkeleton() {
   return (
-    <div className="overflow-x-auto pb-2">
+    <div className="overflow-x-auto pb-2 flex justify-center">
       <div
         className="inline-grid gap-[3px]"
         style={{
@@ -78,10 +78,10 @@ function ContributionSkeleton() {
           gridAutoFlow: "column",
         }}
       >
-        {Array.from({ length: 140 }).map((_, i) => (
+        {Array.from({ length: 224 }).map((_, i) => (
           <div
             key={i}
-            className="w-[11px] h-[11px] rounded-[2px] bg-neutral-100 dark:bg-neutral-800/50 animate-pulse"
+            className="w-[13px] h-[13px] rounded-[2px] bg-neutral-100 dark:bg-neutral-800/50 animate-pulse"
           />
         ))}
       </div>
@@ -142,7 +142,7 @@ export function GitHub() {
         <FadeIn delay={0.1}>
           <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800/50 bg-neutral-50/50 dark:bg-neutral-900/20 p-6 sm:p-8">
             {/* Stats row */}
-            <div className="flex flex-wrap items-center gap-6 mb-6">
+            <div className="flex flex-wrap items-center justify-center gap-8 mb-6">
               {data && (
                 <div className="flex items-baseline gap-2">
                   <span className="text-2xl font-bold text-neutral-900 dark:text-white">

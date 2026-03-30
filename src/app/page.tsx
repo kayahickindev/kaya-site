@@ -16,13 +16,21 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <Metrics />
+        <div className="bg-neutral-50 dark:bg-[#0a0a0a]">
+          <Metrics />
+        </div>
         <About />
-        <Projects />
+        <div className="bg-neutral-50 dark:bg-[#0a0a0a]">
+          <Projects />
+        </div>
         <Timeline />
-        <GitHub />
+        <div className="bg-neutral-50 dark:bg-[#0a0a0a]">
+          <GitHub />
+        </div>
         <Interests />
-        <CoFounder />
+        <div className="bg-neutral-50 dark:bg-[#0a0a0a]">
+          <CoFounder />
+        </div>
         <Contact />
       </main>
       <Footer />

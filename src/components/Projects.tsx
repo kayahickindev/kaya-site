@@ -28,11 +28,11 @@ function ProjectCard({
       variants={staggerChild}
       className={`group relative rounded-2xl border transition-all duration-300 ${
         featured
-          ? "border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900/50"
+          ? "sm:col-span-2 border-neutral-300 dark:border-neutral-700 bg-gradient-to-br from-neutral-50 to-neutral-100/50 dark:from-neutral-900/50 dark:to-neutral-800/20"
           : "border-neutral-200 dark:border-neutral-800/50 bg-white dark:bg-neutral-900/20"
       } hover:border-neutral-400 dark:hover:border-neutral-600 hover:-translate-y-0.5`}
     >
-      <div className="p-6 sm:p-8">
+      <div className={`p-6 ${featured ? "sm:p-10" : "sm:p-8"}`}>
         <div className="flex items-start justify-between mb-4">
           <div>
             <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-1">

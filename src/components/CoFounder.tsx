@@ -11,15 +11,15 @@ export function CoFounder() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800/50 bg-neutral-50/50 dark:bg-neutral-900/20 p-8 sm:p-12 lg:p-16">
           <FadeIn>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white mb-6 text-center">
               {siteConfig.cofounder.heading}
             </h2>
-            <p className="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl mb-10">
+            <p className="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl mx-auto mb-10 text-center">
               {siteConfig.cofounder.description}
             </p>
           </FadeIn>
 
-          <Stagger className="space-y-4 mb-10" staggerDelay={0.08}>
+          <Stagger className="space-y-4 mb-10 max-w-2xl mx-auto" staggerDelay={0.08}>
             {siteConfig.cofounder.qualities.map((quality) => (
               <motion.div
                 key={quality}
@@ -36,7 +36,7 @@ export function CoFounder() {
             ))}
           </Stagger>
 
-          <FadeIn delay={0.3}>
+          <FadeIn delay={0.3} className="text-center">
             <p className="text-lg font-semibold text-neutral-900 dark:text-white mb-6">
               {siteConfig.cofounder.cta}
             </p>

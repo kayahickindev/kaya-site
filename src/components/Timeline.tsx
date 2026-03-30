@@ -19,20 +19,20 @@ export function Timeline() {
 
         <Stagger className="relative">
           {/* Timeline line */}
-          <div className="absolute left-[7px] top-3 bottom-3 w-px bg-neutral-200 dark:bg-neutral-800" />
+          <div className="absolute left-[8px] top-3 bottom-3 w-[2px] bg-neutral-200 dark:bg-neutral-800" />
 
-          <div className="space-y-10">
+          <div className="space-y-14">
             {siteConfig.timeline.map((entry) => (
               <motion.div
                 key={entry.company}
                 variants={staggerChild}
-                className="relative pl-10"
+                className="relative pl-12"
               >
                 {/* Timeline dot */}
                 <div
-                  className={`absolute left-0 top-[6px] w-[15px] h-[15px] rounded-full border-2 ${
+                  className={`absolute left-0 top-[5px] w-[18px] h-[18px] rounded-full border-2 ${
                     entry.active
-                      ? "border-neutral-900 dark:border-white bg-neutral-900 dark:bg-white"
+                      ? "border-neutral-900 dark:border-white bg-neutral-900 dark:bg-white ring-4 ring-neutral-900/10 dark:ring-white/10"
                       : "border-neutral-400 dark:border-neutral-600 bg-white dark:bg-neutral-950"
                   }`}
                 />
