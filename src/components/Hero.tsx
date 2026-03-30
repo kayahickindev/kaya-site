@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Mail, ArrowDown } from "lucide-react";
+import { Mail } from "lucide-react";
 import { siteConfig } from "@/data/content";
 
 function GitHubIcon({ size = 18 }: { size?: number }) {
@@ -46,11 +46,11 @@ const fadeUp = (delay: number) => ({
 
 export function Hero() {
   return (
-    <section className="relative min-h-[90dvh] flex items-center pt-24 pb-12">
-      <div className="max-w-6xl mx-auto px-6 w-full">
-        <div className="grid lg:grid-cols-[1fr,300px] gap-12 lg:gap-16 items-center">
+    <section className="pt-32 pb-20 lg:pt-40 lg:pb-28">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
           {/* Text content */}
-          <div className="order-2 lg:order-1">
+          <div className="flex-1 order-2 lg:order-1">
             <motion.p
               {...fadeUp(0)}
               className="text-sm font-medium tracking-widest uppercase text-neutral-500 dark:text-neutral-500 mb-4"
@@ -105,12 +105,12 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Headshot placeholder */}
+          {/* Headshot */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="order-1 lg:order-2 flex justify-center lg:justify-end"
+            className="flex-shrink-0 order-1 lg:order-2 flex justify-center lg:justify-end"
           >
             <div className="relative">
               <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-72 lg:h-72 rounded-2xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 overflow-hidden">
@@ -129,20 +129,6 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:block"
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ArrowDown size={20} className="text-neutral-400" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }
