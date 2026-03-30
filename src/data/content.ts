@@ -130,7 +130,7 @@ export const siteConfig = {
       role: "Co-Founder",
       period: "Jun 2024 — Feb 2025",
       description:
-        "Built a B2B lead generation agency that used AI and outbound systems to generate pipeline and book qualified meetings for clients.",
+        "Built a B2B lead generation agency serving small to mid-sized companies in major US markets. Used AI and outbound systems to generate pipeline and book qualified meetings for clients. Reached $20k MRR.",
       active: false,
     },
     {
