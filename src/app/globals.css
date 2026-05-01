@@ -5,6 +5,20 @@
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-serif);
+
+  /* Signature accent — warm amber. Pairs with serif display + neutral base. */
+  --color-accent-50: #fbf3e8;
+  --color-accent-100: #f4dfbf;
+  --color-accent-200: #e9c594;
+  --color-accent-300: #ddaa6a;
+  --color-accent-400: #d49b5a;
+  --color-accent-500: #c98a45;
+  --color-accent-600: #a36e35;
+  --color-accent-700: #7d5325;
+  --color-accent-800: #573917;
+  --color-accent-900: #3b250d;
+  --color-accent-950: #1f1306;
 }
 
 html {
@@ -12,31 +26,43 @@ html {
   scroll-padding-top: 5rem;
 }
 
+body {
+  background-color: #ffffff;
+}
+
+.dark body {
+  background-color: #070605;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(212, 155, 90, 0.08), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 100% 100%, rgba(212, 155, 90, 0.04), transparent 60%);
+  background-attachment: fixed;
+}
+
 ::selection {
-  background-color: #a3a3a3;
-  color: #0a0a0a;
+  background-color: #d49b5a;
+  color: #1a1208;
 }
 
 .dark ::selection {
-  background-color: #404040;
-  color: #fafafa;
+  background-color: #d49b5a;
+  color: #1a1208;
 }
 
-/* GitHub contribution graph colors */
+/* GitHub contribution graph colors — accent-tinted in dark, neutral in light */
 :root {
   --gh-0: #ebedf0;
-  --gh-1: #9be9a8;
-  --gh-2: #40c463;
-  --gh-3: #30a14e;
-  --gh-4: #216e39;
+  --gh-1: #f4dfbf;
+  --gh-2: #e9c594;
+  --gh-3: #ddaa6a;
+  --gh-4: #c98a45;
 }
 
 .dark {
-  --gh-0: #161b22;
-  --gh-1: #0e4429;
-  --gh-2: #006d32;
-  --gh-3: #26a641;
-  --gh-4: #39d353;
+  --gh-0: #1a1610;
+  --gh-1: #3a2a17;
+  --gh-2: #6b4a25;
+  --gh-3: #a36e35;
+  --gh-4: #d49b5a;
 }
 
 /* Custom scrollbar */
@@ -55,4 +81,60 @@ html {
 
 .dark ::-webkit-scrollbar-thumb {
   background: #525252;
+}
+
+/* Display serif utility */
+.font-serif {
+  font-family: var(--font-serif), ui-serif, Georgia, serif;
+  letter-spacing: -0.02em;
+}
+
+/* Grain noise overlay (used on hero) */
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+.dark .grain {
+  opacity: 0.10;
+}
+
+/* Soft accent glow utility */
+.accent-glow {
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(212, 155, 90, 0.18), transparent 70%);
+}
+
+.dark .accent-glow {
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(212, 155, 90, 0.22), transparent 70%);
+}
+
+/* Live status pulse */
+@keyframes accent-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.85); }
+}
+
+.accent-pulse {
+  animation: accent-pulse 2.4s ease-in-out infinite;
+}
+
+/* Subtle float animation for featured visuals */
+@keyframes gentle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.gentle-float {
+  animation: gentle-float 6s ease-in-out infinite;
+}
+
+/* Reveal mask for word-level hero animation */
+.reveal-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
 }

@@ -1,8 +1,9 @@
 "use client";
 
-import { ExternalLink } from "lucide-react";
+import { Mail, ArrowUpRight, ExternalLink } from "lucide-react";
 import { siteConfig } from "@/data/content";
 import { FadeIn } from "@/lib/animations";
+import { EmailLink } from "./EmailLink";
 
 function GitHubIcon({ size = 18 }: { size?: number }) {
   return (
@@ -28,69 +29,82 @@ function LinkedInIcon({ size = 18 }: { size?: number }) {
   );
 }
 
-const contactLinks = [
-  {
-    icon: GitHubIcon,
-    label: "GitHub",
-    href: siteConfig.social.github,
-    display: "kayahickindev",
-  },
-  {
-    icon: TwitterIcon,
-    label: "X / Twitter",
-    href: siteConfig.social.twitter,
-    display: "@KayaHickin",
-  },
-  {
-    icon: LinkedInIcon,
-    label: "LinkedIn",
-    href: siteConfig.social.linkedin,
-    display: "kayahickin",
-  },
-  {
-    icon: ExternalLink,
-    label: "MyFutureSelf",
-    href: siteConfig.social.myfutureself,
-    display: "myfutureselfapp.com",
-  },
+function InstagramIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+    </svg>
+  );
+}
+
+const socials = [
+  { Icon: GitHubIcon, href: siteConfig.social.github, label: "GitHub" },
+  { Icon: TwitterIcon, href: siteConfig.social.twitter, label: "X / Twitter" },
+  { Icon: LinkedInIcon, href: siteConfig.social.linkedin, label: "LinkedIn" },
+  { Icon: InstagramIcon, href: siteConfig.social.instagram, label: "Instagram" },
+  { Icon: ExternalLink, href: siteConfig.social.myfutureself, label: "MyFutureSelf" },
 ];
 
 export function Contact() {
+  const { eyebrow, body, primaryCta } = siteConfig.contact;
+
   return (
-    <section id="contact" className="py-24 md:py-32">
-      <div className="max-w-6xl mx-auto px-6">
+    <section
+      id="contact"
+      className="relative py-28 md:py-36 overflow-hidden"
+    >
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-1/2 -translate-y-1/2 mx-auto max-w-3xl h-[480px] opacity-50 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(212,155,90,0.18), transparent 70%)",
+        }}
+      />
+
+      <div className="relative max-w-3xl mx-auto px-6 text-center">
         <FadeIn>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white mb-4 text-center">
-            {siteConfig.contact.heading}
+          <span className="text-xs font-semibold tracking-widest uppercase text-accent-500 dark:text-accent-300 mb-5 block">
+            {eyebrow}
+          </span>
+          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-neutral-900 dark:text-white mb-7 leading-[1.05]">
+            Let&apos;s build{" "}
+            <span className="font-serif italic font-normal">something</span>.
           </h2>
-          <p className="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl mx-auto mb-12 text-center">
-            {siteConfig.contact.description}
+          <p className="text-lg sm:text-xl text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl mx-auto mb-10">
+            {body}
           </p>
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <div className="grid sm:grid-cols-2 gap-3">
-            {contactLinks.map(({ icon: Icon, label, href, display }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={
-                    href.startsWith("http") ? "noopener noreferrer" : undefined
-                  }
-                  className="flex items-center gap-4 p-4 rounded-xl border border-neutral-200 dark:border-neutral-800/50 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-200 group"
-                >
-                  <div className="p-2.5 rounded-lg bg-neutral-100 dark:bg-neutral-800/50 text-neutral-500 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors duration-200">
-                    <Icon size={18} />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-neutral-900 dark:text-white">
-                      {label}
-                    </p>
-                    <p className="text-sm text-neutral-500">{display}</p>
-                  </div>
-                </a>
-              ))}
+          <EmailLink
+            ariaLabel="Send an email"
+            className="group inline-flex items-center gap-3 px-7 py-4 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium text-base hover:bg-neutral-800 dark:hover:bg-neutral-100 ring-1 ring-transparent hover:ring-accent-400/50 transition-all"
+          >
+            <Mail size={18} />
+            <span>{primaryCta.label}</span>
+            <ArrowUpRight
+              size={18}
+              className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </EmailLink>
+        </FadeIn>
+
+        <FadeIn delay={0.2}>
+          <div className="mt-14 flex items-center justify-center gap-2.5 flex-wrap">
+            {socials.map(({ Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                title={label}
+                className="p-3 rounded-full border border-neutral-200 dark:border-neutral-800 text-neutral-500 hover:text-accent-500 dark:hover:text-accent-300 hover:border-accent-400/60 transition-all"
+              >
+                <Icon size={18} />
+              </a>
+            ))}
           </div>
         </FadeIn>
       </div>

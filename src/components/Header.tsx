@@ -32,16 +32,17 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/80 dark:bg-neutral-950/80 backdrop-blur-xl border-b border-neutral-200 dark:border-neutral-800/50"
+          ? "bg-white/75 dark:bg-[#070605]/80 backdrop-blur-xl border-b border-neutral-200/70 dark:border-neutral-800/50"
           : ""
       }`}
     >
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <a
           href="#"
-          className="text-lg font-semibold tracking-tight text-neutral-900 dark:text-white"
+          className="text-base font-semibold tracking-tight text-neutral-900 dark:text-white flex items-center gap-1"
         >
-          Kaya Hickin<span className="text-neutral-400">.</span>
+          Kaya Hickin
+          <span className="text-accent-500 dark:text-accent-300">.</span>
         </a>
 
         {/* Desktop nav */}
@@ -57,11 +58,11 @@ export function Header() {
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           {mounted && (
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-lg text-neutral-500 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200"
+              className="p-2 rounded-lg text-neutral-500 hover:text-accent-500 dark:hover:text-accent-300 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors duration-200"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
@@ -69,7 +70,7 @@ export function Header() {
           )}
 
           <button
-            className="md:hidden p-2 rounded-lg text-neutral-500 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200"
+            className="md:hidden p-2 rounded-lg text-neutral-500 hover:text-accent-500 dark:hover:text-accent-300 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors duration-200"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -86,7 +87,7 @@ export function Header() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="overflow-hidden md:hidden bg-white/95 dark:bg-neutral-950/95 backdrop-blur-xl border-b border-neutral-200 dark:border-neutral-800/50"
+            className="overflow-hidden md:hidden bg-white/95 dark:bg-[#070605]/95 backdrop-blur-xl border-b border-neutral-200 dark:border-neutral-800/50"
           >
             <div className="px-6 py-4 space-y-1">
               {siteConfig.nav.map((item) => (
@@ -94,7 +95,7 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block py-3 text-base text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white transition-colors"
+                  className="block py-3 text-base text-neutral-600 dark:text-neutral-300 hover:text-accent-500 dark:hover:text-accent-300 transition-colors"
                 >
                   {item.label}
                 </a>

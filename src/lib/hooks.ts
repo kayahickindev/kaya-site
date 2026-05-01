@@ -3,7 +3,12 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useInView } from "framer-motion";
 
-export function useCountUp(end: number, duration = 2000, format = false) {
+export function useCountUp(
+  end: number,
+  duration = 2000,
+  format = false,
+  decimals = 0
+) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref as React.RefObject<Element>, { once: true });
@@ -19,7 +24,7 @@ export function useCountUp(end: number, duration = 2000, format = false) {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      const current = Math.floor(eased * end);
+      const current = eased * end;
 
       setCount(current);
 
@@ -33,7 +38,13 @@ export function useCountUp(end: number, duration = 2000, format = false) {
     requestAnimationFrame(animate);
   }, [isInView, end, duration]);
 
-  const formatted = format ? count.toLocaleString() : count.toString();
+  let formatted: string;
+  if (decimals > 0) {
+    formatted = count.toFixed(decimals);
+  } else {
+    const rounded = Math.floor(count);
+    formatted = format ? rounded.toLocaleString() : rounded.toString();
+  }
 
   return { count: formatted, ref };
 }

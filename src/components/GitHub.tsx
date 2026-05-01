@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { ExternalLink } from "lucide-react";
+import { siteConfig } from "@/data/content";
+import { FadeIn } from "@/lib/animations";
 
 function GitHubIcon({ size = 28 }: { size?: number }) {
   return (
@@ -10,8 +12,6 @@ function GitHubIcon({ size = 28 }: { size?: number }) {
     </svg>
   );
 }
-import { siteConfig } from "@/data/content";
-import { FadeIn } from "@/lib/animations";
 
 interface ContributionDay {
   date: string;
@@ -25,14 +25,9 @@ interface GitHubData {
 }
 
 function ContributionGrid({ data }: { data: GitHubData | null }) {
-  if (!data) {
-    return <ContributionSkeleton />;
-  }
+  if (!data) return <ContributionSkeleton />;
 
-  // Take the last 20 weeks (140 days) for a compact view
   const recent = data.contributions.slice(-224);
-
-  // Group into weeks (7 days each)
   const weeks: ContributionDay[][] = [];
   for (let i = 0; i < recent.length; i += 7) {
     weeks.push(recent.slice(i, i + 7));
@@ -52,9 +47,7 @@ function ContributionGrid({ data }: { data: GitHubData | null }) {
             <div
               key={`${wi}-${di}`}
               className="w-[13px] h-[13px] rounded-[2px] transition-colors duration-200"
-              style={{
-                backgroundColor: `var(--gh-${day.level})`,
-              }}
+              style={{ backgroundColor: `var(--gh-${day.level})` }}
               title={
                 day.date
                   ? `${day.count} contribution${day.count !== 1 ? "s" : ""} on ${day.date}`
@@ -91,12 +84,8 @@ function ContributionSkeleton() {
 
 export function GitHub() {
   const [data, setData] = useState<GitHubData | null>(null);
-  const [profileStats, setProfileStats] = useState<{
-    public_repos: number;
-  } | null>(null);
 
   useEffect(() => {
-    // Fetch contribution data
     fetch(
       `https://github-contributions-api.jogruber.de/v4/${siteConfig.github.username}?y=last`
     )
@@ -112,69 +101,49 @@ export function GitHub() {
         }
       })
       .catch(() => {});
-
-    // Fetch profile stats
-    fetch(`https://api.github.com/users/${siteConfig.github.username}`)
-      .then((res) => (res.ok ? res.json() : null))
-      .then((json) => {
-        if (json) {
-          setProfileStats({ public_repos: json.public_repos });
-        }
-      })
-      .catch(() => {});
   }, []);
 
   return (
     <section id="github" className="py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
         <FadeIn>
-          <div className="flex items-center gap-3 mb-4">
-            <GitHubIcon size={28} />
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white">
-              {siteConfig.github.heading}
-            </h2>
+          <div className="mb-12 max-w-2xl">
+            <span className="text-xs font-semibold tracking-widest uppercase text-accent-500 dark:text-accent-300 mb-3 block">
+              In the open
+            </span>
+            <div className="flex items-center gap-3 mb-4">
+              <GitHubIcon size={28} />
+              <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900 dark:text-white">
+                I <span className="font-serif italic font-normal">ship</span> constantly.
+              </h2>
+            </div>
+            <p className="text-neutral-500 dark:text-neutral-500 max-w-2xl">
+              {siteConfig.github.description}
+            </p>
           </div>
-          <p className="text-neutral-500 dark:text-neutral-500 mb-10 max-w-2xl">
-            {siteConfig.github.description}
-          </p>
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800/50 bg-neutral-50/50 dark:bg-neutral-900/20 p-6 sm:p-8">
-            {/* Stats row */}
-            <div className="flex flex-wrap items-center justify-center gap-8 mb-6">
-              {data && (
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-bold text-neutral-900 dark:text-white">
-                    {data.total.toLocaleString()}
-                  </span>
-                  <span className="text-sm text-neutral-500">
-                    contributions last year
-                  </span>
-                </div>
-              )}
-              {profileStats && (
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-bold text-neutral-900 dark:text-white">
-                    {profileStats.public_repos}
-                  </span>
-                  <span className="text-sm text-neutral-500">
-                    public repos
-                  </span>
-                </div>
-              )}
-            </div>
+          <div className="rounded-3xl border border-neutral-200 dark:border-neutral-800/60 bg-gradient-to-br from-neutral-50/80 to-white dark:from-neutral-900/40 dark:to-neutral-950/40 p-7 sm:p-10">
+            {data && (
+              <div className="flex items-baseline justify-center gap-2 mb-7">
+                <span className="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900 dark:text-white">
+                  {data.total.toLocaleString()}
+                </span>
+                <span className="text-sm text-neutral-500">
+                  contributions last year
+                </span>
+              </div>
+            )}
 
-            {/* Contribution grid */}
             <ContributionGrid data={data} />
 
-            {/* Profile link */}
-            <div className="mt-6 pt-6 border-t border-neutral-200 dark:border-neutral-800/50">
+            <div className="mt-7 pt-7 border-t border-neutral-200 dark:border-neutral-800/60 flex justify-center">
               <a
                 href={siteConfig.github.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200"
+                className="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-accent-500 dark:hover:text-accent-300 transition-colors duration-200"
               >
                 <span>View on GitHub</span>
                 <ExternalLink size={14} />

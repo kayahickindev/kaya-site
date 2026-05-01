@@ -1,144 +1,198 @@
+// Email is split to prevent plain-text scraping. Reassembled on click only.
+const EMAIL_USER = "kaya";
+const EMAIL_DOMAIN = "successai.app";
+
 export const siteConfig = {
   name: "Kaya Hickin",
-  title: "Founder, Builder, Operator",
+  title: "Co-founder · Builder · Operator",
   url: "https://www.kayahickin.com",
 
   seo: {
-    title: "Kaya Hickin | Founder, Builder, Operator",
+    title: "Kaya Hickin, Co-founder of MyFutureSelf",
     description:
-      "Building MyFutureSelf, an AI app with 19,000+ downloads. Three profitable companies since freshman year. Looking for an exceptional technical co-founder.",
+      "Co-founder and CTO of MyFutureSelf, an AI app with 950+ paying subscribers and a 4.7★ App Store rating. Always looking for technical co-founders.",
+  },
+
+  status: {
+    pill: "Currently shipping MyFutureSelf",
   },
 
   hero: {
+    eyebrow: "Co-founder · Builder · Operator",
     headline: "I build products that move people forward.",
     description:
-      "I've started three profitable companies since freshman year and I'm currently building MyFutureSelf, an AI app with 19,000+ downloads helping people become who they want to be. I design, code, and ship.",
+      "Co-founder and CTO at MyFutureSelf, an AI iOS app with 950+ paying subscribers and a 4.7★ App Store rating. I design, code, and ship.",
     cta: {
-      primary: { text: "View My Work", href: "#projects" },
-      secondary: { text: "Get in Touch", href: "#contact" },
+      primary: { text: "See what I've built", href: "#projects" },
+      secondary: { text: "Get in touch", href: "#contact" },
     },
   },
 
   metrics: [
-    { value: 19000, label: "App Downloads", prefix: "", suffix: "+", format: true },
-    { value: 1200, label: "Paying Subscribers", prefix: "", suffix: "+", format: true },
-    { value: 30, label: "Revenue (First 4 Mo.)", prefix: "$", suffix: "k+", format: false },
-    { value: 3, label: "Profitable Companies", prefix: "", suffix: "", format: false },
+    {
+      value: 953,
+      label: "Active Paid Subscribers",
+      detail: "MyFutureSelf, server-validated via Apple",
+      prefix: "",
+      suffix: "+",
+      format: true,
+    },
+    {
+      value: 95916,
+      label: "User Actions Completed",
+      detail: "Tasks, voice sessions, daily check-ins",
+      prefix: "",
+      suffix: "+",
+      format: true,
+    },
+    {
+      value: 4.7,
+      label: "App Store Rating",
+      detail: "From 636 verified reviews",
+      prefix: "",
+      suffix: "★",
+      format: false,
+      decimals: 1,
+    },
   ],
 
-  recognition: "Winner, RedHawk Business Accelerator, Miami University 2025",
+  recognitions: [
+    "Winner, RedHawk Business Accelerator (Miami University 2025)",
+    "Honorable Mention, TCU Values & Ventures Competition",
+  ],
 
   about: {
-    heading: "About Me",
+    heading: "About",
     paragraphs: [
-      "I started my first company freshman year because I wanted to see if I could actually build something people would pay for. Turns out I could, so I kept going.",
-      "My main focus right now is MyFutureSelf, an AI app that helps people create a vivid version of their future self and then become that person through personalized guidance, accountability, and action. I designed and built most of it myself: the product, the frontend, the backend, the prompt systems, all of it.",
-      "I'm finishing up at Miami University this spring with a Marketing degree and an Entrepreneurship minor, then heading to San Francisco after graduation.",
-      "Most of my time goes toward thinking about how AI can make consumer products that change real behavior, not just engagement metrics.",
+      "I started my first company freshman year because I wanted to see if I could build something people would pay for. Turns out I could, so I kept going.",
+      "My main focus right now is MyFutureSelf, an AI app that helps people define who they want to become and then become that person through a 90-day personalized roadmap, an AI mentor that speaks as their future self, and daily action. As CTO, I led the technical build end to end: iOS, backend, and AI systems.",
+      "I'm graduating from Miami University this month with a Marketing degree and an Entrepreneurship minor, then heading to San Francisco.",
+      "Most of my time goes toward thinking about how AI can build consumer products that change real behavior, not just engagement metrics.",
     ],
     sidebar: [
-      { label: "Location", value: "SF-bound (currently Ohio)" },
-      { label: "Education", value: "Miami University, May 2026", detail: "Marketing + Entrepreneurship Minor" },
-      { label: "Focus", value: "AI, Consumer Products, Behavior Change" },
-      { label: "Other interests", value: "Fitness, hiking, reading, podcasts" },
+      { label: "Based in", value: "Oxford, OH", detail: "SF-bound this summer", icon: "MapPin" },
+      { label: "Education", value: "Miami University", detail: "BA Marketing, Minor in Entrepreneurship, May 2026", icon: "GraduationCap" },
+      { label: "Focus", value: "AI · Consumer · Behavior change", icon: "Target" },
+      { label: "Off-screen", value: "Lifting, hiking, reading, podcasts", icon: "Compass" },
     ],
   },
 
   techStack: {
-    heading: "What I Build With",
+    heading: "How I build",
     items: [
-      "Swift",
-      "SwiftUI",
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Node.js",
-      "Firebase",
-      "OpenAI API",
-      "Claude API",
-      "Tailwind CSS",
-      "Python",
-      "Git",
+      { name: "Swift / SwiftUI", category: "iOS" },
+      { name: "Core Data / StoreKit", category: "iOS" },
+      { name: "WebRTC", category: "iOS" },
+      { name: "TypeScript", category: "Web" },
+      { name: "Next.js / React", category: "Web" },
+      { name: "Tailwind CSS", category: "Web" },
+      { name: "Node.js", category: "Backend" },
+      { name: "Firebase / Firestore", category: "Backend" },
+      { name: "Cloud Functions", category: "Backend" },
+      { name: "OpenAI Responses API", category: "AI" },
+      { name: "Claude API", category: "AI" },
+      { name: "Realtime / Voice", category: "AI" },
+      { name: "Cursor", category: "Workflow" },
+      { name: "Claude Code", category: "Workflow" },
+      { name: "Mixpanel", category: "Workflow" },
+      { name: "Superwall", category: "Workflow" },
     ],
   },
 
   projects: [
     {
       name: "MyFutureSelf",
+      tagline: "AI mentorship for the person you're becoming.",
       description:
-        "AI app helping people create their future self and become that person through personalized guidance, accountability, and action.",
+        "A 90-day roadmap and a voice AI mentor that speaks as your future self.",
+      highlights: [
+        "950+ active paid subscribers",
+        "4.7★ on App Store · 636 reviews",
+        "95K+ user actions completed",
+      ],
       links: {
         website: "https://myfutureselfapp.com/",
         appStore:
-          "https://apps.apple.com/us/app/myfutureself-daily-habit-coach/id6745573360",
+          "https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360",
       },
+      image: "/mfs-hero.webp",
       featured: true,
-      tags: ["AI", "Consumer", "iOS"],
+      tags: ["AI", "Consumer", "iOS", "Voice"],
+      status: "Active · Scaling",
     },
     {
       name: "Dog AI",
+      tagline: "What's your dog actually feeling?",
       description:
-        "AI-powered app using computer vision to help interpret dog behavior and detect when something may be wrong.",
+        "iOS app that uses computer vision to interpret dog behavior and flag when something might be wrong. A weekend build that turned into a paying product.",
       links: {
         appStore:
           "https://apps.apple.com/us/app/dog-ai-dog-mood-detector/id6746574124",
       },
       featured: false,
       tags: ["AI", "Vision", "iOS"],
+      status: "Live",
+    },
+    {
+      name: "Appointra",
+      tagline: "B2B outbound, on autopilot.",
+      description:
+        "Lead generation agency for SF, NYC, and Chicago startups. Generated millions in pipeline and hundreds of qualified meetings using AI-powered outbound. Reached $20k MRR before I wound it down to focus full-time on MyFutureSelf.",
+      links: {
+        website: "https://appointra.net/",
+      },
+      featured: false,
+      tags: ["B2B", "Outbound", "Agency"],
+      status: "Wound down",
     },
     {
       name: "LeadBoost Pro",
+      tagline: "Marketing for businesses that don't have a marketing team.",
       description:
-        "Marketing, web development, and consulting business helping companies improve their digital presence and growth.",
+        "Web development, marketing, and consulting for small and underrepresented businesses in the local community. The first company I ran. Profitable from year one.",
       links: {
         website: "https://leadboost-pro.com/",
       },
       featured: false,
       tags: ["Marketing", "Web Dev", "Consulting"],
-    },
-    {
-      name: "Appointra",
-      description:
-        "B2B lead generation and outbound business serving startups across New York, San Francisco, and Chicago.",
-      links: {
-        website: "https://appointra.net/",
-      },
-      featured: false,
-      tags: ["B2B", "Lead Gen", "Outbound"],
+      status: "Active",
     },
   ],
 
   timeline: [
     {
       company: "MyFutureSelf",
-      role: "Co-Founder, CTO",
-      period: "Jan 2025 — Present",
+      role: "Co-Founder · CTO",
+      period: "Jan 2025 to Present",
       description:
-        "Building an AI app that helps users create their future self and become that person through personalized guidance, accountability, and action. 19,000+ downloads, 1,200+ paying subscribers, ~$30k revenue in first 4 months. Designed and built the product end to end.",
+        "Building an iOS app with a 90-day personalized roadmap and a voice AI mentor. Led the product and technical build end to end. Now serving 950+ active paid subscribers with a 4.7★ App Store rating.",
+      metrics: ["950+ paid", "4.7★", "95K+ actions"],
       active: true,
     },
     {
       company: "RedHawk Business Accelerator",
-      role: "Winner — Miami University",
+      role: "Winner, Miami University",
       period: "April 2025",
       description:
-        "Won the university's competitive business accelerator program for MyFutureSelf.",
+        "Won Miami University's competitive business accelerator with MyFutureSelf.",
       active: false,
     },
     {
       company: "Appointra",
       role: "Co-Founder",
-      period: "Jun 2024 — Feb 2025",
+      period: "Jun 2024 to Feb 2025",
       description:
-        "Built a B2B lead generation agency for startups in San Francisco, Chicago, and New York. Generated millions in pipeline value and booked hundreds of qualified meetings using AI-powered outbound systems. Reached $20k MRR.",
+        "Built a B2B lead generation agency serving startups in SF, NYC, and Chicago. Generated millions in pipeline, booked hundreds of qualified meetings via AI-powered outbound. Hit $20k MRR before I wound it down to focus on MyFutureSelf.",
+      metrics: ["$20k MRR", "100s of meetings booked"],
       active: false,
     },
     {
       company: "LeadBoost Pro",
       role: "Co-Founder",
-      period: "Jan 2023 — Jun 2024",
+      period: "Jan 2023 to Jun 2024",
       description:
-        "Built a marketing, web development, and consulting business focused on helping small, underrepresented businesses and our local community grow through stronger digital presence, customer acquisition, and better systems.",
+        "Started in my dorm room. Built a marketing, web development, and consulting business focused on helping small and underrepresented businesses grow through stronger digital presence and better systems.",
+      metrics: ["Profitable year one"],
       active: false,
     },
   ],
@@ -146,65 +200,39 @@ export const siteConfig = {
   github: {
     username: "kayahickindev",
     url: "https://github.com/kayahickindev",
-    heading: "I Ship Constantly",
+    heading: "I ship constantly.",
     description:
-      "I build with AI-assisted workflows and ship fast. Most of my work lives across Swift/SwiftUI for iOS and React/Next.js for web, with OpenAI and Claude APIs powering the AI layers. I push code daily.",
-  },
-
-  whatsNext: {
-    heading: "Where I'm Headed",
-    items: [
-      {
-        title: "Moving to San Francisco",
-        description: "This summer. To be around the people and companies pushing things forward.",
-      },
-      {
-        title: "Scaling MyFutureSelf",
-        description: "Focused on retention, AI depth, and building something people use every day, not just download once.",
-      },
-      {
-        title: "Finding a co-founder",
-        description: "The right technical partner to take MFS from a strong start to something much bigger.",
-      },
-      {
-        title: "Raising and accelerating",
-        description: "Exploring early-stage funding and accelerator programs to fuel the next stage of growth.",
-      },
-    ],
-  },
-
-  cofounder: {
-    heading: "Looking for a Technical Co-Founder",
-    description:
-      "MyFutureSelf has real traction and I need a technical partner to help turn it into something much bigger. Someone who can own the engineering, the infrastructure, the scale, the AI systems, while I drive product, design, and growth.",
-    qualities: [
-      "You can architect and ship production systems end to end",
-      "You move fast and would rather ship and iterate than plan forever",
-      "You care about the outcome, not who gets credit",
-      "You want to build a product that millions of people actually use",
-    ],
-    cta: "If this sounds like you, reach out. Let's talk.",
+      "I'm AI-native in how I build, with Cursor and Claude Code in my daily flow. Most of my code lives in Swift/SwiftUI for iOS and TypeScript/Next.js for web.",
   },
 
   contact: {
-    heading: "Let's Build Something",
-    description:
-      "If you're a builder, investor, or someone working on something ambitious, I'd love to connect.",
+    eyebrow: "Reach out",
+    heading: "Let's build something.",
+    body:
+      "I'm always looking for a technical co-founder at founding level with equity, for MyFutureSelf and for what comes next. Investors backing consumer AI and builders shipping ambitious products, drop a line too.",
+    primaryCta: {
+      label: "Email me",
+    },
+  },
+
+  // Email parts kept separate so the literal address never appears in source HTML.
+  emailParts: {
+    user: EMAIL_USER,
+    domain: EMAIL_DOMAIN,
   },
 
   social: {
     github: "https://github.com/kayahickindev",
     twitter: "https://x.com/KayaHickin",
     linkedin: "https://www.linkedin.com/in/kayahickin/",
-    email: "",
+    instagram: "https://www.instagram.com/kayahickin/",
     myfutureself: "https://myfutureselfapp.com/",
   },
 
   nav: [
     { label: "About", href: "#about" },
-    { label: "Projects", href: "#projects" },
+    { label: "Work", href: "#projects" },
     { label: "Experience", href: "#experience" },
-    { label: "GitHub", href: "#github" },
     { label: "Contact", href: "#contact" },
   ],
 };
