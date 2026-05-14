@@ -8,9 +8,9 @@ export const siteConfig = {
   url: "https://www.kayahickin.com",
 
   seo: {
-    title: "Kaya Hickin, Co-founder of MyFutureSelf",
+    title: "Kaya Hickin — Technical Co-founder & CTO, MyFutureSelf",
     description:
-      "Co-founder and CTO of MyFutureSelf, an AI app with 950+ paying subscribers and a 4.7★ App Store rating. Always looking for technical co-founders.",
+      "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 1,900+ paid subscribers, $40K+ revenue, and 4.7★ in 5 months. Solo-built iOS, backend, and voice-AI stack end-to-end. 170,000+ lines of code and 1,400+ commits in the last year. Building consumer AI for behavior change.",
   },
 
   status: {
@@ -21,7 +21,7 @@ export const siteConfig = {
     eyebrow: "Co-founder · Builder · Operator",
     headline: "I build products that move people forward.",
     description:
-      "Co-founder and CTO at MyFutureSelf, an AI iOS app with 950+ paying subscribers and a 4.7★ App Store rating. I design, code, and ship.",
+      "Co-founder and CTO at MyFutureSelf, an AI iOS app with 1,900+ paying subscribers, 22,700+ downloads, and a 4.7★ App Store rating. I design, code, and ship.",
     cta: {
       primary: { text: "See what I've built", href: "#projects" },
       secondary: { text: "Get in touch", href: "#contact" },
@@ -30,17 +30,17 @@ export const siteConfig = {
 
   metrics: [
     {
-      value: 953,
-      label: "Active Paid Subscribers",
+      value: 1900,
+      label: "Paid Subscribers",
       detail: "MyFutureSelf, server-validated via Apple",
       prefix: "",
       suffix: "+",
       format: true,
     },
     {
-      value: 95916,
-      label: "User Actions Completed",
-      detail: "Tasks, voice sessions, daily check-ins",
+      value: 22700,
+      label: "App Downloads",
+      detail: "MyFutureSelf, first 5 months on the App Store",
       prefix: "",
       suffix: "+",
       format: true,
@@ -64,10 +64,10 @@ export const siteConfig = {
   about: {
     heading: "About",
     paragraphs: [
-      "I started my first company freshman year because I wanted to see if I could build something people would pay for. Turns out I could, so I kept going.",
+      "I started my first company freshman year because I wanted to see if I could build something people would pay for. Turns out I could, so I kept going. Three companies later, I'm three for three on profitability.",
       "My main focus right now is MyFutureSelf, an AI app that helps people define who they want to become and then become that person through a 90-day personalized roadmap, an AI mentor that speaks as their future self, and daily action. As CTO, I led the technical build end to end: iOS, backend, and AI systems.",
-      "I'm graduating from Miami University this month with a Marketing degree and an Entrepreneurship minor, then heading to San Francisco.",
-      "Most of my time goes toward thinking about how AI can build consumer products that change real behavior, not just engagement metrics.",
+      "I'm AI-native in how I build. In the last year I've shipped 170,000+ lines of code and 1,400+ commits, mostly written alongside Claude Code and Codex. The AI tool stack is how I move at the speed of two engineers as a solo CTO.",
+      "I'm graduating from Miami University this month with a Marketing degree and an Entrepreneurship minor, then heading to San Francisco. Most of my time goes toward thinking about how AI can build consumer products that change real behavior, not just engagement metrics.",
     ],
     sidebar: [
       { label: "Based in", value: "Oxford, OH", detail: "SF-bound this summer", icon: "MapPin" },
@@ -92,8 +92,9 @@ export const siteConfig = {
       { name: "OpenAI Responses API", category: "AI" },
       { name: "Claude API", category: "AI" },
       { name: "Realtime / Voice", category: "AI" },
-      { name: "Cursor", category: "Workflow" },
       { name: "Claude Code", category: "Workflow" },
+      { name: "Codex", category: "Workflow" },
+      { name: "Cursor", category: "Workflow" },
       { name: "Mixpanel", category: "Workflow" },
       { name: "Superwall", category: "Workflow" },
     ],
@@ -106,9 +107,9 @@ export const siteConfig = {
       description:
         "A 90-day roadmap and a voice AI mentor that speaks as your future self.",
       highlights: [
-        "950+ active paid subscribers",
-        "4.7★ on App Store · 636 reviews",
-        "95K+ user actions completed",
+        "1,900+ paid subscribers · $40K+ revenue",
+        "22,700+ downloads · 4.7★ from 636 reviews",
+        "20,000+ hours of AI coaching delivered",
       ],
       links: {
         website: "https://myfutureselfapp.com/",
@@ -137,7 +138,7 @@ export const siteConfig = {
       name: "Appointra",
       tagline: "B2B outbound, on autopilot.",
       description:
-        "Lead generation agency for SF, NYC, and Chicago startups. Generated millions in pipeline and hundreds of qualified meetings using AI-powered outbound. Reached $20k MRR before I wound it down to focus full-time on MyFutureSelf.",
+        "Lead generation agency for SF, NYC, and Chicago startups. Scaled to $20k MRR in three months using AI-powered outbound, generating millions in pipeline and hundreds of qualified meetings. Wound it down to focus full-time on MyFutureSelf.",
       links: {
         website: "https://appointra.net/",
       },
@@ -165,8 +166,8 @@ export const siteConfig = {
       role: "Co-Founder · CTO",
       period: "Jan 2025 to Present",
       description:
-        "Building an iOS app with a 90-day personalized roadmap and a voice AI mentor. Led the product and technical build end to end. Now serving 950+ active paid subscribers with a 4.7★ App Store rating.",
-      metrics: ["950+ paid", "4.7★", "95K+ actions"],
+        "Building an iOS app with a 90-day personalized roadmap and a voice AI mentor. Led the product and technical build end to end. In its first 5 months: 22,700+ downloads, 1,900+ paid subscribers, $40K+ revenue, 20,000+ hours of AI coaching delivered, 4.7★ App Store rating.",
+      metrics: ["1,900+ paid", "$40K+ rev", "20K+ coaching hrs"],
       active: true,
     },
     {
@@ -182,8 +183,8 @@ export const siteConfig = {
       role: "Co-Founder",
       period: "Jun 2024 to Feb 2025",
       description:
-        "Built a B2B lead generation agency serving startups in SF, NYC, and Chicago. Generated millions in pipeline, booked hundreds of qualified meetings via AI-powered outbound. Hit $20k MRR before I wound it down to focus on MyFutureSelf.",
-      metrics: ["$20k MRR", "100s of meetings booked"],
+        "Built a B2B lead generation agency serving startups in SF, NYC, and Chicago. Scaled to $20k MRR in three months via AI-powered outbound, generating millions in pipeline and hundreds of qualified meetings. Wound it down to focus on MyFutureSelf.",
+      metrics: ["$20k MRR in 3 months", "100s of meetings booked"],
       active: false,
     },
     {
@@ -202,7 +203,7 @@ export const siteConfig = {
     url: "https://github.com/kayahickindev",
     heading: "I ship constantly.",
     description:
-      "I'm AI-native in how I build, with Cursor and Claude Code in my daily flow. Most of my code lives in Swift/SwiftUI for iOS and TypeScript/Next.js for web.",
+      "170,000+ lines of code and 1,400+ commits in the last year. I'm AI-native in how I build, with Claude Code and Codex in my daily flow. Most of my code lives in Swift/SwiftUI for iOS and TypeScript/Next.js for web.",
   },
 
   contact: {

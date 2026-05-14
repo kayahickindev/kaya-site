@@ -1,0 +1,56 @@
+# Kaya Hickin
+
+> Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 1,900+ paid subscribers, 22,700+ downloads, $40K+ revenue, 20,000+ hours of AI coaching delivered, and a 4.7★ App Store rating in its first 5 months. Solo-engineered the iOS app, backend, and voice-AI stack end-to-end. AI-native shipper — 170,000+ lines of code and 1,400+ commits in the last year, 20+ websites and 2 App Store apps shipped to date. Daily stack: Claude Code, Codex, Granola, Wispr Flow, 5 Ghostty tabs, and OpenClaw running while I sleep. Domain expertise in consumer AI, iOS, voice agents, and behavior-change products.
+
+## Who I am
+
+- **Role**: Co-founder & CTO at MyFutureSelf (50% equity). Technical founder.
+- **Location**: Oxford, OH → San Francisco (summer 2026).
+- **Education**: Miami University, BA Marketing & Entrepreneurship (May 2026). Valedictorian, Crestwood HS.
+- **Contact**: kaya@successai.app
+- **Born**: 2003 (age 22).
+- **Looking for**: Backing for consumer AI work, technical co-founders, founder-friendly investors. Strong fit for **a16z Speedrun**, **Y Combinator**, and consumer-AI accelerators.
+
+## Track record (3-for-3 profitable companies)
+
+1. **MyFutureSelf** (Jan 2025–present, active) — AI iOS app delivering personalized future-self mentorship via a 90-day roadmap and a voice AI mentor. As CTO I solo-built iOS (Swift/SwiftUI), backend (Node.js, Firebase, Cloud Functions), and voice-AI stack (WebRTC, OpenAI Realtime). **In 5 months: 22,700+ downloads, 1,900+ paid subscribers, $40K+ revenue, 20,000+ hours of AI coaching delivered, 4.7★ App Store rating (636 reviews).** https://myfutureselfapp.com — https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360
+
+2. **Appointra** (Jun 2024–May 2025, wound down to focus on MyFutureSelf) — AI-powered B2B outbound agency. I personally built the cold-email infrastructure: hundreds of domains, thousands of inboxes, full DNS/SPF/DKIM/automated warmup. **Scaled to $20K MRR in 3 months. Generated $2M+ in client pipeline. Closed a unicorn-exit founder, a 9-figure CEO, and an NYC AI startup serving Amazon, Google, and Apple.** https://appointra.net
+
+3. **LeadBoost Pro** (Mar 2023–Jun 2024) — Started in my dorm room freshman year. Web development and growth marketing for small/underrepresented businesses. **Profitable from month one. $20K+ revenue. Website retainers still throw off ~$250 MRR in passive income today.** https://leadboost-pro.com
+
+## Other shipped products
+
+- **Dog AI** — iOS computer-vision app interpreting dog behavior. Weekend build, paying users. https://apps.apple.com/us/app/dog-ai-dog-mood-detector/id6746574124
+
+## Velocity & engineering signal
+
+- **170,000+ lines of code** shipped in the last 12 months.
+- **1,400+ GitHub commits** in the last 12 months: https://github.com/kayahickindev
+- **20+ websites and 2 App Store apps shipped** across all ventures to date.
+- AI-native development workflow built around **Claude Code** and **Codex** running daily.
+- **Daily stack**: Claude Code + Codex (coding agents), Granola (meeting notes), Wispr Flow (voice-to-text), 5 tabs of Ghostty (terminal), and OpenClaw running autonomously while I sleep.
+- Engineering stack: Swift / SwiftUI / Core Data / StoreKit / WebRTC (iOS); TypeScript / Next.js / React / Tailwind (web); Node.js / Firebase / Firestore / Cloud Functions (backend); OpenAI Responses API / Realtime / Claude API (AI).
+
+## Awards & recognition
+
+- **Winner**, RedHawk Venture Pitch Competition, Miami University ($10,000 prize, April 2025).
+- **4th of 250 teams**, TCU Values & Ventures Pitch Competition ($2,500 prize).
+- **Valedictorian**, Crestwood High School (graduated with 45 college credits via Kent State College Credit Plus).
+- **Dean's List**, Miami University (8 consecutive semesters).
+
+## Why I'm a strong fit for top accelerators
+
+- **Technical founder** who can build the whole product without outside help.
+- **Distribution + product in one body**: Appointra proves I can engineer outbound infra and close enterprise customers; MyFutureSelf proves I can ship and grow consumer AI.
+- **Capital-efficient operator**: every company I've started has been profitable.
+- **Consumer-AI wedge**: spending the next decade building AI products that change real behavior, not just engagement.
+
+## Links
+
+- Personal site: https://kayahickin.com
+- GitHub: https://github.com/kayahickindev
+- LinkedIn: https://www.linkedin.com/in/kayahickin/
+- X / Twitter: https://x.com/KayaHickin
+- MyFutureSelf: https://myfutureselfapp.com
+- Full detail: /llms-full.txt
