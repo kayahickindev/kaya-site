@@ -10,7 +10,7 @@ export const siteConfig = {
   seo: {
     title: "Kaya Hickin — Technical Co-founder & CTO, MyFutureSelf",
     description:
-      "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 1,519+ paid subscribers, $40K+ revenue, and 4.7★ in 5 months. Solo-built iOS, backend, and voice-AI stack end-to-end. 170,000+ lines of code and 1,400+ commits in the last year. Building consumer AI for behavior change.",
+      "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 1,519+ paid subscribers, $53K ARR, and 4.7★ in 5 months. Solo-built iOS, backend, and voice-AI stack end-to-end. 170,000+ lines of code and 1,400+ commits in the last year. Building consumer AI for behavior change.",
   },
 
   status: {
@@ -107,7 +107,7 @@ export const siteConfig = {
       description:
         "A 90-day roadmap and a voice AI mentor that speaks as your future self.",
       highlights: [
-        "1,519+ paid subscribers · $40K+ revenue",
+        "1,519+ paid subscribers · $53K ARR",
         "22,700+ downloads · 4.7★ from 636 reviews",
         "20,000+ hours of AI coaching delivered",
       ],
@@ -166,8 +166,8 @@ export const siteConfig = {
       role: "Co-Founder · CTO",
       period: "Jan 2025 to Present",
       description:
-        "Building an iOS app with a 90-day personalized roadmap and a voice AI mentor. Led the product and technical build end to end. In its first 5 months: 22,700+ downloads, 1,519+ paid subscribers, $40K+ revenue, 20,000+ hours of AI coaching delivered, 4.7★ App Store rating.",
-      metrics: ["1,519+ paid", "$40K+ rev", "20K+ coaching hrs"],
+        "Building an iOS app with a 90-day personalized roadmap and a voice AI mentor. Led the product and technical build end to end. In its first 5 months: 22,700+ downloads, 1,519+ paid subscribers, $53K ARR, 20,000+ hours of AI coaching delivered, 4.7★ App Store rating.",
+      metrics: ["1,519+ paid", "$53K ARR", "20K+ coaching hrs"],
       active: true,
     },
     {

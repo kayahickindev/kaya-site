@@ -83,7 +83,7 @@ const personJsonLd = {
   image: `${siteConfig.url}/headshot.jpg`,
   jobTitle: "Co-founder & CTO at MyFutureSelf",
   description:
-    "Three-for-three profitable founder. Co-founder and CTO of MyFutureSelf — an AI iOS app with 1,519+ paying subscribers, 22,700+ downloads, $40K+ revenue, 20,000+ hours of AI coaching delivered, and a 4.7-star App Store rating in its first 5 months. Solo-engineered the iOS app, backend, and voice-AI stack end-to-end. Previously co-founded Appointra (B2B AI outbound, scaled to $20K MRR in 3 months and $2M+ in client pipeline) and LeadBoost Pro (profitable from month one freshman year, still generating MRR). Shipped 170,000+ lines of code and 1,400+ GitHub commits in the last year, plus 20+ websites and 2 App Store apps across all ventures. Daily AI-native stack: Claude Code, Codex, Granola, Wispr Flow, Ghostty, and OpenClaw running autonomously overnight. Domain expertise in consumer AI, iOS, voice agents, and behavior-change products.",
+    "Three-for-three profitable founder. Co-founder and CTO of MyFutureSelf — an AI iOS app with 1,519+ paying subscribers, 22,700+ downloads, $53K ARR, 20,000+ hours of AI coaching delivered, and a 4.7-star App Store rating in its first 5 months. Solo-engineered the iOS app, backend, and voice-AI stack end-to-end. Previously co-founded Appointra (B2B AI outbound, scaled to $20K MRR in 3 months and $2M+ in client pipeline) and LeadBoost Pro (profitable from month one freshman year, still generating MRR). Shipped 170,000+ lines of code and 1,400+ GitHub commits in the last year, plus 20+ websites and 2 App Store apps across all ventures. Daily AI-native stack: Claude Code, Codex, Granola, Wispr Flow, Ghostty, and OpenClaw running autonomously overnight. Domain expertise in consumer AI, iOS, voice agents, and behavior-change products.",
   email: "kaya@successai.app",
   gender: "Male",
   nationality: "American",
@@ -157,7 +157,7 @@ const orgJsonLd = {
   url: "https://myfutureselfapp.com",
   founder: { "@type": "Person", name: "Kaya Hickin", url: siteConfig.url },
   description:
-    "AI iOS app that creates a personalized future-self mentor for each user — delivering a 90-day roadmap and voice-based AI coaching. In its first 5 months: 22,700+ downloads, 1,519+ paid subscribers, $40K+ revenue, 20,000+ hours of AI coaching delivered, and a 4.7★ App Store rating from 636 verified reviews.",
+    "AI iOS app that creates a personalized future-self mentor for each user — delivering a 90-day roadmap and voice-based AI coaching. In its first 5 months: 22,700+ downloads, 1,519+ paid subscribers, $53K ARR, 20,000+ hours of AI coaching delivered, and a 4.7★ App Store rating from 636 verified reviews.",
   sameAs: [
     "https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360",
   ],

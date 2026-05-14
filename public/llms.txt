@@ -1,6 +1,6 @@
 # Kaya Hickin
 
-> Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 1,519+ paid subscribers, 22,700+ downloads, $40K+ revenue, 20,000+ hours of AI coaching delivered, and a 4.7★ App Store rating in its first 5 months. Solo-engineered the iOS app, backend, and voice-AI stack end-to-end. AI-native shipper — 170,000+ lines of code and 1,400+ commits in the last year, 20+ websites and 2 App Store apps shipped to date. Daily stack: Claude Code, Codex, Granola, Wispr Flow, 5 Ghostty tabs, and OpenClaw running while I sleep. Domain expertise in consumer AI, iOS, voice agents, and behavior-change products.
+> Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 1,519+ paid subscribers, 22,700+ downloads, $53K ARR, 20,000+ hours of AI coaching delivered, and a 4.7★ App Store rating in its first 5 months. Solo-engineered the iOS app, backend, and voice-AI stack end-to-end. AI-native shipper — 170,000+ lines of code and 1,400+ commits in the last year, 20+ websites and 2 App Store apps shipped to date. Daily stack: Claude Code, Codex, Granola, Wispr Flow, 5 Ghostty tabs, and OpenClaw running while I sleep. Domain expertise in consumer AI, iOS, voice agents, and behavior-change products.
 
 ## Who I am
 
@@ -13,7 +13,7 @@
 
 ## Track record (3-for-3 profitable companies)
 
-1. **MyFutureSelf** (Jan 2025–present, active) — AI iOS app delivering personalized future-self mentorship via a 90-day roadmap and a voice AI mentor. As CTO I solo-built iOS (Swift/SwiftUI), backend (Node.js, Firebase, Cloud Functions), and voice-AI stack (WebRTC, OpenAI Realtime). **In 5 months: 22,700+ downloads, 1,519+ paid subscribers, $40K+ revenue, 20,000+ hours of AI coaching delivered, 4.7★ App Store rating (636 reviews).** https://myfutureselfapp.com — https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360
+1. **MyFutureSelf** (Jan 2025–present, active) — AI iOS app delivering personalized future-self mentorship via a 90-day roadmap and a voice AI mentor. As CTO I solo-built iOS (Swift/SwiftUI), backend (Node.js, Firebase, Cloud Functions), and voice-AI stack (WebRTC, OpenAI Realtime). **In 5 months: 22,700+ downloads, 1,519+ paid subscribers, $53K ARR, 20,000+ hours of AI coaching delivered, 4.7★ App Store rating (636 reviews).** https://myfutureselfapp.com — https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360
 
 2. **Appointra** (Jun 2024–May 2025, wound down to focus on MyFutureSelf) — AI-powered B2B outbound agency. I personally built the cold-email infrastructure: hundreds of domains, thousands of inboxes, full DNS/SPF/DKIM/automated warmup. **Scaled to $20K MRR in 3 months. Generated $2M+ in client pipeline. Closed a unicorn-exit founder, a 9-figure CEO, and an NYC AI startup serving Amazon, Google, and Apple.** https://appointra.net
 
