@@ -109,7 +109,7 @@ export const siteConfig = {
       highlights: [
         "1,322 paid subscribers · $53K ARR",
         "24,000+ downloads · 4.7★ from 671 reviews",
-        "43,692 hours of AI coaching delivered",
+        "20,811 hours of AI coaching delivered",
       ],
       links: {
         website: "https://myfutureselfapp.com/",
@@ -166,8 +166,8 @@ export const siteConfig = {
       role: "Co-Founder · CTO",
       period: "Jan 2025 to Present",
       description:
-        "Building an iOS app with a 90-day personalized roadmap and a voice AI mentor. Led the product and technical build end to end. In its first 7 months: 24,000+ downloads, 1,322 paid subscribers, $53K ARR, 43,692 hours of AI coaching delivered, 4.7★ App Store rating.",
-      metrics: ["1,322 paid", "$53K ARR", "43K+ coaching hrs"],
+        "Building an iOS app with a 90-day personalized roadmap and a voice AI mentor. Led the product and technical build end to end. In its first 7 months: 24,000+ downloads, 1,322 paid subscribers, $53K ARR, 20,811 hours of AI coaching delivered, 4.7★ App Store rating.",
+      metrics: ["1,322 paid", "$53K ARR", "20K+ coaching hrs"],
       active: true,
     },
     {
