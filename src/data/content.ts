@@ -10,7 +10,7 @@ export const siteConfig = {
   seo: {
     title: "Kaya Hickin — Technical Co-founder & CTO, MyFutureSelf",
     description:
-      "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 1,168 paid subscribers, $53K ARR, and 4.7★ in 7 months. Solo-built iOS, backend, and voice-AI stack end-to-end. 170,000+ lines of code and 1,400+ commits in the last year. Building consumer AI for behavior change.",
+      "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 1,322 paid subscribers, $53K ARR, and 4.7★ in 7 months. Solo-built iOS, backend, and voice-AI stack end-to-end. 170,000+ lines of code and 1,400+ commits in the last year. Building consumer AI for behavior change.",
   },
 
   status: {
@@ -21,7 +21,7 @@ export const siteConfig = {
     eyebrow: "Co-founder · Builder · Operator",
     headline: "I build products that move people forward.",
     description:
-      "Co-founder and CTO at MyFutureSelf, an AI iOS app with 1,168 paying subscribers, 24,000+ downloads, and a 4.7★ App Store rating. I design, code, and ship.",
+      "Co-founder and CTO at MyFutureSelf, an AI iOS app with 1,322 paying subscribers, 24,000+ downloads, and a 4.7★ App Store rating. I design, code, and ship.",
     cta: {
       primary: { text: "See what I've built", href: "#projects" },
       secondary: { text: "Get in touch", href: "#contact" },
@@ -30,7 +30,7 @@ export const siteConfig = {
 
   metrics: [
     {
-      value: 1168,
+      value: 1322,
       label: "Paid Subscribers",
       detail: "MyFutureSelf, server-validated via Apple",
       prefix: "",
@@ -107,7 +107,7 @@ export const siteConfig = {
       description:
         "A 90-day roadmap and a voice AI mentor that speaks as your future self.",
       highlights: [
-        "1,168 paid subscribers · $53K ARR",
+        "1,322 paid subscribers · $53K ARR",
         "24,000+ downloads · 4.7★ from 671 reviews",
         "43,692 hours of AI coaching delivered",
       ],
@@ -166,8 +166,8 @@ export const siteConfig = {
       role: "Co-Founder · CTO",
       period: "Jan 2025 to Present",
       description:
-        "Building an iOS app with a 90-day personalized roadmap and a voice AI mentor. Led the product and technical build end to end. In its first 7 months: 24,000+ downloads, 1,168 paid subscribers, $53K ARR, 43,692 hours of AI coaching delivered, 4.7★ App Store rating.",
-      metrics: ["1,168 paid", "$53K ARR", "43K+ coaching hrs"],
+        "Building an iOS app with a 90-day personalized roadmap and a voice AI mentor. Led the product and technical build end to end. In its first 7 months: 24,000+ downloads, 1,322 paid subscribers, $53K ARR, 43,692 hours of AI coaching delivered, 4.7★ App Store rating.",
+      metrics: ["1,322 paid", "$53K ARR", "43K+ coaching hrs"],
       active: true,
     },
     {
