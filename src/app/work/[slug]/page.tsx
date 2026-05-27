@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  Apple,
   ArrowLeft,
   ArrowUpRight,
   BriefcaseBusiness,
@@ -130,43 +129,34 @@ function DogAiVisual() {
   return (
     <div className="relative grid min-h-[360px] place-items-center overflow-hidden rounded-md border border-white/10 bg-neutral-950 p-6 text-white lg:min-h-[520px]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_25%,rgba(34,197,94,0.18),transparent_33%),linear-gradient(145deg,rgba(20,184,166,0.12),transparent_40%,rgba(251,191,36,0.11))]" />
-      <div className="relative grid w-full max-w-xl gap-4 lg:grid-cols-[0.78fr_1fr]">
-        <div className="mx-auto w-48 rounded-[2rem] border border-white/15 bg-black p-3 shadow-2xl">
-          <div className="rounded-[1.35rem] border border-white/10 bg-neutral-900 p-4">
-            <div className="mb-4 flex items-center justify-between text-[10px] text-neutral-500">
-              <span>Dog AI</span>
-              <Apple size={13} />
-            </div>
-            <div className="grid aspect-[3/4] place-items-center rounded-2xl border border-emerald-300/20 bg-[radial-gradient(circle,rgba(34,197,94,0.22),transparent_48%)]">
-              <Target size={76} className="text-emerald-200/80" />
-            </div>
-            <div className="mt-4 space-y-2">
-              {["Relaxed", "Alert", "Needs attention"].map((item, index) => (
-                <div key={item} className="rounded-lg bg-white/[0.06] p-2">
-                  <div className="mb-1 flex items-center justify-between text-[10px] text-neutral-400">
-                    <span>{item}</span>
-                    <span>{index === 0 ? "72%" : index === 1 ? "18%" : "10%"}</span>
-                  </div>
-                  <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
-                    <div
-                      className="h-full rounded-full bg-emerald-300"
-                      style={{ width: index === 0 ? "72%" : index === 1 ? "18%" : "10%" }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+      <div className="relative grid w-full max-w-xl gap-4">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-5">
+          <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-emerald-200/80">
+            Custom LLM
+          </p>
+          <p className="mt-2 text-3xl font-semibold leading-tight">
+            Tens of thousands of dog images.
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-neutral-300">
+            Built and trained the underlying model myself, including a behavior dataset from Harvard.
+          </p>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-3">
+          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-4">
+            <p className="text-2xl font-semibold">10,000s</p>
+            <p className="mt-1 text-[11px] leading-snug text-neutral-400">training images</p>
+          </div>
+          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-4">
+            <p className="text-2xl font-semibold">Harvard</p>
+            <p className="mt-1 text-[11px] leading-snug text-neutral-400">behavior dataset</p>
+          </div>
+          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-4">
+            <p className="text-2xl font-semibold">Live</p>
+            <p className="mt-1 text-[11px] leading-snug text-neutral-400">App Store, paid</p>
           </div>
         </div>
-        <div className="grid content-center gap-3">
-          {["Computer vision read", "Behavior signal", "Consumer answer"].map((item) => (
-            <div key={item} className="rounded-xl border border-white/10 bg-white/[0.06] p-4">
-              <p className="text-sm font-semibold text-white">{item}</p>
-              <p className="mt-1 text-xs leading-relaxed text-neutral-400">
-                Narrow scope, fast launch, clear App Store utility.
-              </p>
-            </div>
-          ))}
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-xs text-neutral-400">
+          Solo build: dataset assembly, model training, iOS app, App Store launch.
         </div>
       </div>
     </div>

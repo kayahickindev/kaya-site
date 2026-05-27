@@ -180,7 +180,7 @@ export const siteConfig = {
       name: "Dog AI",
       tagline: "What's your dog actually feeling?",
       description:
-        "iOS app that uses computer vision to interpret dog behavior and flag when something might be wrong. A weekend build that turned into a paying product.",
+        "iOS app that interprets dog behavior with a custom LLM I built and trained on tens of thousands of dog images, including a behavior dataset from Harvard. A weekend build that turned into a paying App Store product.",
       links: {
         appStore:
           "https://apps.apple.com/us/app/dog-ai-dog-mood-detector/id6746574124",
