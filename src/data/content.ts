@@ -269,7 +269,7 @@ export const siteConfig = {
 
   contact: {
     eyebrow: "Reach out",
-    heading: "Let's build something.",
+    heading: "Get in touch.",
     body:
       "I'm always looking for a technical co-founder at founding level with equity, for MyFutureSelf and for what comes next. Investors backing consumer AI and builders shipping ambitious products, drop a line too.",
     primaryCta: {

@@ -23,14 +23,11 @@ export default function StackPage() {
   return (
     <SubpageShell accent="cyan">
       <div className="flex flex-col gap-6">
-        <header className="relative flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <header className="relative">
           <div aria-hidden className="aurora" style={{ opacity: 0.55 }} />
           <h1 className="relative text-4xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-5xl xl:text-6xl dark:text-white">
             How I build.
           </h1>
-          <p className="relative max-w-md text-sm leading-snug text-neutral-600 dark:text-neutral-400 sm:text-right">
-            Solo-shippable layers. AI in the loop. Production from day one.
-          </p>
         </header>
 
         <StackGrid grouped={grouped} />

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { SubpageShell } from "@/components/SubpageShell";
 import { TiltImage } from "@/components/TiltImage";
 import { siteConfig } from "@/data/content";
@@ -115,21 +114,15 @@ export default function WorkPage() {
                   ))}
                 </ul>
 
-                <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-1">
-                  <div className="flex flex-wrap gap-1">
-                    {hero.project.tags.slice(0, 4).map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-black/10 bg-white/55 px-2 py-0.5 text-[10px] font-medium text-neutral-700 dark:border-white/15 dark:bg-white/[0.06] dark:text-neutral-300"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <span className="inline-flex h-8 items-center gap-2 rounded-md bg-neutral-950 px-3 text-xs font-medium text-white transition group-hover:gap-3 dark:bg-white dark:text-neutral-950">
-                    Case study
-                    <ArrowUpRight size={13} />
-                  </span>
+                <div className="mt-auto flex flex-wrap gap-1 pt-1">
+                  {hero.project.tags.slice(0, 4).map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-black/10 bg-white/55 px-2 py-0.5 text-[10px] font-medium text-neutral-700 dark:border-white/15 dark:bg-white/[0.06] dark:text-neutral-300"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
 
@@ -207,13 +200,6 @@ export default function WorkPage() {
                     </li>
                   ))}
                 </ul>
-
-                <div className="relative mt-3 flex items-center justify-end border-t border-black/10 pt-2 dark:border-white/10">
-                  <span className="inline-flex h-7 items-center gap-1.5 rounded-md border border-black/15 bg-white/55 px-2.5 text-[11px] font-medium text-neutral-800 transition group-hover:border-black/30 group-hover:bg-white group-hover:gap-2 dark:border-white/15 dark:bg-white/[0.05] dark:text-neutral-200 dark:group-hover:border-white/30 dark:group-hover:bg-white/[0.1]">
-                    Detail
-                    <ArrowUpRight size={11} />
-                  </span>
-                </div>
               </Link>
             );
           })}

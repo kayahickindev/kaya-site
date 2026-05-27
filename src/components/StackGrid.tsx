@@ -21,41 +21,31 @@ type GroupedItem = {
 
 const categoryMeta: Record<
   Category,
-  { icon: LucideIcon; blurb: string; accent: string; dotBg: string; bar: string }
+  { icon: LucideIcon; accent: string; bar: string }
 > = {
   iOS: {
     icon: Apple,
-    blurb: "Native consumer products with payments, persistence, and realtime voice.",
     accent: "text-cyan-700 dark:text-cyan-300",
-    dotBg: "bg-cyan-500 dark:bg-cyan-300",
     bar: "from-cyan-400/60 to-transparent",
   },
   Web: {
     icon: Globe,
-    blurb: "Marketing sites, dashboards, and conversion surfaces.",
     accent: "text-emerald-700 dark:text-emerald-300",
-    dotBg: "bg-emerald-500 dark:bg-emerald-300",
     bar: "from-emerald-400/60 to-transparent",
   },
   Backend: {
     icon: Braces,
-    blurb: "Fast iteration with production reliability.",
     accent: "text-amber-700 dark:text-amber-300",
-    dotBg: "bg-amber-500 dark:bg-amber-300",
     bar: "from-amber-400/60 to-transparent",
   },
   AI: {
     icon: BrainCircuit,
-    blurb: "Models and voice loops wired into behavior change.",
     accent: "text-purple-700 dark:text-purple-300",
-    dotBg: "bg-purple-500 dark:bg-purple-300",
     bar: "from-purple-400/60 to-transparent",
   },
   Workflow: {
     icon: Workflow,
-    blurb: "Daily AI-native build, measure, and monetize loop.",
     accent: "text-rose-700 dark:text-rose-300",
-    dotBg: "bg-rose-500 dark:bg-rose-300",
     bar: "from-rose-400/60 to-transparent",
   },
 };
@@ -108,7 +98,6 @@ export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
                 {group.category}
               </h2>
             </div>
-            <p className="mt-2 text-[11px] leading-snug text-neutral-500">{meta.blurb}</p>
             <ul className="mt-3 grid gap-1.5">
               {group.items.map((item, itemIndex) => (
                 <motion.li

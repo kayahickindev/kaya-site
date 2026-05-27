@@ -256,7 +256,11 @@ export function CommandCenter() {
                   ))}
                 </div>
 
-                <div className="relative min-h-0 flex-1 overflow-hidden">
+                <Link
+                  href={`/work/${featured.slug}`}
+                  aria-label={`Open ${featured.name} case study`}
+                  className="relative min-h-0 flex-1 overflow-hidden"
+                >
                   {featured.image ? (
                     <Image
                       src={featured.image}
@@ -265,20 +269,10 @@ export function CommandCenter() {
                       height={1250}
                       unoptimized
                       loading="eager"
-                      className="mx-auto h-full max-h-[500px] w-auto scale-[1.32] object-contain drop-shadow-2xl xl:scale-[1.45]"
+                      className="mx-auto h-full max-h-[540px] w-auto scale-[1.32] object-contain drop-shadow-2xl xl:scale-[1.45]"
                     />
                   ) : null}
-                </div>
-
-                <div className="mt-3 flex items-center justify-end gap-3 border-t border-white/10 pt-3">
-                  <Link
-                    href={`/work/${featured.slug}`}
-                    className="inline-flex h-9 shrink-0 items-center gap-2 rounded-md bg-white px-3 text-sm font-medium text-neutral-950 transition hover:-translate-y-0.5 hover:bg-neutral-200"
-                  >
-                    Case study
-                    <ArrowUpRight size={14} />
-                  </Link>
-                </div>
+                </Link>
               </div>
             </motion.div>
           )}

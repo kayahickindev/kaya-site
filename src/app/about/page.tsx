@@ -26,7 +26,8 @@ const SIDEBAR_ICONS: Record<string, LucideIcon> = {
 };
 
 const paragraphs = [
-  "Working full-time in my family's business at 14, valedictorian out of high school, shipping companies ever since. Now co-founder and CTO of MyFutureSelf, an AI mentor that speaks as your future self. Solo-built iOS, Firebase backend, and AI integration in six months, alongside Claude Code and Codex. 2,600+ contributions in the last year. I build consumer AI for behavior change.",
+  "Working full-time in my family's business at 14, valedictorian out of high school, shipping companies ever since.",
+  "Now co-founder and CTO of MyFutureSelf, an AI mentor that speaks as your future self. Solo-built iOS, Firebase backend, and AI integration in six months. I build consumer AI for behavior change.",
 ];
 
 const highlightStats = [
