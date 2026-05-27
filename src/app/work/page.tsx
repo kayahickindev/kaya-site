@@ -138,7 +138,7 @@ export default function WorkPage() {
                 </div>
               </div>
 
-              <div className="relative min-h-[220px] overflow-hidden bg-neutral-950 md:min-h-0">
+              <div className="relative min-h-[220px] overflow-hidden md:min-h-0">
                 {hero.project.image ? (
                   <Image
                     src={hero.project.image}
@@ -146,7 +146,7 @@ export default function WorkPage() {
                     width={781}
                     height={1250}
                     unoptimized
-                    className="absolute inset-0 m-auto h-full max-h-[340px] w-auto scale-[1.2] object-contain drop-shadow-2xl"
+                    className="absolute inset-0 m-auto h-full max-h-[340px] w-auto scale-[1.2] object-contain mix-blend-screen drop-shadow-2xl"
                   />
                 ) : null}
               </div>

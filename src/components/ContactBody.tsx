@@ -89,12 +89,6 @@ const socials: Social[] = [
   },
 ];
 
-const openTo = [
-  "Technical co-founder roles",
-  "MyFutureSelf investors",
-  "Consumer AI builders",
-];
-
 export function ContactPanel() {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-8 py-8 text-center">
@@ -135,23 +129,6 @@ export function ContactPanel() {
             <Copy size={14} />
             Copy address
           </button>
-        </div>
-      </div>
-
-      <div className="flex flex-col items-center gap-2.5">
-        <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-neutral-500">
-          Open to
-        </p>
-        <div className="flex flex-wrap justify-center gap-2">
-          {openTo.map((item) => (
-            <span
-              key={item}
-              className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1.5 text-xs font-medium text-amber-800 backdrop-blur dark:border-amber-300/30 dark:bg-amber-300/[0.06] dark:text-amber-200"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-500 dark:bg-amber-300" />
-              {item}
-            </span>
-          ))}
         </div>
       </div>
 
