@@ -34,7 +34,7 @@ export const siteConfig = {
     description:
       "Co-founder and CTO of MyFutureSelf. I ship the product, backend, voice AI, growth systems, and the weird glue between all of it.",
     status: "Live: MyFutureSelf scaling",
-    availability: "Oxford, OH now · San Francisco summer 2026",
+    availability: "Cleveland, OH",
     routes: [
       {
         label: "About",
@@ -120,10 +120,10 @@ export const siteConfig = {
       "I started my first company freshman year because I wanted to see if I could build something people would pay for. Turns out I could, so I kept going. Three companies later, I'm three for three on profitability.",
       "My main focus right now is MyFutureSelf, an AI app that helps people define who they want to become and then become that person through a 90-day personalized roadmap, an AI mentor that speaks as their future self, and daily action. As CTO, I led the technical build end to end: iOS, backend, and AI systems.",
       "I'm AI-native in how I build. In the last year I've shipped 170,000+ lines of code and 1,400+ commits, mostly written alongside Claude Code and Codex. The AI tool stack is how I move at the speed of two engineers as a solo CTO.",
-      "I'm graduating from Miami University this month with a Marketing degree and an Entrepreneurship minor, then heading to San Francisco. Most of my time goes toward thinking about how AI can build consumer products that change real behavior, not just engagement metrics.",
+      "I'm graduating from Miami University this month with a Marketing degree and an Entrepreneurship minor, based in Cleveland, OH. Most of my time goes toward thinking about how AI can build consumer products that change real behavior, not just engagement metrics.",
     ],
     sidebar: [
-      { label: "Based in", value: "Oxford, OH", detail: "SF-bound this summer", icon: "MapPin" },
+      { label: "Based in", value: "Cleveland, OH", icon: "MapPin" },
       { label: "Education", value: "Miami University", detail: "BA Marketing, Minor in Entrepreneurship, May 2026", icon: "GraduationCap" },
       { label: "Focus", value: "AI · Consumer · Behavior change", icon: "Target" },
       { label: "Off-screen", value: "Lifting, hiking, reading, podcasts", icon: "Compass" },

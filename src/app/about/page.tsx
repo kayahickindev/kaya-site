@@ -26,8 +26,8 @@ const quickFacts = [
   },
   {
     label: "Location",
-    value: "Oxford, OH",
-    detail: "San Francisco-bound this summer",
+    value: "Cleveland, OH",
+    detail: "Based in Ohio",
     icon: MapPin,
   },
   {

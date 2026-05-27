@@ -88,8 +88,8 @@ const personJsonLd = {
   email: "kaya@successai.app",
   gender: "Male",
   nationality: "American",
-  homeLocation: { "@type": "Place", name: "Oxford, Ohio, USA" },
-  workLocation: { "@type": "Place", name: "San Francisco, CA (relocating summer 2026)" },
+  homeLocation: { "@type": "Place", name: "Cleveland, Ohio, USA" },
+  workLocation: { "@type": "Place", name: "Cleveland, Ohio, USA" },
   alumniOf: [
     {
       "@type": "CollegeOrUniversity",
@@ -144,7 +144,7 @@ const personJsonLd = {
     {
       "@type": "Occupation",
       name: "Co-founder & CTO, MyFutureSelf",
-      occupationLocation: { "@type": "City", name: "Oxford, Ohio" },
+      occupationLocation: { "@type": "City", name: "Cleveland, Ohio" },
       skills:
         "iOS engineering (Swift/SwiftUI), backend (Node.js/Firebase/Cloud Functions), voice AI (WebRTC, OpenAI Realtime), AI integration (Claude, OpenAI), product design, growth, AI-native development with Claude Code and Codex",
     },
