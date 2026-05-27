@@ -53,13 +53,17 @@ const headlineMetrics = [
   },
 ];
 
+const emeraldAccent = {
+  accent: "text-emerald-700 dark:text-emerald-300",
+  iconColor: "text-emerald-600 dark:text-emerald-300",
+  bar: "from-emerald-400/60 to-transparent",
+};
+
 const proofGroups = [
   {
     label: "Product traction",
     icon: "TrendingUp" as const,
-    accent: "text-cyan-700 dark:text-cyan-300",
-    iconColor: "text-cyan-600 dark:text-cyan-300",
-    bar: "from-cyan-400/60 to-transparent",
+    ...emeraldAccent,
     points: [
       "1,718 paid subscribers · $65K ARR",
       "26K+ App Store downloads in 7 months",
@@ -70,9 +74,7 @@ const proofGroups = [
   {
     label: "Depth of build",
     icon: "Wrench" as const,
-    accent: "text-emerald-700 dark:text-emerald-300",
-    iconColor: "text-emerald-600 dark:text-emerald-300",
-    bar: "from-emerald-400/60 to-transparent",
+    ...emeraldAccent,
     points: [
       "Solo-built iOS, backend, and voice-AI stack",
       "SwiftUI · Core Data · StoreKit",
@@ -83,9 +85,7 @@ const proofGroups = [
   {
     label: "Founder pattern",
     icon: "Award" as const,
-    accent: "text-amber-700 dark:text-amber-200",
-    iconColor: "text-amber-600 dark:text-amber-300",
-    bar: "from-amber-400/60 to-transparent",
+    ...emeraldAccent,
     points: [
       "Three-for-three on profitable companies",
       "Appointra: $20K MRR in three months",
@@ -111,7 +111,7 @@ export default function ProofPage() {
         <ProofGrid groups={proofGroups} />
 
         <div className={`${cardSurface} p-5`}>
-          <ContributionGraph contributionCount="2,600+" />
+          <ContributionGraph contributionCount="2,600+" palette="emerald" />
         </div>
 
         <a

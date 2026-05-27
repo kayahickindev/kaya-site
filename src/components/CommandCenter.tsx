@@ -107,11 +107,43 @@ function SocialPill({
 }
 
 const metricTiles = [
-  { value: 1718, label: "paid subscribers", format: true },
-  { value: 65, label: "ARR", prefix: "$", suffix: "K" },
-  { value: 26, label: "downloads", suffix: "K+" },
-  { value: 4.7, label: "App Store rating", suffix: "★", decimals: 1 },
-  { value: 52, label: "avg monthly growth", suffix: "%" },
+  {
+    value: 1718,
+    label: "paid subscribers",
+    format: true,
+    sparkline: [12, 38, 90, 220, 480, 880, 1350, 1718],
+    accent: "rgb(34,197,94)",
+  },
+  {
+    value: 65,
+    label: "ARR",
+    prefix: "$",
+    suffix: "K",
+    sparkline: [2, 6, 12, 22, 35, 48, 58, 65],
+    accent: "rgb(212,155,90)",
+  },
+  {
+    value: 26,
+    label: "downloads",
+    suffix: "K+",
+    sparkline: [0.4, 1.2, 3, 6.5, 11, 16, 21, 26],
+    accent: "rgb(34,211,238)",
+  },
+  {
+    value: 4.7,
+    label: "App Store rating",
+    suffix: "★",
+    decimals: 1,
+    sparkline: [4.4, 4.5, 4.6, 4.6, 4.7, 4.7, 4.7, 4.7],
+    accent: "rgb(251,191,36)",
+  },
+  {
+    value: 52,
+    label: "avg monthly growth",
+    suffix: "%",
+    sparkline: [38, 44, 49, 51, 50, 53, 56, 52],
+    accent: "rgb(244,114,182)",
+  },
 ];
 
 export function CommandCenter() {
@@ -217,22 +249,20 @@ export function CommandCenter() {
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.08, ease }}
-              className="relative flex min-h-[420px] flex-col overflow-hidden rounded-md border border-white/10 bg-neutral-950 text-white shadow-2xl shadow-black/10 sm:min-h-[520px] lg:col-span-5 lg:min-h-0"
+              className="relative flex min-h-[380px] flex-col overflow-hidden rounded-md border border-white/10 bg-neutral-950 text-white shadow-2xl shadow-black/10 sm:min-h-[460px] lg:col-span-5 lg:min-h-0"
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_18%,rgba(34,211,238,0.16),transparent_30%),linear-gradient(150deg,rgba(34,211,238,0.08),transparent_38%,rgba(244,114,182,0.11)_76%,rgba(251,191,36,0.08))]" />
               <div className="relative z-10 flex min-h-0 flex-1 flex-col p-5 xl:p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className="relative flex h-2 w-2">
-                        <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 accent-pulse" />
-                        <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/15 px-2.5 py-1 text-[11px] font-medium text-amber-200">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 accent-pulse" />
+                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-300" />
                       </span>
-                      <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-cyan-200/80">
-                        Current focus
-                      </div>
-                    </div>
-                    <h2 className="mt-1 truncate text-3xl font-semibold xl:text-4xl">
+                      Current focus
+                    </span>
+                    <h2 className="mt-2 truncate text-3xl font-semibold xl:text-4xl">
                       {featured.name}
                     </h2>
                   </div>

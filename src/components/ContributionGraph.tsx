@@ -20,22 +20,30 @@ function intensityFor(week: number, day: number) {
   return 4;
 }
 
-const cellFills = [
-  "var(--gh-0)",
-  "var(--gh-1)",
-  "var(--gh-2)",
-  "var(--gh-3)",
-  "var(--gh-4)",
-];
+export type ContributionPalette = "amber" | "emerald";
+
+const cellFillsByPalette: Record<ContributionPalette, string[]> = {
+  amber: ["var(--gh-0)", "var(--gh-1)", "var(--gh-2)", "var(--gh-3)", "var(--gh-4)"],
+  emerald: [
+    "var(--gh-em-0)",
+    "var(--gh-em-1)",
+    "var(--gh-em-2)",
+    "var(--gh-em-3)",
+    "var(--gh-em-4)",
+  ],
+};
 
 export function ContributionGraph({
   weeks = 52,
   contributionCount = "2,600+",
+  palette = "amber",
 }: {
   weeks?: number;
   contributionCount?: string;
+  palette?: ContributionPalette;
 }) {
   const reducedMotion = useReducedMotion();
+  const cellFills = cellFillsByPalette[palette];
 
   const cells = useMemo(() => {
     const result: { x: number; y: number; level: number }[] = [];

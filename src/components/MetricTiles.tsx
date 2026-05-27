@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { useCountUp } from "@/lib/hooks";
+import { Sparkline } from "./Sparkline";
 
 type Metric = {
   value: number;
@@ -11,6 +12,8 @@ type Metric = {
   decimals?: number;
   display?: string;
   label: string;
+  sparkline?: number[];
+  accent?: string;
 };
 
 const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];
@@ -36,12 +39,23 @@ function MetricTile({ metric, index }: { metric: Metric; index: number }) {
       variants={tileVariants}
       className="rounded-md border border-black/10 bg-white/55 px-3 py-2.5 backdrop-blur transition hover:-translate-y-0.5 hover:border-amber-400/40 hover:bg-white/70 dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-amber-300/40 dark:hover:bg-white/[0.07]"
     >
-      <span
-        ref={ref}
-        className="block text-lg font-semibold text-neutral-950 xl:text-xl dark:text-white"
-      >
-        {display}
-      </span>
+      <div className="flex items-start justify-between gap-2">
+        <span
+          ref={ref}
+          className="block text-lg font-semibold tabular-nums text-neutral-950 xl:text-xl dark:text-white"
+        >
+          {display}
+        </span>
+        {metric.sparkline && metric.accent ? (
+          <Sparkline
+            points={metric.sparkline}
+            accent={metric.accent}
+            width={56}
+            height={18}
+            strokeWidth={1.25}
+          />
+        ) : null}
+      </div>
       <div className="mt-0.5 text-[10px] uppercase tracking-wide text-neutral-500 dark:text-neutral-500">
         {metric.label}
       </div>

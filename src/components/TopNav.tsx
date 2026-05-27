@@ -182,12 +182,14 @@ export function TopNav() {
           <Link
             href="/"
             aria-label="Kaya Hickin home"
-            className="flex h-9 shrink-0 items-center gap-2 rounded-md px-2 font-semibold transition hover:bg-neutral-950/[0.055] dark:hover:bg-white/[0.07]"
+            className="flex h-9 shrink-0 items-center gap-2 rounded-md px-2 transition hover:bg-neutral-950/[0.055] dark:hover:bg-white/[0.07]"
           >
-            <span className="grid h-6 w-6 place-items-center rounded bg-neutral-950 text-xs text-white dark:bg-white dark:text-neutral-950">
+            <span className="grid h-7 w-7 place-items-center rounded bg-neutral-950 font-serif text-sm leading-none text-white dark:bg-white dark:text-neutral-950">
               KH
             </span>
-            <span className="hidden sm:inline">{siteConfig.name}</span>
+            <span className="hidden font-serif text-[17px] tracking-tight text-neutral-950 sm:inline dark:text-white">
+              {siteConfig.name}
+            </span>
           </Link>
           <span aria-hidden className="mx-1 hidden h-5 w-px bg-black/10 dark:bg-white/10 md:block" />
           <nav className="flex min-w-0 flex-wrap items-center gap-0.5">

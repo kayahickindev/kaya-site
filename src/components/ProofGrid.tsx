@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion, type Variants } from "framer-motion";
 import { Award, CheckCircle2, TrendingUp, Wrench, type LucideIcon } from "lucide-react";
 import { cardSurface } from "@/lib/surfaces";
+import { Sparkline } from "./Sparkline";
 
 type ProofGroup = {
   label: string;
@@ -56,49 +57,6 @@ type Metric = {
   sparkline?: number[];
   accent?: string;
 };
-
-function Sparkline({ points, accent, animate }: { points: number[]; accent: string; animate: boolean }) {
-  const max = Math.max(...points);
-  const min = Math.min(...points);
-  const range = max - min || 1;
-  const width = 80;
-  const height = 22;
-  const step = width / (points.length - 1);
-  const path = points
-    .map((p, i) => {
-      const x = i * step;
-      const y = height - ((p - min) / range) * height;
-      return `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`;
-    })
-    .join(" ");
-  const lastX = (points.length - 1) * step;
-  const lastY = height - ((points[points.length - 1] - min) / range) * height;
-
-  return (
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="block">
-      <motion.path
-        d={path}
-        fill="none"
-        stroke={accent}
-        strokeWidth={1.5}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        initial={{ pathLength: 0, opacity: 0.4 }}
-        animate={animate ? { pathLength: 1, opacity: 1 } : { pathLength: 1, opacity: 1 }}
-        transition={{ duration: 1.4, ease: [0.21, 0.47, 0.32, 0.98] }}
-      />
-      <motion.circle
-        cx={lastX}
-        cy={lastY}
-        r={2}
-        fill={accent}
-        initial={{ opacity: 0 }}
-        animate={animate ? { opacity: 1 } : { opacity: 1 }}
-        transition={{ duration: 0.3, delay: 1.3 }}
-      />
-    </svg>
-  );
-}
 
 function parseMetric(value: string) {
   const match = value.match(/^([^\d.]*)([\d.,]+)(.*)$/);

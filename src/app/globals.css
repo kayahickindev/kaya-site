@@ -55,6 +55,12 @@ body {
   --gh-2: #e9c594;
   --gh-3: #ddaa6a;
   --gh-4: #c98a45;
+
+  --gh-em-0: #ebedf0;
+  --gh-em-1: #c8e8d4;
+  --gh-em-2: #84cda7;
+  --gh-em-3: #3fa168;
+  --gh-em-4: #1f7d4d;
 }
 
 .dark {
@@ -63,6 +69,12 @@ body {
   --gh-2: #6b4a25;
   --gh-3: #a36e35;
   --gh-4: #d49b5a;
+
+  --gh-em-0: #0f1612;
+  --gh-em-1: #173a28;
+  --gh-em-2: #246b44;
+  --gh-em-3: #3fa168;
+  --gh-em-4: #52d39a;
 }
 
 /* Motion tokens for custom animation utilities */
