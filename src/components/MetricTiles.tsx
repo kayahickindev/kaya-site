@@ -27,7 +27,25 @@ const tileVariants: Variants = {
   }),
 };
 
-function MetricTile({ metric, index }: { metric: Metric; index: number }) {
+type TileAccent = "neutral" | "amber" | "emerald" | "cyan" | "violet";
+
+const valueColorByAccent: Record<TileAccent, string> = {
+  neutral: "text-neutral-950 dark:text-white",
+  amber: "text-amber-800 dark:text-amber-200",
+  emerald: "text-emerald-700 dark:text-emerald-200",
+  cyan: "text-cyan-700 dark:text-cyan-200",
+  violet: "text-violet-700 dark:text-violet-200",
+};
+
+function MetricTile({
+  metric,
+  index,
+  accent,
+}: {
+  metric: Metric;
+  index: number;
+  accent: TileAccent;
+}) {
   const { count, ref } = useCountUp(metric.value, 1600, metric.format ?? false, metric.decimals ?? 0);
   const display = metric.display ?? `${metric.prefix ?? ""}${count}${metric.suffix ?? ""}`;
 
@@ -42,7 +60,7 @@ function MetricTile({ metric, index }: { metric: Metric; index: number }) {
       <div className="flex items-start justify-between gap-2">
         <span
           ref={ref}
-          className="block text-lg font-semibold tabular-nums text-neutral-950 xl:text-xl dark:text-white"
+          className={`block text-lg font-semibold tabular-nums xl:text-xl ${valueColorByAccent[accent]}`}
         >
           {display}
         </span>
@@ -63,7 +81,13 @@ function MetricTile({ metric, index }: { metric: Metric; index: number }) {
   );
 }
 
-export function MetricTiles({ metrics }: { metrics: Metric[] }) {
+export function MetricTiles({
+  metrics,
+  accent = "neutral",
+}: {
+  metrics: Metric[];
+  accent?: TileAccent;
+}) {
   const reducedMotion = useReducedMotion();
 
   return (
@@ -73,6 +97,7 @@ export function MetricTiles({ metrics }: { metrics: Metric[] }) {
           key={metric.label}
           metric={reducedMotion ? { ...metric, display: metric.display ?? `${metric.prefix ?? ""}${metric.value}${metric.suffix ?? ""}` } : metric}
           index={index}
+          accent={accent}
         />
       ))}
     </div>

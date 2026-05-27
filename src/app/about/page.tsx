@@ -57,7 +57,10 @@ export default function AboutPage() {
           </div>
 
           <div className="max-w-prose space-y-4 text-base leading-relaxed text-neutral-700 xl:text-lg dark:text-neutral-300">
-            {paragraphs.map((p) => (
+            <p className="font-serif text-2xl italic leading-snug text-neutral-900 sm:text-3xl xl:text-[2rem] dark:text-neutral-100">
+              {paragraphs[0]}
+            </p>
+            {paragraphs.slice(1).map((p) => (
               <p key={p}>{p}</p>
             ))}
           </div>

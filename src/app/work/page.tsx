@@ -28,9 +28,9 @@ const heroMetrics: Record<string, { value: string; label: string }> = {
 
 const cardHighlights: Record<string, string[]> = {
   myfutureself: [
-    "1,718 paid subscribers · $65K ARR",
     "4.7★ from 715 App Store reviews",
     "26K+ downloads · 52% avg monthly growth",
+    "Solo-built iOS, backend, and voice-AI stack",
   ],
   "dog-ai": [
     "Custom LLM, trained on tens of thousands of dog images",
@@ -126,7 +126,7 @@ export default function WorkPage() {
                 </div>
               </div>
 
-              <TiltImage className="relative min-h-[220px] overflow-hidden md:min-h-0">
+              <TiltImage className="relative min-h-[260px] overflow-hidden md:min-h-0">
                 {hero.project.image ? (
                   <Image
                     src={hero.project.image}
@@ -134,7 +134,7 @@ export default function WorkPage() {
                     width={781}
                     height={1250}
                     unoptimized
-                    className="absolute inset-0 m-auto h-full max-h-[260px] w-auto scale-[0.95] object-contain mix-blend-screen drop-shadow-2xl transition-transform duration-500 group-hover:scale-[1] sm:max-h-[340px] sm:scale-[1.2] sm:group-hover:scale-[1.26]"
+                    className="absolute inset-0 m-auto h-full max-h-[320px] w-auto scale-[1.25] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] transition-transform duration-500 group-hover:scale-[1.3] sm:max-h-[420px] sm:scale-[1.55] sm:group-hover:scale-[1.6]"
                   />
                 ) : null}
               </TiltImage>

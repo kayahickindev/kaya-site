@@ -160,29 +160,8 @@ export function CommandCenter() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.48, ease }}
-            className="flex flex-col justify-center gap-5 py-2 lg:col-span-7 lg:pr-7"
+            className="flex flex-col justify-center gap-3 py-2 lg:col-span-7 lg:pr-7"
           >
-            <div className="flex items-center gap-4">
-              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md border border-black/10 bg-neutral-200 dark:border-white/10 dark:bg-neutral-900">
-                <Image
-                  src="/headshot.jpg"
-                  alt="Kaya Hickin"
-                  fill
-                  sizes="96px"
-                  className="object-cover"
-                  priority
-                />
-              </div>
-              <div className="min-w-0">
-                <div className="text-sm font-semibold text-neutral-950 dark:text-white">
-                  Kaya Hickin
-                </div>
-                <div className="mt-0.5 text-xs text-neutral-600 dark:text-neutral-400">
-                  Co-Founder · CTO · MyFutureSelf
-                </div>
-              </div>
-            </div>
-
             <div className="relative max-w-5xl">
               <div aria-hidden className="aurora" />
               <div className="relative">
@@ -193,7 +172,7 @@ export function CommandCenter() {
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="mt-1 flex flex-wrap items-center gap-2">
               <Link
                 href="/proof"
                 className="inline-flex h-10 items-center gap-2 rounded-md bg-neutral-950 px-4 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:bg-neutral-800 dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200"
@@ -212,8 +191,8 @@ export function CommandCenter() {
               </a>
             </div>
 
-            <Link href="/proof" className="block" aria-label="See full proof">
-              <MetricTiles metrics={metricTiles} />
+            <Link href="/proof" className="mt-1 block" aria-label="See full proof">
+              <MetricTiles metrics={metricTiles} accent="amber" />
             </Link>
 
             <div className="flex items-center gap-2">
@@ -249,61 +228,62 @@ export function CommandCenter() {
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.08, ease }}
-              className="relative flex min-h-[380px] flex-col overflow-hidden rounded-md border border-white/10 bg-neutral-950 text-white shadow-2xl shadow-black/10 sm:min-h-[460px] lg:col-span-5 lg:min-h-0"
+              className="relative flex min-h-[460px] flex-col items-end gap-4 lg:col-span-5 lg:min-h-0"
             >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_18%,rgba(34,211,238,0.16),transparent_30%),linear-gradient(150deg,rgba(34,211,238,0.08),transparent_38%,rgba(244,114,182,0.11)_76%,rgba(251,191,36,0.08))]" />
-              <div className="relative z-10 flex min-h-0 flex-1 flex-col p-5 xl:p-6">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="min-w-0">
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/15 px-2.5 py-1 text-[11px] font-medium text-amber-200">
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 accent-pulse" />
-                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-300" />
-                      </span>
-                      Current focus
-                    </span>
-                    <h2 className="mt-2 truncate text-3xl font-semibold xl:text-4xl">
-                      {featured.name}
-                    </h2>
-                  </div>
-                  <Link
-                    href={`/work/${featured.slug}`}
-                    aria-label={`Open ${featured.name} case study`}
-                    className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-white/15 bg-white/10 transition hover:-translate-y-0.5 hover:bg-white/15"
-                  >
-                    <ArrowUpRight size={18} />
-                  </Link>
-                </div>
-
-                <div className="mt-3 flex flex-wrap gap-2">
+              <div className="relative z-10 flex w-full flex-col items-end gap-2.5 text-right">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/15 px-2.5 py-1 text-[11px] font-medium text-amber-800 dark:text-amber-200">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 accent-pulse" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-500 dark:bg-amber-300" />
+                  </span>
+                  Current focus
+                </span>
+                <Link
+                  href={`/work/${featured.slug}`}
+                  aria-label={`Open ${featured.name} case study`}
+                  className="group inline-flex items-center gap-2"
+                >
+                  <h2 className="text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
+                    {featured.name}
+                  </h2>
+                  <ArrowUpRight
+                    size={20}
+                    className="text-neutral-500 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-amber-600 dark:group-hover:text-amber-300"
+                  />
+                </Link>
+                <div className="flex flex-wrap items-center justify-end gap-1.5">
                   {featured.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-md bg-white/[0.07] px-2.5 py-1.5 text-[11px] text-neutral-300"
+                      className="rounded-md border border-black/10 bg-white/50 px-2 py-0.5 text-[10px] font-medium text-neutral-700 backdrop-blur dark:border-white/10 dark:bg-white/[0.05] dark:text-neutral-300"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-
-                <Link
-                  href={`/work/${featured.slug}`}
-                  aria-label={`Open ${featured.name} case study`}
-                  className="relative min-h-0 flex-1 overflow-hidden"
-                >
-                  {featured.image ? (
-                    <Image
-                      src={featured.image}
-                      alt={`${featured.name} app screenshots`}
-                      width={781}
-                      height={1250}
-                      unoptimized
-                      loading="eager"
-                      className="mx-auto h-full max-h-[540px] w-auto scale-[1.32] object-contain drop-shadow-2xl xl:scale-[1.45]"
-                    />
-                  ) : null}
-                </Link>
               </div>
+
+              <Link
+                href={`/work/${featured.slug}`}
+                aria-label={`Open ${featured.name} case study`}
+                className="relative w-full flex-1"
+              >
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-[-12%] bg-[radial-gradient(ellipse_60%_55%_at_60%_55%,rgba(251,191,36,0.28),transparent_65%)] dark:bg-[radial-gradient(ellipse_60%_55%_at_60%_55%,rgba(251,191,36,0.22),transparent_65%)]"
+                />
+                {featured.image ? (
+                  <Image
+                    src={featured.image}
+                    alt={`${featured.name} app screenshots`}
+                    width={781}
+                    height={1250}
+                    unoptimized
+                    loading="eager"
+                    className="relative ml-auto h-full max-h-[600px] w-auto translate-x-[4%] scale-[1.5] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] sm:scale-[1.65] xl:translate-x-[8%] xl:scale-[1.85]"
+                  />
+                ) : null}
+              </Link>
             </motion.div>
           )}
         </section>
