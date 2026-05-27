@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import { Sun, Moon, Menu, X } from "lucide-react";
@@ -9,13 +11,9 @@ import { useScrolled } from "@/lib/hooks";
 
 export function Header() {
   const scrolled = useScrolled();
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const { resolvedTheme, setTheme } = useTheme();
 
   useEffect(() => {
     if (mobileOpen) {
@@ -37,37 +35,44 @@ export function Header() {
       }`}
     >
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a
-          href="#"
+        <Link
+          href="/"
           className="text-base font-semibold tracking-tight text-neutral-900 dark:text-white flex items-center gap-1"
         >
           Kaya Hickin
           <span className="text-accent-500 dark:text-accent-300">.</span>
-        </a>
+        </Link>
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
-          {siteConfig.nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200"
-            >
-              {item.label}
-            </a>
-          ))}
+          {siteConfig.nav.map((item) => {
+            const active = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={`text-sm transition-colors duration-200 ${
+                  active
+                    ? "text-neutral-950 dark:text-white"
+                    : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
 
         <div className="flex items-center gap-2">
-          {mounted && (
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-lg text-neutral-500 hover:text-accent-500 dark:hover:text-accent-300 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors duration-200"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-          )}
+          <button
+            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+            className="p-2 rounded-lg text-neutral-500 hover:text-accent-500 dark:hover:text-accent-300 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors duration-200"
+            aria-label="Toggle theme"
+            suppressHydrationWarning
+          >
+            {resolvedTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
 
           <button
             className="md:hidden p-2 rounded-lg text-neutral-500 hover:text-accent-500 dark:hover:text-accent-300 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors duration-200"
@@ -91,14 +96,14 @@ export function Header() {
           >
             <div className="px-6 py-4 space-y-1">
               {siteConfig.nav.map((item) => (
-                <a
+                <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
                   className="block py-3 text-base text-neutral-600 dark:text-neutral-300 hover:text-accent-500 dark:hover:text-accent-300 transition-colors"
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
             </div>
           </motion.div>

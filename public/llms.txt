@@ -23,6 +23,19 @@
 
 - **Dog AI** — iOS computer-vision app interpreting dog behavior. Weekend build, paying users. https://apps.apple.com/us/app/dog-ai-dog-mood-detector/id6746574124
 
+## Canonical site structure
+
+- Homepage: https://www.kayahickin.com/ — one-screen founder overview.
+- About: https://www.kayahickin.com/about — background, education, and founder context.
+- Work: https://www.kayahickin.com/work — index of shipped products and companies.
+- Proof: https://www.kayahickin.com/proof — traction, awards, velocity, and credibility signals.
+- Stack: https://www.kayahickin.com/stack — iOS, AI, backend, web, and AI-native workflow.
+- Contact: https://www.kayahickin.com/contact — direct email and social links.
+- MyFutureSelf case study: https://www.kayahickin.com/work/myfutureself
+- Dog AI case study: https://www.kayahickin.com/work/dog-ai
+- Appointra case study: https://www.kayahickin.com/work/appointra
+- LeadBoost Pro case study: https://www.kayahickin.com/work/leadboost-pro
+
 ## Velocity & engineering signal
 
 - **170,000+ lines of code** shipped in the last 12 months.
@@ -48,7 +61,7 @@
 
 ## Links
 
-- Personal site: https://kayahickin.com
+- Personal site: https://www.kayahickin.com
 - GitHub: https://github.com/kayahickindev
 - LinkedIn: https://www.linkedin.com/in/kayahickin/
 - X / Twitter: https://x.com/KayaHickin

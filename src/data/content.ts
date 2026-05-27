@@ -28,6 +28,59 @@ export const siteConfig = {
     },
   },
 
+  commandCenter: {
+    eyebrow: "Founder OS · Consumer AI · iOS",
+    headline: "Kaya Hickin builds consumer AI that changes behavior.",
+    description:
+      "Co-founder and CTO of MyFutureSelf. I ship the product, backend, voice AI, growth systems, and the weird glue between all of it.",
+    status: "Live: MyFutureSelf scaling",
+    availability: "Oxford, OH now · San Francisco summer 2026",
+    routes: [
+      {
+        label: "About",
+        href: "/about",
+        kicker: "founder story",
+        description: "Why I build, what I am focused on, and the path so far.",
+      },
+      {
+        label: "Proof",
+        href: "/proof",
+        kicker: "numbers + velocity",
+        description: "Revenue, subscribers, downloads, awards, and shipping signal.",
+      },
+      {
+        label: "Stack",
+        href: "/stack",
+        kicker: "how I build",
+        description: "iOS, backend, AI voice, analytics, and agent workflow.",
+      },
+      {
+        label: "Contact",
+        href: "/contact",
+        kicker: "investors + builders",
+        description: "Reach out about consumer AI, MyFutureSelf, or what comes next.",
+      },
+    ],
+    proof: [
+      { value: "1,322", label: "paid subscribers" },
+      { value: "$53K", label: "ARR" },
+      { value: "24K+", label: "downloads" },
+      { value: "4.7★", label: "App Store rating" },
+      { value: "170K+", label: "LOC shipped" },
+    ],
+    rails: [
+      "SwiftUI",
+      "Realtime voice",
+      "Firebase",
+      "Claude Code",
+      "Codex",
+      "StoreKit",
+      "Mixpanel",
+      "Consumer AI",
+      "Behavior change",
+    ],
+  },
+
   metrics: [
     {
       value: 1322,
@@ -102,6 +155,7 @@ export const siteConfig = {
 
   projects: [
     {
+      slug: "myfutureself",
       name: "MyFutureSelf",
       tagline: "AI mentorship for the person you're becoming.",
       description:
@@ -122,6 +176,7 @@ export const siteConfig = {
       status: "Active · Scaling",
     },
     {
+      slug: "dog-ai",
       name: "Dog AI",
       tagline: "What's your dog actually feeling?",
       description:
@@ -135,6 +190,7 @@ export const siteConfig = {
       status: "Live",
     },
     {
+      slug: "appointra",
       name: "Appointra",
       tagline: "B2B outbound, on autopilot.",
       description:
@@ -147,6 +203,7 @@ export const siteConfig = {
       status: "Wound down",
     },
     {
+      slug: "leadboost-pro",
       name: "LeadBoost Pro",
       tagline: "Marketing for businesses that don't have a marketing team.",
       description:
@@ -231,9 +288,9 @@ export const siteConfig = {
   },
 
   nav: [
-    { label: "About", href: "#about" },
-    { label: "Work", href: "#projects" },
-    { label: "Experience", href: "#experience" },
-    { label: "Contact", href: "#contact" },
+    { label: "About", href: "/about" },
+    { label: "Proof", href: "/proof" },
+    { label: "Stack", href: "/stack" },
+    { label: "Contact", href: "/contact" },
   ],
 };

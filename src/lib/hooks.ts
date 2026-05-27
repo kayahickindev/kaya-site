@@ -1,7 +1,13 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
-import { useInView } from "framer-motion";
+import {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  type RefObject,
+} from "react";
+import { useInView, useReducedMotion } from "framer-motion";
 
 export function useCountUp(
   end: number,
@@ -11,14 +17,30 @@ export function useCountUp(
 ) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref as React.RefObject<Element>, { once: true });
+  const isInView = useInView(ref as RefObject<Element | null>, { once: true });
   const hasAnimated = useRef(false);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     if (!isInView || hasAnimated.current) return;
     hasAnimated.current = true;
 
+    if (shouldReduceMotion || duration <= 0) {
+      let isCancelled = false;
+
+      queueMicrotask(() => {
+        if (!isCancelled) {
+          setCount(end);
+        }
+      });
+
+      return () => {
+        isCancelled = true;
+      };
+    }
+
     const startTime = performance.now();
+    let animationFrame = 0;
 
     const animate = (currentTime: number) => {
       const elapsed = currentTime - startTime;
@@ -29,14 +51,16 @@ export function useCountUp(
       setCount(current);
 
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        animationFrame = requestAnimationFrame(animate);
       } else {
         setCount(end);
       }
     };
 
-    requestAnimationFrame(animate);
-  }, [isInView, end, duration]);
+    animationFrame = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, [isInView, end, duration, shouldReduceMotion]);
 
   let formatted: string;
   if (decimals > 0) {
@@ -58,8 +82,12 @@ export function useScrolled(threshold = 20) {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    const animationFrame = window.requestAnimationFrame(handleScroll);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [handleScroll]);
 
   return scrolled;

@@ -15,7 +15,6 @@ Three-for-three profitable founder, technical CTO building consumer AI for behav
 - **Name**: Kaya Hickin
 - **Age**: 22
 - **Email**: kaya@successai.app
-- **Phone**: +1 330 839 5855
 - **Location**: Oxford, Ohio, USA — relocating to San Francisco summer 2026
 - **Citizenship**: United States
 - **Title**: Co-founder & CTO, MyFutureSelf
@@ -40,7 +39,7 @@ As CTO, shipped iOS, backend, and AI systems end-to-end as the solo engineer.
 **Metrics in first 7 months**:
 - 24,000+ downloads
 - 1,322 paid subscribers (Apple-authoritative ever-paid cohort)
-- $53,000 ARR
+- $53K ARR
 - 20,811 hours of AI coaching delivered (47,056 completed tasks @ ~26.5 min avg)
 - 4.7★ App Store rating from 671 verified reviews
 - 87% lifetime paying-customer retention (still in a paid period)
@@ -98,6 +97,19 @@ Joined the family landscaping business at age 14 and worked through high school 
 
 - **Dog AI** — iOS app using computer vision to interpret dog behavior and flag when something might be wrong. A weekend build that turned into a paying product. https://apps.apple.com/us/app/dog-ai-dog-mood-detector/id6746574124
 
+## Canonical site structure
+
+- **Homepage**: https://www.kayahickin.com/ — one-screen founder overview.
+- **About**: https://www.kayahickin.com/about — background, education, and founder context.
+- **Work**: https://www.kayahickin.com/work — index of shipped products and companies.
+- **Proof**: https://www.kayahickin.com/proof — traction, awards, velocity, and credibility signals.
+- **Stack**: https://www.kayahickin.com/stack — iOS, AI, backend, web, and AI-native workflow.
+- **Contact**: https://www.kayahickin.com/contact — direct email and social links.
+- **MyFutureSelf**: https://www.kayahickin.com/work/myfutureself — flagship consumer AI case study.
+- **Dog AI**: https://www.kayahickin.com/work/dog-ai — shipped iOS computer-vision app.
+- **Appointra**: https://www.kayahickin.com/work/appointra — B2B outbound and pipeline case study.
+- **LeadBoost Pro**: https://www.kayahickin.com/work/leadboost-pro — first profitable web and growth company.
+
 ## Engineering velocity
 
 - **170,000+ lines of code** shipped in the last 12 months
@@ -149,8 +161,7 @@ Spending the next decade building consumer AI products that change real behavior
 ## Direct contact
 
 - Email: kaya@successai.app
-- Phone: +1 330 839 5855
-- Personal site: https://kayahickin.com
+- Personal site: https://www.kayahickin.com
 - GitHub: https://github.com/kayahickindev
 - LinkedIn: https://www.linkedin.com/in/kayahickin/
 - X / Twitter: https://x.com/KayaHickin

@@ -62,7 +62,7 @@ export async function GET() {
               lineHeight: 1.5,
             }}
           >
-            Building MyFutureSelf. 19,000+ downloads. 1,200+ paying subscribers.
+            Building MyFutureSelf. 24,000+ downloads. 1,322 paid subscribers. $53K ARR.
           </div>
         </div>
 
@@ -75,6 +75,7 @@ export async function GET() {
           }}
         >
           <img
+            alt="Kaya Hickin"
             src={headshotBase64}
             width={280}
             height={280}
