@@ -93,11 +93,7 @@ export function ContactPanel() {
           Contact
         </div>
         <h1 className="mt-2 text-5xl font-semibold leading-[0.95] text-neutral-950 sm:text-6xl xl:text-7xl dark:text-white">
-          Let&apos;s build{" "}
-          <span className="font-serif italic font-normal text-amber-700 dark:text-amber-200">
-            something
-          </span>
-          .
+          Let&apos;s build something.
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-neutral-700 xl:text-lg dark:text-neutral-300">
           {siteConfig.contact.body}

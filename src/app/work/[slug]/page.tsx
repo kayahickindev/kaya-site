@@ -292,7 +292,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                   </span>
                 ) : null}
               </div>
-              <p className="mt-3 font-serif text-2xl italic leading-tight text-amber-700 dark:text-amber-200">
+              <p className="mt-3 text-xl leading-snug text-neutral-700 dark:text-neutral-300">
                 {project.tagline}
               </p>
               <p className="mt-3 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">

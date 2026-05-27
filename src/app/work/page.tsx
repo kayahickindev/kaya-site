@@ -21,6 +21,13 @@ const accents: Record<string, string> = {
   "leadboost-pro": "from-amber-500/15 via-transparent to-emerald-500/10",
 };
 
+const cardHighlights: Record<string, string[]> = {
+  myfutureself: ["1,718 paid subscribers · $65K ARR", "4.7★ from 715 App Store reviews"],
+  "dog-ai": ["Custom LLM, tens of thousands of dog images", "Harvard behavior dataset"],
+  appointra: ["$20k MRR in three months", "Millions in client pipeline"],
+  "leadboost-pro": ["Profitable from year one", "First company, dorm-room start"],
+};
+
 export default function WorkPage() {
   return (
     <SubpageShell activePath="/work">
@@ -31,15 +38,11 @@ export default function WorkPage() {
               Work
             </div>
             <h1 className="mt-1 text-3xl font-semibold leading-[0.95] text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
-              Shipped products, not{" "}
-              <span className="font-serif italic font-normal text-amber-700 dark:text-amber-200">
-                case studies
-              </span>
-              .
+              Shipped products, not case studies.
             </h1>
           </div>
-          <p className="max-w-md text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-            Four companies, three profitable, one App Store hit, all built end to end. Click any card to read the detail page.
+          <p className="max-w-xs text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+            Four companies. Three profitable. One App Store hit.
           </p>
         </header>
 
@@ -47,12 +50,13 @@ export default function WorkPage() {
           {projectDetails.map((detail) => {
             const { project } = detail;
             const accent = accents[detail.slug] ?? "from-amber-500/10 via-transparent to-cyan-500/10";
+            const highlights = cardHighlights[detail.slug] ?? [];
 
             return (
               <Link
                 key={detail.slug}
                 href={`/work/${detail.slug}`}
-                className="group relative flex min-h-0 flex-col overflow-hidden rounded-md border border-black/10 bg-white/55 p-4 backdrop-blur transition hover:-translate-y-0.5 hover:border-black/25 hover:bg-white/75 dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-white/25 dark:hover:bg-white/[0.07]"
+                className="group relative flex min-h-0 flex-col overflow-hidden rounded-md border border-black/10 bg-white/55 p-5 backdrop-blur transition hover:-translate-y-0.5 hover:border-black/25 hover:bg-white/75 dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-white/25 dark:hover:bg-white/[0.07]"
               >
                 <div
                   aria-hidden
@@ -64,7 +68,7 @@ export default function WorkPage() {
                     <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
                       {detail.role} · {detail.timeframe}
                     </p>
-                    <h2 className="mt-1 truncate text-2xl font-semibold leading-tight text-neutral-950 xl:text-3xl dark:text-white">
+                    <h2 className="mt-1 text-3xl font-semibold leading-tight text-neutral-950 xl:text-4xl dark:text-white">
                       {project.name}
                     </h2>
                   </div>
@@ -75,24 +79,20 @@ export default function WorkPage() {
                   ) : null}
                 </div>
 
-                <p className="relative mt-2 font-serif text-lg italic leading-snug text-amber-700 dark:text-amber-200">
+                <p className="relative mt-3 text-base leading-snug text-neutral-700 dark:text-neutral-300">
                   {project.tagline}
                 </p>
 
-                <p className="relative mt-2 text-sm leading-snug text-neutral-700 dark:text-neutral-300">
-                  {project.description}
-                </p>
-
-                <ul className="relative mt-3 grid flex-1 gap-1 text-xs text-neutral-600 dark:text-neutral-400">
-                  {detail.outcomes.slice(0, 3).map((outcome) => (
-                    <li key={outcome} className="flex gap-2">
+                <ul className="relative mt-auto grid gap-1.5 pt-4 text-sm text-neutral-700 dark:text-neutral-200">
+                  {highlights.map((highlight) => (
+                    <li key={highlight} className="flex gap-2">
                       <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-500 dark:bg-amber-300" />
-                      <span className="leading-snug">{outcome}</span>
+                      <span className="leading-snug">{highlight}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="relative mt-3 flex items-center justify-between gap-2 border-t border-black/10 pt-2 dark:border-white/10">
+                <div className="relative mt-4 flex items-center justify-between gap-2 border-t border-black/10 pt-3 dark:border-white/10">
                   <div className="flex flex-wrap gap-1">
                     {project.tags.slice(0, 3).map((tag) => (
                       <span
@@ -104,7 +104,7 @@ export default function WorkPage() {
                     ))}
                   </div>
                   <span className="inline-flex items-center gap-1 text-xs font-medium text-neutral-800 transition group-hover:gap-2 dark:text-neutral-200">
-                    Read detail
+                    Detail
                     <ArrowUpRight size={13} />
                   </span>
                 </div>

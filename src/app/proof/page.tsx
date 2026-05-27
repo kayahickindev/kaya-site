@@ -69,11 +69,7 @@ export default function ProofPage() {
               Proof
             </div>
             <h1 className="mt-1 text-3xl font-semibold leading-[0.95] text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
-              The receipts, in{" "}
-              <span className="font-serif italic font-normal text-amber-700 dark:text-amber-200">
-                public
-              </span>
-              .
+              The receipts, in public.
             </h1>
           </div>
           <p className="max-w-md text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">

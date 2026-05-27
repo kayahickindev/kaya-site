@@ -482,11 +482,7 @@ export function CommandCenter() {
 
             <div className="my-8 max-w-5xl lg:my-9 2xl:my-12">
               <h1 className="text-5xl font-semibold leading-[0.92] text-neutral-950 sm:text-6xl xl:text-7xl 2xl:text-8xl dark:text-white">
-                I build{" "}
-                <span className="font-serif italic font-normal text-amber-700 dark:text-amber-200">
-                  consumer AI
-                </span>{" "}
-                that changes behavior.
+                I build consumer AI that changes behavior.
               </h1>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-neutral-700 xl:text-lg dark:text-neutral-300">
                 {siteConfig.commandCenter.description}
