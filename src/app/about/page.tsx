@@ -26,10 +26,8 @@ const SIDEBAR_ICONS: Record<string, LucideIcon> = {
 };
 
 const paragraphs = [
-  "Started working full-time in my family's business at 14. Graduated high school valedictorian. Built 20+ custom websites and launched 2 crypto projects ($500K+ combined market cap) freshman year of college.",
-  "Three companies later, three for three on profitability. Now co-founder and CTO of MyFutureSelf, a voice AI mentor that speaks as your future self. Solo-built the iOS app, Firebase backend, and AI integration in six months.",
-  "Previously co-founded Appointra with Giancarlo. Built the automated cold-email infra that drove $2M+ in pipeline for 8/9-figure founders. Wound it down to go all-in on MyFutureSelf.",
-  "AI-native: 2,600+ contributions in the last year alongside Claude Code and Codex. I think about how AI can change real behavior, not engagement metrics.",
+  "Working full-time in my family's business at 14, valedictorian out of high school, shipping companies ever since. Now co-founder and CTO of MyFutureSelf, a voice AI mentor that speaks as your future self. Solo-built iOS, Firebase backend, and AI integration in six months.",
+  "AI-native by default. 2,600+ contributions in the last year alongside Claude Code and Codex. I build consumer AI for behavior change, not engagement metrics.",
 ];
 
 const highlightStats = [
@@ -41,7 +39,7 @@ const highlightStats = [
 
 export default function AboutPage() {
   return (
-    <SubpageShell activePath="/about">
+    <SubpageShell>
       <div className="grid h-full min-h-0 grid-cols-1 gap-4 lg:grid-cols-12">
         <div className="flex min-h-0 flex-col lg:col-span-7 lg:pr-4">
           <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
@@ -51,13 +49,13 @@ export default function AboutPage() {
             Builder, operator, founder.
           </h1>
 
-          <div className="mt-4 space-y-2.5 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+          <div className="mt-5 max-w-prose space-y-4 text-base leading-relaxed text-neutral-700 xl:text-lg dark:text-neutral-300">
             {paragraphs.map((p) => (
               <p key={p}>{p}</p>
             ))}
           </div>
 
-          <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+          <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
             {highlightStats.map((s) => (
               <div
                 key={s.label}

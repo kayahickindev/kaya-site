@@ -36,14 +36,14 @@ export default function StackPage() {
   })).filter((g) => g.items.length > 0);
 
   return (
-    <SubpageShell activePath="/stack">
+    <SubpageShell>
       <div className="flex h-full min-h-0 flex-col gap-3">
         <header>
           <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
             Stack
           </div>
           <h1 className="mt-1 text-3xl font-semibold leading-[0.95] text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
-            How I build at founder speed.
+            How I build.
           </h1>
         </header>
 

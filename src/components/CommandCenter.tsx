@@ -1,22 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ComponentType } from "react";
+import { type ComponentType } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Search, X } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/data/content";
-import { LiveShipped } from "./LiveShipped";
 import { MetricTiles } from "./MetricTiles";
 import { RevealHeadline } from "./RevealHeadline";
-
-type Action = {
-  label: string;
-  href?: string;
-  detail: string;
-  external?: boolean;
-  email?: boolean;
-};
+import { TopNav } from "./TopNav";
 
 const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];
 
@@ -50,11 +42,6 @@ function InstagramIcon({ size = 17 }: { size?: number }) {
       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
     </svg>
   );
-}
-
-function openEmail() {
-  const { user, domain } = siteConfig.emailParts;
-  window.location.assign(`mailto:${user}@${domain}`);
 }
 
 function SignalField() {
@@ -107,120 +94,12 @@ function SocialLink({
       rel="noopener noreferrer"
       aria-label={label}
       title={label}
-      className="grid h-9 w-9 place-items-center rounded-md text-neutral-600 transition hover:-translate-y-0.5 hover:bg-neutral-950/[0.055] hover:text-neutral-950 dark:text-neutral-400 dark:hover:bg-white/[0.07] dark:hover:text-white"
+      className="grid h-8 w-8 place-items-center rounded-md text-neutral-500 transition hover:-translate-y-0.5 hover:bg-neutral-950/[0.055] hover:text-neutral-950 dark:text-neutral-400 dark:hover:bg-white/[0.07] dark:hover:text-white"
     >
-      <Icon size={17} />
+      <Icon size={15} />
     </a>
   );
 }
-
-function CommandPalette({
-  open,
-  actions,
-  onClose,
-}: {
-  open: boolean;
-  actions: Action[];
-  onClose: () => void;
-}) {
-  const [query, setQuery] = useState("");
-
-  const filtered = actions.filter((action) => {
-    const haystack = `${action.label} ${action.detail}`.toLowerCase();
-    return haystack.includes(query.toLowerCase());
-  });
-
-  const activate = (action: Action) => {
-    onClose();
-    if (action.email) {
-      openEmail();
-      return;
-    }
-    if (!action.href) return;
-    if (action.external) {
-      window.open(action.href, "_blank", "noopener,noreferrer");
-      return;
-    }
-    window.location.assign(action.href);
-  };
-
-  return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          className="fixed inset-0 z-[80] grid place-items-center bg-neutral-950/55 px-4 backdrop-blur-sm"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onMouseDown={onClose}
-        >
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-label="Command menu"
-            className="w-full max-w-xl overflow-hidden rounded-lg border border-white/15 bg-neutral-950 text-white shadow-2xl"
-            initial={{ opacity: 0, y: 18, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 12, scale: 0.98 }}
-            transition={{ duration: 0.22, ease }}
-            onMouseDown={(event) => event.stopPropagation()}
-          >
-            <div className="flex items-center gap-3 border-b border-white/10 px-4">
-              <Search size={18} className="text-neutral-500" />
-              <input
-                autoFocus
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search pages, projects, links"
-                className="h-14 min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-neutral-500"
-              />
-              <button
-                type="button"
-                onClick={onClose}
-                aria-label="Close command menu"
-                className="grid h-8 w-8 place-items-center rounded-md text-neutral-500 transition hover:bg-white/10 hover:text-white"
-              >
-                <X size={16} />
-              </button>
-            </div>
-            <div className="max-h-[420px] overflow-y-auto p-2">
-              {filtered.map((action) => (
-                <button
-                  key={`${action.label}-${action.href ?? "email"}`}
-                  type="button"
-                  onClick={() => activate(action)}
-                  className="group flex w-full items-center justify-between gap-3 rounded-md px-3 py-3 text-left transition hover:bg-white/[0.075]"
-                >
-                  <span className="min-w-0">
-                    <span className="block text-sm font-medium text-white">{action.label}</span>
-                    <span className="mt-0.5 block truncate text-xs text-neutral-500">
-                      {action.detail}
-                    </span>
-                  </span>
-                  <ArrowUpRight
-                    size={15}
-                    className="shrink-0 text-neutral-600 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-neutral-300"
-                  />
-                </button>
-              ))}
-              {filtered.length === 0 && (
-                <div className="px-3 py-8 text-center text-sm text-neutral-500">No matches.</div>
-              )}
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-const primaryRoutes = [
-  { label: "About", href: "/about" },
-  { label: "Work", href: "/work" },
-  { label: "Proof", href: "/proof" },
-  { label: "Stack", href: "/stack" },
-  { label: "Contact", href: "/contact" },
-];
 
 const metricTiles = [
   { value: 1718, label: "paid subscribers", format: true },
@@ -231,97 +110,13 @@ const metricTiles = [
 ];
 
 export function CommandCenter() {
-  const [paletteOpen, setPaletteOpen] = useState(false);
   const featured = siteConfig.projects.find((project) => project.featured);
-
-  const actions = useMemo<Action[]>(
-    () => [
-      ...siteConfig.commandCenter.routes.map((route) => ({
-        label: route.label,
-        href: route.href,
-        detail: route.description,
-      })),
-      ...siteConfig.projects.map((project) => ({
-        label: project.name,
-        href: `/work/${project.slug}`,
-        detail: project.tagline ?? project.description,
-      })),
-      { label: "GitHub", href: siteConfig.social.github, detail: "Open source and shipping log", external: true },
-      { label: "LinkedIn", href: siteConfig.social.linkedin, detail: "Professional profile", external: true },
-      { label: "Email Kaya", detail: "Start a direct conversation", email: true },
-    ],
-    []
-  );
-
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
-        event.preventDefault();
-        setPaletteOpen((current) => !current);
-      }
-      if (event.key === "Escape") {
-        setPaletteOpen(false);
-      }
-    };
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, []);
 
   return (
     <main className="relative h-dvh overflow-hidden bg-[#f4f1ea] text-neutral-950 dark:bg-[#050505] dark:text-white max-lg:h-auto max-lg:min-h-dvh max-lg:overflow-y-auto">
       <SignalField />
-      <div className="relative z-10 grid h-full min-h-0 grid-rows-[44px_minmax(0,1fr)_auto] gap-4 px-4 py-3 sm:px-5 lg:px-7">
-        <header className="flex h-11 min-w-0 items-center justify-between gap-3">
-          <Link
-            href="/"
-            aria-label="Kaya Hickin home"
-            className="flex h-10 shrink-0 items-center gap-3 rounded-md border border-black/10 bg-white/52 px-3 text-sm font-semibold backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:hover:bg-white/[0.075]"
-          >
-            <span className="grid h-6 w-6 place-items-center rounded bg-neutral-950 text-xs text-white dark:bg-white dark:text-neutral-950">
-              KH
-            </span>
-            <span>{siteConfig.name}</span>
-          </Link>
-
-          <nav className="hidden min-w-0 items-center gap-1 lg:flex">
-            {primaryRoutes.map((route) => (
-              <Link
-                key={route.href}
-                href={route.href}
-                className="rounded-md px-3 py-2 text-sm text-neutral-700 transition hover:bg-neutral-950/[0.055] hover:text-neutral-950 dark:text-neutral-300 dark:hover:bg-white/[0.07] dark:hover:text-white"
-              >
-                {route.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex shrink-0 items-center gap-2">
-            <div className="hidden md:block">
-              <LiveShipped />
-            </div>
-            <button
-              type="button"
-              onClick={() => setPaletteOpen(true)}
-              aria-label="Open command menu (Cmd+K)"
-              className="hidden h-10 items-center gap-2 rounded-md border border-black/10 bg-white/45 px-3 text-xs text-neutral-600 backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-white/[0.035] dark:text-neutral-400 dark:hover:bg-white/[0.08] sm:flex"
-            >
-              <Search size={14} />
-              <span>Search</span>
-              <kbd className="rounded border border-black/10 bg-white/40 px-1 py-0.5 font-mono text-[10px] dark:border-white/15 dark:bg-white/[0.06]">
-                ⌘K
-              </kbd>
-            </button>
-            <button
-              type="button"
-              onClick={() => setPaletteOpen(true)}
-              aria-label="Open command menu"
-              className="grid h-10 w-10 place-items-center rounded-md border border-black/10 bg-white/45 backdrop-blur sm:hidden dark:border-white/10 dark:bg-white/[0.035]"
-            >
-              <Search size={16} />
-            </button>
-          </div>
-        </header>
+      <div className="relative z-10 grid h-full min-h-0 grid-rows-[auto_minmax(0,1fr)] gap-4 px-4 py-3 sm:px-5 lg:px-7">
+        <TopNav />
 
         <section className="grid min-h-0 grid-cols-1 gap-6 lg:grid-cols-12">
           <motion.div
@@ -383,6 +178,13 @@ export function CommandCenter() {
             <Link href="/proof" className="mt-4 block" aria-label="See full proof">
               <MetricTiles metrics={metricTiles} />
             </Link>
+
+            <div className="mt-5 flex items-center gap-1">
+              <SocialLink href={siteConfig.social.github} label="GitHub" icon={GitHubIcon} />
+              <SocialLink href={siteConfig.social.linkedin} label="LinkedIn" icon={LinkedInIcon} />
+              <SocialLink href={siteConfig.social.twitter} label="X / Twitter" icon={TwitterIcon} />
+              <SocialLink href={siteConfig.social.instagram} label="Instagram" icon={InstagramIcon} />
+            </div>
           </motion.div>
 
           {featured && (
@@ -454,51 +256,7 @@ export function CommandCenter() {
             </motion.div>
           )}
         </section>
-
-        <motion.nav
-          aria-label="Social links"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.42, delay: 0.18, ease }}
-          className="flex items-center justify-between gap-3 rounded-md border border-black/10 bg-white/45 px-3 py-2 text-sm backdrop-blur dark:border-white/10 dark:bg-white/[0.028]"
-        >
-          <div className="flex min-w-0 items-center gap-3 lg:hidden">
-            {primaryRoutes.slice(0, 3).map((route) => (
-              <Link
-                key={route.href}
-                href={route.href}
-                className="text-xs text-neutral-600 transition hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
-              >
-                {route.label}
-              </Link>
-            ))}
-          </div>
-
-          <div className="hidden text-xs text-neutral-500 dark:text-neutral-500 lg:flex lg:items-center lg:gap-3">
-            <span className="font-mono uppercase tracking-[0.18em]">Reach out</span>
-            <button
-              type="button"
-              onClick={openEmail}
-              className="text-neutral-700 transition hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-white"
-            >
-              kaya<span className="text-neutral-500">@</span>successai.app
-            </button>
-          </div>
-
-          <div className="flex shrink-0 items-center gap-1">
-            <SocialLink href={siteConfig.social.github} label="GitHub" icon={GitHubIcon} />
-            <SocialLink href={siteConfig.social.linkedin} label="LinkedIn" icon={LinkedInIcon} />
-            <SocialLink href={siteConfig.social.twitter} label="X / Twitter" icon={TwitterIcon} />
-            <SocialLink href={siteConfig.social.instagram} label="Instagram" icon={InstagramIcon} />
-          </div>
-        </motion.nav>
       </div>
-      <CommandPalette
-        key={paletteOpen ? "open" : "closed"}
-        open={paletteOpen}
-        actions={actions}
-        onClose={() => setPaletteOpen(false)}
-      />
     </main>
   );
 }

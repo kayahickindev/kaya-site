@@ -25,32 +25,28 @@ const cardHighlights: Record<string, string[]> = {
   myfutureself: [
     "1,718 paid subscribers · $65K ARR",
     "4.7★ from 715 App Store reviews",
-    "26K+ downloads, 52% avg monthly growth",
-    "Solo iOS + backend + voice AI in 6 months",
+    "26K+ downloads · 52% avg monthly growth",
   ],
   "dog-ai": [
-    "Custom LLM, tens of thousands of dog images",
+    "Custom LLM, trained on tens of thousands of dog images",
     "Behavior dataset from Harvard",
-    "Solo dataset, training, and iOS build",
     "Live on the App Store as a paying product",
   ],
   appointra: [
     "$20k MRR in three months",
     "$2M+ in client pipeline generated",
     "Hundreds of qualified meetings booked",
-    "Co-built with Giancarlo, then sunset",
   ],
   "leadboost-pro": [
     "Profitable from year one",
     "20+ custom websites freshman year",
-    "Marketing + web dev + consulting",
     "Dorm-room start, still live",
   ],
 };
 
 export default function WorkPage() {
   return (
-    <SubpageShell activePath="/work">
+    <SubpageShell>
       <div className="flex h-full min-h-0 flex-col gap-4">
         <header>
           <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">

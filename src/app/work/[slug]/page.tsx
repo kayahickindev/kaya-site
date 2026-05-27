@@ -264,7 +264,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   ];
 
   return (
-    <SubpageShell activePath="/work">
+    <SubpageShell>
       <div className="flex h-full min-h-0 flex-col gap-3">
         <Link
           href="/work"
