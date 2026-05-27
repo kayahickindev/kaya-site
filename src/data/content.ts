@@ -30,7 +30,7 @@ export const siteConfig = {
 
   commandCenter: {
     eyebrow: "Founder OS · Consumer AI · iOS",
-    headline: "Kaya Hickin builds consumer AI that changes behavior.",
+    headline: "I build consumer AI that changes behavior.",
     description:
       "Co-founder and CTO of MyFutureSelf. I ship the product, backend, voice AI, growth systems, and the weird glue between all of it.",
     status: "Live: MyFutureSelf scaling",

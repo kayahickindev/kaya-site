@@ -19,7 +19,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { siteConfig } from "@/data/content";
-import { EmailLink } from "./EmailLink";
 
 type Action = {
   label: string;
@@ -113,23 +112,26 @@ function ProofStrip() {
   return (
     <Link
       href="/proof"
-      className="grid overflow-hidden rounded-md border border-black/10 bg-white/52 backdrop-blur transition hover:bg-white/78 dark:border-white/10 dark:bg-white/[0.04] dark:hover:bg-white/[0.07] sm:grid-cols-5"
+      className="group flex min-w-0 flex-wrap items-center gap-x-4 gap-y-2 rounded-md border border-black/10 bg-white/52 px-4 py-3 text-sm backdrop-blur transition hover:bg-white/78 dark:border-white/10 dark:bg-white/[0.035] dark:hover:bg-white/[0.06]"
     >
       {siteConfig.commandCenter.proof.map((item, index) => (
-        <motion.div
+        <motion.span
           key={item.label}
           whileHover={{ y: -1 }}
-          className={`min-w-0 px-3 py-2.5 ${
-            index > 0 ? "border-t border-black/10 dark:border-white/10 sm:border-l sm:border-t-0" : ""
-          }`}
+          className="inline-flex min-w-0 items-baseline gap-1.5"
         >
-          <div className="truncate text-lg font-semibold leading-none text-neutral-950 xl:text-xl dark:text-white">
+          {index > 0 ? (
+            <span className="mr-2 hidden text-neutral-300 dark:text-neutral-700 sm:inline">
+              /
+            </span>
+          ) : null}
+          <span className="font-semibold text-neutral-950 dark:text-white">
             {item.value}
-          </div>
-          <div className="mt-1 truncate text-[10px] leading-tight text-neutral-600 dark:text-neutral-400">
+          </span>
+          <span className="truncate text-xs text-neutral-600 dark:text-neutral-400">
             {item.label}
-          </div>
-        </motion.div>
+          </span>
+        </motion.span>
       ))}
     </Link>
   );
@@ -244,7 +246,7 @@ function AppVisual({
         unoptimized
         loading="eager"
         onError={() => setFailed(true)}
-        className="h-full max-h-[500px] w-auto max-w-full translate-y-8 scale-[1.12] object-contain drop-shadow-2xl xl:translate-y-10 xl:scale-[1.24]"
+        className="h-full max-h-[520px] w-auto max-w-full translate-y-2 scale-[1.18] object-contain drop-shadow-2xl xl:translate-y-3 xl:scale-[1.34]"
       />
     </div>
   );
@@ -425,7 +427,7 @@ export function CommandCenter() {
   return (
     <main className="relative h-dvh overflow-hidden bg-[#f4f1ea] text-neutral-950 dark:bg-[#050505] dark:text-white max-lg:h-auto max-lg:min-h-dvh max-lg:overflow-y-auto">
       <SignalField />
-      <div className="relative z-10 grid h-full min-h-0 grid-rows-[44px_minmax(0,1fr)_auto] gap-3 px-4 py-3 sm:px-5 lg:px-7">
+      <div className="relative z-10 grid h-full min-h-0 grid-rows-[44px_minmax(0,1fr)_auto] gap-4 px-4 py-3 sm:px-5 lg:px-7">
         <header className="flex h-11 min-w-0 items-center justify-between gap-3">
           <Link
             href="/"
@@ -435,6 +437,7 @@ export function CommandCenter() {
             <span className="grid h-6 w-6 place-items-center rounded bg-neutral-950 text-xs text-white dark:bg-white dark:text-neutral-950">
               KH
             </span>
+            <span>{siteConfig.name}</span>
           </Link>
 
           <div className="hidden min-w-0 flex-1 items-center justify-center lg:flex">
@@ -449,12 +452,12 @@ export function CommandCenter() {
           <div className="h-10 w-10 shrink-0" aria-hidden />
         </header>
 
-        <section className="grid min-h-0 grid-cols-1 gap-5 lg:grid-cols-12">
+        <section className="grid min-h-0 grid-cols-1 gap-6 lg:grid-cols-12">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.48, ease }}
-            className="flex min-h-[520px] flex-col justify-center overflow-hidden py-4 lg:col-span-7 lg:min-h-0 lg:pr-5"
+            className="flex min-h-[520px] flex-col justify-center overflow-hidden py-4 lg:col-span-7 lg:min-h-0 lg:pr-7"
           >
             <div className="flex items-center gap-3">
               <div className="relative h-14 w-14 overflow-hidden rounded-md border border-black/10 bg-neutral-200 dark:border-white/10 dark:bg-neutral-900">
@@ -477,9 +480,9 @@ export function CommandCenter() {
               </div>
             </div>
 
-            <div className="my-8 max-w-5xl lg:my-10 2xl:my-12">
+            <div className="my-8 max-w-5xl lg:my-9 2xl:my-12">
               <h1 className="text-5xl font-semibold leading-[0.92] text-neutral-950 sm:text-6xl xl:text-7xl 2xl:text-8xl dark:text-white">
-                Kaya Hickin builds{" "}
+                I build{" "}
                 <span className="font-serif italic font-normal text-amber-700 dark:text-amber-200">
                   consumer AI
                 </span>{" "}
@@ -499,13 +502,15 @@ export function CommandCenter() {
                   See proof
                   <ArrowRight size={16} />
                 </Link>
-                <EmailLink
-                  ariaLabel="Send Kaya an email"
+                <a
+                  href={siteConfig.social.myfutureself}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex h-10 items-center gap-2 rounded-md border border-black/10 bg-white/70 px-4 text-sm font-medium text-neutral-800 transition hover:-translate-y-0.5 hover:border-black/25 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-200 dark:hover:border-white/25 dark:hover:bg-white/[0.08]"
                 >
-                  <Mail size={16} />
-                  Contact
-                </EmailLink>
+                  Open MyFutureSelf
+                  <ArrowUpRight size={15} />
+                </a>
               </div>
               <ProofStrip />
             </div>
@@ -541,7 +546,7 @@ export function CommandCenter() {
                   </Link>
                 </div>
 
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div className="mt-3 flex flex-wrap gap-2">
                   {featured.tags.map((tag) => (
                     <span
                       key={tag}
@@ -552,7 +557,7 @@ export function CommandCenter() {
                   ))}
                 </div>
 
-                <div className="mt-3 min-h-0 flex-1">
+                <div className="min-h-0 flex-1">
                   <AppVisual image={featured.image} name={featured.name} />
                 </div>
 
@@ -560,15 +565,13 @@ export function CommandCenter() {
                   <span className="truncate text-xs text-neutral-400">
                     Live iOS product · revenue-backed behavior change
                   </span>
-                  <a
-                    href={siteConfig.social.myfutureself}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href={`/work/${featured.slug}`}
                     className="inline-flex h-9 shrink-0 items-center gap-2 rounded-md bg-white px-3 text-sm font-medium text-neutral-950 transition hover:-translate-y-0.5 hover:bg-neutral-200"
                   >
-                    Open
+                    Case study
                     <ArrowUpRight size={14} />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </motion.div>
@@ -580,7 +583,7 @@ export function CommandCenter() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.42, delay: 0.18, ease }}
-          className="grid min-h-0 gap-2 rounded-md border border-black/10 bg-white/54 p-2 backdrop-blur dark:border-white/10 dark:bg-white/[0.04] lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_auto]"
+          className="grid min-h-0 gap-1 rounded-md border border-black/10 bg-white/45 p-1.5 text-sm backdrop-blur dark:border-white/10 dark:bg-white/[0.028] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)_auto]"
         >
           <div className="flex min-w-0 flex-wrap items-center gap-1">
             {siteConfig.commandCenter.routes.map((route, index) => (
