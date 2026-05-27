@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { Providers } from "./providers";
 import "./globals.css";
@@ -175,14 +176,18 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-dvh bg-white dark:bg-[#070605] text-neutral-900 dark:text-neutral-100 font-sans antialiased">
-        <script
+        <Script
+          id="person-json-ld"
           type="application/ld+json"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
           }}
         />
-        <script
+        <Script
+          id="organization-json-ld"
           type="application/ld+json"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(orgJsonLd).replace(/</g, "\\u003c"),
           }}
