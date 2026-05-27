@@ -2,12 +2,14 @@
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Award, CheckCircle2, TrendingUp, Wrench, type LucideIcon } from "lucide-react";
+import { cardSurface } from "@/lib/surfaces";
 
 type ProofGroup = {
   label: string;
   icon: "TrendingUp" | "Wrench" | "Award";
   accent: string;
-  dotBg: string;
+  iconColor: string;
+  bar: string;
   points: string[];
 };
 
@@ -50,7 +52,34 @@ type Metric = {
   value: string;
   label: string;
   detail: string;
+  sparkline?: number[];
+  accent?: string;
 };
+
+function Sparkline({ points, accent }: { points: number[]; accent: string }) {
+  const max = Math.max(...points);
+  const min = Math.min(...points);
+  const range = max - min || 1;
+  const width = 80;
+  const height = 22;
+  const step = width / (points.length - 1);
+  const path = points
+    .map((p, i) => {
+      const x = i * step;
+      const y = height - ((p - min) / range) * height;
+      return `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`;
+    })
+    .join(" ");
+  const lastX = (points.length - 1) * step;
+  const lastY = height - ((points[points.length - 1] - min) / range) * height;
+
+  return (
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="block">
+      <path d={path} fill="none" stroke={accent} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx={lastX} cy={lastY} r={2} fill={accent} />
+    </svg>
+  );
+}
 
 export function ProofMetrics({ metrics }: { metrics: Metric[] }) {
   const reducedMotion = useReducedMotion();
@@ -64,10 +93,15 @@ export function ProofMetrics({ metrics }: { metrics: Metric[] }) {
           initial={reducedMotion ? false : "hidden"}
           animate="show"
           variants={tileVariants}
-          className="rounded-md border border-black/10 bg-white/55 p-3 backdrop-blur transition hover:-translate-y-0.5 hover:border-amber-400/40 hover:bg-white/70 dark:border-white/10 dark:bg-white/[0.035] dark:hover:border-amber-300/40 dark:hover:bg-white/[0.07]"
+          className={`${cardSurface} p-3 transition hover:-translate-y-0.5 hover:border-amber-400/40 dark:hover:border-amber-300/40`}
         >
-          <div className="text-2xl font-semibold text-neutral-950 xl:text-3xl dark:text-white">
-            {m.value}
+          <div className="flex items-start justify-between gap-2">
+            <div className="text-2xl font-semibold tracking-tight text-neutral-950 xl:text-3xl dark:text-white">
+              {m.value}
+            </div>
+            {m.sparkline ? (
+              <Sparkline points={m.sparkline} accent={m.accent ?? "rgb(212,155,90)"} />
+            ) : null}
           </div>
           <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wide text-neutral-700 dark:text-neutral-300">
             {m.label}
@@ -85,7 +119,7 @@ export function ProofGrid({ groups }: { groups: ProofGroup[] }) {
   const reducedMotion = useReducedMotion();
 
   return (
-    <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
       {groups.map((group, columnIndex) => {
         const Icon = ICONS[group.icon];
 
@@ -96,15 +130,19 @@ export function ProofGrid({ groups }: { groups: ProofGroup[] }) {
             initial={reducedMotion ? false : "hidden"}
             animate="show"
             variants={columnVariants}
-            className="flex min-h-0 flex-col rounded-md border border-black/10 bg-white/55 p-4 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]"
+            className={`${cardSurface} p-4`}
           >
+            <div
+              aria-hidden
+              className={`pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r ${group.bar}`}
+            />
             <div className="flex items-center gap-2 border-b border-black/10 pb-2 dark:border-white/10">
-              <Icon size={15} className={group.accent} />
-              <h2 className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
+              <Icon size={15} className={group.iconColor} />
+              <h2 className={`text-[11px] font-mono uppercase tracking-[0.18em] ${group.accent}`}>
                 {group.label}
               </h2>
             </div>
-            <ul className="mt-3 grid flex-1 content-start gap-2">
+            <ul className="mt-3 grid gap-2">
               {group.points.map((point, itemIndex) => (
                 <motion.li
                   key={point}
@@ -116,7 +154,7 @@ export function ProofGrid({ groups }: { groups: ProofGroup[] }) {
                 >
                   <CheckCircle2
                     size={14}
-                    className={`mt-0.5 flex-shrink-0 ${group.dotBg}`}
+                    className={`mt-0.5 flex-shrink-0 ${group.iconColor}`}
                   />
                   <span>{point}</span>
                 </motion.li>

@@ -99,7 +99,7 @@ function DogAiVisual() {
     <div className="relative grid h-full min-h-0 place-items-center overflow-hidden rounded-md border border-white/10 bg-neutral-950 p-5 text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_25%,rgba(34,197,94,0.18),transparent_33%),linear-gradient(145deg,rgba(20,184,166,0.12),transparent_40%,rgba(251,191,36,0.11))]" />
       <div className="relative grid w-full max-w-md gap-3">
-        <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-4">
+        <div className="rounded-md border border-white/10 bg-white/[0.05] p-4">
           <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-emerald-200/80">
             Custom LLM
           </p>
@@ -111,15 +111,15 @@ function DogAiVisual() {
           </p>
         </div>
         <div className="grid grid-cols-3 gap-2">
-          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-3">
+          <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
             <p className="text-xl font-semibold">10,000s</p>
             <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">training images</p>
           </div>
-          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-3">
+          <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
             <p className="text-xl font-semibold">Harvard</p>
             <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">behavior dataset</p>
           </div>
-          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-3">
+          <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
             <p className="text-xl font-semibold">Live</p>
             <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">App Store, paid</p>
           </div>
@@ -149,7 +149,7 @@ function AppointraVisual() {
         </div>
         <div className="grid flex-1 gap-2 sm:grid-cols-3">
           {columns.map((column) => (
-            <div key={column.label} className="rounded-xl border border-white/10 bg-white/[0.06] p-3">
+            <div key={column.label} className="rounded-md border border-white/10 bg-white/[0.06] p-3">
               <p className="text-[10px] text-neutral-400">{column.label}</p>
               <p className="mt-1 text-2xl font-semibold">{column.value}</p>
               <div className="mt-3 space-y-1.5">
@@ -163,11 +163,11 @@ function AppointraVisual() {
           ))}
         </div>
         <div className="grid grid-cols-2 gap-2">
-          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-3">
+          <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
             <p className="text-xl font-semibold">$20k</p>
             <p className="text-[10px] text-neutral-400">MRR in three months</p>
           </div>
-          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-3">
+          <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
             <p className="text-xl font-semibold">Millions</p>
             <p className="text-[10px] text-neutral-400">in client pipeline</p>
           </div>
@@ -182,7 +182,7 @@ function LeadBoostVisual() {
     <div className="relative h-full min-h-0 overflow-hidden rounded-md border border-white/10 bg-neutral-950 p-4 text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_18%,rgba(251,191,36,0.18),transparent_32%),linear-gradient(145deg,rgba(251,191,36,0.1),transparent_42%,rgba(34,197,94,0.1))]" />
       <div className="relative flex h-full flex-col justify-center">
-        <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] shadow-2xl">
+        <div className="overflow-hidden rounded-md border border-white/10 bg-white/[0.06] shadow-2xl">
           <div className="flex items-center gap-2 border-b border-white/10 bg-black/24 px-3 py-2">
             <span className="h-2 w-2 rounded-full bg-red-300" />
             <span className="h-2 w-2 rounded-full bg-yellow-300" />
@@ -209,7 +209,7 @@ function LeadBoostVisual() {
             </div>
             <div className="grid gap-2">
               {[70, 48, 86].map((width, index) => (
-                <div key={width} className="rounded-xl bg-black/24 p-3">
+                <div key={width} className="rounded-md bg-black/24 p-3">
                   <div className="mb-2 h-2 w-20 rounded-full bg-white/15" />
                   <div className="h-2 rounded-full bg-amber-200/80" style={{ width: `${width}%` }} />
                   <div className="mt-1.5 h-2 w-2/3 rounded-full bg-white/10" />

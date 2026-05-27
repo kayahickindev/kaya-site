@@ -9,6 +9,8 @@ import {
   Workflow,
   type LucideIcon,
 } from "lucide-react";
+import { BrandLogo } from "./BrandLogo";
+import { cardSurface } from "@/lib/surfaces";
 
 type Category = "iOS" | "Web" | "Backend" | "AI" | "Workflow";
 
@@ -17,36 +19,44 @@ type GroupedItem = {
   items: { name: string; category: string }[];
 };
 
-const categoryMeta: Record<Category, { icon: LucideIcon; blurb: string; accent: string; dotBg: string }> = {
+const categoryMeta: Record<
+  Category,
+  { icon: LucideIcon; blurb: string; accent: string; dotBg: string; bar: string }
+> = {
   iOS: {
     icon: Apple,
     blurb: "Native consumer products with payments, persistence, and realtime voice.",
     accent: "text-cyan-700 dark:text-cyan-300",
     dotBg: "bg-cyan-500 dark:bg-cyan-300",
+    bar: "from-cyan-400/60 to-transparent",
   },
   Web: {
     icon: Globe,
     blurb: "Marketing sites, dashboards, and conversion surfaces.",
     accent: "text-emerald-700 dark:text-emerald-300",
     dotBg: "bg-emerald-500 dark:bg-emerald-300",
+    bar: "from-emerald-400/60 to-transparent",
   },
   Backend: {
     icon: Braces,
     blurb: "Fast iteration with production reliability.",
     accent: "text-amber-700 dark:text-amber-300",
     dotBg: "bg-amber-500 dark:bg-amber-300",
+    bar: "from-amber-400/60 to-transparent",
   },
   AI: {
     icon: BrainCircuit,
     blurb: "Models and voice loops wired into behavior change.",
     accent: "text-purple-700 dark:text-purple-300",
     dotBg: "bg-purple-500 dark:bg-purple-300",
+    bar: "from-purple-400/60 to-transparent",
   },
   Workflow: {
     icon: Workflow,
     blurb: "Daily AI-native build, measure, and monetize loop.",
     accent: "text-rose-700 dark:text-rose-300",
     dotBg: "bg-rose-500 dark:bg-rose-300",
+    bar: "from-rose-400/60 to-transparent",
   },
 };
 
@@ -74,7 +84,7 @@ export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
   const reducedMotion = useReducedMotion();
 
   return (
-    <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-5">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
       {grouped.map((group, columnIndex) => {
         const meta = categoryMeta[group.category];
         const Icon = meta.icon;
@@ -86,8 +96,12 @@ export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
             initial={reducedMotion ? false : "hidden"}
             animate="show"
             variants={columnVariants}
-            className="flex min-h-0 flex-col rounded-md border border-black/10 bg-white/55 p-3 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]"
+            className={`${cardSurface} p-3`}
           >
+            <div
+              aria-hidden
+              className={`pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r ${meta.bar}`}
+            />
             <div className="flex items-center gap-2 border-b border-black/10 pb-2 dark:border-white/10">
               <Icon size={15} className={meta.accent} />
               <h2 className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
@@ -95,7 +109,7 @@ export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
               </h2>
             </div>
             <p className="mt-2 text-[11px] leading-snug text-neutral-500">{meta.blurb}</p>
-            <ul className="mt-3 grid flex-1 content-start gap-1.5">
+            <ul className="mt-3 grid gap-1.5">
               {group.items.map((item, itemIndex) => (
                 <motion.li
                   key={item.name}
@@ -103,9 +117,9 @@ export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
                   initial={reducedMotion ? false : "hidden"}
                   animate="show"
                   variants={itemVariants}
-                  className="flex items-center gap-2 rounded bg-neutral-950/[0.035] px-2 py-1.5 text-xs text-neutral-800 dark:bg-white/[0.04] dark:text-neutral-200"
+                  className="flex items-center gap-2 rounded bg-neutral-950/[0.04] px-2 py-1.5 text-xs text-neutral-800 transition hover:bg-neutral-950/[0.07] dark:bg-white/[0.04] dark:text-neutral-200 dark:hover:bg-white/[0.07]"
                 >
-                  <span className={`h-1 w-1 rounded-full ${meta.dotBg}`} />
+                  <BrandLogo name={item.name} size={14} />
                   <span className="truncate">{item.name}</span>
                 </motion.li>
               ))}

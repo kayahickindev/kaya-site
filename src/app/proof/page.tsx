@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { ExternalLink } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { ContributionGraph } from "@/components/ContributionGraph";
 import { ProofGrid, ProofMetrics } from "@/components/ProofGrid";
 import { SubpageShell } from "@/components/SubpageShell";
 import { siteConfig } from "@/data/content";
+import { cardSurface } from "@/lib/surfaces";
 
 export const metadata: Metadata = {
   title: `Proof | ${siteConfig.name}`,
@@ -14,11 +16,41 @@ export const metadata: Metadata = {
 };
 
 const headlineMetrics = [
-  { value: "1,718", label: "paid subscribers", detail: "server-validated via Apple" },
-  { value: "$65K", label: "ARR", detail: "MyFutureSelf, 7 months in" },
-  { value: "26K+", label: "downloads", detail: "App Store, 7 months" },
-  { value: "4.7★", label: "App Store rating", detail: "715 verified reviews" },
-  { value: "52%", label: "avg MoM growth", detail: "revenue, last 6 months" },
+  {
+    value: "1,718",
+    label: "paid subscribers",
+    detail: "server-validated via Apple",
+    sparkline: [12, 38, 90, 220, 480, 880, 1350, 1718],
+    accent: "rgb(34,197,94)",
+  },
+  {
+    value: "$65K",
+    label: "ARR",
+    detail: "MyFutureSelf, 7 months in",
+    sparkline: [2, 6, 12, 22, 35, 48, 58, 65],
+    accent: "rgb(212,155,90)",
+  },
+  {
+    value: "26K+",
+    label: "downloads",
+    detail: "App Store, 7 months",
+    sparkline: [0.4, 1.2, 3, 6.5, 11, 16, 21, 26],
+    accent: "rgb(34,211,238)",
+  },
+  {
+    value: "4.7★",
+    label: "App Store rating",
+    detail: "715 verified reviews",
+    sparkline: [4.4, 4.5, 4.6, 4.6, 4.7, 4.7, 4.7, 4.7],
+    accent: "rgb(251,191,36)",
+  },
+  {
+    value: "52%",
+    label: "avg MoM growth",
+    detail: "revenue, last 6 months",
+    sparkline: [38, 44, 49, 51, 50, 53, 56, 52],
+    accent: "rgb(244,114,182)",
+  },
 ];
 
 const proofGroups = [
@@ -26,7 +58,8 @@ const proofGroups = [
     label: "Product traction",
     icon: "TrendingUp" as const,
     accent: "text-cyan-700 dark:text-cyan-300",
-    dotBg: "text-cyan-600 dark:text-cyan-300",
+    iconColor: "text-cyan-600 dark:text-cyan-300",
+    bar: "from-cyan-400/60 to-transparent",
     points: [
       "1,718 paid subscribers · $65K ARR",
       "26K+ App Store downloads in 7 months",
@@ -38,7 +71,8 @@ const proofGroups = [
     label: "Depth of build",
     icon: "Wrench" as const,
     accent: "text-emerald-700 dark:text-emerald-300",
-    dotBg: "text-emerald-600 dark:text-emerald-300",
+    iconColor: "text-emerald-600 dark:text-emerald-300",
+    bar: "from-emerald-400/60 to-transparent",
     points: [
       "Solo-built iOS, backend, and voice-AI stack",
       "SwiftUI · Core Data · StoreKit",
@@ -50,7 +84,8 @@ const proofGroups = [
     label: "Founder pattern",
     icon: "Award" as const,
     accent: "text-amber-700 dark:text-amber-200",
-    dotBg: "text-amber-600 dark:text-amber-300",
+    iconColor: "text-amber-600 dark:text-amber-300",
+    bar: "from-amber-400/60 to-transparent",
     points: [
       "Three-for-three on profitable companies",
       "Appointra: $20K MRR in three months",
@@ -63,31 +98,45 @@ const proofGroups = [
 export default function ProofPage() {
   return (
     <SubpageShell>
-      <div className="flex h-full min-h-0 flex-col gap-3">
-        <header>
-          <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-            Proof
+      <div className="flex flex-col gap-6">
+        <header className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+              Proof
+            </div>
+            <h1 className="mt-1 text-4xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-5xl xl:text-6xl dark:text-white">
+              The receipts.
+            </h1>
           </div>
-          <h1 className="mt-1 text-3xl font-semibold leading-[0.95] text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
-            The receipts.
-          </h1>
+          <p className="max-w-md text-sm leading-snug text-neutral-600 dark:text-neutral-400 sm:text-right">
+            Numbers, not narratives. Server-validated metrics from MyFutureSelf
+            and a shipping cadence backed by GitHub.
+          </p>
         </header>
 
         <ProofMetrics metrics={headlineMetrics} />
 
         <ProofGrid groups={proofGroups} />
 
+        <div className={`${cardSurface} p-5`}>
+          <ContributionGraph contributionCount="2,600+" />
+        </div>
+
         <a
           href={siteConfig.github.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-between gap-3 rounded-md border border-black/10 bg-white/45 px-3 py-2 text-xs text-neutral-600 backdrop-blur transition hover:bg-white/70 dark:border-white/10 dark:bg-white/[0.035] dark:text-neutral-400 dark:hover:bg-white/[0.06]"
+          className={`${cardSurface} group flex items-center justify-between gap-3 px-4 py-3 text-sm transition hover:-translate-y-0.5 hover:border-black/25 dark:hover:border-white/25`}
         >
-          <span className="flex items-center gap-2">
-            <ExternalLink size={14} />
-            github.com/{siteConfig.github.username} · 2,600+ contributions in the last year
+          <span className="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
+            <span className="font-mono text-xs">github.com/{siteConfig.github.username}</span>
+            <span className="text-neutral-400 dark:text-neutral-600">·</span>
+            <span className="text-xs text-neutral-500">Open shipping log on GitHub</span>
           </span>
-          <span className="text-neutral-500">View profile →</span>
+          <span className="inline-flex h-8 items-center gap-1.5 rounded-md bg-neutral-950 px-3 text-xs font-medium text-white transition group-hover:gap-2 dark:bg-white dark:text-neutral-950">
+            View profile
+            <ArrowUpRight size={12} />
+          </span>
         </a>
       </div>
     </SubpageShell>
