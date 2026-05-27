@@ -359,9 +359,6 @@ export function CommandCenter() {
                 words={["I", "build", "consumer", "AI", "that", "changes", "behavior."]}
                 className="text-5xl font-semibold leading-[0.92] text-neutral-950 sm:text-6xl xl:text-7xl 2xl:text-8xl dark:text-white"
               />
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-700 xl:text-lg dark:text-neutral-300">
-                {siteConfig.commandCenter.description}
-              </p>
             </div>
 
             <div className="mt-5 flex flex-wrap items-center gap-2">
