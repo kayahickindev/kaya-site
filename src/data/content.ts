@@ -32,7 +32,7 @@ export const siteConfig = {
     eyebrow: "Founder OS · Consumer AI · iOS",
     headline: "I build consumer AI that changes behavior.",
     description:
-      "Solo-built MyFutureSelf in six months: native iOS, Firebase backend, voice AI.",
+      "Building voice AI that speaks as your future self.",
     status: "Live: MyFutureSelf scaling",
     availability: "Cleveland, OH",
     routes: [

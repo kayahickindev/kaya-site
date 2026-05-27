@@ -328,7 +328,7 @@ export function CommandCenter() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.48, ease }}
-            className="flex min-h-[520px] flex-col justify-start overflow-hidden py-2 lg:col-span-7 lg:min-h-0 lg:pr-7"
+            className="flex min-h-[520px] flex-col justify-center overflow-hidden py-2 lg:col-span-7 lg:min-h-0 lg:pr-7"
           >
             <div className="flex items-center gap-4">
               <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md border border-black/10 bg-neutral-200 dark:border-white/10 dark:bg-neutral-900">
@@ -349,7 +349,7 @@ export function CommandCenter() {
                   Co-Founder · CTO · MyFutureSelf
                 </div>
                 <div className="mt-1 text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-                  Three-for-three profitable · Cleveland, OH
+                  Three-for-three profitable
                 </div>
               </div>
             </div>
