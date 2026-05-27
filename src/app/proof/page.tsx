@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CheckCircle2 } from "lucide-react";
+import { Award, CheckCircle2, ExternalLink, TrendingUp, Wrench } from "lucide-react";
 import { SubpageShell } from "@/components/SubpageShell";
 import { siteConfig } from "@/data/content";
 
@@ -12,106 +12,114 @@ export const metadata: Metadata = {
   },
 };
 
+const headlineMetrics = [
+  { value: "1,718", label: "paid subscribers", detail: "server-validated via Apple" },
+  { value: "$65K", label: "ARR", detail: "MyFutureSelf, 7 months in" },
+  { value: "26K+", label: "downloads", detail: "App Store, 7 months" },
+  { value: "4.7★", label: "App Store rating", detail: "715 verified reviews" },
+  { value: "52%", label: "avg MoM growth", detail: "revenue, last 6 months" },
+];
+
 const proofGroups = [
   {
     label: "Product traction",
+    icon: TrendingUp,
     points: [
       "1,718 paid subscribers and $65K ARR",
-      "26,000+ App Store downloads",
+      "26,000+ App Store downloads in 7 months",
       "52% average monthly revenue growth",
-      "4.7-star rating from 715 reviews",
+      "4.7-star rating across 715 verified reviews",
+      "D1 retention 69% · D7 retention 47%",
+      "Live and scaling on the App Store",
     ],
   },
   {
     label: "Depth of build",
+    icon: Wrench,
     points: [
-      "Solo iOS, backend, and voice-AI stack",
-      "D1 retention 69% / D7 retention 47%",
-      "170,000+ lines of code, 1,400+ commits",
+      "Solo-built iOS, backend, and voice-AI stack",
+      "Native SwiftUI with Core Data and StoreKit",
+      "Realtime voice via WebRTC and OpenAI Realtime",
+      "Firebase, Firestore, and Cloud Functions backend",
+      "170,000+ lines of code shipped last year",
+      "1,400+ commits across product and infra",
     ],
   },
   {
     label: "Founder pattern",
+    icon: Award,
     points: [
-      "Three-for-three profitable companies",
-      "Appointra: $20k MRR in 3 months",
-      "Winner, RedHawk Accelerator (Miami U)",
+      "Three-for-three on profitable companies",
+      "LeadBoost Pro: profitable from year one",
+      "Appointra: $20k MRR in three months",
+      "Generated millions in client pipeline",
+      "Winner, RedHawk Accelerator at Miami University",
+      "Honorable Mention, TCU Values & Ventures",
     ],
   },
-];
-
-const headlineMetrics = [
-  { value: "1,718", label: "paid subscribers" },
-  { value: "$65K", label: "ARR" },
-  { value: "26K+", label: "downloads" },
-  { value: "4.7★", label: "715 reviews" },
-  { value: "52%", label: "avg monthly growth" },
 ];
 
 export default function ProofPage() {
   return (
     <SubpageShell activePath="/proof">
-      <div className="grid h-full min-h-0 grid-cols-1 gap-4 lg:grid-cols-12">
-        <div className="flex min-h-0 flex-col lg:col-span-5 lg:pr-4">
-          <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-            Proof
-          </div>
-          <h1 className="mt-2 text-4xl font-semibold leading-[0.95] text-neutral-950 sm:text-5xl xl:text-6xl dark:text-white">
-            The receipts, in{" "}
-            <span className="font-serif italic font-normal text-amber-700 dark:text-amber-200">
-              public
-            </span>
-            .
-          </h1>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-neutral-700 xl:text-base dark:text-neutral-300">
-            Shipped products, paying users, durable usage, and a visible build trail. Numbers below are pulled from production.
-          </p>
-
-          <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
-            {headlineMetrics.map((m) => (
-              <div
-                key={m.label}
-                className="rounded-md border border-black/10 bg-white/55 p-3 backdrop-blur dark:border-white/10 dark:bg-white/[0.035]"
-              >
-                <div className="text-xl font-semibold text-neutral-950 sm:text-2xl dark:text-white">
-                  {m.value}
-                </div>
-                <div className="mt-0.5 text-[10px] uppercase tracking-wide text-neutral-500">
-                  {m.label}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-4 flex flex-wrap gap-1.5 text-[11px] text-neutral-500 dark:text-neutral-500">
-            {siteConfig.recognitions.map((r) => (
-              <span
-                key={r}
-                className="rounded-md border border-black/10 bg-white/45 px-2 py-1 dark:border-white/10 dark:bg-white/[0.035]"
-              >
-                {r}
+      <div className="flex h-full min-h-0 flex-col gap-3">
+        <header className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+              Proof
+            </div>
+            <h1 className="mt-1 text-3xl font-semibold leading-[0.95] text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
+              The receipts, in{" "}
+              <span className="font-serif italic font-normal text-amber-700 dark:text-amber-200">
+                public
               </span>
-            ))}
+              .
+            </h1>
           </div>
+          <p className="max-w-md text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+            Shipped products, paying users, durable usage, and a visible build trail. Every number on this page is pulled from production.
+          </p>
+        </header>
+
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+          {headlineMetrics.map((m) => (
+            <div
+              key={m.label}
+              className="rounded-md border border-black/10 bg-white/55 p-3 backdrop-blur dark:border-white/10 dark:bg-white/[0.035]"
+            >
+              <div className="text-2xl font-semibold text-neutral-950 xl:text-3xl dark:text-white">
+                {m.value}
+              </div>
+              <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wide text-neutral-700 dark:text-neutral-300">
+                {m.label}
+              </div>
+              <div className="mt-0.5 text-[10px] leading-snug text-neutral-500 dark:text-neutral-500">
+                {m.detail}
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="grid min-h-0 gap-3 lg:col-span-7 lg:grid-rows-3">
-          {proofGroups.map((group) => (
+        <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-3">
+          {proofGroups.map(({ label, icon: Icon, points }) => (
             <div
-              key={group.label}
+              key={label}
               className="flex min-h-0 flex-col rounded-md border border-black/10 bg-white/55 p-4 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]"
             >
-              <h2 className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-                {group.label}
-              </h2>
-              <ul className="mt-2 grid gap-1.5 sm:grid-cols-2">
-                {group.points.map((point) => (
+              <div className="flex items-center gap-2 border-b border-black/10 pb-2 dark:border-white/10">
+                <Icon size={15} className="text-amber-700 dark:text-amber-200" />
+                <h2 className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
+                  {label}
+                </h2>
+              </div>
+              <ul className="mt-3 grid flex-1 content-start gap-2">
+                {points.map((point) => (
                   <li
                     key={point}
                     className="flex gap-2 text-sm leading-snug text-neutral-700 dark:text-neutral-300"
                   >
                     <CheckCircle2
-                      size={15}
+                      size={14}
                       className="mt-0.5 flex-shrink-0 text-amber-600 dark:text-amber-300"
                     />
                     <span>{point}</span>
@@ -121,6 +129,19 @@ export default function ProofPage() {
             </div>
           ))}
         </div>
+
+        <a
+          href={siteConfig.github.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-between gap-3 rounded-md border border-black/10 bg-white/45 px-3 py-2 text-xs text-neutral-600 backdrop-blur transition hover:bg-white/70 dark:border-white/10 dark:bg-white/[0.035] dark:text-neutral-400 dark:hover:bg-white/[0.06]"
+        >
+          <span className="flex items-center gap-2">
+            <ExternalLink size={14} />
+            github.com/{siteConfig.github.username} · 1,400+ commits, 170K+ lines last year
+          </span>
+          <span className="text-neutral-500">View profile →</span>
+        </a>
       </div>
     </SubpageShell>
   );
