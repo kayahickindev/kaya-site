@@ -91,28 +91,24 @@ const socials: Social[] = [
 
 export function ContactPanel() {
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-8 py-8 text-center">
-      <div className="flex flex-col items-center gap-3">
-        <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-neutral-500">
-          Contact
-        </span>
-        <h1 className="text-5xl font-semibold leading-[0.9] tracking-tight text-neutral-950 sm:text-6xl xl:text-7xl dark:text-white">
-          Pick a line.
-        </h1>
-        <p className="mt-1 max-w-xl text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
+    <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-10 py-10 text-center">
+      <h1 className="text-5xl font-semibold leading-[0.9] tracking-tight text-neutral-950 sm:text-6xl xl:text-7xl dark:text-white">
+        Get in touch.
+      </h1>
+
+      <div className={`${cardSurface} relative w-full overflow-hidden p-8 sm:p-10`}>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(168,85,247,0.18),transparent_55%)] dark:bg-[radial-gradient(circle_at_50%_0%,rgba(196,181,253,0.16),transparent_55%)]"
+        />
+        <p className="relative text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
+          kaya<span className="text-neutral-400 dark:text-neutral-600">@</span>successai.app
+        </p>
+        <p className="relative mt-4 max-w-xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 mx-auto">
           Open to technical co-founder roles at founding level with equity,
           investors backing consumer AI, and builders shipping ambitious products.
         </p>
-      </div>
-
-      <div className={`${cardSurface} w-full p-7 sm:p-8`}>
-        <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-neutral-500">
-          Direct line
-        </p>
-        <p className="mt-2 text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
-          kaya<span className="text-neutral-400 dark:text-neutral-600">@</span>successai.app
-        </p>
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+        <div className="relative mt-6 flex flex-wrap items-center justify-center gap-2">
           <button
             type="button"
             onClick={openEmail}
@@ -132,32 +128,27 @@ export function ContactPanel() {
         </div>
       </div>
 
-      <div className="w-full">
-        <p className="mb-2.5 text-[10px] font-mono uppercase tracking-[0.22em] text-neutral-500">
-          Around the web
-        </p>
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-          {socials.map(({ href, label, handle, icon: Icon, brandClass }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${label} — ${handle}`}
-              className={`group relative flex flex-col items-center gap-2 overflow-hidden rounded-md border border-black/10 bg-white/55 p-5 backdrop-blur transition duration-200 dark:border-white/10 dark:bg-white/[0.04] ${brandClass}`}
-            >
-              <ArrowUpRight
-                size={14}
-                className="absolute right-3 top-3 opacity-30 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100"
-              />
-              <Icon size={28} />
-              <div className="flex flex-col items-center">
-                <p className="text-sm font-semibold tracking-tight">{label}</p>
-                <p className="text-[11px] opacity-70">{handle}</p>
-              </div>
-            </a>
-          ))}
-        </div>
+      <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-4">
+        {socials.map(({ href, label, handle, icon: Icon, brandClass }) => (
+          <a
+            key={label}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${label}, ${handle}`}
+            className={`group relative flex flex-col items-center gap-2 overflow-hidden rounded-md border border-black/10 bg-white/55 p-5 backdrop-blur transition duration-200 dark:border-white/10 dark:bg-white/[0.04] ${brandClass}`}
+          >
+            <ArrowUpRight
+              size={14}
+              className="absolute right-3 top-3 opacity-30 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100"
+            />
+            <Icon size={28} />
+            <div className="flex flex-col items-center">
+              <p className="text-sm font-semibold tracking-tight">{label}</p>
+              <p className="text-[11px] opacity-70">{handle}</p>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SubpageShell } from "@/components/SubpageShell";
 import { siteConfig } from "@/data/content";
-import { cardSurface, cardSurfaceHover, cardSurfaceFeatured } from "@/lib/surfaces";
+import { cardSurfaceHover, cardSurfaceFeatured } from "@/lib/surfaces";
 import { projectDetails } from "./_projectDetails";
 
 export const metadata: Metadata = {
@@ -58,13 +58,10 @@ export default function WorkPage() {
   const rest = projectDetails.filter((d) => d.slug !== "myfutureself");
 
   return (
-    <SubpageShell>
+    <SubpageShell accent="amber">
       <div className="flex flex-col gap-4">
         <header>
-          <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-            Work
-          </div>
-          <h1 className="mt-1 text-3xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
+          <h1 className="text-3xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
             Shipped products.
           </h1>
         </header>

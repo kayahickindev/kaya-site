@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import {
-  Compass,
   GraduationCap,
   MapPin,
   Target,
@@ -24,12 +23,10 @@ const SIDEBAR_ICONS: Record<string, LucideIcon> = {
   MapPin,
   GraduationCap,
   Target,
-  Compass,
 };
 
 const paragraphs = [
-  "Working full-time in my family's business at 14, valedictorian out of high school, shipping companies ever since. Now co-founder and CTO of MyFutureSelf, a voice AI mentor that speaks as your future self. Solo-built iOS, Firebase backend, and AI integration in six months.",
-  "AI-native by default. 2,600+ contributions in the last year alongside Claude Code and Codex. I build consumer AI for behavior change, not engagement metrics.",
+  "Working full-time in my family's business at 14, valedictorian out of high school, shipping companies ever since. Now co-founder and CTO of MyFutureSelf, a voice AI mentor that speaks as your future self. Solo-built iOS, Firebase backend, and AI integration in six months, alongside Claude Code and Codex. 2,600+ contributions in the last year. I build consumer AI for behavior change, not engagement metrics.",
 ];
 
 const highlightStats = [
@@ -48,17 +45,12 @@ const companyMarks: Record<string, { letter: string; accent: string }> = {
 
 export default function AboutPage() {
   return (
-    <SubpageShell>
+    <SubpageShell accent="amber">
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
         <div className="flex flex-col gap-6 lg:col-span-7 lg:pr-2">
-          <div>
-            <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-              About
-            </div>
-            <h1 className="mt-1 text-4xl font-semibold leading-[0.9] tracking-tight text-neutral-950 sm:text-5xl xl:text-6xl dark:text-white">
-              Builder, operator, founder.
-            </h1>
-          </div>
+          <h1 className="text-4xl font-semibold leading-[0.9] tracking-tight text-neutral-950 sm:text-5xl xl:text-6xl dark:text-white">
+            Builder, operator, founder.
+          </h1>
 
           <div className="max-w-prose space-y-4 text-base leading-relaxed text-neutral-700 xl:text-lg dark:text-neutral-300">
             {paragraphs.map((p) => (
@@ -79,7 +71,7 @@ export default function AboutPage() {
             ))}
           </div>
 
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
             {siteConfig.about.sidebar.map((item) => {
               const Icon = SIDEBAR_ICONS[item.icon] ?? MapPin;
               return (

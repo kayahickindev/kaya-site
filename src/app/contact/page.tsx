@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <SubpageShell>
+    <SubpageShell accent="violet">
       <ContactPanel />
     </SubpageShell>
   );

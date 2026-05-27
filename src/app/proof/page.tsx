@@ -97,20 +97,15 @@ const proofGroups = [
 
 export default function ProofPage() {
   return (
-    <SubpageShell>
+    <SubpageShell accent="emerald">
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-              Proof
-            </div>
-            <h1 className="mt-1 text-4xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-5xl xl:text-6xl dark:text-white">
-              The receipts.
-            </h1>
-          </div>
+          <h1 className="text-4xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-5xl xl:text-6xl dark:text-white">
+            By the numbers.
+          </h1>
           <p className="max-w-md text-sm leading-snug text-neutral-600 dark:text-neutral-400 sm:text-right">
-            Numbers, not narratives. Server-validated metrics from MyFutureSelf
-            and a shipping cadence backed by GitHub.
+            Server-validated metrics from MyFutureSelf and a shipping cadence
+            backed by GitHub.
           </p>
         </header>
 

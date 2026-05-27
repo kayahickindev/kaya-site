@@ -50,20 +50,23 @@ function SignalField() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:72px_72px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(8,145,178,0.08),transparent_36%,rgba(217,119,6,0.08)_68%,transparent)] dark:bg-[linear-gradient(120deg,rgba(34,211,238,0.07),transparent_36%,rgba(251,191,36,0.08)_68%,transparent)]" />
-      {Array.from({ length: 14 }).map((_, i) => {
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_10%,rgba(8,145,178,0.18),transparent_55%),radial-gradient(circle_at_10%_90%,rgba(217,119,6,0.14),transparent_55%)] dark:bg-[radial-gradient(circle_at_85%_10%,rgba(34,211,238,0.14),transparent_55%),radial-gradient(circle_at_10%_90%,rgba(251,191,36,0.12),transparent_55%)]" />
+      {Array.from({ length: 20 }).map((_, i) => {
         const left = (i * 37) % 100;
         const top = (i * 53) % 100;
         const delay = (i % 9) * 0.28;
+        const tint = i % 2 === 0
+          ? "bg-cyan-700/35 shadow-[0_0_12px_rgba(8,145,178,0.30)] dark:bg-cyan-300/45 dark:shadow-[0_0_14px_rgba(34,211,238,0.30)]"
+          : "bg-amber-700/35 shadow-[0_0_12px_rgba(217,119,6,0.30)] dark:bg-amber-300/45 dark:shadow-[0_0_14px_rgba(251,191,36,0.30)]";
         return (
           <motion.span
             key={i}
-            className="absolute h-1 w-1 rounded-full bg-neutral-900/18 shadow-[0_0_10px_rgba(0,0,0,0.12)] dark:bg-white/28 dark:shadow-[0_0_12px_rgba(255,255,255,0.18)]"
+            className={`absolute h-1 w-1 rounded-full ${tint}`}
             style={{ left: `${left}%`, top: `${top}%` }}
             animate={
               reducedMotion
                 ? undefined
-                : { opacity: [0.16, 0.55, 0.16], scale: [0.8, 1, 0.8] }
+                : { opacity: [0.18, 0.6, 0.18], scale: [0.8, 1.05, 0.8] }
             }
             transition={{
               duration: 6.8 + (i % 5),
@@ -266,10 +269,6 @@ export function CommandCenter() {
                       className="mx-auto h-full max-h-[500px] w-auto scale-[1.32] object-contain drop-shadow-2xl xl:scale-[1.45]"
                     />
                   ) : null}
-                  <div className="pointer-events-none absolute bottom-1 left-1 rounded-md border border-white/15 bg-black/55 px-3 py-2 text-xs backdrop-blur">
-                    <span className="font-semibold text-white">$65K ARR</span>
-                    <span className="ml-2 text-neutral-400">· 1,718 paid · 4.7★</span>
-                  </div>
                 </div>
 
                 <div className="mt-3 flex items-center justify-end gap-3 border-t border-white/10 pt-3">

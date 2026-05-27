@@ -126,7 +126,6 @@ export const siteConfig = {
       { label: "Based in", value: "Cleveland, OH", icon: "MapPin" },
       { label: "Education", value: "Miami University", detail: "BA Marketing, Minor in Entrepreneurship, May 2026", icon: "GraduationCap" },
       { label: "Focus", value: "AI · Consumer · Behavior change", icon: "Target" },
-      { label: "Off-screen", value: "Lifting, hiking, reading, podcasts", icon: "Compass" },
     ],
   },
 
