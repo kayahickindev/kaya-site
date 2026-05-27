@@ -59,13 +59,13 @@ export default function WorkPage() {
 
   return (
     <SubpageShell>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4">
         <header>
           <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
             Work
           </div>
-          <h1 className="mt-1 text-4xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-5xl xl:text-6xl dark:text-white">
-            Shipped products, not case studies.
+          <h1 className="mt-1 text-3xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
+            Shipped products.
           </h1>
         </header>
 
@@ -79,7 +79,7 @@ export default function WorkPage() {
               className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${accents[hero.slug]}`}
             />
             <div className="relative grid grid-cols-1 gap-0 md:grid-cols-[1.4fr_1fr]">
-              <div className="flex flex-col gap-4 p-6 md:p-8">
+              <div className="flex flex-col gap-3 p-5 md:p-6">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
                     {hero.role} · {hero.timeframe}
@@ -94,24 +94,24 @@ export default function WorkPage() {
                 </div>
 
                 <div>
-                  <h2 className="text-4xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-5xl dark:text-white">
+                  <h2 className="text-3xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-4xl dark:text-white">
                     {hero.project.name}
                   </h2>
-                  <p className="mt-2 text-base text-neutral-700 dark:text-neutral-300">
+                  <p className="mt-1.5 text-sm text-neutral-700 dark:text-neutral-300">
                     {hero.project.tagline}
                   </p>
                 </div>
 
-                <div className="flex items-baseline gap-3">
-                  <span className="text-4xl font-semibold tracking-tight text-amber-700 sm:text-5xl dark:text-amber-200">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-3xl font-semibold tracking-tight text-amber-700 sm:text-4xl dark:text-amber-200">
                     {heroMetrics[hero.slug].value}
                   </span>
-                  <span className="text-xs uppercase tracking-wide text-neutral-600 dark:text-neutral-400">
+                  <span className="text-[11px] uppercase tracking-wide text-neutral-600 dark:text-neutral-400">
                     {heroMetrics[hero.slug].label}
                   </span>
                 </div>
 
-                <ul className="grid gap-1.5 text-sm text-neutral-700 dark:text-neutral-300">
+                <ul className="grid gap-1 text-[13px] text-neutral-700 dark:text-neutral-300">
                   {cardHighlights[hero.slug].map((h) => (
                     <li key={h} className="flex items-start gap-2">
                       <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-500 dark:bg-amber-300" />
@@ -120,7 +120,7 @@ export default function WorkPage() {
                   ))}
                 </ul>
 
-                <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-2">
+                <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-1">
                   <div className="flex flex-wrap gap-1">
                     {hero.project.tags.slice(0, 4).map((tag) => (
                       <span
@@ -131,14 +131,14 @@ export default function WorkPage() {
                       </span>
                     ))}
                   </div>
-                  <span className="inline-flex h-9 items-center gap-2 rounded-md bg-neutral-950 px-4 text-xs font-medium text-white transition group-hover:gap-3 dark:bg-white dark:text-neutral-950">
+                  <span className="inline-flex h-8 items-center gap-2 rounded-md bg-neutral-950 px-3 text-xs font-medium text-white transition group-hover:gap-3 dark:bg-white dark:text-neutral-950">
                     Case study
-                    <ArrowUpRight size={14} />
+                    <ArrowUpRight size={13} />
                   </span>
                 </div>
               </div>
 
-              <div className="relative min-h-[260px] overflow-hidden bg-neutral-950 md:min-h-0">
+              <div className="relative min-h-[220px] overflow-hidden bg-neutral-950 md:min-h-0">
                 {hero.project.image ? (
                   <Image
                     src={hero.project.image}
@@ -146,7 +146,7 @@ export default function WorkPage() {
                     width={781}
                     height={1250}
                     unoptimized
-                    className="absolute inset-0 m-auto h-full max-h-[420px] w-auto scale-[1.25] object-contain drop-shadow-2xl"
+                    className="absolute inset-0 m-auto h-full max-h-[340px] w-auto scale-[1.2] object-contain drop-shadow-2xl"
                   />
                 ) : null}
               </div>
@@ -165,7 +165,7 @@ export default function WorkPage() {
               <Link
                 key={detail.slug}
                 href={`/work/${detail.slug}`}
-                className={`${cardSurfaceHover} group flex flex-col p-5`}
+                className={`${cardSurfaceHover} group flex flex-col p-4`}
               >
                 <div
                   aria-hidden
@@ -188,15 +188,15 @@ export default function WorkPage() {
                   ) : null}
                 </div>
 
-                <h2 className="relative mt-3 text-2xl font-semibold leading-tight tracking-tight text-neutral-950 sm:text-3xl dark:text-white">
+                <h2 className="relative mt-2 text-xl font-semibold leading-tight tracking-tight text-neutral-950 sm:text-2xl dark:text-white">
                   {project.name}
                 </h2>
-                <p className="relative mt-1 text-sm leading-snug text-neutral-600 dark:text-neutral-400">
+                <p className="relative mt-0.5 text-xs leading-snug text-neutral-600 dark:text-neutral-400">
                   {project.tagline}
                 </p>
 
-                <div className="relative mt-4 flex items-baseline gap-2">
-                  <span className="text-3xl font-semibold tracking-tight text-neutral-950 dark:text-white">
+                <div className="relative mt-3 flex items-baseline gap-2">
+                  <span className="text-2xl font-semibold tracking-tight text-neutral-950 dark:text-white">
                     {hero.value}
                   </span>
                   <span className="text-[10px] uppercase tracking-wide text-neutral-500 dark:text-neutral-500">
@@ -204,7 +204,7 @@ export default function WorkPage() {
                   </span>
                 </div>
 
-                <ul className="relative mt-3 grid gap-1.5 text-xs text-neutral-700 dark:text-neutral-300">
+                <ul className="relative mt-2 grid gap-1 text-xs text-neutral-700 dark:text-neutral-300">
                   {highlights.map((h) => (
                     <li key={h} className="flex items-start gap-2">
                       <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-neutral-400 dark:bg-neutral-500" />
@@ -213,10 +213,10 @@ export default function WorkPage() {
                   ))}
                 </ul>
 
-                <div className="relative mt-4 flex items-center justify-end border-t border-black/10 pt-3 dark:border-white/10">
-                  <span className="inline-flex h-8 items-center gap-1.5 rounded-md border border-black/15 bg-white/55 px-3 text-xs font-medium text-neutral-800 transition group-hover:border-black/30 group-hover:bg-white group-hover:gap-2 dark:border-white/15 dark:bg-white/[0.05] dark:text-neutral-200 dark:group-hover:border-white/30 dark:group-hover:bg-white/[0.1]">
+                <div className="relative mt-3 flex items-center justify-end border-t border-black/10 pt-2 dark:border-white/10">
+                  <span className="inline-flex h-7 items-center gap-1.5 rounded-md border border-black/15 bg-white/55 px-2.5 text-[11px] font-medium text-neutral-800 transition group-hover:border-black/30 group-hover:bg-white group-hover:gap-2 dark:border-white/15 dark:bg-white/[0.05] dark:text-neutral-200 dark:group-hover:border-white/30 dark:group-hover:bg-white/[0.1]">
                     Detail
-                    <ArrowUpRight size={12} />
+                    <ArrowUpRight size={11} />
                   </span>
                 </div>
               </Link>

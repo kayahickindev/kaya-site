@@ -113,28 +113,28 @@ export default function AboutPage() {
             </span>
           </div>
 
-          <ol className="relative space-y-3 border-l border-black/10 pl-4 dark:border-white/10">
+          <ol className="relative space-y-6 border-l border-black/10 pl-5 dark:border-white/10">
             {siteConfig.timeline.map((entry) => {
               const mark = companyMarks[entry.company];
               return (
                 <li key={entry.company} className="relative">
                   <span
-                    className={`absolute -left-[21px] top-1 grid h-3 w-3 place-items-center rounded-full border-2 ${
+                    className={`absolute -left-[23px] top-1.5 grid h-3.5 w-3.5 place-items-center rounded-full border-2 ${
                       entry.active
                         ? "border-amber-500 bg-amber-400 shadow-[0_0_10px_rgba(212,155,90,0.55)]"
                         : "border-neutral-400 bg-white dark:border-neutral-600 dark:bg-neutral-950"
                     }`}
                   />
                   <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2.5">
                       {mark ? (
                         <span
-                          className={`grid h-5 w-5 shrink-0 place-items-center rounded text-[10px] font-bold ${mark.accent}`}
+                          className={`grid h-6 w-6 shrink-0 place-items-center rounded text-xs font-bold ${mark.accent}`}
                         >
                           {mark.letter}
                         </span>
                       ) : null}
-                      <p className="text-sm font-semibold text-neutral-950 dark:text-white">
+                      <p className="text-base font-semibold text-neutral-950 dark:text-white">
                         {entry.company}
                       </p>
                     </div>
@@ -142,18 +142,18 @@ export default function AboutPage() {
                       {entry.period}
                     </span>
                   </div>
-                  <p className="ml-7 text-xs text-neutral-500 dark:text-neutral-500">
+                  <p className="ml-[34px] mt-0.5 text-xs text-neutral-500 dark:text-neutral-500">
                     {entry.role}
                   </p>
-                  <p className="ml-7 mt-1 text-xs leading-snug text-neutral-700 dark:text-neutral-300">
+                  <p className="ml-[34px] mt-2 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
                     {entry.description}
                   </p>
                   {entry.metrics && entry.metrics.length > 0 ? (
-                    <div className="ml-7 mt-1.5 flex flex-wrap gap-1">
+                    <div className="ml-[34px] mt-2.5 flex flex-wrap gap-1.5">
                       {entry.metrics.slice(0, 3).map((m) => (
                         <span
                           key={m}
-                          className={`rounded px-1.5 py-0.5 text-[10px] font-medium ${
+                          className={`rounded px-2 py-0.5 text-[11px] font-medium ${
                             entry.active
                               ? "bg-amber-400/15 text-amber-700 dark:text-amber-200"
                               : "bg-neutral-950/[0.05] text-neutral-600 dark:bg-white/[0.06] dark:text-neutral-400"

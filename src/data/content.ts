@@ -230,15 +230,6 @@ export const siteConfig = {
       active: true,
     },
     {
-      company: "RedHawk Business Accelerator",
-      role: "Winner, Miami University",
-      period: "April 2025",
-      description:
-        "Won Miami University's $10K business accelerator pitch competition with MyFutureSelf.",
-      metrics: ["$10K prize"],
-      active: false,
-    },
-    {
       company: "Appointra",
       role: "Co-Founder · CTO",
       period: "Jun 2024 to Feb 2025",
