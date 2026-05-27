@@ -148,18 +148,17 @@ export function CommandCenter() {
                 <div className="mt-0.5 text-xs text-neutral-600 dark:text-neutral-400">
                   Co-Founder · CTO · MyFutureSelf
                 </div>
-                <span className="mt-1.5 inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/15 px-2 py-0.5 text-[10px] font-medium tracking-wide text-amber-800 dark:text-amber-200">
-                  <span className="h-1.5 w-1.5 rounded-full bg-amber-500 dark:bg-amber-300" />
-                  Three-for-three profitable
-                </span>
               </div>
             </div>
 
-            <div className="max-w-5xl">
-              <RevealHeadline
-                words={["I", "build", "consumer", "AI", "that", "changes", "behavior."]}
-                className="text-5xl font-semibold leading-[0.92] text-neutral-950 sm:text-6xl xl:text-7xl 2xl:text-8xl dark:text-white"
-              />
+            <div className="relative max-w-5xl">
+              <div aria-hidden className="aurora" />
+              <div className="relative">
+                <RevealHeadline
+                  words={["I", "build", "consumer", "AI", "that", "changes", "behavior."]}
+                  className="text-5xl font-semibold leading-[0.92] text-neutral-950 sm:text-6xl xl:text-7xl 2xl:text-8xl dark:text-white"
+                />
+              </div>
             </div>
 
             <div className="flex flex-wrap items-center gap-2">

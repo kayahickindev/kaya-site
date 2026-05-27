@@ -23,7 +23,13 @@ type BrandKey =
   | "wispr"
   | "ghostty"
   | "lovable"
-  | "replit";
+  | "replit"
+  | "revenuecat"
+  | "testflight"
+  | "supabase"
+  | "stripe"
+  | "whisper"
+  | "elevenlabs";
 
 function detect(name: string): BrandKey | null {
   const n = name.toLowerCase();
@@ -52,6 +58,12 @@ function detect(name: string): BrandKey | null {
   if (n.includes("ghostty")) return "ghostty";
   if (n.includes("lovable")) return "lovable";
   if (n.includes("replit")) return "replit";
+  if (n.includes("revenuecat")) return "revenuecat";
+  if (n.includes("testflight")) return "testflight";
+  if (n.includes("supabase")) return "supabase";
+  if (n.includes("stripe")) return "stripe";
+  if (n.includes("whisper")) return "whisper";
+  if (n.includes("elevenlabs")) return "elevenlabs";
   return null;
 }
 
@@ -229,6 +241,47 @@ function Icon({ brand, size = 14 }: { brand: BrandKey; size?: number }) {
       return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="#F26207" aria-hidden>
           <path d="M3 3h9v8H3zm0 10h9v8H3zm12-5h6v8h-6z" />
+        </svg>
+      );
+    case "revenuecat":
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="#FF6961" aria-hidden>
+          <path d="M12 3a4 4 0 014 4v1h2a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V10a2 2 0 012-2h2V7a4 4 0 014-4zm0 2a2 2 0 00-2 2v1h4V7a2 2 0 00-2-2zm-2 8a2 2 0 104 0 2 2 0 00-4 0z" />
+        </svg>
+      );
+    case "testflight":
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="#0D7AFF" aria-hidden>
+          <path d="M12 2L4 18l8-4 8 4z" />
+          <circle cx="12" cy="10" r="2" fill="#fff" />
+        </svg>
+      );
+    case "supabase":
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="#3ECF8E" aria-hidden>
+          <path d="M13 2L4 14h7v8l9-12h-7z" />
+        </svg>
+      );
+    case "stripe":
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="#635BFF" aria-hidden>
+          <path d="M13.3 8.6c0-.7.6-1 1.5-1 1.4 0 3.1.4 4.4 1.1V4.5c-1.5-.6-3-.9-4.4-.9-3.6 0-6 1.9-6 5 0 4.9 6.7 4.1 6.7 6.2 0 .8-.7 1.1-1.7 1.1-1.5 0-3.6-.6-5.2-1.5v4.3c1.8.8 3.6 1.1 5.2 1.1 3.7 0 6.2-1.8 6.2-5 0-5.3-6.7-4.4-6.7-6.2z" />
+        </svg>
+      );
+    case "whisper":
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#10A37F" strokeWidth="1.8" strokeLinecap="round" aria-hidden>
+          <line x1="6" y1="9" x2="6" y2="15" />
+          <line x1="10" y1="6" x2="10" y2="18" />
+          <line x1="14" y1="8" x2="14" y2="16" />
+          <line x1="18" y1="10" x2="18" y2="14" />
+        </svg>
+      );
+    case "elevenlabs":
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+          <rect x="6" y="4" width="4" height="16" rx="0.5" />
+          <rect x="14" y="4" width="4" height="16" rx="0.5" />
         </svg>
       );
   }

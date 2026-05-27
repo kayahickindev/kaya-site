@@ -140,6 +140,34 @@ body {
   animation: gentle-float var(--motion-duration-float) var(--motion-ease-standard) infinite;
 }
 
+/* Aurora drift — slow, multi-stop gradient drift behind hero text */
+@keyframes aurora-drift {
+  0%   { transform: translate3d(0%, 0%, 0) scale(1); }
+  33%  { transform: translate3d(-6%, 3%, 0) scale(1.06); }
+  66%  { transform: translate3d(5%, -3%, 0) scale(1.04); }
+  100% { transform: translate3d(0%, 0%, 0) scale(1); }
+}
+
+.aurora {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  filter: blur(60px);
+  background:
+    radial-gradient(40% 50% at 20% 30%, rgba(8, 145, 178, 0.20), transparent 65%),
+    radial-gradient(35% 45% at 80% 30%, rgba(217, 119, 6, 0.22), transparent 65%),
+    radial-gradient(45% 55% at 50% 80%, rgba(244, 114, 182, 0.16), transparent 65%);
+  animation: aurora-drift 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+.dark .aurora {
+  background:
+    radial-gradient(40% 50% at 20% 30%, rgba(34, 211, 238, 0.18), transparent 65%),
+    radial-gradient(35% 45% at 80% 30%, rgba(251, 191, 36, 0.20), transparent 65%),
+    radial-gradient(45% 55% at 50% 80%, rgba(244, 114, 182, 0.14), transparent 65%);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -147,6 +175,7 @@ body {
 
   .accent-pulse,
   .gentle-float,
+  .aurora,
   .animate-pulse,
   .animate-bounce {
     animation: none;

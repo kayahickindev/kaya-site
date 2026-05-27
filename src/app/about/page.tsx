@@ -48,9 +48,12 @@ export default function AboutPage() {
     <SubpageShell accent="amber">
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
         <div className="flex flex-col gap-6 lg:col-span-7 lg:pr-2">
-          <h1 className="text-4xl font-semibold leading-[0.9] tracking-tight text-neutral-950 sm:text-5xl xl:text-6xl dark:text-white">
-            Builder, operator, founder.
-          </h1>
+          <div className="relative">
+            <div aria-hidden className="aurora" style={{ opacity: 0.6 }} />
+            <h1 className="relative text-4xl font-semibold leading-[0.9] tracking-tight text-neutral-950 sm:text-5xl xl:text-6xl dark:text-white">
+              Builder, operator, founder.
+            </h1>
+          </div>
 
           <div className="max-w-prose space-y-4 text-base leading-relaxed text-neutral-700 xl:text-lg dark:text-neutral-300">
             {paragraphs.map((p) => (

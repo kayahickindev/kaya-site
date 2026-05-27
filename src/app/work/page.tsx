@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SubpageShell } from "@/components/SubpageShell";
+import { TiltImage } from "@/components/TiltImage";
 import { siteConfig } from "@/data/content";
 import { cardSurfaceHover, cardSurfaceFeatured } from "@/lib/surfaces";
 import { projectDetails } from "./_projectDetails";
@@ -56,8 +57,9 @@ export default function WorkPage() {
   return (
     <SubpageShell accent="amber">
       <div className="flex flex-col gap-4">
-        <header>
-          <h1 className="text-3xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
+        <header className="relative">
+          <div aria-hidden className="aurora" style={{ opacity: 0.55 }} />
+          <h1 className="relative text-3xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
             Shipped products.
           </h1>
         </header>
@@ -131,7 +133,7 @@ export default function WorkPage() {
                 </div>
               </div>
 
-              <div className="relative min-h-[220px] overflow-hidden md:min-h-0">
+              <TiltImage className="relative min-h-[220px] overflow-hidden md:min-h-0">
                 {hero.project.image ? (
                   <Image
                     src={hero.project.image}
@@ -139,10 +141,10 @@ export default function WorkPage() {
                     width={781}
                     height={1250}
                     unoptimized
-                    className="absolute inset-0 m-auto h-full max-h-[340px] w-auto scale-[1.2] object-contain mix-blend-screen drop-shadow-2xl"
+                    className="absolute inset-0 m-auto h-full max-h-[340px] w-auto scale-[1.2] object-contain mix-blend-screen drop-shadow-2xl transition-transform duration-500 group-hover:scale-[1.26]"
                   />
                 ) : null}
-              </div>
+              </TiltImage>
             </div>
           </Link>
         ) : null}
@@ -161,7 +163,11 @@ export default function WorkPage() {
               >
                 <div
                   aria-hidden
-                  className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${cardAccent}`}
+                  className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${cardAccent} opacity-70 transition-opacity duration-300 group-hover:opacity-100`}
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute -inset-px bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,0%),rgba(217,119,6,0.18),transparent_55%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,0%),rgba(251,191,36,0.18),transparent_55%)]"
                 />
 
                 <div className="relative flex items-start justify-between gap-3">
@@ -169,9 +175,11 @@ export default function WorkPage() {
                     <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
                       {detail.role}
                     </p>
-                    <p className="mt-0.5 text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-                      {detail.timeframe}
-                    </p>
+                    {detail.timeframe ? (
+                      <p className="mt-0.5 text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+                        {detail.timeframe}
+                      </p>
+                    ) : null}
                   </div>
                 </div>
 

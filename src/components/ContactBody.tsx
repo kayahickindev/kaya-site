@@ -92,9 +92,12 @@ const socials: Social[] = [
 export function ContactPanel() {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-10 py-10 text-center">
-      <h1 className="text-5xl font-semibold leading-[0.9] tracking-tight text-neutral-950 sm:text-6xl xl:text-7xl dark:text-white">
-        Get in touch.
-      </h1>
+      <div className="relative">
+        <div aria-hidden className="aurora" style={{ opacity: 0.6 }} />
+        <h1 className="relative text-5xl font-semibold leading-[0.9] tracking-tight text-neutral-950 sm:text-6xl xl:text-7xl dark:text-white">
+          Get in touch.
+        </h1>
+      </div>
 
       <div className={`${cardSurface} relative w-full overflow-hidden p-8 sm:p-10`}>
         <div

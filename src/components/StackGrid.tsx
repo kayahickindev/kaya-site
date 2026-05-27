@@ -63,20 +63,20 @@ const categoryMeta: Record<
 const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];
 
 const columnVariants: Variants = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0, y: 14 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease, delay: i * 0.08 },
+    transition: { duration: 0.42, ease, delay: i * 0.04 },
   }),
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, x: -8 },
+  hidden: { opacity: 0, x: -6 },
   show: (i: number) => ({
     opacity: 1,
     x: 0,
-    transition: { duration: 0.32, ease, delay: 0.18 + i * 0.04 },
+    transition: { duration: 0.28, ease, delay: 0.16 + i * 0.04 },
   }),
 };
 
@@ -113,7 +113,7 @@ export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
               {group.items.map((item, itemIndex) => (
                 <motion.li
                   key={item.name}
-                  custom={columnIndex * 6 + itemIndex}
+                  custom={itemIndex}
                   initial={reducedMotion ? false : "hidden"}
                   animate="show"
                   variants={itemVariants}
