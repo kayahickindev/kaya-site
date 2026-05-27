@@ -41,8 +41,8 @@ const proofGroups = [
       "Native SwiftUI with Core Data and StoreKit",
       "Realtime voice via WebRTC and OpenAI Realtime",
       "Firebase, Firestore, and Cloud Functions backend",
-      "170,000+ lines of code shipped last year",
-      "1,400+ commits across product and infra",
+      "2,600+ GitHub contributions in the last year",
+      "Claude Code and Codex in the daily build loop",
     ],
   },
   {
@@ -138,7 +138,7 @@ export default function ProofPage() {
         >
           <span className="flex items-center gap-2">
             <ExternalLink size={14} />
-            github.com/{siteConfig.github.username} · 1,400+ commits, 170K+ lines last year
+            github.com/{siteConfig.github.username} · 2,600+ contributions in the last year
           </span>
           <span className="text-neutral-500">View profile →</span>
         </a>

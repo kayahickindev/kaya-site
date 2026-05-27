@@ -7,12 +7,10 @@ import {
   ArrowUpRight,
   BriefcaseBusiness,
   CheckCircle2,
-  Code2,
   ExternalLink,
-  Layers3,
-  Sparkles,
   Target,
 } from "lucide-react";
+import { SubpageShell } from "@/components/SubpageShell";
 import { siteConfig } from "@/data/content";
 import { getProjectDetail, projectDetails } from "../_projectDetails";
 
@@ -65,7 +63,7 @@ function ActionLink({ action }: { action: ProjectAction }) {
     return (
       <a href={action.href} target="_blank" rel="noopener noreferrer" className={className}>
         {action.label}
-        <ExternalLink size={15} />
+        <ExternalLink size={14} />
       </a>
     );
   }
@@ -73,43 +71,14 @@ function ActionLink({ action }: { action: ProjectAction }) {
   return (
     <Link href={action.href} className={className}>
       {action.label}
-      <ArrowUpRight size={15} />
+      <ArrowUpRight size={14} />
     </Link>
-  );
-}
-
-function ShellHeader() {
-  return (
-    <header className="border-b border-black/10 bg-white/58 backdrop-blur-xl dark:border-white/10 dark:bg-[#050505]/72">
-      <nav className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-5 sm:px-6 lg:px-8">
-        <Link
-          href="/"
-          className="flex items-center gap-3 text-sm font-semibold text-neutral-950 transition hover:text-neutral-600 dark:text-white dark:hover:text-neutral-300"
-        >
-          <span className="grid h-7 w-7 place-items-center rounded bg-neutral-950 text-xs text-white dark:bg-white dark:text-neutral-950">
-            KH
-          </span>
-          <span>Kaya Hickin</span>
-        </Link>
-        <div className="flex items-center gap-4 text-sm text-neutral-500 dark:text-neutral-400">
-          <Link href="/work" className="transition hover:text-neutral-950 dark:hover:text-white">
-            Work
-          </Link>
-          <Link href="/proof" className="transition hover:text-neutral-950 dark:hover:text-white">
-            Proof
-          </Link>
-          <Link href="/contact" className="transition hover:text-neutral-950 dark:hover:text-white">
-            Contact
-          </Link>
-        </div>
-      </nav>
-    </header>
   );
 }
 
 function MyFutureSelfVisual({ image, name }: { image?: string; name: string }) {
   return (
-    <div className="relative flex min-h-[360px] items-center justify-center overflow-hidden rounded-md border border-white/10 bg-neutral-950 p-6 text-white lg:min-h-[520px]">
+    <div className="relative flex h-full min-h-0 items-center justify-center overflow-hidden rounded-md border border-white/10 bg-neutral-950 p-4 text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_18%,rgba(34,211,238,0.18),transparent_31%),linear-gradient(150deg,rgba(34,211,238,0.09),transparent_38%,rgba(244,114,182,0.13)_76%,rgba(251,191,36,0.08))]" />
       {image ? (
         <Image
@@ -117,7 +86,7 @@ function MyFutureSelfVisual({ image, name }: { image?: string; name: string }) {
           alt={`${name} app screenshots`}
           width={781}
           height={1250}
-          className="relative z-10 h-auto w-[82%] max-w-[520px] scale-125 drop-shadow-2xl"
+          className="relative z-10 h-full max-h-[460px] w-auto drop-shadow-2xl"
           priority
         />
       ) : null}
@@ -127,10 +96,10 @@ function MyFutureSelfVisual({ image, name }: { image?: string; name: string }) {
 
 function DogAiVisual() {
   return (
-    <div className="relative grid min-h-[360px] place-items-center overflow-hidden rounded-md border border-white/10 bg-neutral-950 p-6 text-white lg:min-h-[520px]">
+    <div className="relative grid h-full min-h-0 place-items-center overflow-hidden rounded-md border border-white/10 bg-neutral-950 p-5 text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_25%,rgba(34,197,94,0.18),transparent_33%),linear-gradient(145deg,rgba(20,184,166,0.12),transparent_40%,rgba(251,191,36,0.11))]" />
-      <div className="relative grid w-full max-w-xl gap-4">
-        <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-5">
+      <div className="relative grid w-full max-w-md gap-3">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-4">
           <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-emerald-200/80">
             Custom LLM
           </p>
@@ -141,22 +110,19 @@ function DogAiVisual() {
             Built and trained the underlying model myself, including a behavior dataset from Harvard.
           </p>
         </div>
-        <div className="grid gap-3 sm:grid-cols-3">
-          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-4">
-            <p className="text-2xl font-semibold">10,000s</p>
-            <p className="mt-1 text-[11px] leading-snug text-neutral-400">training images</p>
+        <div className="grid grid-cols-3 gap-2">
+          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-3">
+            <p className="text-xl font-semibold">10,000s</p>
+            <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">training images</p>
           </div>
-          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-4">
-            <p className="text-2xl font-semibold">Harvard</p>
-            <p className="mt-1 text-[11px] leading-snug text-neutral-400">behavior dataset</p>
+          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-3">
+            <p className="text-xl font-semibold">Harvard</p>
+            <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">behavior dataset</p>
           </div>
-          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-4">
-            <p className="text-2xl font-semibold">Live</p>
-            <p className="mt-1 text-[11px] leading-snug text-neutral-400">App Store, paid</p>
+          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-3">
+            <p className="text-xl font-semibold">Live</p>
+            <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">App Store, paid</p>
           </div>
-        </div>
-        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-xs text-neutral-400">
-          Solo build: dataset assembly, model training, iOS app, App Store launch.
         </div>
       </div>
     </div>
@@ -171,24 +137,24 @@ function AppointraVisual() {
   ];
 
   return (
-    <div className="relative min-h-[360px] overflow-hidden rounded-md border border-white/10 bg-neutral-950 p-5 text-white lg:min-h-[520px]">
+    <div className="relative h-full min-h-0 overflow-hidden rounded-md border border-white/10 bg-neutral-950 p-4 text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_20%,rgba(59,130,246,0.2),transparent_30%),linear-gradient(145deg,rgba(14,165,233,0.12),transparent_40%,rgba(168,85,247,0.12))]" />
-      <div className="relative flex h-full flex-col justify-between gap-5">
+      <div className="relative flex h-full flex-col justify-between gap-3">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-[10px] font-mono uppercase text-blue-200/75">Outbound system</p>
-            <h2 className="mt-1 text-2xl font-semibold">Pipeline engine</h2>
+            <h3 className="mt-1 text-2xl font-semibold">Pipeline engine</h3>
           </div>
-          <BriefcaseBusiness className="text-blue-200/80" size={28} />
+          <BriefcaseBusiness className="text-blue-200/80" size={24} />
         </div>
-        <div className="grid flex-1 gap-3 md:grid-cols-3">
+        <div className="grid flex-1 gap-2 sm:grid-cols-3">
           {columns.map((column) => (
-            <div key={column.label} className="rounded-xl border border-white/10 bg-white/[0.06] p-4">
-              <p className="text-xs text-neutral-400">{column.label}</p>
-              <p className="mt-1 text-3xl font-semibold">{column.value}</p>
-              <div className="mt-5 space-y-2">
+            <div key={column.label} className="rounded-xl border border-white/10 bg-white/[0.06] p-3">
+              <p className="text-[10px] text-neutral-400">{column.label}</p>
+              <p className="mt-1 text-2xl font-semibold">{column.value}</p>
+              <div className="mt-3 space-y-1.5">
                 {column.items.map((item) => (
-                  <div key={item} className="rounded-lg bg-black/24 px-3 py-2 text-xs text-neutral-300">
+                  <div key={item} className="rounded bg-black/24 px-2 py-1 text-[11px] text-neutral-300">
                     {item}
                   </div>
                 ))}
@@ -196,14 +162,14 @@ function AppointraVisual() {
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-2 gap-3">
-          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-4">
-            <p className="text-2xl font-semibold">$20k</p>
-            <p className="text-xs text-neutral-400">MRR in three months</p>
+        <div className="grid grid-cols-2 gap-2">
+          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-3">
+            <p className="text-xl font-semibold">$20k</p>
+            <p className="text-[10px] text-neutral-400">MRR in three months</p>
           </div>
-          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-4">
-            <p className="text-2xl font-semibold">Millions</p>
-            <p className="text-xs text-neutral-400">in client pipeline</p>
+          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-3">
+            <p className="text-xl font-semibold">Millions</p>
+            <p className="text-[10px] text-neutral-400">in client pipeline</p>
           </div>
         </div>
       </div>
@@ -213,41 +179,41 @@ function AppointraVisual() {
 
 function LeadBoostVisual() {
   return (
-    <div className="relative min-h-[360px] overflow-hidden rounded-md border border-white/10 bg-neutral-950 p-5 text-white lg:min-h-[520px]">
+    <div className="relative h-full min-h-0 overflow-hidden rounded-md border border-white/10 bg-neutral-950 p-4 text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_18%,rgba(251,191,36,0.18),transparent_32%),linear-gradient(145deg,rgba(251,191,36,0.1),transparent_42%,rgba(34,197,94,0.1))]" />
       <div className="relative flex h-full flex-col justify-center">
         <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] shadow-2xl">
-          <div className="flex items-center gap-2 border-b border-white/10 bg-black/24 px-4 py-3">
-            <span className="h-2.5 w-2.5 rounded-full bg-red-300" />
-            <span className="h-2.5 w-2.5 rounded-full bg-yellow-300" />
-            <span className="h-2.5 w-2.5 rounded-full bg-green-300" />
-            <span className="ml-3 rounded-md bg-white/[0.08] px-3 py-1 text-xs text-neutral-400">
+          <div className="flex items-center gap-2 border-b border-white/10 bg-black/24 px-3 py-2">
+            <span className="h-2 w-2 rounded-full bg-red-300" />
+            <span className="h-2 w-2 rounded-full bg-yellow-300" />
+            <span className="h-2 w-2 rounded-full bg-green-300" />
+            <span className="ml-3 rounded-md bg-white/[0.08] px-2.5 py-0.5 text-[10px] text-neutral-400">
               leadboost-pro.com
             </span>
           </div>
-          <div className="grid gap-4 p-5 md:grid-cols-[0.9fr_1.1fr]">
+          <div className="grid gap-4 p-4 md:grid-cols-[0.9fr_1.1fr]">
             <div>
               <p className="text-[10px] font-mono uppercase text-amber-200/75">
                 Local business systems
               </p>
-              <h2 className="mt-2 text-3xl font-semibold leading-tight">
+              <h3 className="mt-2 text-2xl font-semibold leading-tight">
                 Websites, marketing, and operating support.
-              </h2>
-              <div className="mt-5 flex flex-wrap gap-2">
+              </h3>
+              <div className="mt-4 flex flex-wrap gap-2">
                 {["Web", "SEO", "Ads", "Consulting"].map((tag) => (
-                  <span key={tag} className="rounded-md bg-white/[0.08] px-2.5 py-1.5 text-xs">
+                  <span key={tag} className="rounded-md bg-white/[0.08] px-2 py-1 text-[11px]">
                     {tag}
                   </span>
                 ))}
               </div>
             </div>
-            <div className="grid gap-3">
+            <div className="grid gap-2">
               {[70, 48, 86].map((width, index) => (
-                <div key={width} className="rounded-xl bg-black/24 p-4">
-                  <div className="mb-3 h-2 w-24 rounded-full bg-white/15" />
+                <div key={width} className="rounded-xl bg-black/24 p-3">
+                  <div className="mb-2 h-2 w-20 rounded-full bg-white/15" />
                   <div className="h-2 rounded-full bg-amber-200/80" style={{ width: `${width}%` }} />
-                  <div className="mt-2 h-2 w-2/3 rounded-full bg-white/10" />
-                  {index === 1 ? <div className="mt-2 h-2 w-1/2 rounded-full bg-white/10" /> : null}
+                  <div className="mt-1.5 h-2 w-2/3 rounded-full bg-white/10" />
+                  {index === 1 ? <div className="mt-1.5 h-2 w-1/2 rounded-full bg-white/10" /> : null}
                 </div>
               ))}
             </div>
@@ -288,179 +254,121 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
       ? [{ label: "Visit site", href: project.links.website, external: true, primary: true }]
       : []),
     ...(project.links.appStore
-      ? [{ label: project.links.website ? "App Store" : "Open App Store", href: project.links.appStore, external: true, primary: !project.links.website }]
+      ? [{
+          label: project.links.website ? "App Store" : "Open App Store",
+          href: project.links.appStore,
+          external: true,
+          primary: !project.links.website,
+        }]
       : []),
   ];
 
   return (
-    <div className="min-h-dvh bg-[#f4f1ea] text-neutral-950 dark:bg-[#050505] dark:text-white">
-      <ShellHeader />
-
-      <main className="mx-auto max-w-7xl px-5 py-5 sm:px-6 lg:px-8 lg:py-7">
+    <SubpageShell activePath="/work">
+      <div className="flex h-full min-h-0 flex-col gap-3">
         <Link
           href="/work"
-          className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-neutral-500 transition hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
+          className="inline-flex w-fit items-center gap-2 text-xs font-medium text-neutral-500 transition hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
         >
-          <ArrowLeft size={16} />
-          Back to work
+          <ArrowLeft size={14} />
+          All work
         </Link>
 
-        <section className="grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(420px,0.8fr)] lg:items-start">
-          <div className="rounded-md border border-black/10 bg-white/58 p-5 backdrop-blur dark:border-white/10 dark:bg-white/[0.04] lg:p-7">
-            <div className="flex flex-wrap items-start justify-between gap-4">
-              <div>
-                <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-                  {detail.role}
-                </p>
-                <h1 className="mt-3 text-5xl font-semibold leading-[0.96] tracking-tight text-neutral-950 sm:text-6xl dark:text-white">
-                  {project.name}
-                </h1>
+        <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-12">
+          <div className="flex min-h-0 flex-col gap-3 lg:col-span-7">
+            <div className="rounded-md border border-black/10 bg-white/55 p-4 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+                    {detail.role} · {detail.timeframe}
+                  </p>
+                  <h1 className="mt-2 text-4xl font-semibold leading-[0.96] tracking-tight text-neutral-950 sm:text-5xl dark:text-white">
+                    {project.name}
+                  </h1>
+                </div>
+                {project.status ? (
+                  <span className="shrink-0 rounded-md border border-black/10 bg-white/60 px-2.5 py-1.5 text-[11px] font-medium text-neutral-700 dark:border-white/10 dark:bg-white/[0.05] dark:text-neutral-300">
+                    {project.status}
+                  </span>
+                ) : null}
               </div>
-              {project.status ? (
-                <span className="rounded-md border border-black/10 bg-white/60 px-3 py-2 text-xs font-medium text-neutral-600 dark:border-white/10 dark:bg-white/[0.05] dark:text-neutral-300">
-                  {project.status}
-                </span>
+              <p className="mt-3 font-serif text-2xl italic leading-tight text-amber-700 dark:text-amber-200">
+                {project.tagline}
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+                {project.description}
+              </p>
+              {actions.length > 0 ? (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {actions.map((action) => (
+                    <ActionLink key={`${action.label}-${action.href}`} action={action} />
+                  ))}
+                </div>
               ) : null}
             </div>
 
-            <p className="mt-4 max-w-2xl font-serif text-3xl italic leading-tight text-amber-700 dark:text-amber-200">
-              {project.tagline}
-            </p>
-            <p className="mt-4 max-w-3xl text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
-              {project.description}
-            </p>
-
-            <div className="mt-6 grid gap-3 sm:grid-cols-3">
-              <div className="rounded-md border border-black/10 bg-white/50 p-4 dark:border-white/10 dark:bg-white/[0.035]">
-                <p className="text-[10px] font-mono uppercase text-neutral-500">Timeframe</p>
-                <p className="mt-1 text-sm font-semibold text-neutral-950 dark:text-white">
-                  {detail.timeframe}
-                </p>
-              </div>
-              <div className="rounded-md border border-black/10 bg-white/50 p-4 dark:border-white/10 dark:bg-white/[0.035]">
-                <p className="text-[10px] font-mono uppercase text-neutral-500">Stack</p>
-                <p className="mt-1 line-clamp-2 text-sm font-semibold leading-snug text-neutral-950 dark:text-white">
-                  {detail.stack.slice(0, 3).join(" · ")}
-                </p>
-              </div>
-              <div className="rounded-md border border-black/10 bg-white/50 p-4 dark:border-white/10 dark:bg-white/[0.035]">
-                <p className="text-[10px] font-mono uppercase text-neutral-500">Signal</p>
-                <p className="mt-1 line-clamp-2 text-sm font-semibold leading-snug text-neutral-950 dark:text-white">
-                  {detail.outcomes[0]}
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-6 grid gap-4 lg:grid-cols-2">
-              {detail.overview.map((paragraph) => (
-                <p key={paragraph} className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-
-            <div className="mt-6 flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-md border border-black/10 bg-white/55 px-2.5 py-1.5 text-xs text-neutral-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-300"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {actions.length > 0 ? (
-              <div className="mt-7 flex flex-wrap gap-3">
-                {actions.map((action) => (
-                  <ActionLink key={`${action.label}-${action.href}`} action={action} />
-                ))}
-              </div>
-            ) : null}
-          </div>
-
-          <ProjectVisual detail={detail} />
-        </section>
-
-        <section className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <div className="rounded-md border border-black/10 bg-white/58 p-5 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
-            <div className="mb-4 flex items-center gap-2">
-              <Sparkles size={17} className="text-amber-600 dark:text-amber-200" />
-              <h2 className="text-lg font-semibold">Outcomes</h2>
-            </div>
-            <div className="grid gap-2 sm:grid-cols-2">
-              {detail.outcomes.map((outcome) => (
-                <div
-                  key={outcome}
-                  className="flex gap-3 rounded-md border border-black/10 bg-white/50 p-3 text-sm leading-relaxed text-neutral-700 dark:border-white/10 dark:bg-white/[0.035] dark:text-neutral-300"
-                >
-                  <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-emerald-600 dark:text-emerald-300" />
-                  <span>{outcome}</span>
+            <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 sm:grid-cols-2">
+              <div className="flex min-h-0 flex-col rounded-md border border-black/10 bg-white/55 p-3 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
+                <div className="flex items-center gap-2 border-b border-black/10 pb-2 dark:border-white/10">
+                  <CheckCircle2 size={14} className="text-emerald-600 dark:text-emerald-300" />
+                  <h2 className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
+                    Outcomes
+                  </h2>
                 </div>
-              ))}
-            </div>
-          </div>
+                <ul className="mt-2 grid flex-1 content-start gap-1.5">
+                  {detail.outcomes.map((outcome) => (
+                    <li
+                      key={outcome}
+                      className="flex gap-2 text-xs leading-snug text-neutral-700 dark:text-neutral-300"
+                    >
+                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-emerald-500 dark:bg-emerald-300" />
+                      <span>{outcome}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-          <div className="rounded-md border border-black/10 bg-white/58 p-5 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
-            <div className="mb-4 flex items-center gap-2">
-              <Target size={17} className="text-cyan-700 dark:text-cyan-200" />
-              <h2 className="text-lg font-semibold">Ownership</h2>
-            </div>
-            <div className="grid gap-2 sm:grid-cols-2">
-              {detail.ownership.map((item) => (
-                <div
-                  key={item}
-                  className="rounded-md border border-black/10 bg-white/50 p-3 text-sm leading-relaxed text-neutral-700 dark:border-white/10 dark:bg-white/[0.035] dark:text-neutral-300"
-                >
-                  {item}
+              <div className="flex min-h-0 flex-col rounded-md border border-black/10 bg-white/55 p-3 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
+                <div className="flex items-center gap-2 border-b border-black/10 pb-2 dark:border-white/10">
+                  <Target size={14} className="text-amber-700 dark:text-amber-200" />
+                  <h2 className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
+                    Ownership
+                  </h2>
                 </div>
-              ))}
+                <ul className="mt-2 grid flex-1 content-start gap-1.5">
+                  {detail.ownership.map((item) => (
+                    <li
+                      key={item}
+                      className="flex gap-2 text-xs leading-snug text-neutral-700 dark:text-neutral-300"
+                    >
+                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-500 dark:bg-amber-300" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
-        </section>
 
-        <section className="mt-5 rounded-md border border-black/10 bg-white/58 p-4 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex min-w-0 flex-wrap items-center gap-2">
-              <Code2 size={17} className="text-neutral-500" />
+            <div className="flex flex-wrap items-center gap-1.5 rounded-md border border-black/10 bg-white/45 px-3 py-2 backdrop-blur dark:border-white/10 dark:bg-white/[0.035]">
+              <span className="mr-1 text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+                Stack
+              </span>
               {detail.stack.map((item) => (
                 <span
                   key={item}
-                  className="rounded-md bg-neutral-950/[0.055] px-2.5 py-1.5 text-xs text-neutral-700 dark:bg-white/[0.06] dark:text-neutral-300"
+                  className="rounded-md bg-neutral-950/[0.055] px-2 py-0.5 text-[11px] text-neutral-700 dark:bg-white/[0.06] dark:text-neutral-300"
                 >
                   {item}
                 </span>
               ))}
             </div>
-            <div className="flex shrink-0 gap-2">
-              <Link
-                href="/stack"
-                className="inline-flex h-9 items-center gap-2 rounded-md border border-black/10 bg-white/55 px-3 text-sm font-medium text-neutral-700 transition hover:-translate-y-0.5 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-300 dark:hover:bg-white/[0.08]"
-              >
-                Full stack
-                <ArrowUpRight size={14} />
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex h-9 items-center gap-2 rounded-md bg-neutral-950 px-3 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:bg-neutral-800 dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200"
-              >
-                Contact
-                <ArrowUpRight size={14} />
-              </Link>
-            </div>
           </div>
-        </section>
-      </main>
 
-      <footer className="border-t border-black/10 py-6 dark:border-white/10">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 text-xs text-neutral-500 sm:px-6 lg:px-8 dark:text-neutral-500">
-          <Link href="/work" className="inline-flex items-center gap-2 transition hover:text-neutral-950 dark:hover:text-white">
-            <Layers3 size={14} />
-            All work
-          </Link>
-          <span>{siteConfig.name}</span>
+          <div className="min-h-0 lg:col-span-5">
+            <ProjectVisual detail={detail} />
+          </div>
         </div>
-      </footer>
-    </div>
+      </div>
+    </SubpageShell>
   );
 }
