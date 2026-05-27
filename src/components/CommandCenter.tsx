@@ -4,21 +4,11 @@ import { useEffect, useMemo, useState, type ComponentType } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import {
-  Apple,
-  ArrowRight,
-  ArrowUpRight,
-  BriefcaseBusiness,
-  Code2,
-  Layers3,
-  Mail,
-  Search,
-  Sparkles,
-  Target,
-  X,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, Search, X } from "lucide-react";
 import { siteConfig } from "@/data/content";
+import { LiveShipped } from "./LiveShipped";
+import { MetricTiles } from "./MetricTiles";
+import { RevealHeadline } from "./RevealHeadline";
 
 type Action = {
   label: string;
@@ -29,13 +19,6 @@ type Action = {
 };
 
 const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];
-
-const routeIcons: Record<string, LucideIcon> = {
-  About: Target,
-  Proof: Sparkles,
-  Stack: Code2,
-  Contact: Mail,
-};
 
 function GitHubIcon({ size = 17 }: { size?: number }) {
   return (
@@ -81,7 +64,7 @@ function SignalField() {
     <div aria-hidden className="absolute inset-0 overflow-hidden">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:72px_72px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)]" />
       <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(8,145,178,0.08),transparent_36%,rgba(217,119,6,0.08)_68%,transparent)] dark:bg-[linear-gradient(120deg,rgba(34,211,238,0.07),transparent_36%,rgba(251,191,36,0.08)_68%,transparent)]" />
-      {Array.from({ length: 28 }).map((_, i) => {
+      {Array.from({ length: 14 }).map((_, i) => {
         const left = (i * 37) % 100;
         const top = (i * 53) % 100;
         const delay = (i % 9) * 0.28;
@@ -108,150 +91,6 @@ function SignalField() {
   );
 }
 
-function ProofStrip() {
-  return (
-    <Link
-      href="/proof"
-      className="group flex min-w-0 flex-wrap items-center gap-x-4 gap-y-2 rounded-md border border-black/10 bg-white/52 px-4 py-3 text-sm backdrop-blur transition hover:bg-white/78 dark:border-white/10 dark:bg-white/[0.035] dark:hover:bg-white/[0.06]"
-    >
-      {siteConfig.commandCenter.proof.map((item, index) => (
-        <motion.span
-          key={item.label}
-          whileHover={{ y: -1 }}
-          className="inline-flex min-w-0 items-baseline gap-1.5"
-        >
-          {index > 0 ? (
-            <span className="mr-2 hidden text-neutral-300 dark:text-neutral-700 sm:inline">
-              /
-            </span>
-          ) : null}
-          <span className="font-semibold text-neutral-950 dark:text-white">
-            {item.value}
-          </span>
-          <span className="truncate text-xs text-neutral-600 dark:text-neutral-400">
-            {item.label}
-          </span>
-        </motion.span>
-      ))}
-    </Link>
-  );
-}
-
-function RouteDockLink({
-  route,
-  index,
-}: {
-  route: (typeof siteConfig.commandCenter.routes)[number];
-  index: number;
-}) {
-  const Icon = routeIcons[route.label] ?? ArrowRight;
-
-  return (
-    <Link
-      href={route.href}
-      className="group flex min-w-0 items-center gap-2 rounded-md px-2.5 py-2 text-sm font-medium text-neutral-800 transition hover:bg-neutral-950/[0.055] dark:text-neutral-200 dark:hover:bg-white/[0.07]"
-      style={{ animationDelay: `${index * 40}ms` }}
-    >
-      <Icon size={15} className="shrink-0 text-neutral-500 dark:text-neutral-400" />
-      <span className="truncate">{route.label}</span>
-    </Link>
-  );
-}
-
-function ProjectDockLink({
-  project,
-  icon: Icon,
-  href,
-  index,
-}: {
-  project: (typeof siteConfig.projects)[number];
-  icon: LucideIcon;
-  href: string;
-  index: number;
-}) {
-  return (
-    <Link
-      href={href}
-      className="group flex min-w-0 items-center gap-2 rounded-md px-2.5 py-2 text-sm text-neutral-700 transition hover:bg-neutral-950/[0.055] dark:text-neutral-300 dark:hover:bg-white/[0.07]"
-      style={{ animationDelay: `${index * 40}ms` }}
-    >
-      <Icon size={15} className="shrink-0 text-neutral-500 dark:text-neutral-500" />
-      <span className="truncate">{project.name}</span>
-    </Link>
-  );
-}
-
-function StackRail() {
-  const items = siteConfig.commandCenter.rails.slice(0, 3);
-
-  return (
-    <div className="hidden min-w-0 items-center gap-1.5 overflow-hidden 2xl:flex">
-      {items.map((item, i) => (
-        <span
-          key={`${item}-${i}`}
-          className="shrink-0 rounded-md bg-neutral-950/[0.045] px-2.5 py-1.5 text-[11px] text-neutral-600 dark:bg-white/[0.06] dark:text-neutral-400"
-        >
-          {item}
-        </span>
-      ))}
-    </div>
-  );
-}
-
-function AppVisual({
-  image,
-  name,
-}: {
-  image?: string;
-  name: string;
-}) {
-  const [failed, setFailed] = useState(false);
-
-  if (!image || failed) {
-    return (
-      <div className="relative mx-auto flex h-full max-h-[340px] min-h-0 w-full max-w-sm items-center justify-center">
-        <div className="aspect-[9/18] h-full max-h-[330px] rounded-[2rem] border border-white/15 bg-neutral-950 p-3 shadow-2xl">
-          <div className="h-full rounded-[1.35rem] border border-white/10 bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.22),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] p-5">
-            <div className="mb-6 h-1.5 w-16 rounded-full bg-white/25" />
-            <div className="text-[10px] font-mono uppercase text-cyan-200/80">
-              MyFutureSelf
-            </div>
-            <div className="mt-3 text-3xl font-semibold leading-none">90 days</div>
-            <p className="mt-3 text-sm leading-relaxed text-neutral-300">
-              Roadmap, voice mentor, daily action.
-            </p>
-            <div className="mt-7 space-y-2">
-              {["Future self call", "Daily task", "Roadmap check-in"].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-xl border border-white/10 bg-white/[0.06] px-3 py-2 text-xs text-neutral-200"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="relative mx-auto flex h-full min-h-0 items-center justify-center overflow-hidden">
-      <Image
-        src={image}
-        alt={`${name} app screens`}
-        width={781}
-        height={1250}
-        unoptimized
-        loading="eager"
-        onError={() => setFailed(true)}
-        className="h-full max-h-[520px] w-auto max-w-full translate-y-2 scale-[1.18] object-contain drop-shadow-2xl xl:translate-y-3 xl:scale-[1.34]"
-      />
-    </div>
-  );
-}
-
 function SocialLink({
   href,
   label,
@@ -273,12 +112,6 @@ function SocialLink({
       <Icon size={17} />
     </a>
   );
-}
-
-function projectIcon(projectName: string) {
-  if (projectName === "Dog AI") return Apple;
-  if (projectName === "Appointra") return BriefcaseBusiness;
-  return Layers3;
 }
 
 function CommandPalette({
@@ -359,9 +192,7 @@ function CommandPalette({
                   className="group flex w-full items-center justify-between gap-3 rounded-md px-3 py-3 text-left transition hover:bg-white/[0.075]"
                 >
                   <span className="min-w-0">
-                    <span className="block text-sm font-medium text-white">
-                      {action.label}
-                    </span>
+                    <span className="block text-sm font-medium text-white">{action.label}</span>
                     <span className="mt-0.5 block truncate text-xs text-neutral-500">
                       {action.detail}
                     </span>
@@ -373,9 +204,7 @@ function CommandPalette({
                 </button>
               ))}
               {filtered.length === 0 && (
-                <div className="px-3 py-8 text-center text-sm text-neutral-500">
-                  No matches.
-                </div>
+                <div className="px-3 py-8 text-center text-sm text-neutral-500">No matches.</div>
               )}
             </div>
           </motion.div>
@@ -385,10 +214,25 @@ function CommandPalette({
   );
 }
 
+const primaryRoutes = [
+  { label: "About", href: "/about" },
+  { label: "Work", href: "/work" },
+  { label: "Proof", href: "/proof" },
+  { label: "Stack", href: "/stack" },
+  { label: "Contact", href: "/contact" },
+];
+
+const metricTiles = [
+  { value: 1718, label: "paid subscribers", format: true },
+  { value: 65, label: "ARR", prefix: "$", suffix: "K" },
+  { value: 26, label: "downloads", suffix: "K+" },
+  { value: 4.7, label: "App Store rating", suffix: "★", decimals: 1 },
+  { value: 52, label: "avg monthly growth", suffix: "%" },
+];
+
 export function CommandCenter() {
   const [paletteOpen, setPaletteOpen] = useState(false);
   const featured = siteConfig.projects.find((project) => project.featured);
-  const supporting = siteConfig.projects.filter((project) => !project.featured);
 
   const actions = useMemo<Action[]>(
     () => [
@@ -440,16 +284,43 @@ export function CommandCenter() {
             <span>{siteConfig.name}</span>
           </Link>
 
-          <div className="hidden min-w-0 flex-1 items-center justify-center lg:flex">
-            <div className="flex max-w-full items-center gap-2 overflow-hidden rounded-md border border-black/10 bg-white/42 px-3 py-2 text-xs text-neutral-600 backdrop-blur dark:border-white/10 dark:bg-white/[0.035] dark:text-neutral-400">
-              <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
-              <span className="truncate">{siteConfig.commandCenter.status}</span>
-              <span className="text-neutral-300 dark:text-neutral-700">/</span>
-              <span className="truncate">{siteConfig.commandCenter.availability}</span>
-            </div>
-          </div>
+          <nav className="hidden min-w-0 items-center gap-1 lg:flex">
+            {primaryRoutes.map((route) => (
+              <Link
+                key={route.href}
+                href={route.href}
+                className="rounded-md px-3 py-2 text-sm text-neutral-700 transition hover:bg-neutral-950/[0.055] hover:text-neutral-950 dark:text-neutral-300 dark:hover:bg-white/[0.07] dark:hover:text-white"
+              >
+                {route.label}
+              </Link>
+            ))}
+          </nav>
 
-          <div className="h-10 w-10 shrink-0" aria-hidden />
+          <div className="flex shrink-0 items-center gap-2">
+            <div className="hidden md:block">
+              <LiveShipped />
+            </div>
+            <button
+              type="button"
+              onClick={() => setPaletteOpen(true)}
+              aria-label="Open command menu (Cmd+K)"
+              className="hidden h-10 items-center gap-2 rounded-md border border-black/10 bg-white/45 px-3 text-xs text-neutral-600 backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-white/[0.035] dark:text-neutral-400 dark:hover:bg-white/[0.08] sm:flex"
+            >
+              <Search size={14} />
+              <span>Search</span>
+              <kbd className="rounded border border-black/10 bg-white/40 px-1 py-0.5 font-mono text-[10px] dark:border-white/15 dark:bg-white/[0.06]">
+                ⌘K
+              </kbd>
+            </button>
+            <button
+              type="button"
+              onClick={() => setPaletteOpen(true)}
+              aria-label="Open command menu"
+              className="grid h-10 w-10 place-items-center rounded-md border border-black/10 bg-white/45 backdrop-blur sm:hidden dark:border-white/10 dark:bg-white/[0.035]"
+            >
+              <Search size={16} />
+            </button>
+          </div>
         </header>
 
         <section className="grid min-h-0 grid-cols-1 gap-6 lg:grid-cols-12">
@@ -459,56 +330,61 @@ export function CommandCenter() {
             transition={{ duration: 0.48, ease }}
             className="flex min-h-[520px] flex-col justify-center overflow-hidden py-4 lg:col-span-7 lg:min-h-0 lg:pr-7"
           >
-            <div className="flex items-center gap-3">
-              <div className="relative h-14 w-14 overflow-hidden rounded-md border border-black/10 bg-neutral-200 dark:border-white/10 dark:bg-neutral-900">
+            <div className="flex items-center gap-4">
+              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md border border-black/10 bg-neutral-200 dark:border-white/10 dark:bg-neutral-900">
                 <Image
                   src="/headshot.jpg"
                   alt="Kaya Hickin"
                   fill
-                  sizes="56px"
-                  className="object-cover grayscale"
+                  sizes="96px"
+                  className="object-cover"
                   priority
                 />
               </div>
               <div className="min-w-0">
-                <div className="truncate text-xs font-mono uppercase text-neutral-500 dark:text-neutral-500">
-                  {siteConfig.commandCenter.eyebrow}
+                <div className="text-sm font-semibold text-neutral-950 dark:text-white">
+                  Kaya Hickin
                 </div>
-                <div className="mt-1 truncate text-sm text-neutral-700 dark:text-neutral-300">
-                  {siteConfig.status.pill}
+                <div className="mt-0.5 text-xs text-neutral-600 dark:text-neutral-400">
+                  Co-Founder · CTO · MyFutureSelf
+                </div>
+                <div className="mt-1 text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+                  Three-for-three profitable · Cleveland, OH
                 </div>
               </div>
             </div>
 
-            <div className="my-8 max-w-5xl lg:my-9 2xl:my-12">
-              <h1 className="text-5xl font-semibold leading-[0.92] text-neutral-950 sm:text-6xl xl:text-7xl 2xl:text-8xl dark:text-white">
-                I build consumer AI that changes behavior.
-              </h1>
+            <div className="my-7 max-w-5xl lg:my-8">
+              <RevealHeadline
+                words={["I", "build", "consumer", "AI", "that", "changes", "behavior."]}
+                className="text-5xl font-semibold leading-[0.92] text-neutral-950 sm:text-6xl xl:text-7xl 2xl:text-8xl dark:text-white"
+              />
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-neutral-700 xl:text-lg dark:text-neutral-300">
                 {siteConfig.commandCenter.description}
               </p>
             </div>
 
-            <div className="max-w-4xl space-y-3">
-              <div className="flex flex-wrap items-center gap-2">
-                <Link
-                  href="/proof"
-                  className="inline-flex h-10 items-center gap-2 rounded-md bg-neutral-950 px-4 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:bg-neutral-800 dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200"
-                >
-                  See proof
-                  <ArrowRight size={16} />
-                </Link>
-                <a
-                  href={siteConfig.social.myfutureself}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-10 items-center gap-2 rounded-md border border-black/10 bg-white/70 px-4 text-sm font-medium text-neutral-800 transition hover:-translate-y-0.5 hover:border-black/25 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-200 dark:hover:border-white/25 dark:hover:bg-white/[0.08]"
-                >
-                  Open MyFutureSelf
-                  <ArrowUpRight size={15} />
-                </a>
-              </div>
-              <ProofStrip />
+            <div className="flex flex-wrap items-center gap-2">
+              <Link
+                href="/proof"
+                className="inline-flex h-10 items-center gap-2 rounded-md bg-neutral-950 px-4 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:bg-neutral-800 dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200"
+              >
+                See proof
+                <ArrowRight size={16} />
+              </Link>
+              <a
+                href={siteConfig.social.myfutureself}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-10 items-center gap-2 rounded-md border border-black/10 bg-white/70 px-4 text-sm font-medium text-neutral-800 transition hover:-translate-y-0.5 hover:border-black/25 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-200 dark:hover:border-white/25 dark:hover:bg-white/[0.08]"
+              >
+                Open MyFutureSelf
+                <ArrowUpRight size={15} />
+              </a>
+            </div>
+
+            <div className="mt-4">
+              <MetricTiles metrics={metricTiles} />
             </div>
           </motion.div>
 
@@ -524,14 +400,11 @@ export function CommandCenter() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
                     <div className="text-[10px] font-mono uppercase text-cyan-200/80">
-                      Active company
+                      Current focus
                     </div>
                     <h2 className="mt-1 truncate text-3xl font-semibold xl:text-4xl">
                       {featured.name}
                     </h2>
-                    <p className="mt-3 max-w-xl text-sm leading-relaxed text-neutral-300 xl:text-base">
-                      {featured.description}
-                    </p>
                   </div>
                   <Link
                     href={`/work/${featured.slug}`}
@@ -553,14 +426,25 @@ export function CommandCenter() {
                   ))}
                 </div>
 
-                <div className="min-h-0 flex-1">
-                  <AppVisual image={featured.image} name={featured.name} />
+                <div className="relative min-h-0 flex-1">
+                  {featured.image ? (
+                    <Image
+                      src={featured.image}
+                      alt={`${featured.name} app screenshots`}
+                      width={781}
+                      height={1250}
+                      unoptimized
+                      loading="eager"
+                      className="mx-auto h-full max-h-[440px] w-auto translate-y-2 scale-[1.18] object-contain drop-shadow-2xl xl:scale-[1.28]"
+                    />
+                  ) : null}
+                  <div className="pointer-events-none absolute bottom-2 left-2 rounded-md border border-white/15 bg-black/45 px-3 py-2 text-xs backdrop-blur">
+                    <span className="font-semibold text-white">$65K ARR</span>
+                    <span className="ml-2 text-neutral-400">· 1,718 paid</span>
+                  </div>
                 </div>
 
-                <div className="mt-3 flex items-center justify-between gap-3 border-t border-white/10 pt-3">
-                  <span className="truncate text-xs text-neutral-400">
-                    Live iOS product · revenue-backed behavior change
-                  </span>
+                <div className="mt-3 flex items-center justify-end gap-3 border-t border-white/10 pt-3">
                   <Link
                     href={`/work/${featured.slug}`}
                     className="inline-flex h-9 shrink-0 items-center gap-2 rounded-md bg-white px-3 text-sm font-medium text-neutral-950 transition hover:-translate-y-0.5 hover:bg-neutral-200"
@@ -575,49 +459,40 @@ export function CommandCenter() {
         </section>
 
         <motion.nav
-          aria-label="Primary links"
+          aria-label="Social links"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.42, delay: 0.18, ease }}
-          className="grid min-h-0 gap-1 rounded-md border border-black/10 bg-white/45 p-1.5 text-sm backdrop-blur dark:border-white/10 dark:bg-white/[0.028] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)_auto]"
+          className="flex items-center justify-between gap-3 rounded-md border border-black/10 bg-white/45 px-3 py-2 text-sm backdrop-blur dark:border-white/10 dark:bg-white/[0.028]"
         >
-          <div className="flex min-w-0 flex-wrap items-center gap-1">
-            {siteConfig.commandCenter.routes.map((route, index) => (
-              <RouteDockLink key={route.href} route={route} index={index} />
-            ))}
-          </div>
-
-          <div className="flex min-w-0 flex-wrap items-center gap-1 border-black/10 pt-2 dark:border-white/10 sm:border-t lg:border-l lg:border-t-0 lg:pl-2 lg:pt-0">
-            <span className="px-2 text-[10px] font-mono uppercase text-neutral-500 dark:text-neutral-500">
-              Work
-            </span>
-            {supporting.map((project, index) => (
-              <ProjectDockLink
-                key={project.name}
-                project={project}
-                href={`/work/${project.slug}`}
-                index={index}
-                icon={projectIcon(project.name)}
-              />
-            ))}
-          </div>
-
-          <div className="flex min-w-0 items-center justify-between gap-2 border-black/10 pt-2 dark:border-white/10 sm:border-t lg:border-l lg:border-t-0 lg:pl-2 lg:pt-0">
-            <StackRail />
-            <div className="flex shrink-0 items-center gap-1">
-              <SocialLink href={siteConfig.social.github} label="GitHub" icon={GitHubIcon} />
-              <SocialLink href={siteConfig.social.linkedin} label="LinkedIn" icon={LinkedInIcon} />
-              <SocialLink href={siteConfig.social.twitter} label="X / Twitter" icon={TwitterIcon} />
-              <SocialLink href={siteConfig.social.instagram} label="Instagram" icon={InstagramIcon} />
-              <button
-                type="button"
-                onClick={() => setPaletteOpen(true)}
-                aria-label="Open command menu"
-                className="grid h-9 w-9 place-items-center rounded-md text-neutral-600 transition hover:-translate-y-0.5 hover:bg-neutral-950/[0.055] hover:text-neutral-950 dark:text-neutral-400 dark:hover:bg-white/[0.07] dark:hover:text-white"
+          <div className="flex min-w-0 items-center gap-3 lg:hidden">
+            {primaryRoutes.slice(0, 3).map((route) => (
+              <Link
+                key={route.href}
+                href={route.href}
+                className="text-xs text-neutral-600 transition hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
               >
-                <Search size={17} />
-              </button>
-            </div>
+                {route.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="hidden text-xs text-neutral-500 dark:text-neutral-500 lg:flex lg:items-center lg:gap-3">
+            <span className="font-mono uppercase tracking-[0.18em]">Reach out</span>
+            <button
+              type="button"
+              onClick={openEmail}
+              className="text-neutral-700 transition hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-white"
+            >
+              kaya<span className="text-neutral-500">@</span>successai.app
+            </button>
+          </div>
+
+          <div className="flex shrink-0 items-center gap-1">
+            <SocialLink href={siteConfig.social.github} label="GitHub" icon={GitHubIcon} />
+            <SocialLink href={siteConfig.social.linkedin} label="LinkedIn" icon={LinkedInIcon} />
+            <SocialLink href={siteConfig.social.twitter} label="X / Twitter" icon={TwitterIcon} />
+            <SocialLink href={siteConfig.social.instagram} label="Instagram" icon={InstagramIcon} />
           </div>
         </motion.nav>
       </div>
