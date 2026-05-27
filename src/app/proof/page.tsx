@@ -63,18 +63,13 @@ export default function ProofPage() {
   return (
     <SubpageShell activePath="/proof">
       <div className="flex h-full min-h-0 flex-col gap-3">
-        <header className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-              Proof
-            </div>
-            <h1 className="mt-1 text-3xl font-semibold leading-[0.95] text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
-              The receipts, in public.
-            </h1>
+        <header>
+          <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+            Proof
           </div>
-          <p className="max-w-md text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-            Shipped products, paying users, durable usage, and a visible build trail. Every number on this page is pulled from production.
-          </p>
+          <h1 className="mt-1 text-3xl font-semibold leading-[0.95] text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
+            The receipts, in public.
+          </h1>
         </header>
 
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">

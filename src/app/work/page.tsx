@@ -22,28 +22,43 @@ const accents: Record<string, string> = {
 };
 
 const cardHighlights: Record<string, string[]> = {
-  myfutureself: ["1,718 paid subscribers · $65K ARR", "4.7★ from 715 App Store reviews"],
-  "dog-ai": ["Custom LLM, tens of thousands of dog images", "Harvard behavior dataset"],
-  appointra: ["$20k MRR in three months", "Millions in client pipeline"],
-  "leadboost-pro": ["Profitable from year one", "First company, dorm-room start"],
+  myfutureself: [
+    "1,718 paid subscribers · $65K ARR",
+    "4.7★ from 715 App Store reviews",
+    "26K+ downloads, 52% avg monthly growth",
+    "Solo iOS + backend + voice AI in 6 months",
+  ],
+  "dog-ai": [
+    "Custom LLM, tens of thousands of dog images",
+    "Behavior dataset from Harvard",
+    "Solo dataset, training, and iOS build",
+    "Live on the App Store as a paying product",
+  ],
+  appointra: [
+    "$20k MRR in three months",
+    "$2M+ in client pipeline generated",
+    "Hundreds of qualified meetings booked",
+    "Co-built with Giancarlo, then sunset",
+  ],
+  "leadboost-pro": [
+    "Profitable from year one",
+    "20+ custom websites freshman year",
+    "Marketing + web dev + consulting",
+    "Dorm-room start, still live",
+  ],
 };
 
 export default function WorkPage() {
   return (
     <SubpageShell activePath="/work">
       <div className="flex h-full min-h-0 flex-col gap-4">
-        <header className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-              Work
-            </div>
-            <h1 className="mt-1 text-3xl font-semibold leading-[0.95] text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
-              Shipped products, not case studies.
-            </h1>
+        <header>
+          <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+            Work
           </div>
-          <p className="max-w-xs text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-            Four companies. Three profitable. One App Store hit.
-          </p>
+          <h1 className="mt-1 text-3xl font-semibold leading-[0.95] text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
+            Shipped products, not case studies.
+          </h1>
         </header>
 
         <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 md:grid-cols-2 md:grid-rows-2">
@@ -83,7 +98,7 @@ export default function WorkPage() {
                   {project.tagline}
                 </p>
 
-                <ul className="relative mt-auto grid gap-1.5 pt-4 text-sm text-neutral-700 dark:text-neutral-200">
+                <ul className="relative mt-3 grid flex-1 content-start gap-1.5 text-sm text-neutral-700 dark:text-neutral-200">
                   {highlights.map((highlight) => (
                     <li key={highlight} className="flex gap-2">
                       <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-500 dark:bg-amber-300" />

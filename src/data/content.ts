@@ -175,7 +175,7 @@ export const siteConfig = {
       image: "/mfs-hero.webp",
       featured: true,
       tags: ["AI", "Consumer", "iOS", "Voice"],
-      status: "Active · Scaling",
+      status: "Current focus",
     },
     {
       slug: "dog-ai",
@@ -189,7 +189,7 @@ export const siteConfig = {
       },
       featured: false,
       tags: ["AI", "Vision", "iOS"],
-      status: "Live",
+      status: "Past · Live",
     },
     {
       slug: "appointra",
@@ -202,7 +202,7 @@ export const siteConfig = {
       },
       featured: false,
       tags: ["B2B", "Outbound", "Agency"],
-      status: "Wound down",
+      status: "Past · Wound down",
     },
     {
       slug: "leadboost-pro",
@@ -215,7 +215,7 @@ export const siteConfig = {
       },
       featured: false,
       tags: ["Marketing", "Web Dev", "Consulting"],
-      status: "Active",
+      status: "Past · Live",
     },
   ],
 
@@ -225,8 +225,8 @@ export const siteConfig = {
       role: "Co-Founder · CTO",
       period: "Jan 2025 to Present",
       description:
-        "Building an iOS app with a 90-day personalized roadmap and a voice AI mentor. Led the product and technical build end to end. Current traction: 26,000+ downloads, 1,718 paid subscribers, $65K ARR, 52% average monthly revenue growth, and a 4.7★ App Store rating from 715 reviews.",
-      metrics: ["1,718 paid", "$65K ARR", "52% MoM growth"],
+        "AI iOS app: 90-day roadmap and a voice mentor that speaks as your future self. Solo-built iOS, Firebase backend, and AI integration in six months.",
+      metrics: ["1,718 paid", "$65K ARR", "4.7★ · 715 reviews"],
       active: true,
     },
     {
@@ -234,16 +234,17 @@ export const siteConfig = {
       role: "Winner, Miami University",
       period: "April 2025",
       description:
-        "Won Miami University's competitive business accelerator with MyFutureSelf.",
+        "Won Miami University's $10K business accelerator pitch competition with MyFutureSelf.",
+      metrics: ["$10K prize"],
       active: false,
     },
     {
       company: "Appointra",
-      role: "Co-Founder",
+      role: "Co-Founder · CTO",
       period: "Jun 2024 to Feb 2025",
       description:
-        "Built a B2B lead generation agency serving startups in SF, NYC, and Chicago. Scaled to $20k MRR in three months via AI-powered outbound, generating millions in pipeline and hundreds of qualified meetings. Wound it down to focus on MyFutureSelf.",
-      metrics: ["$20k MRR in 3 months", "100s of meetings booked"],
+        "Co-founded with Giancarlo. Built the automated cold-email infra that drove $2M+ in pipeline for 8/9-figure founders. Wound it down to go all-in on MyFutureSelf.",
+      metrics: ["$20k MRR · 3 months", "$2M+ pipeline", "100s of meetings"],
       active: false,
     },
     {
@@ -251,8 +252,8 @@ export const siteConfig = {
       role: "Co-Founder",
       period: "Jan 2023 to Jun 2024",
       description:
-        "Started in my dorm room. Built a marketing, web development, and consulting business focused on helping small and underrepresented businesses grow through stronger digital presence and better systems.",
-      metrics: ["Profitable year one"],
+        "Dorm-room start. Built 20+ custom websites freshman year. Marketing, web dev, and consulting for small and underrepresented businesses.",
+      metrics: ["Profitable year one", "20+ sites built"],
       active: false,
     },
   ],

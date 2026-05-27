@@ -26,9 +26,17 @@ const SIDEBAR_ICONS: Record<string, LucideIcon> = {
 };
 
 const paragraphs = [
-  "Started my first company freshman year. Three companies later, three for three on profitability.",
-  "Now co-founder and CTO of MyFutureSelf, an AI iOS app that turns who you want to become into a 90-day plan, a voice mentor, and daily action. I built the iOS app, backend, and voice-AI stack solo.",
-  "I'm AI-native. 2,600+ contributions in the last year, mostly written alongside Claude Code and Codex. I think about how AI can change real behavior, not engagement metrics.",
+  "Started working full-time in my family's business at 14. Graduated high school valedictorian. Built 20+ custom websites and launched 2 crypto projects ($500K+ combined market cap) freshman year of college.",
+  "Three companies later, three for three on profitability. Now co-founder and CTO of MyFutureSelf, a voice AI mentor that speaks as your future self. Solo-built the iOS app, Firebase backend, and AI integration in six months.",
+  "Previously co-founded Appointra with Giancarlo. Built the automated cold-email infra that drove $2M+ in pipeline for 8/9-figure founders. Wound it down to go all-in on MyFutureSelf.",
+  "AI-native: 2,600+ contributions in the last year alongside Claude Code and Codex. I think about how AI can change real behavior, not engagement metrics.",
+];
+
+const highlightStats = [
+  { value: "8 yrs", label: "professional experience" },
+  { value: "3-for-3", label: "profitable companies" },
+  { value: "8/8", label: "Dean's List semesters" },
+  { value: "Valedictorian", label: "high school class of '22" },
 ];
 
 export default function AboutPage() {
@@ -43,27 +51,43 @@ export default function AboutPage() {
             Builder, operator, founder.
           </h1>
 
-          <div className="mt-5 space-y-3 text-sm leading-relaxed text-neutral-700 xl:text-base dark:text-neutral-300">
+          <div className="mt-4 space-y-2.5 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
             {paragraphs.map((p) => (
               <p key={p}>{p}</p>
             ))}
           </div>
 
-          <div className="mt-auto grid grid-cols-2 gap-2 pt-5 sm:grid-cols-4">
+          <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {highlightStats.map((s) => (
+              <div
+                key={s.label}
+                className="rounded-md border border-amber-500/20 bg-amber-400/[0.06] p-2.5 backdrop-blur dark:border-amber-300/20 dark:bg-amber-300/[0.04]"
+              >
+                <p className="text-base font-semibold text-amber-800 dark:text-amber-200 xl:text-lg">
+                  {s.value}
+                </p>
+                <p className="mt-0.5 text-[10px] uppercase leading-snug tracking-wide text-neutral-600 dark:text-neutral-400">
+                  {s.label}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-auto grid grid-cols-2 gap-2 pt-4 sm:grid-cols-4">
             {siteConfig.about.sidebar.map((item) => {
               const Icon = SIDEBAR_ICONS[item.icon] ?? MapPin;
               return (
                 <div
                   key={item.label}
-                  className="rounded-md border border-black/10 bg-white/55 p-3 backdrop-blur dark:border-white/10 dark:bg-white/[0.035]"
+                  className="rounded-md border border-black/10 bg-white/55 p-2.5 backdrop-blur dark:border-white/10 dark:bg-white/[0.035]"
                 >
-                  <div className="flex items-center gap-2">
-                    <Icon size={13} className="text-amber-700 dark:text-amber-200" />
-                    <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+                  <div className="flex items-center gap-1.5">
+                    <Icon size={12} className="text-neutral-500" />
+                    <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-neutral-500">
                       {item.label}
                     </p>
                   </div>
-                  <p className="mt-1.5 text-sm font-semibold text-neutral-950 dark:text-white">
+                  <p className="mt-1 text-xs font-semibold leading-snug text-neutral-950 dark:text-white">
                     {item.value}
                   </p>
                 </div>
@@ -103,8 +127,11 @@ export default function AboutPage() {
                 <p className="text-xs text-neutral-500 dark:text-neutral-500">
                   {entry.role}
                 </p>
+                <p className="mt-1 text-xs leading-snug text-neutral-700 dark:text-neutral-300">
+                  {entry.description}
+                </p>
                 {entry.metrics && entry.metrics.length > 0 ? (
-                  <div className="mt-1 flex flex-wrap gap-1">
+                  <div className="mt-1.5 flex flex-wrap gap-1">
                     {entry.metrics.slice(0, 3).map((m) => (
                       <span
                         key={m}
