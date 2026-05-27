@@ -18,7 +18,6 @@ import {
   Sparkles,
   Sun,
   Target,
-  SquareTerminal,
   X,
   type LucideIcon,
 } from "lucide-react";
@@ -41,13 +40,6 @@ const routeIcons: Record<string, LucideIcon> = {
   Stack: Code2,
   Contact: Mail,
 };
-
-const accentClasses = [
-  "border-cyan-300/35 text-cyan-700 dark:text-cyan-200",
-  "border-amber-300/45 text-amber-700 dark:text-amber-200",
-  "border-fuchsia-300/35 text-fuchsia-700 dark:text-fuchsia-200",
-  "border-emerald-300/35 text-emerald-700 dark:text-emerald-200",
-];
 
 function GitHubIcon({ size = 17 }: { size?: number }) {
   return (
@@ -91,24 +83,24 @@ function SignalField() {
 
   return (
     <div aria-hidden className="absolute inset-0 overflow-hidden">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.045)_1px,transparent_1px)] bg-[size:56px_56px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.045)_1px,transparent_1px)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(8,145,178,0.12),transparent_32%,rgba(217,119,6,0.12)_62%,transparent)] dark:bg-[linear-gradient(120deg,rgba(34,211,238,0.10),transparent_32%,rgba(251,191,36,0.12)_62%,transparent)]" />
-      {Array.from({ length: 72 }).map((_, i) => {
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:72px_72px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(8,145,178,0.08),transparent_36%,rgba(217,119,6,0.08)_68%,transparent)] dark:bg-[linear-gradient(120deg,rgba(34,211,238,0.07),transparent_36%,rgba(251,191,36,0.08)_68%,transparent)]" />
+      {Array.from({ length: 28 }).map((_, i) => {
         const left = (i * 37) % 100;
         const top = (i * 53) % 100;
         const delay = (i % 9) * 0.28;
         return (
           <motion.span
             key={i}
-            className="absolute h-1 w-1 rounded-full bg-neutral-900/30 shadow-[0_0_10px_rgba(0,0,0,0.18)] dark:bg-white/45 dark:shadow-[0_0_12px_rgba(255,255,255,0.25)]"
+            className="absolute h-1 w-1 rounded-full bg-neutral-900/18 shadow-[0_0_10px_rgba(0,0,0,0.12)] dark:bg-white/28 dark:shadow-[0_0_12px_rgba(255,255,255,0.18)]"
             style={{ left: `${left}%`, top: `${top}%` }}
             animate={
               reducedMotion
                 ? undefined
-                : { opacity: [0.22, 0.9, 0.22], scale: [0.75, 1.1, 0.75] }
+                : { opacity: [0.16, 0.55, 0.16], scale: [0.8, 1, 0.8] }
             }
             transition={{
-              duration: 4.8 + (i % 5),
+              duration: 6.8 + (i % 5),
               delay,
               repeat: Infinity,
               ease: "easeInOut",
@@ -131,7 +123,7 @@ function ThemeButton() {
       onClick={() => setTheme(nextTheme)}
       aria-label="Toggle theme"
       suppressHydrationWarning
-      className="grid h-10 w-10 place-items-center rounded-lg border border-black/10 bg-white/65 text-neutral-700 transition hover:border-black/25 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-300 dark:hover:border-white/25 dark:hover:bg-white/[0.08]"
+      className="grid h-10 w-10 place-items-center rounded-md border border-black/10 bg-white/50 text-neutral-700 transition hover:border-black/25 hover:bg-white dark:border-white/10 dark:bg-white/[0.035] dark:text-neutral-300 dark:hover:border-white/25 dark:hover:bg-white/[0.08]"
     >
       <Sun size={17} className="hidden dark:block" />
       <Moon size={17} className="block dark:hidden" />
@@ -141,14 +133,19 @@ function ThemeButton() {
 
 function ProofStrip() {
   return (
-    <div className="grid grid-cols-5 gap-2">
-      {siteConfig.commandCenter.proof.map((item) => (
+    <Link
+      href="/proof"
+      className="grid overflow-hidden rounded-md border border-black/10 bg-white/52 backdrop-blur transition hover:bg-white/78 dark:border-white/10 dark:bg-white/[0.04] dark:hover:bg-white/[0.07] sm:grid-cols-5"
+    >
+      {siteConfig.commandCenter.proof.map((item, index) => (
         <motion.div
           key={item.label}
           whileHover={{ y: -1 }}
-          className="min-w-0 rounded-md border border-black/10 bg-white/60 px-3 py-2 backdrop-blur dark:border-white/10 dark:bg-white/[0.045]"
+          className={`min-w-0 px-3 py-2.5 ${
+            index > 0 ? "border-t border-black/10 dark:border-white/10 sm:border-l sm:border-t-0" : ""
+          }`}
         >
-          <div className="truncate text-[clamp(1rem,1.25vw,1.45rem)] font-semibold leading-none text-neutral-950 dark:text-white">
+          <div className="truncate text-lg font-semibold leading-none text-neutral-950 xl:text-xl dark:text-white">
             {item.value}
           </div>
           <div className="mt-1 truncate text-[10px] leading-tight text-neutral-600 dark:text-neutral-400">
@@ -156,11 +153,11 @@ function ProofStrip() {
           </div>
         </motion.div>
       ))}
-    </div>
+    </Link>
   );
 }
 
-function RouteButton({
+function RouteDockLink({
   route,
   index,
 }: {
@@ -170,37 +167,18 @@ function RouteButton({
   const Icon = routeIcons[route.label] ?? ArrowRight;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.36, delay: 0.2 + index * 0.04, ease }}
+    <Link
+      href={route.href}
+      className="group flex min-w-0 items-center gap-2 rounded-md px-2.5 py-2 text-sm font-medium text-neutral-800 transition hover:bg-neutral-950/[0.055] dark:text-neutral-200 dark:hover:bg-white/[0.07]"
+      style={{ animationDelay: `${index * 40}ms` }}
     >
-      <Link
-        href={route.href}
-        className={`group flex h-full min-h-[78px] items-start justify-between gap-3 rounded-md border bg-white/62 p-3 text-left transition duration-200 hover:-translate-y-0.5 hover:bg-white/90 dark:bg-white/[0.045] dark:hover:bg-white/[0.075] ${accentClasses[index % accentClasses.length]}`}
-      >
-        <div className="min-w-0">
-          <div className="text-[9px] font-mono uppercase text-neutral-500 dark:text-neutral-500">
-            {route.kicker}
-          </div>
-          <div className="mt-1 flex items-center gap-2 text-sm font-semibold text-neutral-950 dark:text-white">
-            <Icon size={14} />
-            <span>{route.label}</span>
-          </div>
-          <p className="mt-2 line-clamp-1 text-xs leading-snug text-neutral-600 dark:text-neutral-400">
-            {route.description}
-          </p>
-        </div>
-        <ArrowUpRight
-          size={14}
-          className="mt-0.5 shrink-0 text-neutral-500 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 dark:text-neutral-400"
-        />
-      </Link>
-    </motion.div>
+      <Icon size={15} className="shrink-0 text-neutral-500 dark:text-neutral-400" />
+      <span className="truncate">{route.label}</span>
+    </Link>
   );
 }
 
-function ProjectPill({
+function ProjectDockLink({
   project,
   icon: Icon,
   href,
@@ -212,46 +190,26 @@ function ProjectPill({
   index: number;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.36, delay: 0.32 + index * 0.04, ease }}
+    <Link
+      href={href}
+      className="group flex min-w-0 items-center gap-2 rounded-md px-2.5 py-2 text-sm text-neutral-700 transition hover:bg-neutral-950/[0.055] dark:text-neutral-300 dark:hover:bg-white/[0.07]"
+      style={{ animationDelay: `${index * 40}ms` }}
     >
-      <Link
-        href={href}
-        className="group flex h-full min-h-[64px] items-center justify-between gap-2 rounded-md border border-black/10 bg-white/62 px-3 transition hover:-translate-y-0.5 hover:border-black/20 hover:bg-white/90 dark:border-white/10 dark:bg-white/[0.045] dark:hover:border-white/20 dark:hover:bg-white/[0.075]"
-      >
-        <div className="flex min-w-0 items-center gap-2">
-          <div className="grid h-7 w-7 shrink-0 place-items-center rounded-md border border-black/10 bg-white/55 text-neutral-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-300">
-            <Icon size={14} />
-          </div>
-          <div className="min-w-0">
-            <div className="truncate text-[13px] font-semibold text-neutral-950 dark:text-white">
-              {project.name}
-            </div>
-            <p className="truncate text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">
-              {project.tagline}
-            </p>
-          </div>
-        </div>
-        <ArrowRight
-          size={14}
-          className="hidden shrink-0 text-neutral-500 transition group-hover:translate-x-0.5 dark:text-neutral-400 2xl:block"
-        />
-      </Link>
-    </motion.div>
+      <Icon size={15} className="shrink-0 text-neutral-500 dark:text-neutral-500" />
+      <span className="truncate">{project.name}</span>
+    </Link>
   );
 }
 
 function StackRail() {
-  const items = siteConfig.commandCenter.rails.slice(0, 7);
+  const items = siteConfig.commandCenter.rails.slice(0, 3);
 
   return (
-    <div className="flex min-h-0 flex-wrap content-start gap-2 overflow-hidden">
+    <div className="hidden min-w-0 items-center gap-1.5 overflow-hidden 2xl:flex">
       {items.map((item, i) => (
         <span
           key={`${item}-${i}`}
-          className="rounded-md border border-black/10 bg-white/50 px-2.5 py-1.5 text-[11px] text-neutral-700 dark:border-white/10 dark:bg-white/[0.05] dark:text-neutral-300"
+          className="shrink-0 rounded-md bg-neutral-950/[0.045] px-2.5 py-1.5 text-[11px] text-neutral-600 dark:bg-white/[0.06] dark:text-neutral-400"
         >
           {item}
         </span>
@@ -308,7 +266,7 @@ function AppVisual({
         unoptimized
         loading="eager"
         onError={() => setFailed(true)}
-        className="h-full max-h-[360px] w-auto max-w-full object-contain drop-shadow-2xl"
+        className="h-full max-h-[540px] w-auto max-w-full origin-bottom scale-[1.28] object-contain drop-shadow-2xl xl:scale-[1.42]"
       />
     </div>
   );
@@ -330,11 +288,17 @@ function SocialLink({
       rel="noopener noreferrer"
       aria-label={label}
       title={label}
-      className="grid h-10 w-10 place-items-center rounded-lg border border-black/10 bg-white/55 text-neutral-700 transition hover:-translate-y-0.5 hover:border-black/25 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-300 dark:hover:border-white/25 dark:hover:bg-white/[0.08]"
+      className="grid h-9 w-9 place-items-center rounded-md text-neutral-600 transition hover:-translate-y-0.5 hover:bg-neutral-950/[0.055] hover:text-neutral-950 dark:text-neutral-400 dark:hover:bg-white/[0.07] dark:hover:text-white"
     >
       <Icon size={17} />
     </a>
   );
+}
+
+function projectIcon(projectName: string) {
+  if (projectName === "Dog AI") return Apple;
+  if (projectName === "Appointra") return BriefcaseBusiness;
+  return Layers3;
 }
 
 function CommandPalette({
@@ -483,11 +447,11 @@ export function CommandCenter() {
   return (
     <main className="relative h-dvh overflow-hidden bg-[#f4f1ea] text-neutral-950 dark:bg-[#050505] dark:text-white max-lg:h-auto max-lg:min-h-dvh max-lg:overflow-y-auto">
       <SignalField />
-      <div className="relative z-10 flex h-full min-h-0 flex-col gap-3 px-4 py-3 sm:px-5 lg:px-7">
-        <header className="flex h-11 shrink-0 items-center justify-between gap-3">
+      <div className="relative z-10 grid h-full min-h-0 grid-rows-[44px_minmax(0,1fr)_auto] gap-3 px-4 py-3 sm:px-5 lg:px-7">
+        <header className="flex h-11 min-w-0 items-center justify-between gap-3">
           <Link
             href="/"
-            className="flex h-10 items-center gap-3 rounded-md border border-black/10 bg-white/60 px-3 text-sm font-semibold backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-white/[0.045] dark:hover:bg-white/[0.075]"
+            className="flex h-10 shrink-0 items-center gap-3 rounded-md border border-black/10 bg-white/52 px-3 text-sm font-semibold backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:hover:bg-white/[0.075]"
           >
             <span className="grid h-6 w-6 place-items-center rounded bg-neutral-950 text-xs text-white dark:bg-white dark:text-neutral-950">
               KH
@@ -496,7 +460,7 @@ export function CommandCenter() {
           </Link>
 
           <div className="hidden min-w-0 flex-1 items-center justify-center lg:flex">
-            <div className="flex max-w-full items-center gap-2 overflow-hidden rounded-md border border-black/10 bg-white/50 px-3 py-2 text-xs text-neutral-600 backdrop-blur dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-400">
+            <div className="flex max-w-full items-center gap-2 overflow-hidden rounded-md border border-black/10 bg-white/42 px-3 py-2 text-xs text-neutral-600 backdrop-blur dark:border-white/10 dark:bg-white/[0.035] dark:text-neutral-400">
               <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
               <span className="truncate">{siteConfig.commandCenter.status}</span>
               <span className="text-neutral-300 dark:text-neutral-700">/</span>
@@ -505,24 +469,16 @@ export function CommandCenter() {
           </div>
 
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => setPaletteOpen(true)}
-              className="hidden h-10 items-center gap-2 rounded-md border border-black/10 bg-white/65 px-3 text-sm text-neutral-700 transition hover:border-black/25 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-300 dark:hover:border-white/25 dark:hover:bg-white/[0.08] sm:flex"
-            >
-              <Search size={16} />
-              <span>Command</span>
-            </button>
             <ThemeButton />
           </div>
         </header>
 
-        <section className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-12 lg:grid-rows-[minmax(0,1fr)_188px]">
+        <section className="grid min-h-0 grid-cols-1 gap-5 lg:grid-cols-12">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.48, ease }}
-            className="flex min-h-[520px] flex-col justify-between overflow-hidden rounded-md border border-black/10 bg-white/64 p-5 backdrop-blur sm:p-6 lg:col-span-7 lg:min-h-0 dark:border-white/10 dark:bg-white/[0.045]"
+            className="flex min-h-[520px] flex-col justify-center overflow-hidden py-4 lg:col-span-7 lg:min-h-0 lg:pr-5"
           >
             <div className="flex items-center gap-3">
               <div className="relative h-14 w-14 overflow-hidden rounded-md border border-black/10 bg-neutral-200 dark:border-white/10 dark:bg-neutral-900">
@@ -545,20 +501,20 @@ export function CommandCenter() {
               </div>
             </div>
 
-            <div className="py-5 lg:py-4 xl:py-7">
-              <h1 className="max-w-5xl text-[clamp(3rem,4.8vw,5.7rem)] font-semibold leading-[0.95] text-neutral-950 dark:text-white">
+            <div className="my-8 max-w-5xl lg:my-10 2xl:my-12">
+              <h1 className="text-5xl font-semibold leading-[0.92] text-neutral-950 sm:text-6xl xl:text-7xl 2xl:text-8xl dark:text-white">
                 Kaya Hickin builds{" "}
                 <span className="font-serif italic font-normal text-amber-700 dark:text-amber-200">
                   consumer AI
                 </span>{" "}
                 that changes behavior.
               </h1>
-              <p className="mt-4 max-w-2xl text-[clamp(0.95rem,1.18vw,1.2rem)] leading-relaxed text-neutral-700 dark:text-neutral-300">
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-neutral-700 xl:text-lg dark:text-neutral-300">
                 {siteConfig.commandCenter.description}
               </p>
             </div>
 
-            <div className="space-y-3">
+            <div className="max-w-4xl space-y-3">
               <div className="flex flex-wrap items-center gap-2">
                 <Link
                   href="/proof"
@@ -574,12 +530,6 @@ export function CommandCenter() {
                   <Mail size={16} />
                   Contact
                 </EmailLink>
-                <div className="ml-0 flex items-center gap-2 sm:ml-auto">
-                  <SocialLink href={siteConfig.social.github} label="GitHub" icon={GitHubIcon} />
-                  <SocialLink href={siteConfig.social.linkedin} label="LinkedIn" icon={LinkedInIcon} />
-                  <SocialLink href={siteConfig.social.twitter} label="X / Twitter" icon={TwitterIcon} />
-                  <SocialLink href={siteConfig.social.instagram} label="Instagram" icon={InstagramIcon} />
-                </div>
               </div>
               <ProofStrip />
             </div>
@@ -592,15 +542,17 @@ export function CommandCenter() {
               transition={{ duration: 0.5, delay: 0.08, ease }}
               className="relative flex min-h-[520px] flex-col overflow-hidden rounded-md border border-black/10 bg-neutral-950 text-white shadow-2xl shadow-black/10 lg:col-span-5 lg:min-h-0 dark:border-white/10"
             >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_15%,rgba(34,211,238,0.22),transparent_28%),linear-gradient(135deg,rgba(34,211,238,0.12),transparent_34%,rgba(244,114,182,0.12)_72%,rgba(251,191,36,0.12))]" />
-              <div className="relative z-10 flex min-h-0 flex-1 flex-col p-5">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_18%,rgba(34,211,238,0.16),transparent_30%),linear-gradient(150deg,rgba(34,211,238,0.08),transparent_38%,rgba(244,114,182,0.11)_76%,rgba(251,191,36,0.08))]" />
+              <div className="relative z-10 flex min-h-0 flex-1 flex-col p-5 xl:p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
                     <div className="text-[10px] font-mono uppercase text-cyan-200/80">
                       Active company
                     </div>
-                    <h2 className="mt-1 truncate text-2xl font-semibold">{featured.name}</h2>
-                    <p className="mt-2 max-w-xl text-sm leading-relaxed text-neutral-300">
+                    <h2 className="mt-1 truncate text-3xl font-semibold xl:text-4xl">
+                      {featured.name}
+                    </h2>
+                    <p className="mt-3 max-w-xl text-sm leading-relaxed text-neutral-300 xl:text-base">
                       {featured.description}
                     </p>
                   </div>
@@ -613,65 +565,86 @@ export function CommandCenter() {
                   </Link>
                 </div>
 
-                <div className="mt-4 grid grid-cols-3 gap-2">
-                  {featured.highlights?.map((highlight) => (
-                    <div
-                      key={highlight}
-                      className="rounded-md border border-white/10 bg-white/[0.055] px-3 py-2"
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {featured.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-md bg-white/[0.07] px-2.5 py-1.5 text-[11px] text-neutral-300"
                     >
-                      <p className="line-clamp-2 text-[11px] leading-snug text-neutral-300">
-                        {highlight}
-                      </p>
-                    </div>
+                      {tag}
+                    </span>
                   ))}
                 </div>
 
-                <div className="mt-4 min-h-0 flex-1">
+                <div className="mt-3 min-h-0 flex-1">
                   <AppVisual image={featured.image} name={featured.name} />
+                </div>
+
+                <div className="mt-3 flex items-center justify-between gap-3 border-t border-white/10 pt-3">
+                  <span className="truncate text-xs text-neutral-400">
+                    Live iOS product · revenue-backed behavior change
+                  </span>
+                  <a
+                    href={siteConfig.social.myfutureself}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex h-9 shrink-0 items-center gap-2 rounded-md bg-white px-3 text-sm font-medium text-neutral-950 transition hover:-translate-y-0.5 hover:bg-neutral-200"
+                  >
+                    Open
+                    <ArrowUpRight size={14} />
+                  </a>
                 </div>
               </div>
             </motion.div>
           )}
+        </section>
 
-          <div className="grid min-h-0 gap-2 lg:col-span-7 lg:grid-cols-2 lg:grid-rows-2 lg:gap-3">
+        <motion.nav
+          aria-label="Primary links"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.42, delay: 0.18, ease }}
+          className="grid min-h-0 gap-2 rounded-md border border-black/10 bg-white/54 p-2 backdrop-blur dark:border-white/10 dark:bg-white/[0.04] lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_auto]"
+        >
+          <div className="flex min-w-0 flex-wrap items-center gap-1">
             {siteConfig.commandCenter.routes.map((route, index) => (
-              <RouteButton key={route.href} route={route} index={index} />
+              <RouteDockLink key={route.href} route={route} index={index} />
             ))}
           </div>
 
-          <div className="grid min-h-0 gap-3 lg:col-span-5 lg:grid-rows-[1fr_auto]">
-            <div className="grid min-h-0 gap-2 sm:grid-cols-3 lg:gap-3">
-              {supporting.map((project, index) => (
-                <ProjectPill
-                  key={project.name}
-                  project={project}
-                  href={`/work/${project.slug}`}
-                  index={index}
-                  icon={
-                    project.name === "Dog AI"
-                      ? Apple
-                      : project.name === "Appointra"
-                        ? BriefcaseBusiness
-                        : Layers3
-                  }
-                />
-              ))}
-            </div>
-            <div className="flex min-h-0 items-center justify-between gap-3 rounded-md border border-black/10 bg-white/55 px-3 py-2 dark:border-white/10 dark:bg-white/[0.04]">
-              <StackRail />
-              <a
-                href={siteConfig.social.myfutureself}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden h-9 shrink-0 items-center gap-2 rounded-md border border-black/10 bg-white/55 px-3 text-sm text-neutral-700 transition hover:-translate-y-0.5 hover:border-black/25 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-300 dark:hover:border-white/25 dark:hover:bg-white/[0.08] xl:inline-flex"
+          <div className="flex min-w-0 flex-wrap items-center gap-1 border-black/10 pt-2 dark:border-white/10 sm:border-t lg:border-l lg:border-t-0 lg:pl-2 lg:pt-0">
+            <span className="px-2 text-[10px] font-mono uppercase text-neutral-500 dark:text-neutral-500">
+              Work
+            </span>
+            {supporting.map((project, index) => (
+              <ProjectDockLink
+                key={project.name}
+                project={project}
+                href={`/work/${project.slug}`}
+                index={index}
+                icon={projectIcon(project.name)}
+              />
+            ))}
+          </div>
+
+          <div className="flex min-w-0 items-center justify-between gap-2 border-black/10 pt-2 dark:border-white/10 sm:border-t lg:border-l lg:border-t-0 lg:pl-2 lg:pt-0">
+            <StackRail />
+            <div className="flex shrink-0 items-center gap-1">
+              <SocialLink href={siteConfig.social.github} label="GitHub" icon={GitHubIcon} />
+              <SocialLink href={siteConfig.social.linkedin} label="LinkedIn" icon={LinkedInIcon} />
+              <SocialLink href={siteConfig.social.twitter} label="X / Twitter" icon={TwitterIcon} />
+              <SocialLink href={siteConfig.social.instagram} label="Instagram" icon={InstagramIcon} />
+              <button
+                type="button"
+                onClick={() => setPaletteOpen(true)}
+                aria-label="Open command menu"
+                className="grid h-9 w-9 place-items-center rounded-md text-neutral-600 transition hover:-translate-y-0.5 hover:bg-neutral-950/[0.055] hover:text-neutral-950 dark:text-neutral-400 dark:hover:bg-white/[0.07] dark:hover:text-white"
               >
-                <SquareTerminal size={15} />
-                MyFutureSelf
-                <ArrowUpRight size={13} />
-              </a>
+                <Search size={17} />
+              </button>
             </div>
           </div>
-        </section>
+        </motion.nav>
       </div>
       <CommandPalette
         key={paletteOpen ? "open" : "closed"}
