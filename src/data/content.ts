@@ -10,7 +10,7 @@ export const siteConfig = {
   seo: {
     title: "Kaya Hickin — Technical Co-founder & CTO, MyFutureSelf",
     description:
-      "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 1,322 paid subscribers, $53K ARR, and 4.7★ in 7 months. Solo-built iOS, backend, and voice-AI stack end-to-end. 170,000+ lines of code and 1,400+ commits in the last year. Building consumer AI for behavior change.",
+      "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 1,718 paid subscribers, $65K ARR, 26K+ downloads, 52% average monthly growth, and a 4.7★ App Store rating. Solo-built iOS, backend, and voice-AI stack end-to-end. Building consumer AI for behavior change.",
   },
 
   status: {
@@ -21,7 +21,7 @@ export const siteConfig = {
     eyebrow: "Co-founder · Builder · Operator",
     headline: "I build products that move people forward.",
     description:
-      "Co-founder and CTO at MyFutureSelf, an AI iOS app with 1,322 paying subscribers, 24,000+ downloads, and a 4.7★ App Store rating. I design, code, and ship.",
+      "Co-founder and CTO at MyFutureSelf, an AI iOS app with 1,718 paying subscribers, 26,000+ downloads, $65K ARR, and 52% average monthly growth. I design, code, and ship.",
     cta: {
       primary: { text: "See what I've built", href: "#projects" },
       secondary: { text: "Get in touch", href: "#contact" },
@@ -62,11 +62,11 @@ export const siteConfig = {
       },
     ],
     proof: [
-      { value: "1,322", label: "paid subscribers" },
-      { value: "$53K", label: "ARR" },
-      { value: "24K+", label: "downloads" },
-      { value: "4.7★", label: "App Store rating" },
-      { value: "170K+", label: "LOC shipped" },
+      { value: "1,718", label: "paid subscribers" },
+      { value: "$65K", label: "ARR" },
+      { value: "26K+", label: "downloads" },
+      { value: "4.7★", label: "715 reviews" },
+      { value: "52%", label: "avg monthly growth" },
     ],
     rails: [
       "SwiftUI",
@@ -83,15 +83,15 @@ export const siteConfig = {
 
   metrics: [
     {
-      value: 1322,
+      value: 1718,
       label: "Paid Subscribers",
       detail: "MyFutureSelf, server-validated via Apple",
       prefix: "",
-      suffix: "+",
+      suffix: "",
       format: true,
     },
     {
-      value: 24000,
+      value: 26000,
       label: "App Downloads",
       detail: "MyFutureSelf, first 7 months on the App Store",
       prefix: "",
@@ -101,7 +101,7 @@ export const siteConfig = {
     {
       value: 4.7,
       label: "App Store Rating",
-      detail: "From 671 verified reviews",
+      detail: "From 715 verified reviews",
       prefix: "",
       suffix: "★",
       format: false,
@@ -161,9 +161,9 @@ export const siteConfig = {
       description:
         "A 90-day roadmap and a voice AI mentor that speaks as your future self.",
       highlights: [
-        "1,322 paid subscribers · $53K ARR",
-        "24,000+ downloads · 4.7★ from 671 reviews",
-        "20,811 hours of AI coaching delivered",
+        "1,718 paid subscribers · $65K ARR",
+        "26,000+ downloads · 4.7★ from 715 reviews",
+        "52% average monthly revenue growth",
       ],
       links: {
         website: "https://myfutureselfapp.com/",
@@ -223,8 +223,8 @@ export const siteConfig = {
       role: "Co-Founder · CTO",
       period: "Jan 2025 to Present",
       description:
-        "Building an iOS app with a 90-day personalized roadmap and a voice AI mentor. Led the product and technical build end to end. In its first 7 months: 24,000+ downloads, 1,322 paid subscribers, $53K ARR, 20,811 hours of AI coaching delivered, 4.7★ App Store rating.",
-      metrics: ["1,322 paid", "$53K ARR", "20K+ coaching hrs"],
+        "Building an iOS app with a 90-day personalized roadmap and a voice AI mentor. Led the product and technical build end to end. Current traction: 26,000+ downloads, 1,718 paid subscribers, $65K ARR, 52% average monthly revenue growth, and a 4.7★ App Store rating from 715 reviews.",
+      metrics: ["1,718 paid", "$65K ARR", "52% MoM growth"],
       active: true,
     },
     {

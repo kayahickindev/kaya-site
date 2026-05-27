@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState, type ComponentType } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useTheme } from "next-themes";
 import {
   Apple,
   ArrowRight,
@@ -13,10 +12,8 @@ import {
   Code2,
   Layers3,
   Mail,
-  Moon,
   Search,
   Sparkles,
-  Sun,
   Target,
   X,
   type LucideIcon,
@@ -109,25 +106,6 @@ function SignalField() {
         );
       })}
     </div>
-  );
-}
-
-function ThemeButton() {
-  const { resolvedTheme, setTheme } = useTheme();
-
-  const nextTheme = resolvedTheme === "dark" ? "light" : "dark";
-
-  return (
-    <button
-      type="button"
-      onClick={() => setTheme(nextTheme)}
-      aria-label="Toggle theme"
-      suppressHydrationWarning
-      className="grid h-10 w-10 place-items-center rounded-md border border-black/10 bg-white/50 text-neutral-700 transition hover:border-black/25 hover:bg-white dark:border-white/10 dark:bg-white/[0.035] dark:text-neutral-300 dark:hover:border-white/25 dark:hover:bg-white/[0.08]"
-    >
-      <Sun size={17} className="hidden dark:block" />
-      <Moon size={17} className="block dark:hidden" />
-    </button>
   );
 }
 
@@ -257,7 +235,7 @@ function AppVisual({
   }
 
   return (
-    <div className="relative mx-auto flex h-full min-h-0 items-end justify-center overflow-hidden">
+    <div className="relative mx-auto flex h-full min-h-0 items-center justify-center overflow-hidden">
       <Image
         src={image}
         alt={`${name} app screens`}
@@ -266,7 +244,7 @@ function AppVisual({
         unoptimized
         loading="eager"
         onError={() => setFailed(true)}
-        className="h-full max-h-[540px] w-auto max-w-full origin-bottom scale-[1.28] object-contain drop-shadow-2xl xl:scale-[1.42]"
+        className="h-full max-h-[500px] w-auto max-w-full translate-y-8 scale-[1.12] object-contain drop-shadow-2xl xl:translate-y-10 xl:scale-[1.24]"
       />
     </div>
   );
@@ -451,12 +429,12 @@ export function CommandCenter() {
         <header className="flex h-11 min-w-0 items-center justify-between gap-3">
           <Link
             href="/"
+            aria-label="Kaya Hickin home"
             className="flex h-10 shrink-0 items-center gap-3 rounded-md border border-black/10 bg-white/52 px-3 text-sm font-semibold backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:hover:bg-white/[0.075]"
           >
             <span className="grid h-6 w-6 place-items-center rounded bg-neutral-950 text-xs text-white dark:bg-white dark:text-neutral-950">
               KH
             </span>
-            <span>Kaya Hickin</span>
           </Link>
 
           <div className="hidden min-w-0 flex-1 items-center justify-center lg:flex">
@@ -468,9 +446,7 @@ export function CommandCenter() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <ThemeButton />
-          </div>
+          <div className="h-10 w-10 shrink-0" aria-hidden />
         </header>
 
         <section className="grid min-h-0 grid-cols-1 gap-5 lg:grid-cols-12">

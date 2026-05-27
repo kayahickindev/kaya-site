@@ -19,16 +19,17 @@ const proofGroups = [
   {
     label: "Product traction",
     points: [
-      "1,322 paid subscribers and $53K ARR for MyFutureSelf",
-      "24,000+ downloads in the first 7 months on the App Store",
-      "4.7-star App Store rating from 671 verified reviews",
+      "1,718 paid subscribers and $65K ARR for MyFutureSelf",
+      "26,000+ downloads on the App Store",
+      "52% average monthly revenue growth",
+      "4.7-star App Store rating from 715 verified reviews",
     ],
   },
   {
     label: "Depth of build",
     points: [
       "Solo-built the iOS, backend, and voice-AI stack end to end",
-      "20,811 hours of AI coaching delivered through MyFutureSelf",
+      "D1 retention at 69% and D7 retention at 47%",
       "170,000+ lines of code and 1,400+ commits in the last year",
     ],
   },
