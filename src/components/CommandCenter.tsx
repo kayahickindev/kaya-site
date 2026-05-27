@@ -328,7 +328,7 @@ export function CommandCenter() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.48, ease }}
-            className="flex min-h-[520px] flex-col justify-center overflow-hidden py-4 lg:col-span-7 lg:min-h-0 lg:pr-7"
+            className="flex min-h-[520px] flex-col justify-start overflow-hidden py-2 lg:col-span-7 lg:min-h-0 lg:pr-7"
           >
             <div className="flex items-center gap-4">
               <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md border border-black/10 bg-neutral-200 dark:border-white/10 dark:bg-neutral-900">
@@ -354,17 +354,17 @@ export function CommandCenter() {
               </div>
             </div>
 
-            <div className="my-7 max-w-5xl lg:my-8">
+            <div className="mt-5 max-w-5xl">
               <RevealHeadline
                 words={["I", "build", "consumer", "AI", "that", "changes", "behavior."]}
                 className="text-5xl font-semibold leading-[0.92] text-neutral-950 sm:text-6xl xl:text-7xl 2xl:text-8xl dark:text-white"
               />
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-neutral-700 xl:text-lg dark:text-neutral-300">
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-700 xl:text-lg dark:text-neutral-300">
                 {siteConfig.commandCenter.description}
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="mt-5 flex flex-wrap items-center gap-2">
               <Link
                 href="/proof"
                 className="inline-flex h-10 items-center gap-2 rounded-md bg-neutral-950 px-4 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:bg-neutral-800 dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200"
@@ -383,9 +383,9 @@ export function CommandCenter() {
               </a>
             </div>
 
-            <div className="mt-4">
+            <Link href="/proof" className="mt-4 block" aria-label="See full proof">
               <MetricTiles metrics={metricTiles} />
-            </div>
+            </Link>
           </motion.div>
 
           {featured && (
@@ -426,7 +426,7 @@ export function CommandCenter() {
                   ))}
                 </div>
 
-                <div className="relative min-h-0 flex-1">
+                <div className="relative min-h-0 flex-1 overflow-hidden">
                   {featured.image ? (
                     <Image
                       src={featured.image}
@@ -435,12 +435,12 @@ export function CommandCenter() {
                       height={1250}
                       unoptimized
                       loading="eager"
-                      className="mx-auto h-full max-h-[440px] w-auto translate-y-2 scale-[1.18] object-contain drop-shadow-2xl xl:scale-[1.28]"
+                      className="mx-auto h-full max-h-[500px] w-auto scale-[1.32] object-contain drop-shadow-2xl xl:scale-[1.45]"
                     />
                   ) : null}
-                  <div className="pointer-events-none absolute bottom-2 left-2 rounded-md border border-white/15 bg-black/45 px-3 py-2 text-xs backdrop-blur">
+                  <div className="pointer-events-none absolute bottom-1 left-1 rounded-md border border-white/15 bg-black/55 px-3 py-2 text-xs backdrop-blur">
                     <span className="font-semibold text-white">$65K ARR</span>
-                    <span className="ml-2 text-neutral-400">· 1,718 paid</span>
+                    <span className="ml-2 text-neutral-400">· 1,718 paid · 4.7★</span>
                   </div>
                 </div>
 

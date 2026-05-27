@@ -34,7 +34,7 @@ function MetricTile({ metric, index }: { metric: Metric; index: number }) {
       initial="hidden"
       animate="show"
       variants={tileVariants}
-      className="rounded-md border border-black/10 bg-white/55 px-3 py-2.5 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]"
+      className="rounded-md border border-black/10 bg-white/55 px-3 py-2.5 backdrop-blur transition hover:-translate-y-0.5 hover:border-amber-400/40 hover:bg-white/70 dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-amber-300/40 dark:hover:bg-white/[0.07]"
     >
       <span
         ref={ref}
