@@ -16,12 +16,8 @@ export const metadata: Metadata = {
   },
 };
 
-const accents: Record<string, string> = {
-  myfutureself: "from-cyan-500/20 via-transparent to-amber-500/15",
-  "dog-ai": "from-emerald-500/20 via-transparent to-amber-500/10",
-  appointra: "from-blue-500/20 via-transparent to-purple-500/10",
-  "leadboost-pro": "from-amber-500/20 via-transparent to-emerald-500/10",
-};
+const heroAccent = "from-cyan-500/20 via-transparent to-amber-500/15";
+const cardAccent = "from-amber-500/15 via-transparent to-amber-500/5";
 
 const heroMetrics: Record<string, { value: string; label: string }> = {
   myfutureself: { value: "$65K", label: "ARR · 1,718 paid · 4.7★" },
@@ -73,7 +69,7 @@ export default function WorkPage() {
           >
             <div
               aria-hidden
-              className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${accents[hero.slug]}`}
+              className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${heroAccent}`}
             />
             <div className="relative grid grid-cols-1 gap-0 md:grid-cols-[1.4fr_1fr]">
               <div className="flex flex-col gap-3 p-5 md:p-6">
@@ -154,7 +150,6 @@ export default function WorkPage() {
         <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
           {rest.map((detail) => {
             const { project } = detail;
-            const accent = accents[detail.slug];
             const highlights = cardHighlights[detail.slug] ?? [];
             const hero = heroMetrics[detail.slug];
 
@@ -166,7 +161,7 @@ export default function WorkPage() {
               >
                 <div
                   aria-hidden
-                  className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${accent} opacity-60`}
+                  className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${cardAccent}`}
                 />
 
                 <div className="relative flex items-start justify-between gap-3">
@@ -178,11 +173,6 @@ export default function WorkPage() {
                       {detail.timeframe}
                     </p>
                   </div>
-                  {project.status ? (
-                    <span className="rounded-full border border-black/10 bg-white/55 px-2 py-0.5 text-[10px] font-medium text-neutral-600 dark:border-white/10 dark:bg-white/[0.05] dark:text-neutral-300">
-                      {project.status}
-                    </span>
-                  ) : null}
                 </div>
 
                 <h2 className="relative mt-2 text-xl font-semibold leading-tight tracking-tight text-neutral-950 sm:text-2xl dark:text-white">

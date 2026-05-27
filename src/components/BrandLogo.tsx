@@ -18,7 +18,12 @@ type BrandKey =
   | "codex"
   | "cursor"
   | "mixpanel"
-  | "superwall";
+  | "superwall"
+  | "granola"
+  | "wispr"
+  | "ghostty"
+  | "lovable"
+  | "replit";
 
 function detect(name: string): BrandKey | null {
   const n = name.toLowerCase();
@@ -42,6 +47,11 @@ function detect(name: string): BrandKey | null {
   if (n.includes("cursor")) return "cursor";
   if (n.includes("mixpanel")) return "mixpanel";
   if (n.includes("superwall")) return "superwall";
+  if (n.includes("granola")) return "granola";
+  if (n.includes("wispr")) return "wispr";
+  if (n.includes("ghostty")) return "ghostty";
+  if (n.includes("lovable")) return "lovable";
+  if (n.includes("replit")) return "replit";
   return null;
 }
 
@@ -185,6 +195,40 @@ function Icon({ brand, size = 14 }: { brand: BrandKey; size?: number }) {
       return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
           <path d="M4 6h16v3H4zm0 5h16v3H4zm0 5h10v3H4z" />
+        </svg>
+      );
+    case "granola":
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="#D97706" aria-hidden>
+          <circle cx="7" cy="9" r="2.2" />
+          <circle cx="14" cy="6.5" r="2" />
+          <circle cx="17" cy="13" r="2.4" />
+          <circle cx="9" cy="15.5" r="2.6" />
+          <circle cx="15" cy="18" r="1.8" />
+        </svg>
+      );
+    case "wispr":
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.6" strokeLinecap="round" aria-hidden>
+          <path d="M3 12c2-4 4-4 6 0s4 4 6 0 4-4 6 0" />
+        </svg>
+      );
+    case "ghostty":
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="#A855F7" aria-hidden>
+          <path d="M12 3a7 7 0 00-7 7v10l2.5-2 2.5 2 2-2 2 2 2.5-2 2.5 2V10a7 7 0 00-7-7zm-2 8a1 1 0 110-2 1 1 0 010 2zm4 0a1 1 0 110-2 1 1 0 010 2z" />
+        </svg>
+      );
+    case "lovable":
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="#EC4899" aria-hidden>
+          <path d="M12 21s-7-4.5-9.5-9C.83 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 3.5 0 5.67 3.5 4 7-2.5 4.5-9.5 9-9.5 9z" />
+        </svg>
+      );
+    case "replit":
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="#F26207" aria-hidden>
+          <path d="M3 3h9v8H3zm0 10h9v8H3zm12-5h6v8h-6z" />
         </svg>
       );
   }

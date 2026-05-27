@@ -26,14 +26,14 @@ const SIDEBAR_ICONS: Record<string, LucideIcon> = {
 };
 
 const paragraphs = [
-  "Working full-time in my family's business at 14, valedictorian out of high school, shipping companies ever since. Now co-founder and CTO of MyFutureSelf, a voice AI mentor that speaks as your future self. Solo-built iOS, Firebase backend, and AI integration in six months, alongside Claude Code and Codex. 2,600+ contributions in the last year. I build consumer AI for behavior change, not engagement metrics.",
+  "Working full-time in my family's business at 14, valedictorian out of high school, shipping companies ever since. Now co-founder and CTO of MyFutureSelf, an AI mentor that speaks as your future self. Solo-built iOS, Firebase backend, and AI integration in six months, alongside Claude Code and Codex. 2,600+ contributions in the last year. I build consumer AI for behavior change.",
 ];
 
 const highlightStats = [
   { value: "8 yrs", label: "professional experience" },
   { value: "3-for-3", label: "profitable companies" },
-  { value: "8/8", label: "Dean's List semesters" },
-  { value: "Valedictorian", label: "high school class of '22" },
+  { value: "1,718", label: "paid subscribers" },
+  { value: "$65K", label: "ARR" },
 ];
 
 const companyMarks: Record<string, { letter: string; accent: string }> = {
@@ -74,6 +74,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
             {siteConfig.about.sidebar.map((item) => {
               const Icon = SIDEBAR_ICONS[item.icon] ?? MapPin;
+              const detail = "detail" in item ? item.detail : undefined;
               return (
                 <div key={item.label} className={`${cardSurface} p-3`}>
                   <div className="flex items-center gap-1.5">
@@ -85,6 +86,11 @@ export default function AboutPage() {
                   <p className="mt-1 text-xs font-semibold leading-snug text-neutral-950 dark:text-white">
                     {item.value}
                   </p>
+                  {detail ? (
+                    <p className="mt-0.5 text-[10px] leading-snug text-neutral-500 dark:text-neutral-500">
+                      {detail}
+                    </p>
+                  ) : null}
                 </div>
               );
             })}
