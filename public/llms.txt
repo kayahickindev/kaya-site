@@ -43,7 +43,12 @@
 - **20+ websites and 2 App Store apps shipped** across all ventures to date.
 - AI-native development workflow built around **Claude Code** and **Codex** running daily.
 - **Daily stack**: Claude Code + Codex (coding agents), Granola (meeting notes), Wispr Flow (voice-to-text), 5 tabs of Ghostty (terminal), and OpenClaw running autonomously while I sleep.
-- Engineering stack: Swift / SwiftUI / Core Data / StoreKit / WebRTC (iOS); TypeScript / Next.js / React / Tailwind (web); Node.js / Firebase / Firestore / Cloud Functions (backend); OpenAI Responses API / Realtime / Claude API (AI).
+- Engineering stack:
+  - iOS: Swift, SwiftUI, Core Data, StoreKit, WebRTC, RevenueCat, Superwall, TestFlight.
+  - Web: TypeScript, Next.js 16, React 19, Tailwind CSS v4, Framer Motion, Vercel.
+  - Backend: Node.js, Firebase, Firestore, Cloud Functions, Supabase, Stripe, Mixpanel.
+  - AI: OpenAI Responses API, Claude API, Realtime/Voice, Whisper, ElevenLabs.
+  - Workflow: Claude Code, Codex, Cursor, Ghostty, Wispr Flow, Granola, Lovable, Replit.
 
 ## Awards & recognition
 

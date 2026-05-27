@@ -141,7 +141,7 @@ export default function WorkPage() {
                     width={781}
                     height={1250}
                     unoptimized
-                    className="absolute inset-0 m-auto h-full max-h-[340px] w-auto scale-[1.2] object-contain mix-blend-screen drop-shadow-2xl transition-transform duration-500 group-hover:scale-[1.26]"
+                    className="absolute inset-0 m-auto h-full max-h-[260px] w-auto scale-[0.95] object-contain mix-blend-screen drop-shadow-2xl transition-transform duration-500 group-hover:scale-[1] sm:max-h-[340px] sm:scale-[1.2] sm:group-hover:scale-[1.26]"
                   />
                 ) : null}
               </TiltImage>

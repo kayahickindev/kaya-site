@@ -156,7 +156,7 @@ export function CommandCenter() {
               <div className="relative">
                 <RevealHeadline
                   words={["I", "build", "consumer", "AI", "that", "changes", "behavior."]}
-                  className="text-5xl font-semibold leading-[0.92] text-neutral-950 sm:text-6xl xl:text-7xl 2xl:text-8xl dark:text-white"
+                  className="text-4xl font-semibold leading-[0.95] text-neutral-950 sm:text-6xl sm:leading-[0.92] xl:text-7xl 2xl:text-8xl dark:text-white"
                 />
               </div>
             </div>
@@ -217,7 +217,7 @@ export function CommandCenter() {
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.08, ease }}
-              className="relative flex min-h-[520px] flex-col overflow-hidden rounded-md border border-white/10 bg-neutral-950 text-white shadow-2xl shadow-black/10 lg:col-span-5 lg:min-h-0"
+              className="relative flex min-h-[420px] flex-col overflow-hidden rounded-md border border-white/10 bg-neutral-950 text-white shadow-2xl shadow-black/10 sm:min-h-[520px] lg:col-span-5 lg:min-h-0"
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_18%,rgba(34,211,238,0.16),transparent_30%),linear-gradient(150deg,rgba(34,211,238,0.08),transparent_38%,rgba(244,114,182,0.11)_76%,rgba(251,191,36,0.08))]" />
               <div className="relative z-10 flex min-h-0 flex-1 flex-col p-5 xl:p-6">
