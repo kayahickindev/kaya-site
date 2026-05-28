@@ -25,7 +25,7 @@ export default function StackPage() {
       <div className="flex flex-col gap-6">
         <header className="relative">
           <div aria-hidden className="aurora" style={{ opacity: 0.55 }} />
-          <h1 className="relative text-4xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-5xl xl:text-6xl dark:text-white">
+          <h1 className="relative text-3xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
             How I build.
           </h1>
         </header>

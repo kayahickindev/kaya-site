@@ -50,56 +50,59 @@ const companyMarks: Record<string, { letter: string; accent: string }> = {
 export default function AboutPage() {
   return (
     <SubpageShell accent="amber">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6">
-        <div className="relative">
-          <div aria-hidden className="aurora" style={{ opacity: 0.6 }} />
-          <h1 className="relative text-4xl font-semibold leading-[0.9] tracking-tight text-neutral-950 sm:text-5xl dark:text-white">
-            Builder, operator, founder.
-          </h1>
-        </div>
-
-        <div className="max-w-prose space-y-4 text-base leading-relaxed text-neutral-700 xl:text-lg dark:text-neutral-300">
-          {paragraphs.map((p) => (
-            <p key={p}>{p}</p>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-          {highlightStats.map((s) => (
-            <div key={s.label} className={`${cardSurfaceFeatured} p-3`}>
-              <p className="text-base font-semibold text-amber-800 dark:text-amber-200 xl:text-lg">
-                {s.value}
-              </p>
-              <p className="mt-0.5 text-[10px] uppercase leading-snug tracking-wide text-neutral-600 dark:text-neutral-400">
-                {s.label}
-              </p>
+      <div className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
+          <div className="flex flex-col gap-4 lg:col-span-7">
+            <div className="relative">
+              <div aria-hidden className="aurora" style={{ opacity: 0.6 }} />
+              <h1 className="relative text-3xl font-semibold leading-[0.9] tracking-tight text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
+                Builder, operator, founder.
+              </h1>
             </div>
-          ))}
-        </div>
+            <div className="max-w-prose space-y-3 text-base leading-relaxed text-neutral-700 xl:text-lg dark:text-neutral-300">
+              {paragraphs.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+          </div>
 
-        <div className="grid grid-cols-1 gap-2">
-          {siteConfig.about.sidebar.map((item) => {
-            const Icon = SIDEBAR_ICONS[item.icon] ?? MapPin;
-            const detail = "detail" in item ? item.detail : undefined;
-            return (
-              <div key={item.label} className={`${cardSurface} p-3`}>
-                <div className="flex items-center gap-1.5">
-                  <Icon size={12} className="text-neutral-500" />
-                  <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-                    {item.label}
+          <div className="flex flex-col gap-3 lg:col-span-5">
+            <div className="grid grid-cols-2 gap-2">
+              {highlightStats.map((s) => (
+                <div key={s.label} className={`${cardSurfaceFeatured} p-3`}>
+                  <p className="text-base font-semibold text-amber-800 dark:text-amber-200 xl:text-lg">
+                    {s.value}
+                  </p>
+                  <p className="mt-0.5 text-[10px] uppercase leading-snug tracking-wide text-neutral-600 dark:text-neutral-400">
+                    {s.label}
                   </p>
                 </div>
-                <p className="mt-1 text-xs font-semibold leading-snug text-neutral-950 dark:text-white">
-                  {item.value}
-                </p>
-                {detail ? (
-                  <p className="mt-0.5 text-[10px] leading-snug text-neutral-500 dark:text-neutral-500">
-                    {detail}
+              ))}
+            </div>
+
+            {siteConfig.about.sidebar.map((item) => {
+              const Icon = SIDEBAR_ICONS[item.icon] ?? MapPin;
+              const detail = "detail" in item ? item.detail : undefined;
+              return (
+                <div key={item.label} className={`${cardSurface} p-3`}>
+                  <div className="flex items-center gap-1.5">
+                    <Icon size={12} className="text-neutral-500" />
+                    <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+                      {item.label}
+                    </p>
+                  </div>
+                  <p className="mt-1 text-xs font-semibold leading-snug text-neutral-950 dark:text-white">
+                    {item.value}
                   </p>
-                ) : null}
-              </div>
-            );
-          })}
+                  {detail ? (
+                    <p className="mt-0.5 text-[10px] leading-snug text-neutral-500 dark:text-neutral-500">
+                      {detail}
+                    </p>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         <div className="flex flex-col gap-3">
@@ -117,7 +120,7 @@ export default function AboutPage() {
               const mark = companyMarks[entry.company];
               const showLogo = hasCompanyMark(entry.company);
               return (
-                <div key={entry.company} className={`${cardSurface} flex flex-col gap-2 p-4`}>
+                <div key={entry.company} className={`${cardSurface} flex flex-col gap-2 p-3`}>
                   <div className="flex items-center justify-between border-b border-black/10 pb-2 dark:border-white/10">
                     <div className="flex items-center gap-2">
                       <span
@@ -134,22 +137,22 @@ export default function AboutPage() {
                   </div>
                   <div className="flex items-center gap-2.5">
                     {showLogo ? (
-                      <CompanyMark company={entry.company} size={28} />
+                      <CompanyMark company={entry.company} size={24} />
                     ) : mark ? (
                       <span
-                        className={`grid h-7 w-7 shrink-0 place-items-center rounded text-xs font-bold ${mark.accent}`}
+                        className={`grid h-6 w-6 shrink-0 place-items-center rounded text-xs font-bold ${mark.accent}`}
                       >
                         {mark.letter}
                       </span>
                     ) : null}
-                    <p className="text-base font-semibold text-neutral-950 dark:text-white">
+                    <p className="text-sm font-semibold text-neutral-950 dark:text-white">
                       {entry.company}
                     </p>
                   </div>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-500">
+                  <p className="text-[11px] text-neutral-500 dark:text-neutral-500">
                     {entry.role}
                   </p>
-                  <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+                  <p className="text-xs leading-relaxed text-neutral-700 dark:text-neutral-300">
                     {entry.description}
                   </p>
                 </div>
@@ -158,9 +161,9 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className={`${cardSurface} flex flex-col gap-4 p-5`}>
+        <div className={`${cardSurface} flex flex-col gap-3 p-4`}>
           <ContributionGraph contributionCount="2,600+" palette="emerald" />
-          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-black/10 pt-4 dark:border-white/10">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-black/10 pt-3 dark:border-white/10">
             <span className="font-mono text-xs text-neutral-500">
               github.com/{siteConfig.github.username}
             </span>
@@ -175,7 +178,6 @@ export default function AboutPage() {
             </a>
           </div>
         </div>
-
       </div>
     </SubpageShell>
   );
