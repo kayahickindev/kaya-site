@@ -35,7 +35,7 @@ export function PathTimeline() {
                     : "border-neutral-400 bg-white dark:border-neutral-600 dark:bg-neutral-950"
                 }`}
               />
-              <span className="whitespace-nowrap text-[10px] font-mono uppercase tracking-wide text-neutral-500">
+              <span className="whitespace-nowrap text-[11px] font-mono uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
                 {entry.period}
               </span>
               {!isLast ? (
@@ -56,7 +56,7 @@ export function PathTimeline() {
                   {entry.company}
                 </p>
               </div>
-              <p className="text-[11px] text-neutral-500 dark:text-neutral-500">
+              <p className="text-[11px] text-neutral-500 dark:text-neutral-400">
                 {entry.role}
               </p>
               <p className="text-xs leading-relaxed text-neutral-700 dark:text-neutral-300">

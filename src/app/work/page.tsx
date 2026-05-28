@@ -62,7 +62,7 @@ function KindChip({ slug }: { slug: string }) {
   if (!kind) return null;
   const Icon = kind.icon;
   return (
-    <span className="inline-flex shrink-0 items-center gap-1 rounded-md border border-emerald-500/25 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-emerald-800 dark:border-emerald-300/25 dark:bg-emerald-300/10 dark:text-emerald-200">
+    <span className="inline-flex shrink-0 items-center gap-1 rounded-md border border-emerald-500/25 bg-emerald-500/10 px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide text-emerald-800 dark:border-emerald-300/25 dark:bg-emerald-300/10 dark:text-emerald-200">
       <Icon size={11} strokeWidth={2.25} />
       {kind.label}
     </span>
@@ -93,7 +93,7 @@ export default function WorkPage() {
                 <KindChip slug={hero.slug} />
               </div>
               <div className="flex flex-col gap-3 p-5 md:p-6">
-                <p className="truncate text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+                <p className="truncate text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
                   {hero.role} · {hero.timeframe}
                 </p>
 
@@ -156,7 +156,7 @@ export default function WorkPage() {
               <Link
                 key={detail.slug}
                 href={`/work/${detail.slug}`}
-                className={`${cardSurfaceHover} group flex min-h-[280px] flex-col p-4`}
+                className={`${cardSurfaceHover} group flex min-h-[200px] flex-col p-4`}
               >
                 <div
                   aria-hidden
@@ -164,7 +164,7 @@ export default function WorkPage() {
                 />
 
                 <div className="relative flex items-center justify-between gap-2">
-                  <p className="truncate text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+                  <p className="truncate text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
                     {detail.role}
                     {detail.timeframe ? ` · ${detail.timeframe}` : ""}
                   </p>
@@ -184,7 +184,7 @@ export default function WorkPage() {
                   <span className="text-2xl font-semibold tracking-tight text-neutral-950 dark:text-white">
                     {hero.value}
                   </span>
-                  <span className="text-[10px] uppercase tracking-wide text-neutral-500 dark:text-neutral-500">
+                  <span className="text-[11px] uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
                     {hero.label}
                   </span>
                 </div>

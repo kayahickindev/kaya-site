@@ -74,7 +74,7 @@ function MetricTile({
           />
         ) : null}
       </div>
-      <div className="mt-0.5 text-[10px] uppercase tracking-wide text-neutral-500 dark:text-neutral-500">
+      <div className="mt-0.5 text-[11px] uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
         {metric.label}
       </div>
     </motion.div>

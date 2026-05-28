@@ -3,8 +3,9 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, Search, X } from "lucide-react";
+import { ArrowUpRight, Moon, Search, Sun, X } from "lucide-react";
 import { siteConfig } from "@/data/content";
 
 const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];
@@ -129,6 +130,44 @@ function CommandPalette({
   );
 }
 
+function NavControls({ onSearch }: { onSearch: () => void }) {
+  const { setTheme } = useTheme();
+
+  const controlClass =
+    "grid h-9 place-items-center rounded-full border border-black/10 bg-white/45 text-neutral-700 backdrop-blur transition hover:bg-neutral-950/[0.055] hover:text-neutral-950 dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-300 dark:hover:bg-white/[0.07] dark:hover:text-white";
+
+  const toggleTheme = () => {
+    const isDark = document.documentElement.classList.contains("dark");
+    setTheme(isDark ? "light" : "dark");
+  };
+
+  return (
+    <div className="flex items-center justify-end gap-2">
+      <button
+        type="button"
+        onClick={onSearch}
+        aria-label="Search (Command K)"
+        className={`${controlClass} gap-1.5 px-3`}
+      >
+        <Search size={15} />
+        <span className="hidden font-mono text-[11px] tracking-tight text-neutral-500 dark:text-neutral-300 sm:inline">
+          ⌘K
+        </span>
+      </button>
+      <button
+        type="button"
+        onClick={toggleTheme}
+        aria-label="Toggle color theme"
+        className={`${controlClass} w-9`}
+      >
+        {/* Icon driven by the .dark class so there is no hydration mismatch. */}
+        <Sun size={16} className="hidden dark:block" />
+        <Moon size={16} className="block dark:hidden" />
+      </button>
+    </div>
+  );
+}
+
 export function TopNav() {
   const pathname = usePathname();
   const [paletteOpen, setPaletteOpen] = useState(false);
@@ -218,7 +257,7 @@ export function TopNav() {
           })}
         </nav>
 
-        <div aria-hidden className="h-10" />
+        <NavControls onSearch={() => setPaletteOpen(true)} />
       </motion.header>
 
       <CommandPalette

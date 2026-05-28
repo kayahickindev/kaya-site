@@ -27,5 +27,5 @@ export const cardSurfaceFeaturedEmerald =
 
 // Chip — small, always rounded-full, no depth treatment.
 export const chip =
-  "inline-flex items-center gap-1 rounded-full border border-black/10 bg-white/70 px-2 py-0.5 text-[10px] font-medium text-neutral-700 " +
+  "inline-flex items-center gap-1 rounded-full border border-black/10 bg-white/70 px-2 py-0.5 text-[11px] font-medium text-neutral-700 " +
   "dark:border-white/10 dark:bg-white/[0.06] dark:text-neutral-300";

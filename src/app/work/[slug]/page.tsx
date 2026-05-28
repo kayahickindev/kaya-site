@@ -101,7 +101,7 @@ function DogAiVisual() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_25%,rgba(34,197,94,0.18),transparent_33%),linear-gradient(145deg,rgba(20,184,166,0.12),transparent_40%,rgba(251,191,36,0.11))]" />
       <div className="relative grid w-full max-w-md gap-3">
         <div className="rounded-md border border-white/10 bg-white/[0.05] p-4">
-          <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-emerald-200/80">
+          <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-emerald-200/80">
             Custom multimodal LLM
           </p>
           <p className="mt-2 text-3xl font-semibold leading-tight">
@@ -114,15 +114,15 @@ function DogAiVisual() {
         <div className="grid grid-cols-3 gap-2">
           <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
             <p className="text-xl font-semibold">Custom</p>
-            <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">multimodal LLM</p>
+            <p className="mt-0.5 text-[11px] leading-snug text-neutral-400">multimodal LLM</p>
           </div>
           <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
             <p className="text-xl font-semibold">Harvard</p>
-            <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">behavioral dataset</p>
+            <p className="mt-0.5 text-[11px] leading-snug text-neutral-400">behavioral dataset</p>
           </div>
           <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
             <p className="text-xl font-semibold">Live</p>
-            <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">App Store, paid</p>
+            <p className="mt-0.5 text-[11px] leading-snug text-neutral-400">App Store, paid</p>
           </div>
         </div>
       </div>
@@ -143,7 +143,7 @@ function AppointraVisual() {
       <div className="relative flex h-full flex-col justify-between gap-3">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-[10px] font-mono uppercase text-blue-200/75">Outbound system</p>
+            <p className="text-[11px] font-mono uppercase text-blue-200/75">Outbound system</p>
             <h3 className="mt-1 text-2xl font-semibold">Pipeline engine</h3>
           </div>
           <BriefcaseBusiness className="text-blue-200/80" size={24} />
@@ -151,7 +151,7 @@ function AppointraVisual() {
         <div className="grid flex-1 gap-2 sm:grid-cols-3">
           {columns.map((column) => (
             <div key={column.label} className="rounded-md border border-white/10 bg-white/[0.06] p-3">
-              <p className="text-[10px] text-neutral-400">{column.label}</p>
+              <p className="text-[11px] text-neutral-400">{column.label}</p>
               <p className="mt-1 text-2xl font-semibold">{column.value}</p>
               <div className="mt-3 space-y-1.5">
                 {column.items.map((item) => (
@@ -166,11 +166,11 @@ function AppointraVisual() {
         <div className="grid grid-cols-2 gap-2">
           <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
             <p className="text-xl font-semibold">$20k</p>
-            <p className="text-[10px] text-neutral-400">MRR in three months</p>
+            <p className="text-[11px] text-neutral-400">MRR in three months</p>
           </div>
           <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
             <p className="text-xl font-semibold">Millions</p>
-            <p className="text-[10px] text-neutral-400">in client pipeline</p>
+            <p className="text-[11px] text-neutral-400">in client pipeline</p>
           </div>
         </div>
       </div>
@@ -188,13 +188,13 @@ function LeadBoostVisual() {
             <span className="h-2 w-2 rounded-full bg-red-300" />
             <span className="h-2 w-2 rounded-full bg-yellow-300" />
             <span className="h-2 w-2 rounded-full bg-green-300" />
-            <span className="ml-3 rounded-md bg-white/[0.08] px-2.5 py-0.5 text-[10px] text-neutral-400">
+            <span className="ml-3 rounded-md bg-white/[0.08] px-2.5 py-0.5 text-[11px] text-neutral-400">
               leadboost-pro.com
             </span>
           </div>
           <div className="grid gap-4 p-4 md:grid-cols-[0.9fr_1.1fr]">
             <div>
-              <p className="text-[10px] font-mono uppercase text-amber-200/75">
+              <p className="text-[11px] font-mono uppercase text-amber-200/75">
                 Local business systems
               </p>
               <h3 className="mt-2 text-2xl font-semibold leading-tight">
@@ -238,7 +238,7 @@ function ViralLoopVisual() {
       <div className="relative flex h-full flex-col justify-between gap-4">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-pink-200/80">
+            <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-pink-200/80">
               AI UGC pipeline
             </p>
             <h3 className="mt-2 text-2xl font-semibold leading-tight sm:text-3xl">
@@ -257,12 +257,12 @@ function ViralLoopVisual() {
               className="relative flex aspect-[9/14] flex-col justify-between overflow-hidden rounded-md border border-white/10 bg-white/[0.04] p-2"
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${post.color} opacity-30`} />
-              <span className="relative inline-flex w-fit rounded bg-black/40 px-1.5 py-0.5 text-[9px] font-mono uppercase tracking-wide text-white/90">
+              <span className="relative inline-flex w-fit rounded bg-black/40 px-1.5 py-0.5 text-[11px] font-mono uppercase tracking-wide text-white/90">
                 {post.tag}
               </span>
               <div className="relative">
                 <p className="text-sm font-semibold leading-none">{post.views}</p>
-                <p className="text-[9px] leading-snug text-white/70">views</p>
+                <p className="text-[11px] leading-snug text-white/70">views</p>
               </div>
             </div>
           ))}
@@ -320,7 +320,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
       <div className="flex h-full min-h-0 flex-col gap-2">
         <Link
           href="/work"
-          className="inline-flex w-fit items-center gap-2 text-xs font-medium text-neutral-500 transition hover:text-emerald-700 dark:text-neutral-400 dark:hover:text-emerald-300"
+          className="inline-flex w-fit items-center gap-2 text-xs font-medium text-neutral-500 transition hover:text-emerald-700 dark:text-neutral-300 dark:hover:text-emerald-300"
         >
           <ArrowLeft size={14} />
           All work
@@ -331,7 +331,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             <div className="rounded-md border border-black/10 bg-white/55 p-4 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+                  <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
                     {detail.role} · {detail.timeframe}
                   </p>
                   <h1 className="mt-2 text-4xl font-semibold leading-[0.96] tracking-tight text-neutral-950 sm:text-5xl dark:text-white">
@@ -399,7 +399,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             </div>
 
             <div className="flex flex-wrap items-center gap-1.5 rounded-md border border-black/10 bg-white/45 px-3 py-2 backdrop-blur dark:border-white/10 dark:bg-white/[0.035]">
-              <span className="mr-1 text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+              <span className="mr-1 text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
                 Stack
               </span>
               {detail.stack.map((item) => (

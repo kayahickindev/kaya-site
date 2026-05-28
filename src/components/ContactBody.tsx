@@ -1,7 +1,7 @@
 "use client";
 
 import type { ComponentType } from "react";
-import { Copy, Mail } from "lucide-react";
+import { Copy, Mail, MapPin } from "lucide-react";
 import { siteConfig } from "@/data/content";
 import { cardSurface } from "@/lib/surfaces";
 
@@ -123,6 +123,23 @@ export function ContactPanel() {
             <Copy size={14} />
             Copy address
           </button>
+        </div>
+
+        <div className="relative mt-7 flex flex-col items-center gap-3 border-t border-black/10 pt-6 dark:border-white/10">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-white/55 px-2.5 py-1 text-[11px] font-medium text-neutral-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-200">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 accent-pulse" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 dark:bg-emerald-300" />
+            </span>
+            Currently open
+          </span>
+          <p className="max-w-md text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
+            Open to partnering with AI engineers, angel and VC investors, and anyone building something cool.
+          </p>
+          <p className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-300">
+            <MapPin size={12} />
+            Cleveland, Ohio
+          </p>
         </div>
       </div>
 

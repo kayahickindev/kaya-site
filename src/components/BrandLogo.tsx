@@ -295,7 +295,7 @@ export function BrandLogo({ name, size = 14 }: { name: string; size?: number }) 
     const letter = name.replace(/[^a-zA-Z]/g, "").charAt(0).toUpperCase() || "·";
     return (
       <span
-        className="grid h-4 w-4 shrink-0 place-items-center rounded-sm bg-neutral-300 text-[9px] font-bold text-neutral-700 dark:bg-white/15 dark:text-neutral-200"
+        className="grid h-4 w-4 shrink-0 place-items-center rounded-sm bg-neutral-300 text-[11px] font-bold text-neutral-700 dark:bg-white/15 dark:text-neutral-200"
         style={{ height: size, width: size }}
         aria-hidden
       >

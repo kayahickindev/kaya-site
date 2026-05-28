@@ -93,18 +93,18 @@ export default function StackPage() {
                   />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+                  <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
                     {tile.product}
                   </p>
                   <div className="mt-1 flex items-baseline gap-2">
                     <span className="text-2xl font-semibold tracking-tight text-neutral-950 dark:text-white">
                       {tile.primary}
                     </span>
-                    <span className="text-[10px] uppercase tracking-wide text-neutral-500 dark:text-neutral-500">
+                    <span className="text-[11px] uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
                       {tile.primaryLabel}
                     </span>
                   </div>
-                  <p className="mt-1 truncate text-[11px] text-neutral-600 dark:text-neutral-400">
+                  <p className="mt-1 truncate text-[11px] text-neutral-600 dark:text-neutral-300">
                     {tile.secondary}
                   </p>
                 </div>
