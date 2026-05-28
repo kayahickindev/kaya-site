@@ -6,7 +6,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { CompanyMark, hasCompanyMark } from "@/components/CompanyMark";
-import { ContributionGraph } from "@/components/ContributionGraph";
 import { SubpageShell } from "@/components/SubpageShell";
 import { siteConfig } from "@/data/content";
 import { cardSurface, cardSurfaceFeatured } from "@/lib/surfaces";
@@ -27,15 +26,13 @@ const SIDEBAR_ICONS: Record<string, LucideIcon> = {
 };
 
 const paragraphs = [
-  "Working full-time in my family's business at 14, valedictorian out of high school, shipping companies ever since.",
-  "Now co-founder and CTO of MyFutureSelf, an AI mentor that speaks as your future self. Solo-built iOS, Firebase backend, and AI integration in six months. I build consumer AI for behavior change.",
+  "Working full-time in my family's business at 14, valedictorian out of high school, shipping companies ever since. I build consumer AI for behavior change.",
 ];
 
 const highlightStats = [
   { value: "8 yrs", label: "professional experience" },
   { value: "3-for-3", label: "profitable companies" },
   { value: "2,600+", label: "contributions last year" },
-  { value: "$10K", label: "RedHawk winner" },
 ];
 
 const companyMarks: Record<string, { letter: string; accent: string }> = {
@@ -63,7 +60,7 @@ export default function AboutPage() {
             ))}
           </div>
 
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          <div className="grid grid-cols-3 gap-2">
             {highlightStats.map((s) => (
               <div key={s.label} className={`${cardSurfaceFeatured} p-3`}>
                 <p className="text-base font-semibold text-amber-800 dark:text-amber-200 xl:text-lg">
@@ -101,9 +98,6 @@ export default function AboutPage() {
             })}
           </div>
 
-          <div className={`${cardSurface} p-4`}>
-            <ContributionGraph contributionCount="2,600+" />
-          </div>
         </div>
 
         <div className={`${cardSurface} flex flex-col gap-3 p-4 lg:col-span-5`}>
@@ -175,14 +169,14 @@ export default function AboutPage() {
             })}
           </ol>
 
-          <div className="mt-1 grid grid-cols-1 gap-2 border-t border-black/10 pt-3 sm:grid-cols-2 dark:border-white/10">
+          <div className="mt-1 flex flex-wrap gap-1.5 border-t border-black/10 pt-3 dark:border-white/10">
             {siteConfig.recognitions.map((r) => (
-              <div
+              <span
                 key={r}
-                className="rounded bg-neutral-950/[0.04] px-2 py-1.5 text-[10px] leading-snug text-neutral-700 dark:bg-white/[0.04] dark:text-neutral-300"
+                className="rounded-full bg-neutral-950/[0.04] px-2.5 py-1 text-[10px] leading-snug text-neutral-700 dark:bg-white/[0.04] dark:text-neutral-300"
               >
                 {r}
-              </div>
+              </span>
             ))}
           </div>
         </div>

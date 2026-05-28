@@ -89,9 +89,15 @@ const socials: Social[] = [
   },
 ];
 
+const lookingFor = [
+  { label: "Cofounder", detail: "founding-level, equity" },
+  { label: "Investor", detail: "consumer AI" },
+  { label: "Builder", detail: "ambitious products" },
+];
+
 export function ContactPanel() {
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 py-6 text-center sm:gap-7 sm:py-10">
+    <div className="mx-auto flex min-h-[calc(100dvh-12rem)] w-full max-w-3xl flex-col items-center justify-center gap-6 py-6 text-center sm:gap-7">
       <div className={`${cardSurface} relative w-full overflow-hidden p-8 sm:p-10`}>
         <div aria-hidden className="aurora pointer-events-none absolute inset-0" style={{ opacity: 0.35 }} />
         <div
@@ -101,10 +107,22 @@ export function ContactPanel() {
         <p className="relative text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
           kaya<span className="text-neutral-400 dark:text-neutral-600">@</span>successai.app
         </p>
-        <p className="relative mt-4 max-w-xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 mx-auto">
-          Open to technical co-founder roles at founding level with equity,
-          investors backing consumer AI, and builders shipping ambitious products.
+        <p className="relative mt-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+          Building consumer AI for behavior change. Open to:
         </p>
+        <div className="relative mt-3 flex flex-wrap items-center justify-center gap-1.5">
+          {lookingFor.map((item) => (
+            <span
+              key={item.label}
+              className="inline-flex items-baseline gap-1.5 rounded-full border border-violet-400/30 bg-violet-400/10 px-3 py-1 text-xs font-medium text-violet-800 backdrop-blur dark:border-violet-300/30 dark:bg-violet-300/10 dark:text-violet-200"
+            >
+              <span>{item.label}</span>
+              <span className="text-[10px] font-normal text-neutral-500 dark:text-neutral-500">
+                {item.detail}
+              </span>
+            </span>
+          ))}
+        </div>
         <div className="relative mt-6 flex flex-wrap items-center justify-center gap-2">
           <button
             type="button"

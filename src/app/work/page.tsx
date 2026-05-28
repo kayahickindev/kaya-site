@@ -32,6 +32,7 @@ const cardHighlights: Record<string, string[]> = {
   myfutureself: [
     "26K+ downloads · 52% avg monthly growth",
     "Solo-built iOS, backend, and voice-AI stack",
+    "Realtime voice via WebRTC + OpenAI Realtime",
   ],
   "mfs-universities": [
     "Pilot live at Miami University",
@@ -160,17 +161,11 @@ export default function WorkPage() {
                   className="pointer-events-none absolute -inset-px bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,0%),rgba(217,119,6,0.18),transparent_55%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,0%),rgba(251,191,36,0.18),transparent_55%)]"
                 />
 
-                <div className="relative flex items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-                      {detail.role}
-                    </p>
-                    {detail.timeframe ? (
-                      <p className="mt-0.5 text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-                        {detail.timeframe}
-                      </p>
-                    ) : null}
-                  </div>
+                <div className="relative min-w-0">
+                  <p className="truncate text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+                    {detail.role}
+                    {detail.timeframe ? ` · ${detail.timeframe}` : ""}
+                  </p>
                 </div>
 
                 <h2 className="relative mt-2 text-xl font-semibold leading-tight tracking-tight text-neutral-950 sm:text-2xl dark:text-white">

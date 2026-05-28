@@ -251,16 +251,6 @@ export function CommandCenter() {
                     className="text-neutral-500 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-amber-600 dark:group-hover:text-amber-300"
                   />
                 </div>
-                <div className="flex flex-wrap items-center justify-center gap-1.5">
-                  {featured.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-md border border-black/10 bg-white/55 px-2 py-0.5 text-[10px] font-medium text-neutral-700 backdrop-blur dark:border-white/10 dark:bg-white/[0.06] dark:text-neutral-300"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
               </Link>
 
               <Link
@@ -280,7 +270,7 @@ export function CommandCenter() {
                     height={1250}
                     unoptimized
                     loading="eager"
-                    className="relative h-auto max-h-[480px] w-auto scale-[0.95] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] sm:scale-[1.05] xl:scale-[1.15]"
+                    className="relative h-auto max-h-[520px] w-auto scale-[1.05] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] sm:scale-[1.18] xl:scale-[1.28]"
                   />
                 ) : null}
               </Link>
