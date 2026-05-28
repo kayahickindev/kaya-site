@@ -51,7 +51,7 @@ function SignalField() {
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:72px_72px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_10%,rgba(8,145,178,0.18),transparent_55%),radial-gradient(circle_at_10%_90%,rgba(217,119,6,0.14),transparent_55%)] dark:bg-[radial-gradient(circle_at_85%_10%,rgba(34,211,238,0.14),transparent_55%),radial-gradient(circle_at_10%_90%,rgba(251,191,36,0.12),transparent_55%)]" />
-      {Array.from({ length: 20 }).map((_, i) => {
+      {Array.from({ length: 12 }).map((_, i) => {
         const left = (i * 37) % 100;
         const top = (i * 53) % 100;
         const delay = (i % 9) * 0.28;
@@ -113,7 +113,6 @@ const metricTiles = [
     format: true,
     sparkline: [12, 38, 90, 220, 480, 880, 1350, 1718],
     accent: "rgb(34,197,94)",
-    range: "12 → 1,718",
   },
   {
     value: 65,
@@ -122,7 +121,6 @@ const metricTiles = [
     suffix: "K",
     sparkline: [2, 6, 12, 22, 35, 48, 58, 65],
     accent: "rgb(212,155,90)",
-    range: "$2K → $65K",
   },
   {
     value: 26,
@@ -130,7 +128,6 @@ const metricTiles = [
     suffix: "K+",
     sparkline: [0.4, 1.2, 3, 6.5, 11, 16, 21, 26],
     accent: "rgb(34,211,238)",
-    range: "0.4K → 26K",
   },
   {
     value: 4.7,
@@ -139,7 +136,6 @@ const metricTiles = [
     decimals: 1,
     sparkline: [4.4, 4.5, 4.6, 4.6, 4.7, 4.7, 4.7, 4.7],
     accent: "rgb(251,191,36)",
-    range: "4.4 → 4.7",
   },
   {
     value: 52,
@@ -147,7 +143,6 @@ const metricTiles = [
     suffix: "%",
     sparkline: [38, 44, 49, 51, 50, 53, 56, 52],
     accent: "rgb(244,114,182)",
-    range: "38% → 52%",
   },
 ];
 

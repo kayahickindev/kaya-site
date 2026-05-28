@@ -31,7 +31,6 @@ const cardHighlights: Record<string, string[]> = {
   myfutureself: [
     "26K+ downloads · 52% avg monthly growth",
     "Solo-built iOS, backend, and voice-AI stack",
-    "Realtime voice via WebRTC + OpenAI Realtime",
   ],
   "viral-loop": [
     "Done-for-you AI UGC content pipeline",
@@ -155,9 +154,6 @@ export default function WorkPage() {
                 <h2 className="relative mt-2 text-xl font-semibold leading-tight tracking-tight text-neutral-950 sm:text-2xl dark:text-white">
                   {project.name}
                 </h2>
-                <p className="relative mt-0.5 text-xs leading-snug text-neutral-600 dark:text-neutral-400">
-                  {project.tagline}
-                </p>
 
                 <div className="relative mt-3 flex items-baseline gap-2">
                   <span className="text-2xl font-semibold tracking-tight text-neutral-950 dark:text-white">

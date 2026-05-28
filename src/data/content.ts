@@ -59,7 +59,6 @@ export const siteConfig = {
       { name: "ElevenLabs", category: "AI" },
       { name: "Claude Code", category: "Workflow" },
       { name: "Codex", category: "Workflow" },
-      { name: "Cursor", category: "Workflow" },
       { name: "Ghostty", category: "Workflow" },
       { name: "Wispr Flow", category: "Workflow" },
       { name: "Granola", category: "Workflow" },

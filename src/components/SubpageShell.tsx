@@ -56,7 +56,7 @@ function SignalField({ accent }: { accent: Accent }) {
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-0 overflow-hidden">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:72px_72px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)]" />
       <div className={`absolute inset-0 ${spec.glow} ${spec.glowDark}`} />
-      {Array.from({ length: 18 }).map((_, i) => {
+      {Array.from({ length: 11 }).map((_, i) => {
         const left = (i * 37) % 100;
         const top = (i * 53) % 100;
         const delay = (i % 9) * 0.28;

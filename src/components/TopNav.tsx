@@ -220,6 +220,16 @@ export function TopNav({ showLiveShipped }: { showLiveShipped?: boolean } = {}) 
               </Link>
             );
           })}
+          <span aria-hidden className="mx-1 h-4 w-px bg-black/10 dark:bg-white/10" />
+          <button
+            type="button"
+            onClick={() => setPaletteOpen(true)}
+            aria-label="Open command menu (Cmd+K)"
+            title="Search (Cmd+K)"
+            className="grid h-7 w-7 place-items-center rounded-full text-neutral-600 transition hover:bg-neutral-950/[0.055] hover:text-neutral-950 dark:text-neutral-400 dark:hover:bg-white/[0.07] dark:hover:text-white"
+          >
+            <Search size={14} />
+          </button>
         </nav>
 
         <div className="flex shrink-0 items-center justify-end gap-2">
@@ -228,15 +238,6 @@ export function TopNav({ showLiveShipped }: { showLiveShipped?: boolean } = {}) 
               <LiveShipped />
             </div>
           ) : null}
-          <button
-            type="button"
-            onClick={() => setPaletteOpen(true)}
-            aria-label="Open command menu (Cmd+K)"
-            title="Search (Cmd+K)"
-            className="grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white/45 text-neutral-600 backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-400 dark:hover:bg-white/[0.08]"
-          >
-            <Search size={16} />
-          </button>
         </div>
       </motion.header>
 
