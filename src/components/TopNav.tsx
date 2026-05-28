@@ -12,7 +12,6 @@ const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];
 const navItems = [
   { label: "About", href: "/about" },
   { label: "Work", href: "/work" },
-  { label: "Proof", href: "/proof" },
   { label: "Stack", href: "/stack" },
   { label: "Contact", href: "/contact" },
 ];

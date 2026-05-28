@@ -174,10 +174,10 @@ export function CommandCenter() {
 
             <div className="mt-1 flex flex-wrap items-center gap-2">
               <Link
-                href="/proof"
+                href="/work"
                 className="inline-flex h-10 items-center gap-2 rounded-md border border-amber-400/40 bg-amber-400/15 px-4 text-sm font-medium text-amber-800 backdrop-blur transition hover:-translate-y-0.5 hover:border-amber-400/60 hover:bg-amber-400/25 dark:text-amber-200 dark:hover:bg-amber-400/20"
               >
-                See proof
+                See work
                 <ArrowRight size={16} />
               </Link>
               <a
@@ -191,7 +191,7 @@ export function CommandCenter() {
               </a>
             </div>
 
-            <Link href="/proof" className="mt-1 block" aria-label="See full proof">
+            <Link href="/work" className="mt-1 block" aria-label="See full work">
               <MetricTiles metrics={metricTiles} accent="amber" />
             </Link>
 

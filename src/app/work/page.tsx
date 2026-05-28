@@ -4,7 +4,7 @@ import Link from "next/link";
 import { SubpageShell } from "@/components/SubpageShell";
 import { TiltImage } from "@/components/TiltImage";
 import { siteConfig } from "@/data/content";
-import { cardSurfaceHover, cardSurfaceFeatured } from "@/lib/surfaces";
+import { cardSurfaceHover, cardSurfaceFeaturedEmerald } from "@/lib/surfaces";
 import { projectDetails } from "./_projectDetails";
 
 export const metadata: Metadata = {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   },
 };
 
-const heroAccent = "from-cyan-500/20 via-transparent to-amber-500/15";
-const cardAccent = "from-amber-500/15 via-transparent to-amber-500/5";
+const heroAccent = "from-cyan-500/20 via-transparent to-emerald-500/15";
+const cardAccent = "from-emerald-500/15 via-transparent to-emerald-500/5";
 
 const heroMetrics: Record<string, { value: string; label: string }> = {
   myfutureself: { value: "$65K", label: "ARR · 1,718 paid · 4.7★" },
@@ -55,7 +55,7 @@ export default function WorkPage() {
   const rest = projectDetails.filter((d) => d.slug !== "myfutureself");
 
   return (
-    <SubpageShell accent="amber">
+    <SubpageShell accent="emerald">
       <div className="flex flex-col gap-4">
         <header className="relative">
           <div aria-hidden className="aurora" style={{ opacity: 0.55 }} />
@@ -67,7 +67,7 @@ export default function WorkPage() {
         {hero ? (
           <Link
             href={`/work/${hero.slug}`}
-            className={`${cardSurfaceFeatured} group block p-0 transition hover:-translate-y-0.5 hover:border-amber-400/50`}
+            className={`${cardSurfaceFeaturedEmerald} group block p-0 transition hover:-translate-y-0.5 hover:border-emerald-400/50`}
           >
             <div
               aria-hidden
@@ -89,7 +89,7 @@ export default function WorkPage() {
                 </div>
 
                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                  <span className="text-3xl font-semibold tracking-tight text-amber-700 sm:text-4xl dark:text-amber-200">
+                  <span className="text-3xl font-semibold tracking-tight text-emerald-700 sm:text-4xl dark:text-emerald-200">
                     $65K ARR
                   </span>
                   <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
@@ -100,7 +100,7 @@ export default function WorkPage() {
                 <ul className="grid gap-1 text-[13px] text-neutral-700 dark:text-neutral-300">
                   {cardHighlights[hero.slug].map((h) => (
                     <li key={h} className="flex items-start gap-2">
-                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-500 dark:bg-amber-300" />
+                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-emerald-500 dark:bg-emerald-300" />
                       <span>{h}</span>
                     </li>
                   ))}
@@ -141,7 +141,7 @@ export default function WorkPage() {
                 />
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute -inset-px bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,0%),rgba(217,119,6,0.18),transparent_55%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,0%),rgba(251,191,36,0.18),transparent_55%)]"
+                  className="pointer-events-none absolute -inset-px bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,0%),rgba(16,185,129,0.18),transparent_55%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,0%),rgba(52,211,153,0.18),transparent_55%)]"
                 />
 
                 <div className="relative min-w-0">

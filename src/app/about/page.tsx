@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import {
+  ArrowUpRight,
   Award,
   GraduationCap,
   MapPin,
@@ -7,6 +8,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { CompanyMark, hasCompanyMark } from "@/components/CompanyMark";
+import { ContributionGraph } from "@/components/ContributionGraph";
 import { SubpageShell } from "@/components/SubpageShell";
 import { siteConfig } from "@/data/content";
 import { cardSurface, cardSurfaceFeatured } from "@/lib/surfaces";
@@ -153,6 +155,24 @@ export default function AboutPage() {
                 </div>
               );
             })}
+          </div>
+        </div>
+
+        <div className={`${cardSurface} flex flex-col gap-4 p-5`}>
+          <ContributionGraph contributionCount="2,600+" palette="emerald" />
+          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-black/10 pt-4 dark:border-white/10">
+            <span className="font-mono text-xs text-neutral-500">
+              github.com/{siteConfig.github.username}
+            </span>
+            <a
+              href={siteConfig.github.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex h-8 items-center gap-1.5 rounded-md bg-neutral-950 px-3 text-xs font-medium text-white transition hover:gap-2 dark:bg-white dark:text-neutral-950"
+            >
+              View profile
+              <ArrowUpRight size={12} />
+            </a>
           </div>
         </div>
 

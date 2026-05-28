@@ -126,7 +126,7 @@ export function ContactPanel() {
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-2">
+      <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-4">
         {socials.map(({ href, label, handle, icon: Icon, brandClass, restTint }) => (
           <a
             key={label}
@@ -134,12 +134,15 @@ export function ContactPanel() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${label}, ${handle}`}
-            className={`group inline-flex h-9 items-center gap-1.5 rounded-full border border-black/10 bg-white/55 px-3 text-xs font-medium text-neutral-700 backdrop-blur transition hover:-translate-y-0.5 dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-300 ${brandClass}`}
+            className={`group flex flex-col items-center justify-center gap-2 rounded-md border border-black/10 bg-white/55 px-3 py-4 text-center backdrop-blur transition hover:-translate-y-0.5 dark:border-white/10 dark:bg-white/[0.04] ${brandClass}`}
           >
             <span className={`transition ${restTint} group-hover:text-current`}>
-              <Icon size={14} />
+              <Icon size={22} />
             </span>
-            {handle}
+            <div className="flex flex-col items-center leading-tight">
+              <p className="text-sm font-semibold tracking-tight">{label}</p>
+              <p className="text-[11px] opacity-70">{handle}</p>
+            </div>
           </a>
         ))}
       </div>
