@@ -89,16 +89,10 @@ const socials: Social[] = [
   },
 ];
 
-const lookingFor = [
-  { label: "Cofounder", detail: "founding-level, equity" },
-  { label: "Investor", detail: "consumer AI" },
-  { label: "Builder", detail: "ambitious products" },
-];
-
 export function ContactPanel() {
   return (
-    <div className="mx-auto flex min-h-[calc(100dvh-12rem)] w-full max-w-3xl flex-col items-center justify-center gap-6 py-6 text-center sm:gap-7">
-      <div className={`${cardSurface} relative w-full overflow-hidden p-8 sm:p-10`}>
+    <div className="mx-auto grid min-h-[calc(100dvh-12rem)] w-full max-w-5xl grid-cols-1 items-stretch gap-6 py-6 text-center lg:grid-cols-[1.4fr_1fr]">
+      <div className={`${cardSurface} relative flex h-full w-full flex-col justify-center overflow-hidden p-8 sm:p-10`}>
         <div aria-hidden className="aurora pointer-events-none absolute inset-0" style={{ opacity: 0.35 }} />
         <div
           aria-hidden
@@ -108,21 +102,8 @@ export function ContactPanel() {
           kaya<span className="text-neutral-400 dark:text-neutral-600">@</span>successai.app
         </p>
         <p className="relative mt-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-          Building consumer AI for behavior change. Open to:
+          Building consumer AI for behavior change.
         </p>
-        <div className="relative mt-3 flex flex-wrap items-center justify-center gap-1.5">
-          {lookingFor.map((item) => (
-            <span
-              key={item.label}
-              className="inline-flex items-baseline gap-1.5 rounded-full border border-violet-400/30 bg-violet-400/10 px-3 py-1 text-xs font-medium text-violet-800 backdrop-blur dark:border-violet-300/30 dark:bg-violet-300/10 dark:text-violet-200"
-            >
-              <span>{item.label}</span>
-              <span className="text-[10px] font-normal text-neutral-500 dark:text-neutral-500">
-                {item.detail}
-              </span>
-            </span>
-          ))}
-        </div>
         <div className="relative mt-6 flex flex-wrap items-center justify-center gap-2">
           <button
             type="button"
@@ -143,7 +124,7 @@ export function ContactPanel() {
         </div>
       </div>
 
-      <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-4">
+      <div className="grid w-full grid-cols-2 gap-2">
         {socials.map(({ href, label, handle, icon: Icon, brandClass }) => (
           <a
             key={label}
@@ -151,7 +132,7 @@ export function ContactPanel() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${label}, ${handle}`}
-            className={`group relative flex flex-col items-center gap-2 overflow-hidden rounded-md border border-black/10 bg-white/55 p-5 backdrop-blur transition duration-200 dark:border-white/10 dark:bg-white/[0.04] ${brandClass}`}
+            className={`group relative flex h-full flex-col items-center justify-center gap-2 overflow-hidden rounded-md border border-black/10 bg-white/55 p-5 backdrop-blur transition duration-200 dark:border-white/10 dark:bg-white/[0.04] ${brandClass}`}
           >
             <ArrowUpRight
               size={14}

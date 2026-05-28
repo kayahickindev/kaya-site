@@ -21,7 +21,7 @@ const cardAccent = "from-amber-500/15 via-transparent to-amber-500/5";
 
 const heroMetrics: Record<string, { value: string; label: string }> = {
   myfutureself: { value: "$65K", label: "ARR · 1,718 paid · 4.7★" },
-  "mfs-universities": { value: "Pilot", label: "Miami University" },
+  "mfs-universities": { value: "Web", label: "campus-focused sibling" },
   "viral-loop": { value: "Live", label: "MVP shipped" },
   "dog-ai": { value: "Live", label: "App Store · paying product" },
   appointra: { value: "$20K", label: "MRR in 3 months" },
@@ -35,24 +35,24 @@ const cardHighlights: Record<string, string[]> = {
     "Realtime voice via WebRTC + OpenAI Realtime",
   ],
   "mfs-universities": [
-    "Pilot live at Miami University",
-    "Built on Lovable for fast iteration",
+    "Web variant of MyFutureSelf",
+    "Designed for campus distribution",
   ],
   "viral-loop": [
     "Done-for-you AI UGC content pipeline",
-    "MVP live, accepting clients",
+    "Organic influencer distribution",
   ],
   "dog-ai": [
     "Custom LLM, trained on tens of thousands of dog images",
     "Behavior dataset from Harvard",
   ],
   appointra: [
-    "$20k MRR in three months",
     "$2M+ in client pipeline generated",
+    "Cold-email infra for 8/9-figure founders",
   ],
   "leadboost-pro": [
-    "20+ custom websites freshman year",
-    "Profitable from month one",
+    "Marketing, web dev, consulting",
+    "Small and underrepresented businesses",
   ],
 };
 

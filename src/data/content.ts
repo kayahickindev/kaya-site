@@ -135,7 +135,7 @@ export const siteConfig = {
       name: "Appointra",
       tagline: "B2B outbound, on autopilot.",
       description:
-        "Lead generation agency for SF, NYC, and Chicago startups. Scaled to $20k MRR in three months using AI-powered outbound, generating millions in pipeline and hundreds of qualified meetings. Wound it down to focus full-time on MyFutureSelf.",
+        "Lead generation agency for SF, NYC, and Chicago startups. Scaled to $20k MRR in three months using AI-powered outbound, generating millions in pipeline and hundreds of qualified meetings.",
       links: {
         website: "https://appointra.net/",
       },
@@ -165,7 +165,7 @@ export const siteConfig = {
       period: "Jan 2025 to Present",
       description:
         "AI iOS app: 90-day roadmap and a voice mentor that speaks as your future self. Solo-built iOS, Firebase backend, and AI integration in six months.",
-      metrics: ["1,718 paid", "$65K ARR", "4.7★ · 715 reviews"],
+      metrics: [],
       active: true,
     },
     {
@@ -173,8 +173,8 @@ export const siteConfig = {
       role: "Co-Founder · CTO",
       period: "Jun 2024 to Feb 2025",
       description:
-        "Co-founded with Giancarlo. Built the automated cold-email infra that drove $2M+ in pipeline for 8/9-figure founders. Wound it down to go all-in on MyFutureSelf.",
-      metrics: ["$20k MRR · 3 months", "$2M+ pipeline"],
+        "Co-founded with Giancarlo. Built cold-email infra that hit $20k MRR in three months and drove $2M+ in pipeline for 8/9-figure founders.",
+      metrics: [],
       active: false,
     },
     {
@@ -182,8 +182,8 @@ export const siteConfig = {
       role: "Co-Founder",
       period: "Jan 2023 to Jun 2024",
       description:
-        "Dorm-room start. Built 20+ custom websites freshman year. Marketing, web dev, and consulting for small and underrepresented businesses.",
-      metrics: ["Profitable month one", "20+ sites built"],
+        "Dorm-room start, profitable from month one. Built 20+ custom websites freshman year. Marketing, web dev, and consulting for small and underrepresented businesses.",
+      metrics: [],
       active: false,
     },
   ],

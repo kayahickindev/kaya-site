@@ -178,55 +178,53 @@ export function TopNav({ showLiveShipped }: { showLiveShipped?: boolean } = {}) 
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.42, ease }}
-        className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-black/10 bg-white/45 p-1.5 text-sm backdrop-blur dark:border-white/10 dark:bg-white/[0.028]"
+        className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 text-sm"
       >
-        <div className="flex min-w-0 items-center gap-1">
-          <Link
-            href="/"
-            aria-label="Kaya Hickin home"
-            className="flex h-9 shrink-0 items-center gap-2 rounded-md px-2 transition hover:bg-neutral-950/[0.055] dark:hover:bg-white/[0.07]"
-          >
-            <span className="grid h-7 w-7 place-items-center rounded bg-neutral-950 font-serif text-sm leading-none text-white dark:bg-white dark:text-neutral-950">
-              KH
-            </span>
-            <span className="hidden font-serif text-[17px] tracking-tight text-neutral-950 sm:inline dark:text-white">
-              {siteConfig.name}
-            </span>
-          </Link>
-          <span aria-hidden className="mx-1 hidden h-5 w-px bg-black/10 dark:bg-white/10 md:block" />
-          <nav className="flex min-w-0 flex-wrap items-center gap-0.5">
-            {navItems.map((item) => {
-              const active =
-                item.href === pathname ||
-                (item.href === "/work" && pathname?.startsWith("/work"));
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  className={`relative rounded-md px-2.5 py-2 transition ${
-                    active
-                      ? "font-medium text-neutral-950 dark:text-white"
-                      : "text-neutral-700 hover:bg-neutral-950/[0.055] dark:text-neutral-300 dark:hover:bg-white/[0.07]"
-                  }`}
-                >
-                  {active && (
-                    <motion.span
-                      layoutId="topnav-active"
-                      className="absolute inset-0 -z-10 rounded-md bg-neutral-950/[0.07] dark:bg-white/[0.08]"
-                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                    />
-                  )}
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
-        </div>
+        <Link
+          href="/"
+          aria-label="Kaya Hickin home"
+          className="flex h-10 w-fit shrink-0 items-center gap-2 rounded-md px-2 transition hover:bg-neutral-950/[0.055] dark:hover:bg-white/[0.07]"
+        >
+          <span className="grid h-7 w-7 place-items-center rounded bg-neutral-950 font-serif text-sm leading-none text-white dark:bg-white dark:text-neutral-950">
+            KH
+          </span>
+          <span className="hidden font-serif text-[17px] tracking-tight text-neutral-950 sm:inline dark:text-white">
+            {siteConfig.name}
+          </span>
+        </Link>
 
-        <div className="flex shrink-0 items-center gap-2">
+        <nav className="flex items-center gap-0.5 rounded-full border border-black/10 bg-white/45 px-1 py-1 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
+          {navItems.map((item) => {
+            const active =
+              item.href === pathname ||
+              (item.href === "/work" && pathname?.startsWith("/work"));
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={`relative rounded-full px-3 py-1.5 text-xs font-medium transition sm:text-sm ${
+                  active
+                    ? "text-neutral-950 dark:text-white"
+                    : "text-neutral-700 hover:bg-neutral-950/[0.055] hover:text-neutral-950 dark:text-neutral-300 dark:hover:bg-white/[0.07] dark:hover:text-white"
+                }`}
+              >
+                {active && (
+                  <motion.span
+                    layoutId="topnav-active"
+                    className="absolute inset-0 -z-10 rounded-full bg-neutral-950/[0.08] dark:bg-white/[0.10]"
+                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                  />
+                )}
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="flex shrink-0 items-center justify-end gap-2">
           {liveShippedVisible ? (
-            <div className="hidden sm:block">
+            <div className="hidden lg:block">
               <LiveShipped />
             </div>
           ) : null}
@@ -235,7 +233,7 @@ export function TopNav({ showLiveShipped }: { showLiveShipped?: boolean } = {}) 
             onClick={() => setPaletteOpen(true)}
             aria-label="Open command menu (Cmd+K)"
             title="Search (Cmd+K)"
-            className="grid h-10 w-10 place-items-center rounded-md border border-black/10 bg-white/45 text-neutral-600 backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-white/[0.035] dark:text-neutral-400 dark:hover:bg-white/[0.08]"
+            className="grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white/45 text-neutral-600 backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-400 dark:hover:bg-white/[0.08]"
           >
             <Search size={16} />
           </button>

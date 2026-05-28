@@ -228,12 +228,12 @@ export function CommandCenter() {
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.08, ease }}
-              className="relative flex flex-col items-center justify-center gap-4 lg:col-span-5"
+              className="relative flex flex-col items-center justify-center gap-1 lg:col-span-5"
             >
               <Link
                 href={`/work/${featured.slug}`}
                 aria-label={`Open ${featured.name} case study`}
-                className="group flex flex-col items-center gap-2 text-center"
+                className="group flex flex-col items-center gap-1 text-center"
               >
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/15 px-2.5 py-1 text-[11px] font-medium text-amber-800 backdrop-blur dark:text-amber-200">
                   <span className="relative flex h-1.5 w-1.5">

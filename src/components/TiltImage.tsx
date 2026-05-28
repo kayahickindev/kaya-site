@@ -44,7 +44,7 @@ export function TiltImage({ children, className = "", maxTilt = 8 }: Props) {
     >
       <motion.div
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="h-full w-full will-change-transform"
+        className="h-full w-full overflow-hidden will-change-transform"
       >
         {children}
       </motion.div>
