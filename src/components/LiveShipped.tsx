@@ -48,8 +48,6 @@ export function LiveShipped() {
     <div className="flex h-10 items-center gap-2 rounded-md border border-black/10 bg-white/45 px-3 text-xs text-neutral-600 backdrop-blur dark:border-white/10 dark:bg-white/[0.035] dark:text-neutral-400">
       <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
       <span className="truncate">{label}</span>
-      <span className="text-neutral-300 dark:text-neutral-700">/</span>
-      <span className="truncate">{siteConfig.availability}</span>
     </div>
   );
 }

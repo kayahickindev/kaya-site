@@ -56,6 +56,7 @@ type Metric = {
   detail: string;
   sparkline?: number[];
   accent?: string;
+  range?: string;
 };
 
 function parseMetric(value: string) {
@@ -123,7 +124,14 @@ export function ProofMetrics({ metrics }: { metrics: Metric[] }) {
               <CountUp value={m.value} />
             </div>
             {m.sparkline ? (
-              <Sparkline points={m.sparkline} accent={m.accent ?? "rgb(212,155,90)"} animate />
+              <div className="flex flex-col items-end gap-0.5">
+                <Sparkline points={m.sparkline} accent={m.accent ?? "rgb(212,155,90)"} animate />
+                {m.range ? (
+                  <span className="font-mono text-[9px] tracking-tight text-neutral-500 dark:text-neutral-500">
+                    {m.range}
+                  </span>
+                ) : null}
+              </div>
             ) : null}
           </div>
           <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wide text-neutral-700 dark:text-neutral-300">

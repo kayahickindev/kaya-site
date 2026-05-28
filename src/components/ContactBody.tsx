@@ -1,7 +1,7 @@
 "use client";
 
 import type { ComponentType } from "react";
-import { ArrowUpRight, Copy, Mail } from "lucide-react";
+import { Copy, Mail } from "lucide-react";
 import { siteConfig } from "@/data/content";
 import { cardSurface } from "@/lib/surfaces";
 
@@ -53,6 +53,7 @@ type Social = {
   handle: string;
   icon: ComponentType<{ size?: number }>;
   brandClass: string;
+  restTint: string;
 };
 
 const socials: Social[] = [
@@ -63,6 +64,7 @@ const socials: Social[] = [
     icon: GitHubIcon,
     brandClass:
       "hover:bg-[#181717] hover:text-white hover:border-[#181717] dark:hover:bg-white dark:hover:text-neutral-950 dark:hover:border-white",
+    restTint: "text-neutral-700 dark:text-neutral-300",
   },
   {
     href: siteConfig.social.linkedin,
@@ -70,6 +72,7 @@ const socials: Social[] = [
     handle: "in/kayahickin",
     icon: LinkedInIcon,
     brandClass: "hover:bg-[#0a66c2] hover:text-white hover:border-[#0a66c2]",
+    restTint: "text-[#0a66c2]/60",
   },
   {
     href: siteConfig.social.twitter,
@@ -78,6 +81,7 @@ const socials: Social[] = [
     icon: XIcon,
     brandClass:
       "hover:bg-black hover:text-white hover:border-black dark:hover:bg-white dark:hover:text-neutral-950 dark:hover:border-white",
+    restTint: "text-neutral-700 dark:text-neutral-300",
   },
   {
     href: siteConfig.social.instagram,
@@ -86,13 +90,14 @@ const socials: Social[] = [
     icon: InstagramIcon,
     brandClass:
       "hover:bg-gradient-to-tr hover:from-amber-500 hover:via-pink-600 hover:to-purple-700 hover:text-white hover:border-transparent",
+    restTint: "text-pink-600/60",
   },
 ];
 
 export function ContactPanel() {
   return (
-    <div className="mx-auto grid min-h-[calc(100dvh-12rem)] w-full max-w-5xl grid-cols-1 items-stretch gap-6 py-6 text-center lg:grid-cols-[1.4fr_1fr]">
-      <div className={`${cardSurface} relative flex h-full w-full flex-col justify-center overflow-hidden p-8 sm:p-10`}>
+    <div className="mx-auto flex min-h-[calc(100dvh-12rem)] w-full max-w-3xl flex-col items-center justify-center gap-6 py-6 text-center sm:gap-7">
+      <div className={`${cardSurface} relative w-full overflow-hidden p-8 sm:p-10`}>
         <div aria-hidden className="aurora pointer-events-none absolute inset-0" style={{ opacity: 0.35 }} />
         <div
           aria-hidden
@@ -124,25 +129,20 @@ export function ContactPanel() {
         </div>
       </div>
 
-      <div className="grid w-full grid-cols-2 gap-2">
-        {socials.map(({ href, label, handle, icon: Icon, brandClass }) => (
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        {socials.map(({ href, label, handle, icon: Icon, brandClass, restTint }) => (
           <a
             key={label}
             href={href}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${label}, ${handle}`}
-            className={`group relative flex h-full flex-col items-center justify-center gap-2 overflow-hidden rounded-md border border-black/10 bg-white/55 p-5 backdrop-blur transition duration-200 dark:border-white/10 dark:bg-white/[0.04] ${brandClass}`}
+            className={`group inline-flex h-9 items-center gap-1.5 rounded-full border border-black/10 bg-white/55 px-3 text-xs font-medium text-neutral-700 backdrop-blur transition hover:-translate-y-0.5 dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-300 ${brandClass}`}
           >
-            <ArrowUpRight
-              size={14}
-              className="absolute right-3 top-3 opacity-30 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100"
-            />
-            <Icon size={28} />
-            <div className="flex flex-col items-center">
-              <p className="text-sm font-semibold tracking-tight">{label}</p>
-              <p className="text-[11px] opacity-70">{handle}</p>
-            </div>
+            <span className={`transition ${restTint} group-hover:text-current`}>
+              <Icon size={14} />
+            </span>
+            {handle}
           </a>
         ))}
       </div>

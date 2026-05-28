@@ -113,6 +113,7 @@ const metricTiles = [
     format: true,
     sparkline: [12, 38, 90, 220, 480, 880, 1350, 1718],
     accent: "rgb(34,197,94)",
+    range: "12 → 1,718",
   },
   {
     value: 65,
@@ -121,6 +122,7 @@ const metricTiles = [
     suffix: "K",
     sparkline: [2, 6, 12, 22, 35, 48, 58, 65],
     accent: "rgb(212,155,90)",
+    range: "$2K → $65K",
   },
   {
     value: 26,
@@ -128,6 +130,7 @@ const metricTiles = [
     suffix: "K+",
     sparkline: [0.4, 1.2, 3, 6.5, 11, 16, 21, 26],
     accent: "rgb(34,211,238)",
+    range: "0.4K → 26K",
   },
   {
     value: 4.7,
@@ -136,6 +139,7 @@ const metricTiles = [
     decimals: 1,
     sparkline: [4.4, 4.5, 4.6, 4.6, 4.7, 4.7, 4.7, 4.7],
     accent: "rgb(251,191,36)",
+    range: "4.4 → 4.7",
   },
   {
     value: 52,
@@ -143,6 +147,7 @@ const metricTiles = [
     suffix: "%",
     sparkline: [38, 44, 49, 51, 50, 53, 56, 52],
     accent: "rgb(244,114,182)",
+    range: "38% → 52%",
   },
 ];
 
@@ -228,7 +233,7 @@ export function CommandCenter() {
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.08, ease }}
-              className="relative flex flex-col items-center justify-center gap-1 lg:col-span-5"
+              className="relative flex flex-col items-center justify-end gap-1 lg:col-span-5"
             >
               <Link
                 href={`/work/${featured.slug}`}

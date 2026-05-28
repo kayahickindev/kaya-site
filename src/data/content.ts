@@ -64,7 +64,6 @@ export const siteConfig = {
       { name: "Wispr Flow", category: "Workflow" },
       { name: "Granola", category: "Workflow" },
       { name: "Lovable", category: "Workflow" },
-      { name: "Replit", category: "Workflow" },
     ],
   },
 
@@ -89,19 +88,6 @@ export const siteConfig = {
       featured: true,
       tags: ["AI", "Consumer", "iOS", "Voice"],
       status: "Current focus",
-    },
-    {
-      slug: "mfs-universities",
-      name: "MyFutureSelf for Universities",
-      tagline: "MyFutureSelf, built for university students.",
-      description:
-        "Web-based version of MyFutureSelf designed for university campuses. Pilot at Miami University. Built on Lovable for fast iteration with student feedback in the loop.",
-      links: {
-        website: "https://mfs-miamiuniversity.lovable.app",
-      },
-      featured: false,
-      tags: ["Web", "AI", "Education"],
-      status: "Live · Pilot",
     },
     {
       slug: "viral-loop",

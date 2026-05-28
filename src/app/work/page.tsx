@@ -21,7 +21,6 @@ const cardAccent = "from-amber-500/15 via-transparent to-amber-500/5";
 
 const heroMetrics: Record<string, { value: string; label: string }> = {
   myfutureself: { value: "$65K", label: "ARR · 1,718 paid · 4.7★" },
-  "mfs-universities": { value: "Web", label: "campus-focused sibling" },
   "viral-loop": { value: "Live", label: "MVP shipped" },
   "dog-ai": { value: "Live", label: "App Store · paying product" },
   appointra: { value: "$20K", label: "MRR in 3 months" },
@@ -34,17 +33,13 @@ const cardHighlights: Record<string, string[]> = {
     "Solo-built iOS, backend, and voice-AI stack",
     "Realtime voice via WebRTC + OpenAI Realtime",
   ],
-  "mfs-universities": [
-    "Web variant of MyFutureSelf",
-    "Designed for campus distribution",
-  ],
   "viral-loop": [
     "Done-for-you AI UGC content pipeline",
     "Organic influencer distribution",
   ],
   "dog-ai": [
-    "Custom LLM, trained on tens of thousands of dog images",
-    "Behavior dataset from Harvard",
+    "Custom multimodal LLM",
+    "Trained on tens of thousands of dog images",
   ],
   appointra: [
     "$2M+ in client pipeline generated",
@@ -79,7 +74,7 @@ export default function WorkPage() {
               aria-hidden
               className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${heroAccent}`}
             />
-            <div className="relative grid grid-cols-1 gap-0 md:grid-cols-[1.4fr_1fr]">
+            <div className="relative grid grid-cols-1 gap-0 md:grid-cols-[1fr_1fr]">
               <div className="flex flex-col gap-3 p-5 md:p-6">
                 <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
                   {hero.role} · {hero.timeframe}
@@ -111,17 +106,6 @@ export default function WorkPage() {
                     </li>
                   ))}
                 </ul>
-
-                <div className="mt-auto flex flex-wrap gap-1 pt-1">
-                  {hero.project.tags.slice(0, 4).map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-black/10 bg-white/55 px-2 py-0.5 text-[10px] font-medium text-neutral-700 dark:border-white/15 dark:bg-white/[0.06] dark:text-neutral-300"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
               </div>
 
               <TiltImage className="relative min-h-[260px] overflow-hidden md:min-h-0">
@@ -132,7 +116,7 @@ export default function WorkPage() {
                     width={781}
                     height={1250}
                     unoptimized
-                    className="absolute inset-0 m-auto h-full max-h-[320px] w-auto scale-[1.25] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] transition-transform duration-500 group-hover:scale-[1.3] sm:max-h-[420px] sm:scale-[1.55] sm:group-hover:scale-[1.6]"
+                    className="absolute inset-0 m-auto h-full max-h-[320px] w-auto scale-[1.0] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] transition-transform duration-500 group-hover:scale-[1.05] sm:max-h-[420px] sm:scale-[1.2] sm:group-hover:scale-[1.25]"
                   />
                 ) : null}
               </TiltImage>
@@ -140,7 +124,7 @@ export default function WorkPage() {
           </Link>
         ) : null}
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {rest.map((detail) => {
             const { project } = detail;
             const highlights = cardHighlights[detail.slug] ?? [];
@@ -150,7 +134,7 @@ export default function WorkPage() {
               <Link
                 key={detail.slug}
                 href={`/work/${detail.slug}`}
-                className={`${cardSurfaceHover} group flex flex-col p-4`}
+                className={`${cardSurfaceHover} group flex min-h-[280px] flex-col p-4`}
               >
                 <div
                   aria-hidden

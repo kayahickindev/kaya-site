@@ -22,6 +22,7 @@ const headlineMetrics = [
     detail: "server-validated via Apple",
     sparkline: [12, 38, 90, 220, 480, 880, 1350, 1718],
     accent: "rgb(34,197,94)",
+    range: "12 → 1,718",
   },
   {
     value: "$65K",
@@ -29,6 +30,7 @@ const headlineMetrics = [
     detail: "MyFutureSelf, 7 months in",
     sparkline: [2, 6, 12, 22, 35, 48, 58, 65],
     accent: "rgb(212,155,90)",
+    range: "$2K → $65K",
   },
   {
     value: "26K+",
@@ -36,6 +38,7 @@ const headlineMetrics = [
     detail: "App Store, 7 months",
     sparkline: [0.4, 1.2, 3, 6.5, 11, 16, 21, 26],
     accent: "rgb(34,211,238)",
+    range: "0.4K → 26K",
   },
   {
     value: "4.7★",
@@ -43,6 +46,7 @@ const headlineMetrics = [
     detail: "715 verified reviews",
     sparkline: [4.4, 4.5, 4.6, 4.6, 4.7, 4.7, 4.7, 4.7],
     accent: "rgb(251,191,36)",
+    range: "4.4 → 4.7",
   },
   {
     value: "52%",
@@ -50,6 +54,7 @@ const headlineMetrics = [
     detail: "revenue, last 6 months",
     sparkline: [38, 44, 49, 51, 50, 53, 56, 52],
     accent: "rgb(244,114,182)",
+    range: "38% → 52%",
   },
 ];
 

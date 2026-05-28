@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import {
+  Award,
   GraduationCap,
   MapPin,
   Target,
@@ -27,11 +28,13 @@ const SIDEBAR_ICONS: Record<string, LucideIcon> = {
 
 const paragraphs = [
   "Working full-time in my family's business at 14, valedictorian out of high school, shipping companies ever since. I build consumer AI for behavior change.",
+  "Shipped two iOS apps to the App Store. Two crypto projects at $500K+ combined market cap. 170K lines of code and 1,400+ commits this year. Self-funded my Miami University tuition. Graduated with honors.",
 ];
 
 const highlightStats = [
   { value: "8 yrs", label: "professional experience" },
   { value: "3-for-3", label: "profitable companies" },
+  { value: "170K", label: "LOC shipped this year" },
   { value: "2,600+", label: "contributions last year" },
 ];
 
@@ -59,7 +62,7 @@ export default function AboutPage() {
           ))}
         </div>
 
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
           {highlightStats.map((s) => (
             <div key={s.label} className={`${cardSurfaceFeatured} p-3`}>
               <p className="text-base font-semibold text-amber-800 dark:text-amber-200 xl:text-lg">
@@ -98,9 +101,15 @@ export default function AboutPage() {
         </div>
 
         <div className="flex flex-col gap-3">
-          <h2 className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
-            The path
-          </h2>
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
+              The path
+            </h2>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 text-[11px] font-medium text-amber-800 backdrop-blur dark:border-amber-300/30 dark:bg-amber-300/10 dark:text-amber-200">
+              <Award size={12} />
+              Winner · RedHawk 2025
+            </span>
+          </div>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
             {siteConfig.timeline.map((entry) => {
               const mark = companyMarks[entry.company];
@@ -147,16 +156,6 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-1.5">
-          {siteConfig.recognitions.map((r) => (
-            <span
-              key={r}
-              className="rounded-full bg-neutral-950/[0.04] px-2.5 py-1 text-[10px] leading-snug text-neutral-700 dark:bg-white/[0.04] dark:text-neutral-300"
-            >
-              {r}
-            </span>
-          ))}
-        </div>
       </div>
     </SubpageShell>
   );

@@ -8,7 +8,6 @@ import {
   BriefcaseBusiness,
   CheckCircle2,
   ExternalLink,
-  GraduationCap,
   Sparkles,
   Target,
 } from "lucide-react";
@@ -226,44 +225,6 @@ function LeadBoostVisual() {
   );
 }
 
-function MfsUniversitiesVisual() {
-  return (
-    <div className="relative h-full min-h-0 overflow-hidden rounded-md border border-white/10 bg-neutral-950 p-5 text-white">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(217,119,6,0.20),transparent_32%),linear-gradient(150deg,rgba(217,119,6,0.10),transparent_42%,rgba(168,85,247,0.12))]" />
-      <div className="relative flex h-full flex-col justify-between gap-4">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-amber-200/80">
-              Campus pilot
-            </p>
-            <h3 className="mt-2 text-2xl font-semibold leading-tight sm:text-3xl">
-              Future self, for college.
-            </h3>
-            <p className="mt-2 max-w-sm text-sm leading-relaxed text-neutral-300">
-              Web-based MyFutureSelf for university students, piloting at Miami University.
-            </p>
-          </div>
-          <GraduationCap className="text-amber-200/80" size={26} />
-        </div>
-        <div className="grid grid-cols-3 gap-2">
-          <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
-            <p className="text-xl font-semibold">Miami</p>
-            <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">University pilot</p>
-          </div>
-          <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
-            <p className="text-xl font-semibold">Web</p>
-            <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">Lovable build</p>
-          </div>
-          <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
-            <p className="text-xl font-semibold">2026</p>
-            <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">Pilot live</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function ViralLoopVisual() {
   const posts = [
     { tag: "Hook", views: "412K", color: "from-rose-400 to-pink-500" },
@@ -314,10 +275,6 @@ function ViralLoopVisual() {
 function ProjectVisual({ detail }: { detail: ProjectDetailItem }) {
   if (detail.slug === "myfutureself") {
     return <MyFutureSelfVisual image={detail.project.image} name={detail.project.name} />;
-  }
-
-  if (detail.slug === "mfs-universities") {
-    return <MfsUniversitiesVisual />;
   }
 
   if (detail.slug === "viral-loop") {

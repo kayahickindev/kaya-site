@@ -14,6 +14,7 @@ type Metric = {
   label: string;
   sparkline?: number[];
   accent?: string;
+  range?: string;
 };
 
 const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];
@@ -65,13 +66,20 @@ function MetricTile({
           {display}
         </span>
         {metric.sparkline && metric.accent ? (
-          <Sparkline
-            points={metric.sparkline}
-            accent={metric.accent}
-            width={56}
-            height={18}
-            strokeWidth={1.25}
-          />
+          <div className="flex flex-col items-end gap-0.5">
+            <Sparkline
+              points={metric.sparkline}
+              accent={metric.accent}
+              width={56}
+              height={18}
+              strokeWidth={1.25}
+            />
+            {metric.range ? (
+              <span className="font-mono text-[9px] tracking-tight text-neutral-500 dark:text-neutral-500">
+                {metric.range}
+              </span>
+            ) : null}
+          </div>
         ) : null}
       </div>
       <div className="mt-0.5 text-[10px] uppercase tracking-wide text-neutral-500 dark:text-neutral-500">
