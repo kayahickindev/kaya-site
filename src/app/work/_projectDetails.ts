@@ -99,10 +99,10 @@ export const projectDetails: ProjectDetail[] = [
     timeframe: "Jan 2023 to Jun 2024",
     overview: [
       "LeadBoost Pro was the first company Kaya ran: a web development, marketing, and consulting business for small and underrepresented businesses.",
-      "It started in a dorm room, became profitable from year one, and established the pattern of building practical systems for real customers.",
+      "It started in a dorm room, became profitable from month one, and established the pattern of building practical systems for real customers.",
     ],
     outcomes: [
-      "Profitable from year one",
+      "Profitable from month one",
       "Served small and underrepresented businesses",
       "Combined web development, marketing, and consulting",
     ],

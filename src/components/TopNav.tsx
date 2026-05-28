@@ -234,9 +234,6 @@ export function TopNav() {
           >
             <Search size={14} />
             <span>Search</span>
-            <kbd className="rounded border border-black/10 bg-white/40 px-1 py-0.5 font-mono text-[10px] dark:border-white/15 dark:bg-white/[0.06]">
-              ⌘K
-            </kbd>
           </button>
           <button
             type="button"

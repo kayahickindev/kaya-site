@@ -228,9 +228,13 @@ export function CommandCenter() {
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.08, ease }}
-              className="relative flex min-h-[460px] flex-col items-end gap-4 lg:col-span-5 lg:min-h-0"
+              className="relative flex flex-col items-end justify-center gap-3 lg:col-span-5"
             >
-              <div className="relative z-10 flex w-full flex-col items-end gap-2.5 text-right">
+              <Link
+                href={`/work/${featured.slug}`}
+                aria-label={`Open ${featured.name} case study`}
+                className="group relative z-10 flex w-full flex-col items-end gap-2 text-right"
+              >
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/15 px-2.5 py-1 text-[11px] font-medium text-amber-800 dark:text-amber-200">
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 accent-pulse" />
@@ -238,19 +242,15 @@ export function CommandCenter() {
                   </span>
                   Current focus
                 </span>
-                <Link
-                  href={`/work/${featured.slug}`}
-                  aria-label={`Open ${featured.name} case study`}
-                  className="group inline-flex items-center gap-2"
-                >
-                  <h2 className="text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
+                <div className="inline-flex items-center gap-2">
+                  <h2 className="text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl xl:text-4xl dark:text-white">
                     {featured.name}
                   </h2>
                   <ArrowUpRight
-                    size={20}
+                    size={18}
                     className="text-neutral-500 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-amber-600 dark:group-hover:text-amber-300"
                   />
-                </Link>
+                </div>
                 <div className="flex flex-wrap items-center justify-end gap-1.5">
                   {featured.tags.map((tag) => (
                     <span
@@ -261,12 +261,12 @@ export function CommandCenter() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </Link>
 
               <Link
                 href={`/work/${featured.slug}`}
                 aria-label={`Open ${featured.name} case study`}
-                className="relative flex w-full flex-1 items-center justify-center"
+                className="relative flex w-full items-center justify-center"
               >
                 <div
                   aria-hidden
@@ -280,7 +280,7 @@ export function CommandCenter() {
                     height={1250}
                     unoptimized
                     loading="eager"
-                    className="relative h-auto max-h-[560px] w-auto scale-[1.0] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] sm:scale-[1.1] xl:scale-[1.2]"
+                    className="relative h-auto max-h-[520px] w-auto scale-[1.0] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] sm:scale-[1.1] xl:scale-[1.2]"
                   />
                 ) : null}
               </Link>

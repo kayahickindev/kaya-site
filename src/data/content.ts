@@ -219,7 +219,7 @@ export const siteConfig = {
       name: "LeadBoost Pro",
       tagline: "Marketing for businesses that don't have a marketing team.",
       description:
-        "Web development, marketing, and consulting for small and underrepresented businesses in the local community. The first company I ran. Profitable from year one.",
+        "Web development, marketing, and consulting for small and underrepresented businesses in the local community. The first company I ran. Profitable from month one.",
       links: {
         website: "https://leadboost-pro.com/",
       },
@@ -254,7 +254,7 @@ export const siteConfig = {
       period: "Jan 2023 to Jun 2024",
       description:
         "Dorm-room start. Built 20+ custom websites freshman year. Marketing, web dev, and consulting for small and underrepresented businesses.",
-      metrics: ["Profitable year one", "20+ sites built"],
+      metrics: ["Profitable month one", "20+ sites built"],
       active: false,
     },
   ],

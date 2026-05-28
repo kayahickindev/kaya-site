@@ -5,6 +5,7 @@ import {
   Target,
   type LucideIcon,
 } from "lucide-react";
+import { CompanyMark, hasCompanyMark } from "@/components/CompanyMark";
 import { ContributionGraph } from "@/components/ContributionGraph";
 import { SubpageShell } from "@/components/SubpageShell";
 import { siteConfig } from "@/data/content";
@@ -57,10 +58,7 @@ export default function AboutPage() {
           </div>
 
           <div className="max-w-prose space-y-4 text-base leading-relaxed text-neutral-700 xl:text-lg dark:text-neutral-300">
-            <p className="font-serif text-2xl italic leading-snug text-neutral-900 sm:text-3xl xl:text-[2rem] dark:text-neutral-100">
-              {paragraphs[0]}
-            </p>
-            {paragraphs.slice(1).map((p) => (
+            {paragraphs.map((p) => (
               <p key={p}>{p}</p>
             ))}
           </div>
@@ -121,6 +119,7 @@ export default function AboutPage() {
           <ol className="relative space-y-6 border-l border-black/10 pl-5 dark:border-white/10">
             {siteConfig.timeline.map((entry) => {
               const mark = companyMarks[entry.company];
+              const showLogo = hasCompanyMark(entry.company);
               return (
                 <li key={entry.company} className="relative">
                   <span
@@ -132,9 +131,11 @@ export default function AboutPage() {
                   />
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex items-center gap-2.5">
-                      {mark ? (
+                      {showLogo ? (
+                        <CompanyMark company={entry.company} size={28} />
+                      ) : mark ? (
                         <span
-                          className={`grid h-6 w-6 shrink-0 place-items-center rounded text-xs font-bold ${mark.accent}`}
+                          className={`grid h-7 w-7 shrink-0 place-items-center rounded text-xs font-bold ${mark.accent}`}
                         >
                           {mark.letter}
                         </span>
@@ -147,14 +148,14 @@ export default function AboutPage() {
                       {entry.period}
                     </span>
                   </div>
-                  <p className="ml-[34px] mt-0.5 text-xs text-neutral-500 dark:text-neutral-500">
+                  <p className="ml-[38px] mt-0.5 text-xs text-neutral-500 dark:text-neutral-500">
                     {entry.role}
                   </p>
-                  <p className="ml-[34px] mt-2 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+                  <p className="ml-[38px] mt-2 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
                     {entry.description}
                   </p>
                   {entry.metrics && entry.metrics.length > 0 ? (
-                    <div className="ml-[34px] mt-2.5 flex flex-wrap gap-1.5">
+                    <div className="ml-[38px] mt-2.5 flex flex-wrap gap-1.5">
                       {entry.metrics.slice(0, 3).map((m) => (
                         <span
                           key={m}

@@ -98,7 +98,7 @@ export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
                 {group.category}
               </h2>
             </div>
-            <ul className="mt-3 grid gap-1.5">
+            <ul className="mt-3 grid gap-2">
               {group.items.map((item, itemIndex) => (
                 <motion.li
                   key={item.name}
@@ -106,9 +106,9 @@ export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
                   initial={reducedMotion ? false : "hidden"}
                   animate="show"
                   variants={itemVariants}
-                  className="flex items-center gap-2 rounded bg-neutral-950/[0.04] px-2 py-1.5 text-xs text-neutral-800 transition hover:bg-neutral-950/[0.07] dark:bg-white/[0.04] dark:text-neutral-200 dark:hover:bg-white/[0.07]"
+                  className="flex items-center gap-2.5 rounded-md bg-neutral-950/[0.04] px-2.5 py-2.5 text-sm text-neutral-800 transition hover:bg-neutral-950/[0.07] dark:bg-white/[0.04] dark:text-neutral-200 dark:hover:bg-white/[0.07]"
                 >
-                  <BrandLogo name={item.name} size={14} />
+                  <BrandLogo name={item.name} size={20} />
                   <span className="truncate">{item.name}</span>
                 </motion.li>
               ))}

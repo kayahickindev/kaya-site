@@ -43,7 +43,7 @@ const cardHighlights: Record<string, string[]> = {
     "Hundreds of qualified meetings booked",
   ],
   "leadboost-pro": [
-    "Profitable from year one",
+    "Profitable from month one",
     "20+ custom websites freshman year",
     "Dorm-room start, still live",
   ],

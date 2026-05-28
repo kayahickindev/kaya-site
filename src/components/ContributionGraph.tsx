@@ -5,9 +5,13 @@ import { motion, useReducedMotion } from "framer-motion";
 
 // Deterministic pseudo-random based on cell index — gives a plausible "active
 // developer" heatmap that's stable across renders without fetching anything.
-function intensityFor(week: number, day: number) {
+function rndFor(week: number, day: number) {
   const seed = (week * 7 + day) * 9301 + 49297;
-  const rnd = (seed % 233280) / 233280;
+  return (seed % 233280) / 233280;
+}
+
+function intensityFor(week: number, day: number) {
+  const rnd = rndFor(week, day);
   // Bias toward more recent weeks being denser, with quieter weekends.
   const recency = week / 52;
   const weekendDip = day === 0 || day === 6 ? 0.55 : 1;
@@ -18,6 +22,24 @@ function intensityFor(week: number, day: number) {
   if (value < 0.52) return 2;
   if (value < 0.72) return 3;
   return 4;
+}
+
+function commitsFor(level: number, week: number, day: number) {
+  if (level === 0) return 0;
+  const rnd = rndFor(week, day);
+  if (level === 1) return 1 + Math.floor(rnd * 3);
+  if (level === 2) return 4 + Math.floor(rnd * 5);
+  if (level === 3) return 9 + Math.floor(rnd * 6);
+  return 15 + Math.floor(rnd * 11);
+}
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function formatCellDate(daysAgo: number) {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  d.setDate(d.getDate() - daysAgo);
+  return `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
 }
 
 export type ContributionPalette = "amber" | "emerald";
@@ -46,10 +68,19 @@ export function ContributionGraph({
   const cellFills = cellFillsByPalette[palette];
 
   const cells = useMemo(() => {
-    const result: { x: number; y: number; level: number }[] = [];
+    const result: {
+      x: number;
+      y: number;
+      level: number;
+      commits: number;
+      daysAgo: number;
+    }[] = [];
     for (let w = 0; w < weeks; w++) {
       for (let d = 0; d < 7; d++) {
-        result.push({ x: w, y: d, level: intensityFor(w, d) });
+        const level = intensityFor(w, d);
+        const commits = commitsFor(level, w, d);
+        const daysAgo = (weeks - 1 - w) * 7 + (6 - d);
+        result.push({ x: w, y: d, level, commits, daysAgo });
       }
     }
     return result;
@@ -87,6 +118,7 @@ export function ContributionGraph({
               height={cellSize}
               rx={2}
               fill={cellFills[cell.level]}
+              className="cursor-pointer transition-opacity hover:opacity-80"
               initial={reducedMotion ? false : { opacity: 0, scale: 0.6 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{
@@ -94,7 +126,13 @@ export function ContributionGraph({
                 delay: reducedMotion ? 0 : cell.x * 0.006 + cell.y * 0.01,
                 ease: [0.21, 0.47, 0.32, 0.98],
               }}
-            />
+            >
+              <title>
+                {cell.commits === 0
+                  ? `No contributions on ${formatCellDate(cell.daysAgo)}`
+                  : `${cell.commits} contribution${cell.commits === 1 ? "" : "s"} on ${formatCellDate(cell.daysAgo)}`}
+              </title>
+            </motion.rect>
           ))}
         </svg>
       </div>
