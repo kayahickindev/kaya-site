@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Briefcase, Globe, Smartphone, type LucideIcon } from "lucide-react";
+import { CompanyMark, hasCompanyMark } from "@/components/CompanyMark";
 import { SubpageShell } from "@/components/SubpageShell";
 import { TiltImage } from "@/components/TiltImage";
 import { siteConfig } from "@/data/content";
@@ -35,7 +37,7 @@ const cardHighlights: Record<string, string[]> = {
   ],
   "dog-ai": [
     "Custom multimodal LLM",
-    "Trained on tens of thousands of dog images",
+    "Trained on Harvard dataset",
   ],
   appointra: [
     "$2M+ in client pipeline generated",
@@ -46,6 +48,26 @@ const cardHighlights: Record<string, string[]> = {
     "Blue collar businesses",
   ],
 };
+
+const projectKind: Record<string, { label: string; icon: LucideIcon }> = {
+  myfutureself: { label: "iOS App", icon: Smartphone },
+  "viral-loop": { label: "Web Service", icon: Globe },
+  "dog-ai": { label: "iOS App", icon: Smartphone },
+  appointra: { label: "Agency", icon: Briefcase },
+  "leadboost-pro": { label: "Agency", icon: Briefcase },
+};
+
+function KindChip({ slug }: { slug: string }) {
+  const kind = projectKind[slug];
+  if (!kind) return null;
+  const Icon = kind.icon;
+  return (
+    <span className="inline-flex shrink-0 items-center gap-1 rounded-md border border-emerald-500/25 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-emerald-800 dark:border-emerald-300/25 dark:bg-emerald-300/10 dark:text-emerald-200">
+      <Icon size={11} strokeWidth={2.25} />
+      {kind.label}
+    </span>
+  );
+}
 
 export default function WorkPage() {
   const hero = projectDetails.find((d) => d.slug === "myfutureself");
@@ -68,14 +90,22 @@ export default function WorkPage() {
           >
             <div className="relative grid grid-cols-1 gap-0 md:grid-cols-[1fr_1fr]">
               <div className="flex flex-col gap-3 p-5 md:p-6">
-                <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-                  {hero.role} · {hero.timeframe}
-                </p>
+                <div className="flex items-center justify-between gap-3">
+                  <p className="truncate text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+                    {hero.role} · {hero.timeframe}
+                  </p>
+                  <KindChip slug={hero.slug} />
+                </div>
 
                 <div>
-                  <h2 className="text-3xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-4xl dark:text-white">
-                    {hero.project.name}
-                  </h2>
+                  <div className="flex items-center gap-2.5">
+                    {hasCompanyMark(hero.project.name) ? (
+                      <CompanyMark company={hero.project.name} size={32} />
+                    ) : null}
+                    <h2 className="text-3xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-4xl dark:text-white">
+                      {hero.project.name}
+                    </h2>
+                  </div>
                   <p className="mt-1.5 text-sm text-neutral-700 dark:text-neutral-300">
                     {hero.project.tagline}
                   </p>
@@ -133,16 +163,22 @@ export default function WorkPage() {
                   className="pointer-events-none absolute -inset-px bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,0%),rgba(16,185,129,0.14),transparent_55%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,0%),rgba(52,211,153,0.14),transparent_55%)]"
                 />
 
-                <div className="relative min-w-0">
+                <div className="relative flex items-center justify-between gap-2">
                   <p className="truncate text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
                     {detail.role}
                     {detail.timeframe ? ` · ${detail.timeframe}` : ""}
                   </p>
+                  <KindChip slug={detail.slug} />
                 </div>
 
-                <h2 className="relative mt-2 text-xl font-semibold leading-tight tracking-tight text-neutral-950 sm:text-2xl dark:text-white">
-                  {project.name}
-                </h2>
+                <div className="relative mt-2 flex items-center gap-2">
+                  {hasCompanyMark(project.name) ? (
+                    <CompanyMark company={project.name} size={22} />
+                  ) : null}
+                  <h2 className="text-xl font-semibold leading-tight tracking-tight text-neutral-950 sm:text-2xl dark:text-white">
+                    {project.name}
+                  </h2>
+                </div>
 
                 <div className="relative mt-3 flex items-baseline gap-2">
                   <span className="text-2xl font-semibold tracking-tight text-neutral-950 dark:text-white">

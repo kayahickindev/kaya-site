@@ -216,16 +216,6 @@ export function TopNav() {
               </Link>
             );
           })}
-          <span aria-hidden className="mx-1 h-4 w-px bg-black/10 dark:bg-white/10" />
-          <button
-            type="button"
-            onClick={() => setPaletteOpen(true)}
-            aria-label="Open command menu (Cmd+K)"
-            title="Search (Cmd+K)"
-            className="grid h-7 w-7 place-items-center rounded-full text-neutral-600 transition hover:bg-neutral-950/[0.055] hover:text-neutral-950 dark:text-neutral-400 dark:hover:bg-white/[0.07] dark:hover:text-white"
-          >
-            <Search size={14} />
-          </button>
         </nav>
 
         <div aria-hidden className="h-10" />

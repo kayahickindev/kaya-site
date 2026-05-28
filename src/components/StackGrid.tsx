@@ -76,7 +76,9 @@ export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
               className={`pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r ${meta.bar}`}
             />
             <div className="flex items-center gap-2 border-b border-black/10 pb-2 dark:border-white/10">
-              <Icon size={15} className={meta.accent} />
+              <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-cyan-500/10 ring-1 ring-cyan-500/20 dark:bg-cyan-300/10 dark:ring-cyan-300/20">
+                <Icon size={13} strokeWidth={2} className={meta.accent} />
+              </span>
               <h2 className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
                 {group.category}
               </h2>

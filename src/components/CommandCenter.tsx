@@ -138,13 +138,6 @@ const metricTiles = [
     sparkline: [4.4, 4.5, 4.6, 4.6, 4.7, 4.7, 4.7, 4.7],
     accent: "rgb(251,191,36)",
   },
-  {
-    value: 52,
-    label: "avg monthly growth",
-    suffix: "%",
-    sparkline: [38, 44, 49, 51, 50, 53, 56, 52],
-    accent: "rgb(244,114,182)",
-  },
 ];
 
 export function CommandCenter() {
@@ -161,7 +154,7 @@ export function CommandCenter() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.48, ease }}
-            className="flex flex-col justify-center gap-3 py-2 lg:col-span-7 lg:pr-3"
+            className="flex flex-col justify-center gap-2.5 py-1 lg:col-span-7 lg:pr-3"
           >
             <div className="relative max-w-5xl">
               <div aria-hidden className="aurora" />
@@ -173,7 +166,7 @@ export function CommandCenter() {
               </div>
             </div>
 
-            <div className="mt-1 flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <Link
                 href="/work"
                 className="inline-flex h-10 items-center gap-2 rounded-md border border-amber-400/40 bg-amber-400/15 px-4 text-sm font-medium text-amber-800 backdrop-blur transition hover:-translate-y-0.5 hover:border-amber-400/60 hover:bg-amber-400/25 dark:text-amber-200 dark:hover:bg-amber-400/20"
@@ -181,18 +174,9 @@ export function CommandCenter() {
                 See work
                 <ArrowRight size={16} />
               </Link>
-              <a
-                href={siteConfig.social.myfutureself}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-10 items-center gap-2 rounded-md border border-black/10 bg-white/55 px-4 text-sm font-medium text-neutral-800 backdrop-blur transition hover:-translate-y-0.5 hover:border-black/25 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-200 dark:hover:border-white/25 dark:hover:bg-white/[0.08]"
-              >
-                Open MyFutureSelf
-                <ArrowUpRight size={15} />
-              </a>
             </div>
 
-            <Link href="/work" className="mt-1 block" aria-label="See full work">
+            <Link href="/work" className="block" aria-label="See full work">
               <MetricTiles metrics={metricTiles} accent="amber" />
             </Link>
 
@@ -229,20 +213,13 @@ export function CommandCenter() {
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.08, ease }}
-              className="relative flex flex-col items-center justify-center gap-0 lg:col-span-5"
+              className="relative flex flex-col items-center justify-center gap-1 lg:col-span-5"
             >
               <Link
                 href={`/work/${featured.slug}`}
                 aria-label={`Open ${featured.name} case study`}
-                className="group flex flex-col items-center gap-1 text-center"
+                className="group flex flex-col items-center gap-1.5 rounded-md text-center transition focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/15 px-2.5 py-1 text-[11px] font-medium text-amber-800 backdrop-blur dark:text-amber-200">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 accent-pulse" />
-                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-500 dark:bg-amber-300" />
-                  </span>
-                  Current focus
-                </span>
                 <div className="inline-flex items-center gap-2">
                   <h2 className="text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl dark:text-white">
                     {featured.name}
@@ -252,12 +229,19 @@ export function CommandCenter() {
                     className="text-neutral-500 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-amber-600 dark:group-hover:text-amber-300"
                   />
                 </div>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/15 px-2.5 py-1 text-[11px] font-medium text-amber-800 backdrop-blur transition group-hover:-translate-y-0.5 group-hover:border-amber-400/60 group-hover:bg-amber-400/25 dark:text-amber-200">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 accent-pulse" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-500 dark:bg-amber-300" />
+                  </span>
+                  Current focus
+                </span>
               </Link>
 
               <Link
                 href={`/work/${featured.slug}`}
                 aria-label={`Open ${featured.name} case study`}
-                className="relative flex w-full items-center justify-center"
+                className="relative -mt-1 flex w-full items-center justify-center lg:-translate-x-3 xl:-translate-x-5"
               >
                 <div
                   aria-hidden
@@ -271,7 +255,7 @@ export function CommandCenter() {
                     height={1250}
                     unoptimized
                     loading="eager"
-                    className="relative h-auto max-h-[520px] w-auto scale-[1.05] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] sm:scale-[1.18] xl:scale-[1.28]"
+                    className="relative h-auto max-h-[520px] w-auto scale-[1.05] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] sm:scale-[1.18] xl:scale-[1.22]"
                   />
                 ) : null}
               </Link>

@@ -102,23 +102,23 @@ function DogAiVisual() {
       <div className="relative grid w-full max-w-md gap-3">
         <div className="rounded-md border border-white/10 bg-white/[0.05] p-4">
           <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-emerald-200/80">
-            Custom LLM
+            Custom multimodal LLM
           </p>
           <p className="mt-2 text-3xl font-semibold leading-tight">
-            Tens of thousands of dog images.
+            Trained on the Harvard dataset.
           </p>
           <p className="mt-2 text-sm leading-relaxed text-neutral-300">
-            Built and trained the underlying model myself, including a behavior dataset from Harvard.
+            Built and trained the underlying model myself on Harvard&apos;s behavioral dataset, then wrapped it in a narrow consumer flow.
           </p>
         </div>
         <div className="grid grid-cols-3 gap-2">
           <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
-            <p className="text-xl font-semibold">10,000s</p>
-            <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">training images</p>
+            <p className="text-xl font-semibold">Custom</p>
+            <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">multimodal LLM</p>
           </div>
           <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
             <p className="text-xl font-semibold">Harvard</p>
-            <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">behavior dataset</p>
+            <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">behavioral dataset</p>
           </div>
           <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
             <p className="text-xl font-semibold">Live</p>

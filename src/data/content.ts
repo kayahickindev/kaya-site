@@ -104,7 +104,7 @@ export const siteConfig = {
       name: "Dog AI",
       tagline: "Custom multimodal LLM, trained on Harvard behavioral data.",
       description:
-        "iOS app that interprets dog behavior with a custom LLM I built and trained on tens of thousands of dog images, including a behavior dataset from Harvard. A weekend build that turned into a paying App Store product.",
+        "iOS app that interprets dog behavior with a custom multimodal LLM I built and trained on a Harvard behavioral dataset. A weekend build that turned into a paying App Store product.",
       links: {
         appStore:
           "https://apps.apple.com/us/app/dog-ai-dog-mood-detector/id6746574124",

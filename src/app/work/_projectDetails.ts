@@ -50,7 +50,7 @@ export const projectDetails: ProjectDetail[] = [
     slug: "viral-loop",
     project: projectByName("Viral Loop"),
     role: "Internal tool",
-    timeframe: "",
+    timeframe: "2026",
     overview: [
       "Viral Loop is a done-for-you service that generates AI UGC content and runs the organic influencer pipeline end-to-end for clients.",
       "Built the MVP on Lovable to validate the offer and start onboarding paying clients.",
@@ -69,15 +69,14 @@ export const projectDetails: ProjectDetail[] = [
   {
     slug: "dog-ai",
     project: projectByName("Dog AI"),
-    role: "Project",
-    timeframe: "",
+    role: "Side quest",
+    timeframe: "2025",
     overview: [
-      "Dog AI is an iOS app that interprets dog behavior from a photo or video. I built and trained the underlying LLM on tens of thousands of dog images, including a behavior dataset from Harvard, then wrapped it in a fast, narrow consumer flow.",
+      "Dog AI is an iOS app that interprets dog behavior from a photo or video. I built and trained the underlying multimodal LLM on a Harvard behavioral dataset, then wrapped it in a fast, narrow consumer flow.",
       "Weekend build that became a paying App Store product. Custom multimodal model, not a wrapped API.",
     ],
     outcomes: [
-      "Custom LLM trained on tens of thousands of dog images",
-      "Incorporated a behavior dataset from Harvard",
+      "Custom multimodal LLM trained on Harvard behavioral data",
       "Live on the App Store as a paying product",
       "Weekend prototype to monetized launch",
     ],
