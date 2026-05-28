@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Search, X } from "lucide-react";
 import { siteConfig } from "@/data/content";
-import { LiveShipped } from "./LiveShipped";
 
 const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];
 
@@ -131,10 +130,8 @@ function CommandPalette({
   );
 }
 
-export function TopNav({ showLiveShipped }: { showLiveShipped?: boolean } = {}) {
+export function TopNav() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
-  const liveShippedVisible = showLiveShipped ?? isHome;
   const [paletteOpen, setPaletteOpen] = useState(false);
 
   const actions = useMemo<Action[]>(
@@ -232,13 +229,7 @@ export function TopNav({ showLiveShipped }: { showLiveShipped?: boolean } = {}) 
           </button>
         </nav>
 
-        <div className="flex shrink-0 items-center justify-end gap-2">
-          {liveShippedVisible ? (
-            <div className="hidden lg:block">
-              <LiveShipped />
-            </div>
-          ) : null}
-        </div>
+        <div aria-hidden className="h-10" />
       </motion.header>
 
       <CommandPalette

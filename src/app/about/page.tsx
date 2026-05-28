@@ -28,14 +28,14 @@ const SIDEBAR_ICONS: Record<string, LucideIcon> = {
 
 const paragraphs = [
   "Working full-time in my family's business at 14, valedictorian out of high school, shipping companies ever since. I build consumer AI for behavior change.",
-  "Shipped two iOS apps to the App Store. Two crypto projects at $500K+ combined market cap. 170K lines of code and 1,400+ commits this year. Self-funded my Miami University tuition. Graduated with honors.",
+  "Shipped two iOS apps to the App Store. Two crypto projects at $500K+ combined market cap. 200K+ lines of code and 2,600+ contributions this year. Self-funded my Miami University tuition. Graduated with honors.",
 ];
 
 const highlightStats = [
   { value: "8 yrs", label: "professional experience" },
   { value: "3-for-3", label: "profitable companies" },
-  { value: "170K", label: "LOC shipped this year" },
-  { value: "2,600+", label: "contributions last year" },
+  { value: "200K+", label: "LOC shipped this year" },
+  { value: "2,600+", label: "contributions this year" },
 ];
 
 const companyMarks: Record<string, { letter: string; accent: string }> = {
@@ -75,7 +75,7 @@ export default function AboutPage() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {siteConfig.about.sidebar.map((item) => {
             const Icon = SIDEBAR_ICONS[item.icon] ?? MapPin;
             const detail = "detail" in item ? item.detail : undefined;

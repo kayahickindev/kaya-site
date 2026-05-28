@@ -63,7 +63,6 @@ const proofGroups = [
       "Solo-built iOS, backend, and voice-AI stack",
       "SwiftUI · Core Data · StoreKit",
       "Realtime voice via WebRTC + OpenAI Realtime",
-      "2,600+ GitHub contributions last year",
     ],
   },
   {
@@ -74,7 +73,6 @@ const proofGroups = [
       "Three-for-three on profitable companies",
       "Appointra: $20K MRR in three months",
       "Millions in client pipeline generated",
-      "Winner, RedHawk Accelerator (Miami University)",
     ],
   },
 ];
