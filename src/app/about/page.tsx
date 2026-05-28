@@ -106,7 +106,7 @@ export default function AboutPage() {
 
         <div className="relative overflow-hidden rounded-md border border-black/10 bg-gradient-to-b from-white/80 to-white/40 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur dark:border-white/10 dark:from-white/[0.05] dark:to-white/[0.015] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
           <div className="flex flex-col gap-3">
-            <ContributionGraph contributionCount="3,000+" palette="amber" />
+            <ContributionGraph palette="amber" />
             <div className="flex items-center justify-end">
               <a
                 href={siteConfig.github.url}
