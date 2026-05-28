@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import {
   ArrowUpRight,
-  Award,
   GraduationCap,
   MapPin,
   Target,
@@ -106,55 +105,60 @@ export default function AboutPage() {
         </div>
 
         <div className="flex flex-col gap-3">
-          <div className="flex items-center justify-between gap-3">
-            <h2 className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
-              The path
-            </h2>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 text-[11px] font-medium text-amber-800 backdrop-blur dark:border-amber-300/30 dark:bg-amber-300/10 dark:text-amber-200">
-              <Award size={12} />
-              Winner · RedHawk 2025
-            </span>
-          </div>
+          <h2 className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
+            The path
+          </h2>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-            {siteConfig.timeline.map((entry) => {
+            {[...siteConfig.timeline].reverse().map((entry, idx, arr) => {
               const mark = companyMarks[entry.company];
               const showLogo = hasCompanyMark(entry.company);
+              const isLast = idx === arr.length - 1;
+              const segmentTint =
+                idx === 0
+                  ? "from-amber-400/25 to-amber-400/45"
+                  : "from-amber-400/45 to-amber-400/65";
               return (
-                <div key={entry.company} className={`${cardSurface} flex flex-col gap-2 p-3`}>
-                  <div className="flex items-center justify-between border-b border-black/10 pb-2 dark:border-white/10">
-                    <div className="flex items-center gap-2">
+                <div key={entry.company} className="flex flex-col gap-2">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`grid h-3 w-3 shrink-0 place-items-center rounded-full border-2 ${
+                        entry.active
+                          ? "border-amber-500 bg-amber-400 shadow-[0_0_10px_rgba(212,155,90,0.55)]"
+                          : "border-neutral-400 bg-white dark:border-neutral-600 dark:bg-neutral-950"
+                      }`}
+                    />
+                    <span className="whitespace-nowrap text-[10px] font-mono uppercase tracking-wide text-neutral-500">
+                      {entry.period}
+                    </span>
+                    {!isLast ? (
                       <span
-                        className={`grid h-3 w-3 shrink-0 place-items-center rounded-full border-2 ${
-                          entry.active
-                            ? "border-amber-500 bg-amber-400 shadow-[0_0_10px_rgba(212,155,90,0.55)]"
-                            : "border-neutral-400 bg-white dark:border-neutral-600 dark:bg-neutral-950"
-                        }`}
+                        aria-hidden
+                        className={`hidden h-px flex-1 self-center bg-gradient-to-r md:block ${segmentTint}`}
                       />
-                      <span className="text-[10px] font-mono uppercase tracking-wide text-neutral-500">
-                        {entry.period}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2.5">
-                    {showLogo ? (
-                      <CompanyMark company={entry.company} size={24} />
-                    ) : mark ? (
-                      <span
-                        className={`grid h-6 w-6 shrink-0 place-items-center rounded text-xs font-bold ${mark.accent}`}
-                      >
-                        {mark.letter}
-                      </span>
                     ) : null}
-                    <p className="text-sm font-semibold text-neutral-950 dark:text-white">
-                      {entry.company}
+                  </div>
+                  <div className={`${cardSurface} flex flex-col gap-2 p-3`}>
+                    <div className="flex items-center gap-2.5">
+                      {showLogo ? (
+                        <CompanyMark company={entry.company} size={24} />
+                      ) : mark ? (
+                        <span
+                          className={`grid h-6 w-6 shrink-0 place-items-center rounded text-xs font-bold ${mark.accent}`}
+                        >
+                          {mark.letter}
+                        </span>
+                      ) : null}
+                      <p className="text-sm font-semibold text-neutral-950 dark:text-white">
+                        {entry.company}
+                      </p>
+                    </div>
+                    <p className="text-[11px] text-neutral-500 dark:text-neutral-500">
+                      {entry.role}
+                    </p>
+                    <p className="text-xs leading-relaxed text-neutral-700 dark:text-neutral-300">
+                      {entry.description}
                     </p>
                   </div>
-                  <p className="text-[11px] text-neutral-500 dark:text-neutral-500">
-                    {entry.role}
-                  </p>
-                  <p className="text-xs leading-relaxed text-neutral-700 dark:text-neutral-300">
-                    {entry.description}
-                  </p>
                 </div>
               );
             })}
