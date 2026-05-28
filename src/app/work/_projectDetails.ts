@@ -94,7 +94,7 @@ export const projectDetails: ProjectDetail[] = [
     timeframe: "",
     overview: [
       "Dog AI is an iOS app that interprets dog behavior from a photo or video. I built and trained the underlying LLM on tens of thousands of dog images, including a behavior dataset from Harvard, then wrapped it in a fast, narrow consumer flow.",
-      "The product started as a weekend build and became a paying App Store product. Scope stayed intentionally tight around one clear question: what is the dog actually feeling.",
+      "Weekend build that became a paying App Store product. Custom multimodal model, not a wrapped API.",
     ],
     outcomes: [
       "Custom LLM trained on tens of thousands of dog images",

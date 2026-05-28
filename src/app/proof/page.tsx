@@ -61,17 +61,6 @@ const emeraldAccent = {
 
 const proofGroups = [
   {
-    label: "Product traction",
-    icon: "TrendingUp" as const,
-    ...emeraldAccent,
-    points: [
-      "1,718 paid subscribers · $65K ARR",
-      "26K+ App Store downloads in 7 months",
-      "52% avg monthly revenue growth",
-      "4.7★ rating across 715 reviews",
-    ],
-  },
-  {
     label: "Depth of build",
     icon: "Wrench" as const,
     ...emeraldAccent,

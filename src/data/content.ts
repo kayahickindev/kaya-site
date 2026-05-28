@@ -119,7 +119,7 @@ export const siteConfig = {
     {
       slug: "dog-ai",
       name: "Dog AI",
-      tagline: "What's your dog actually feeling?",
+      tagline: "Custom multimodal LLM, trained on Harvard behavioral data.",
       description:
         "iOS app that interprets dog behavior with a custom LLM I built and trained on tens of thousands of dog images, including a behavior dataset from Harvard. A weekend build that turned into a paying App Store product.",
       links: {

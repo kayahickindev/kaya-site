@@ -234,16 +234,8 @@ export function TopNav({ showLiveShipped }: { showLiveShipped?: boolean } = {}) 
             type="button"
             onClick={() => setPaletteOpen(true)}
             aria-label="Open command menu (Cmd+K)"
-            className="hidden h-10 items-center gap-2 rounded-md border border-black/10 bg-white/45 px-3 text-xs text-neutral-600 backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-white/[0.035] dark:text-neutral-400 dark:hover:bg-white/[0.08] sm:flex"
-          >
-            <Search size={14} />
-            <span>Search</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setPaletteOpen(true)}
-            aria-label="Open command menu"
-            className="grid h-10 w-10 place-items-center rounded-md border border-black/10 bg-white/45 backdrop-blur sm:hidden dark:border-white/10 dark:bg-white/[0.035]"
+            title="Search (Cmd+K)"
+            className="grid h-10 w-10 place-items-center rounded-md border border-black/10 bg-white/45 text-neutral-600 backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-white/[0.035] dark:text-neutral-400 dark:hover:bg-white/[0.08]"
           >
             <Search size={16} />
           </button>
