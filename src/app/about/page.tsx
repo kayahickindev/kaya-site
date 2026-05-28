@@ -166,7 +166,7 @@ export default function AboutPage() {
         </div>
 
         <div className={`${cardSurface} flex flex-col gap-3 p-4`}>
-          <ContributionGraph contributionCount="2,600+" palette="emerald" />
+          <ContributionGraph contributionCount="2,600+" palette="amber" />
           <div className="flex flex-wrap items-center justify-between gap-3 border-t border-black/10 pt-3 dark:border-white/10">
             <span className="font-mono text-xs text-neutral-500">
               github.com/{siteConfig.github.username}
