@@ -2,6 +2,7 @@
 
 import { type ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { Footer } from "./Footer";
 import { TopNav } from "./TopNav";
 
 const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];
@@ -92,17 +93,19 @@ export function SubpageShell({ children, accent = "amber" }: Props) {
   return (
     <main className="relative min-h-dvh overflow-x-clip bg-[#f4f1ea] text-neutral-950 dark:bg-[#050505] dark:text-white">
       <SignalField accent={accent} />
-      <div className="relative z-10 flex flex-col gap-6 px-4 py-3 sm:px-5 sm:py-4 lg:px-7">
+      <div className="relative z-10 flex min-h-dvh flex-col gap-6 px-4 py-3 sm:px-5 sm:py-4 lg:px-7">
         <TopNav />
 
         <motion.section
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.42, ease }}
-          className="pb-6"
+          className="flex-1 pb-6"
         >
           {children}
         </motion.section>
+
+        <Footer />
       </div>
     </main>
   );

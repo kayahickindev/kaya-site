@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/data/content";
+import { Footer } from "./Footer";
 import { MetricTiles } from "./MetricTiles";
 import { RevealHeadline } from "./RevealHeadline";
 import { TopNav } from "./TopNav";
@@ -152,7 +153,7 @@ export function CommandCenter() {
   return (
     <main className="relative min-h-dvh overflow-hidden bg-[#f4f1ea] text-neutral-950 dark:bg-[#050505] dark:text-white">
       <SignalField />
-      <div className="relative z-10 grid min-h-dvh grid-rows-[auto_1fr] gap-4 px-4 py-3 sm:px-5 sm:py-4 lg:px-7">
+      <div className="relative z-10 grid min-h-dvh grid-rows-[auto_1fr_auto] gap-4 px-4 py-3 sm:px-5 sm:py-4 lg:px-7">
         <TopNav />
 
         <section className="grid grid-cols-1 gap-6 pb-6 lg:grid-cols-12">
@@ -167,7 +168,7 @@ export function CommandCenter() {
               <div className="relative">
                 <RevealHeadline
                   words={["I", "build", "consumer", "AI", "that", "changes", "behavior."]}
-                  className="text-4xl font-semibold leading-[0.95] text-neutral-950 sm:text-6xl sm:leading-[0.92] xl:text-7xl 2xl:text-8xl dark:text-white"
+                  className="text-4xl font-semibold leading-[0.95] text-neutral-950 sm:text-5xl sm:leading-[0.92] xl:text-6xl 2xl:text-7xl dark:text-white"
                 />
               </div>
             </div>
@@ -277,6 +278,8 @@ export function CommandCenter() {
             </motion.div>
           )}
         </section>
+
+        <Footer />
       </div>
     </main>
   );

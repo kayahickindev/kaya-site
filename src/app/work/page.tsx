@@ -42,8 +42,8 @@ const cardHighlights: Record<string, string[]> = {
     "Cold-email infra for 8/9-figure founders",
   ],
   "leadboost-pro": [
-    "Marketing, web dev, consulting",
-    "Small and underrepresented businesses",
+    "Web dev, marketing, and consulting",
+    "Blue collar businesses",
   ],
 };
 
@@ -156,7 +156,7 @@ export default function WorkPage() {
                 <ul className="relative mt-2 grid gap-1 text-xs text-neutral-700 dark:text-neutral-300">
                   {highlights.map((h) => (
                     <li key={h} className="flex items-start gap-2">
-                      <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-neutral-400 dark:bg-neutral-500" />
+                      <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-emerald-500/60 dark:bg-emerald-300/60" />
                       <span className="leading-snug">{h}</span>
                     </li>
                   ))}
