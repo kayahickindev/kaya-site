@@ -119,9 +119,6 @@ export default function AboutPage() {
         </div>
 
         <div className="flex flex-col gap-3">
-          <h2 className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
-            The path
-          </h2>
           <PathTimeline />
         </div>
 

@@ -157,7 +157,7 @@ export function CommandCenter() {
             className="flex flex-col justify-center gap-2.5 py-1 lg:col-span-7 lg:pr-3"
           >
             <div className="group flex w-fit items-center gap-3">
-              <span className="relative block h-14 w-14 shrink-0 overflow-hidden rounded-full border border-black/10 shadow-[0_4px_16px_-6px_rgba(0,0,0,0.4)] ring-1 ring-amber-400/25 dark:border-white/15">
+              <span className="relative block h-14 w-14 shrink-0 overflow-hidden rounded-2xl border border-black/10 shadow-[0_4px_16px_-6px_rgba(0,0,0,0.4)] ring-1 ring-amber-400/25 dark:border-white/15">
                 <Image
                   src="/headshot.jpg"
                   alt="Kaya Hickin"
@@ -187,21 +187,12 @@ export function CommandCenter() {
               </div>
             </div>
 
-            <Link href="/work" aria-label="See full work" className="group block">
-              <div className="mb-1.5 flex items-center justify-between">
-                <span className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-300">
-                  Live traction · MyFutureSelf
-                </span>
-                <span className="inline-flex items-center gap-1 text-[11px] font-medium text-neutral-500 transition group-hover:text-amber-700 dark:text-neutral-300 dark:group-hover:text-amber-300">
-                  All work
-                  <ArrowUpRight
-                    size={13}
-                    className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  />
-                </span>
-              </div>
+            <div>
+              <p className="mb-1.5 text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-300">
+                Live traction · MyFutureSelf
+              </p>
               <MetricTiles metrics={metricTiles} accent="amber" />
-            </Link>
+            </div>
 
             <div className="flex flex-wrap items-center gap-2">
               <Link
@@ -243,7 +234,7 @@ export function CommandCenter() {
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.08, ease }}
-              className="relative flex flex-col items-center justify-center gap-0 pb-2 lg:col-span-5 lg:-translate-x-3 xl:-translate-x-5"
+              className="relative flex flex-col items-center justify-end gap-0 pb-2 lg:col-span-5 lg:-translate-x-3 xl:-translate-x-5"
             >
               <Link
                 href={`/work/${featured.slug}`}
@@ -271,7 +262,7 @@ export function CommandCenter() {
               <Link
                 href={`/work/${featured.slug}`}
                 aria-label={`Open ${featured.name} case study`}
-                className="relative -mt-6 flex w-full items-center justify-center"
+                className="relative -mt-16 flex w-full items-center justify-center xl:-mt-24"
               >
                 <div
                   aria-hidden

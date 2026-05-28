@@ -172,7 +172,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
+      className={`dark ${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-dvh bg-white dark:bg-[#070605] text-neutral-900 dark:text-neutral-100 font-sans antialiased">
