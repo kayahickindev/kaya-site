@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BrandLogo } from "@/components/BrandLogo";
+import Image from "next/image";
 import { StackGrid } from "@/components/StackGrid";
 import { SubpageShell } from "@/components/SubpageShell";
 import { siteConfig } from "@/data/content";
@@ -17,8 +17,9 @@ export const metadata: Metadata = {
 const CATEGORY_ORDER = ["iOS", "Web", "Backend", "AI", "Workflow"] as const;
 
 type UsageTile = {
-  brand: string;
   product: string;
+  logo: string;
+  alt: string;
   primary: string;
   primaryLabel: string;
   secondary: string;
@@ -26,25 +27,28 @@ type UsageTile = {
 
 const usage: UsageTile[] = [
   {
-    brand: "Wispr Flow",
     product: "Wispr Flow",
+    logo: "/logos/wispr-flow.png",
+    alt: "Wispr Flow logo",
     primary: "200K+",
     primaryLabel: "words dictated",
     secondary: "75-day streak · 119 WPM",
   },
   {
-    brand: "Claude Code",
     product: "Claude Code",
+    logo: "/logos/claude-code.svg",
+    alt: "Claude Code logo",
     primary: "48.7M",
     primaryLabel: "tokens consumed",
     secondary: "391 sessions · Opus 4.7 favorite",
   },
   {
-    brand: "Codex",
     product: "Codex",
-    primary: "Soon",
-    primaryLabel: "usage stats",
-    secondary: "Pulled directly from the platform",
+    logo: "/logos/codex.svg",
+    alt: "OpenAI Codex logo",
+    primary: "6.05B",
+    primaryLabel: "tokens, all-time",
+    secondary: "617 threads · since Oct 2025",
   },
 ];
 
@@ -72,13 +76,22 @@ export default function StackPage() {
               <span className="block h-1.5 w-1.5 rounded-full bg-cyan-600 dark:bg-cyan-300 accent-pulse" />
             </span>
             <h2 className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
-              Daily output
+              Daily drivers
             </h2>
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {usage.map((tile) => (
               <div key={tile.product} className={`${cardSurface} flex items-center gap-3 p-4`}>
-                <BrandLogo name={tile.brand} size={36} />
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-white p-2 ring-1 ring-black/10">
+                  <Image
+                    src={tile.logo}
+                    alt={tile.alt}
+                    width={28}
+                    height={28}
+                    unoptimized
+                    className="h-7 w-7 object-contain"
+                  />
+                </span>
                 <div className="min-w-0 flex-1">
                   <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
                     {tile.product}
