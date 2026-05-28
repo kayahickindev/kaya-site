@@ -48,6 +48,46 @@ export const projectDetails: ProjectDetail[] = [
     stack: ["Swift", "SwiftUI", "StoreKit", "WebRTC", "Firebase", "OpenAI", "Claude"],
   },
   {
+    slug: "mfs-universities",
+    project: projectByName("MyFutureSelf for Universities"),
+    role: "Co-founder · Builder",
+    timeframe: "2026 - Present",
+    overview: [
+      "MyFutureSelf for Universities brings the future-self mentorship experience to college students through a web app, starting with Miami University.",
+      "Built on Lovable so the product can iterate alongside student feedback during the pilot.",
+    ],
+    outcomes: [
+      "Live pilot with Miami University students",
+      "Web-based MyFutureSelf experience",
+    ],
+    ownership: [
+      "Product scope and student-flow design",
+      "Web implementation on Lovable",
+      "Pilot rollout with Miami University",
+    ],
+    stack: ["Lovable", "Web"],
+  },
+  {
+    slug: "viral-loop",
+    project: projectByName("Viral Loop"),
+    role: "Co-founder · Builder",
+    timeframe: "2026 - Present",
+    overview: [
+      "Viral Loop is a done-for-you service that generates AI UGC content and runs the organic influencer pipeline end-to-end for clients.",
+      "Built the MVP on Lovable to validate the offer and start onboarding paying clients.",
+    ],
+    outcomes: [
+      "MVP live and accepting clients",
+      "AI-generated UGC content pipeline",
+    ],
+    ownership: [
+      "Service design and pricing",
+      "Web implementation on Lovable",
+      "Content generation pipeline",
+    ],
+    stack: ["Lovable", "AI UGC", "Web"],
+  },
+  {
     slug: "dog-ai",
     project: projectByName("Dog AI"),
     role: "Co-founder",

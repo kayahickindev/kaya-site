@@ -21,9 +21,11 @@ const cardAccent = "from-amber-500/15 via-transparent to-amber-500/5";
 
 const heroMetrics: Record<string, { value: string; label: string }> = {
   myfutureself: { value: "$65K", label: "ARR · 1,718 paid · 4.7★" },
+  "mfs-universities": { value: "Pilot", label: "Miami University" },
+  "viral-loop": { value: "Live", label: "MVP shipped" },
   "dog-ai": { value: "Live", label: "App Store · paying product" },
   appointra: { value: "$20K", label: "MRR in 3 months" },
-  "leadboost-pro": { value: "20+", label: "sites built · year-one profitable" },
+  "leadboost-pro": { value: "20+", label: "sites built · month-one profitable" },
 };
 
 const cardHighlights: Record<string, string[]> = {
@@ -31,6 +33,16 @@ const cardHighlights: Record<string, string[]> = {
     "4.7★ from 715 App Store reviews",
     "26K+ downloads · 52% avg monthly growth",
     "Solo-built iOS, backend, and voice-AI stack",
+  ],
+  "mfs-universities": [
+    "Web-based MyFutureSelf for university students",
+    "Pilot live at Miami University",
+    "Built on Lovable for fast iteration",
+  ],
+  "viral-loop": [
+    "Done-for-you AI UGC content pipeline",
+    "Organic influencer service, end-to-end",
+    "MVP live, accepting clients",
   ],
   "dog-ai": [
     "Custom LLM, trained on tens of thousands of dog images",
@@ -74,18 +86,9 @@ export default function WorkPage() {
             />
             <div className="relative grid grid-cols-1 gap-0 md:grid-cols-[1.4fr_1fr]">
               <div className="flex flex-col gap-3 p-5 md:p-6">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-                    {hero.role} · {hero.timeframe}
-                  </p>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/15 px-2 py-0.5 text-[10px] font-medium text-amber-800 dark:text-amber-200">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 accent-pulse" />
-                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-500 dark:bg-amber-300" />
-                    </span>
-                    Current focus
-                  </span>
-                </div>
+                <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+                  {hero.role} · {hero.timeframe}
+                </p>
 
                 <div>
                   <h2 className="text-3xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-4xl dark:text-white">
@@ -96,12 +99,12 @@ export default function WorkPage() {
                   </p>
                 </div>
 
-                <div className="flex items-baseline gap-2">
+                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                   <span className="text-3xl font-semibold tracking-tight text-amber-700 sm:text-4xl dark:text-amber-200">
-                    {heroMetrics[hero.slug].value}
+                    $65K ARR
                   </span>
-                  <span className="text-[11px] uppercase tracking-wide text-neutral-600 dark:text-neutral-400">
-                    {heroMetrics[hero.slug].label}
+                  <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                    1,718 paid · 4.7★
                   </span>
                 </div>
 
@@ -142,7 +145,7 @@ export default function WorkPage() {
           </Link>
         ) : null}
 
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {rest.map((detail) => {
             const { project } = detail;
             const highlights = cardHighlights[detail.slug] ?? [];

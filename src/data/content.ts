@@ -188,6 +188,32 @@ export const siteConfig = {
       status: "Current focus",
     },
     {
+      slug: "mfs-universities",
+      name: "MyFutureSelf for Universities",
+      tagline: "MyFutureSelf, built for university students.",
+      description:
+        "Web-based version of MyFutureSelf designed for university campuses. Pilot at Miami University. Built on Lovable for fast iteration with student feedback in the loop.",
+      links: {
+        website: "https://mfs-miamiuniversity.lovable.app",
+      },
+      featured: false,
+      tags: ["Web", "AI", "Education"],
+      status: "Live · Pilot",
+    },
+    {
+      slug: "viral-loop",
+      name: "Viral Loop",
+      tagline: "Done-for-you AI UGC influencer service.",
+      description:
+        "Service that generates AI UGC content and runs an organic influencer pipeline end-to-end. Built on Lovable.",
+      links: {
+        website: "https://viralloopmvp.lovable.app",
+      },
+      featured: false,
+      tags: ["AI", "UGC", "Service"],
+      status: "Live · MVP",
+    },
+    {
       slug: "dog-ai",
       name: "Dog AI",
       tagline: "What's your dog actually feeling?",

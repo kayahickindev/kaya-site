@@ -175,7 +175,7 @@ export function CommandCenter() {
             <div className="mt-1 flex flex-wrap items-center gap-2">
               <Link
                 href="/proof"
-                className="inline-flex h-10 items-center gap-2 rounded-md bg-neutral-950 px-4 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:bg-neutral-800 dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200"
+                className="inline-flex h-10 items-center gap-2 rounded-md border border-amber-400/40 bg-amber-400/15 px-4 text-sm font-medium text-amber-800 backdrop-blur transition hover:-translate-y-0.5 hover:border-amber-400/60 hover:bg-amber-400/25 dark:text-amber-200 dark:hover:bg-amber-400/20"
               >
                 See proof
                 <ArrowRight size={16} />
@@ -184,7 +184,7 @@ export function CommandCenter() {
                 href={siteConfig.social.myfutureself}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-10 items-center gap-2 rounded-md border border-black/10 bg-white/70 px-4 text-sm font-medium text-neutral-800 transition hover:-translate-y-0.5 hover:border-black/25 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-200 dark:hover:border-white/25 dark:hover:bg-white/[0.08]"
+                className="inline-flex h-10 items-center gap-2 rounded-md border border-black/10 bg-white/55 px-4 text-sm font-medium text-neutral-800 backdrop-blur transition hover:-translate-y-0.5 hover:border-black/25 hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-200 dark:hover:border-white/25 dark:hover:bg-white/[0.08]"
               >
                 Open MyFutureSelf
                 <ArrowUpRight size={15} />
@@ -228,49 +228,16 @@ export function CommandCenter() {
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.08, ease }}
-              className="relative flex flex-col items-end justify-center gap-3 lg:col-span-5"
+              className="relative flex items-center justify-center lg:col-span-5"
             >
               <Link
                 href={`/work/${featured.slug}`}
                 aria-label={`Open ${featured.name} case study`}
-                className="group relative z-10 flex w-full flex-col items-end gap-2 text-right"
-              >
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/15 px-2.5 py-1 text-[11px] font-medium text-amber-800 dark:text-amber-200">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 accent-pulse" />
-                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-500 dark:bg-amber-300" />
-                  </span>
-                  Current focus
-                </span>
-                <div className="inline-flex items-center gap-2">
-                  <h2 className="text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl xl:text-4xl dark:text-white">
-                    {featured.name}
-                  </h2>
-                  <ArrowUpRight
-                    size={18}
-                    className="text-neutral-500 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-amber-600 dark:group-hover:text-amber-300"
-                  />
-                </div>
-                <div className="flex flex-wrap items-center justify-end gap-1.5">
-                  {featured.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-md border border-black/10 bg-white/50 px-2 py-0.5 text-[10px] font-medium text-neutral-700 backdrop-blur dark:border-white/10 dark:bg-white/[0.05] dark:text-neutral-300"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </Link>
-
-              <Link
-                href={`/work/${featured.slug}`}
-                aria-label={`Open ${featured.name} case study`}
-                className="relative flex w-full items-center justify-center"
+                className="group relative flex w-full items-center justify-center"
               >
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-[-10%] bg-[radial-gradient(ellipse_55%_50%_at_50%_55%,rgba(251,191,36,0.26),transparent_65%)] dark:bg-[radial-gradient(ellipse_55%_50%_at_50%_55%,rgba(251,191,36,0.20),transparent_65%)]"
+                  className="pointer-events-none absolute inset-[-8%] bg-[radial-gradient(ellipse_60%_55%_at_50%_55%,rgba(251,191,36,0.26),transparent_65%)] dark:bg-[radial-gradient(ellipse_60%_55%_at_50%_55%,rgba(251,191,36,0.20),transparent_65%)]"
                 />
                 {featured.image ? (
                   <Image
@@ -283,6 +250,35 @@ export function CommandCenter() {
                     className="relative h-auto max-h-[520px] w-auto scale-[1.0] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] sm:scale-[1.1] xl:scale-[1.2]"
                   />
                 ) : null}
+
+                <div className="absolute left-0 right-0 top-2 z-10 flex flex-col items-center gap-2 text-center sm:left-4 sm:right-auto sm:items-start sm:text-left">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/15 px-2.5 py-1 text-[11px] font-medium text-amber-800 backdrop-blur dark:text-amber-200">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 accent-pulse" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-500 dark:bg-amber-300" />
+                    </span>
+                    Current focus
+                  </span>
+                  <div className="inline-flex items-center gap-2">
+                    <h2 className="text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl xl:text-4xl dark:text-white">
+                      {featured.name}
+                    </h2>
+                    <ArrowUpRight
+                      size={18}
+                      className="text-neutral-500 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-amber-600 dark:group-hover:text-amber-300"
+                    />
+                  </div>
+                  <div className="flex flex-wrap items-center justify-center gap-1.5 sm:justify-start">
+                    {featured.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-md border border-black/10 bg-white/55 px-2 py-0.5 text-[10px] font-medium text-neutral-700 backdrop-blur dark:border-white/10 dark:bg-white/[0.06] dark:text-neutral-300"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </Link>
             </motion.div>
           )}

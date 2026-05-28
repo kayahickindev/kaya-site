@@ -1,37 +1,7 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-
-// Deterministic pseudo-random based on cell index — gives a plausible "active
-// developer" heatmap that's stable across renders without fetching anything.
-function rndFor(week: number, day: number) {
-  const seed = (week * 7 + day) * 9301 + 49297;
-  return (seed % 233280) / 233280;
-}
-
-function intensityFor(week: number, day: number) {
-  const rnd = rndFor(week, day);
-  // Bias toward more recent weeks being denser, with quieter weekends.
-  const recency = week / 52;
-  const weekendDip = day === 0 || day === 6 ? 0.55 : 1;
-  const base = rnd * 0.7 + recency * 0.35;
-  const value = base * weekendDip;
-  if (value < 0.18) return 0;
-  if (value < 0.34) return 1;
-  if (value < 0.52) return 2;
-  if (value < 0.72) return 3;
-  return 4;
-}
-
-function commitsFor(level: number, week: number, day: number) {
-  if (level === 0) return 0;
-  const rnd = rndFor(week, day);
-  if (level === 1) return 1 + Math.floor(rnd * 3);
-  if (level === 2) return 4 + Math.floor(rnd * 5);
-  if (level === 3) return 9 + Math.floor(rnd * 6);
-  return 15 + Math.floor(rnd * 11);
-}
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -40,6 +10,48 @@ function formatCellDate(daysAgo: number) {
   d.setHours(0, 0, 0, 0);
   d.setDate(d.getDate() - daysAgo);
   return `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+}
+
+function levelFromCount(count: number) {
+  if (count === 0) return 0;
+  if (count < 4) return 1;
+  if (count < 9) return 2;
+  if (count < 15) return 3;
+  return 4;
+}
+
+// Deterministic fallback heatmap so the graph renders before (or instead of) live data.
+function rndFor(week: number, day: number) {
+  const seed = (week * 7 + day) * 9301 + 49297;
+  return (seed % 233280) / 233280;
+}
+
+function fallbackCount(week: number, day: number) {
+  const rnd = rndFor(week, day);
+  const recency = week / 52;
+  const weekendDip = day === 0 || day === 6 ? 0.55 : 1;
+  const base = (rnd * 0.7 + recency * 0.35) * weekendDip;
+  if (base < 0.18) return 0;
+  if (base < 0.34) return 1 + Math.floor(rnd * 3);
+  if (base < 0.52) return 4 + Math.floor(rnd * 5);
+  if (base < 0.72) return 9 + Math.floor(rnd * 6);
+  return 15 + Math.floor(rnd * 11);
+}
+
+type RemoteDay = { date: string; count: number };
+
+async function fetchContributions(username: string): Promise<RemoteDay[] | null> {
+  try {
+    const res = await fetch(
+      `https://github-contributions-api.jogruber.de/v4/${username}?y=last`,
+      { cache: "force-cache" },
+    );
+    if (!res.ok) return null;
+    const json = (await res.json()) as { contributions: RemoteDay[] };
+    return json.contributions ?? null;
+  } catch {
+    return null;
+  }
 }
 
 export type ContributionPalette = "amber" | "emerald";
@@ -57,15 +69,32 @@ const cellFillsByPalette: Record<ContributionPalette, string[]> = {
 
 export function ContributionGraph({
   weeks = 52,
-  contributionCount = "2,600+",
+  contributionCount,
   palette = "amber",
+  username = "kayahickindev",
 }: {
   weeks?: number;
   contributionCount?: string;
   palette?: ContributionPalette;
+  username?: string;
 }) {
   const reducedMotion = useReducedMotion();
   const cellFills = cellFillsByPalette[palette];
+
+  const [remote, setRemote] = useState<RemoteDay[] | null>(null);
+  const [remoteTotal, setRemoteTotal] = useState<number | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchContributions(username).then((days) => {
+      if (cancelled || !days) return;
+      setRemote(days);
+      setRemoteTotal(days.reduce((sum, d) => sum + d.count, 0));
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [username]);
 
   const cells = useMemo(() => {
     const result: {
@@ -75,16 +104,54 @@ export function ContributionGraph({
       commits: number;
       daysAgo: number;
     }[] = [];
+
+    if (remote && remote.length > 0) {
+      // Take the most recent (weeks * 7) days from the remote series and lay them out
+      // so the last cell is "today" (week 51, day 6).
+      const total = weeks * 7;
+      const slice = remote.slice(Math.max(0, remote.length - total));
+      slice.forEach((day, i) => {
+        const offsetFromEnd = slice.length - 1 - i;
+        const w = weeks - 1 - Math.floor(offsetFromEnd / 7);
+        const d = 6 - (offsetFromEnd % 7);
+        if (w < 0 || w >= weeks) return;
+        result.push({
+          x: w,
+          y: d,
+          level: levelFromCount(day.count),
+          commits: day.count,
+          daysAgo: offsetFromEnd,
+        });
+      });
+
+      // Fill any cells that didn't get assigned (older history not in slice) with 0s.
+      const seen = new Set(result.map((c) => `${c.x},${c.y}`));
+      for (let w = 0; w < weeks; w++) {
+        for (let d = 0; d < 7; d++) {
+          const key = `${w},${d}`;
+          if (!seen.has(key)) {
+            const daysAgo = (weeks - 1 - w) * 7 + (6 - d);
+            result.push({ x: w, y: d, level: 0, commits: 0, daysAgo });
+          }
+        }
+      }
+      return result;
+    }
+
+    // Fallback: deterministic heatmap until/if remote data arrives.
     for (let w = 0; w < weeks; w++) {
       for (let d = 0; d < 7; d++) {
-        const level = intensityFor(w, d);
-        const commits = commitsFor(level, w, d);
+        const commits = fallbackCount(w, d);
         const daysAgo = (weeks - 1 - w) * 7 + (6 - d);
-        result.push({ x: w, y: d, level, commits, daysAgo });
+        result.push({ x: w, y: d, level: levelFromCount(commits), commits, daysAgo });
       }
     }
     return result;
-  }, [weeks]);
+  }, [weeks, remote]);
+
+  const displayCount = remoteTotal !== null
+    ? `${remoteTotal.toLocaleString()}`
+    : contributionCount ?? "2,600+";
 
   const cellSize = 10;
   const gap = 2;
@@ -98,7 +165,7 @@ export function ContributionGraph({
           A year of shipping
         </p>
         <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-          {contributionCount} contributions
+          {displayCount} contributions
         </p>
       </div>
       <div className="overflow-x-auto">

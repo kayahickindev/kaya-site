@@ -34,8 +34,8 @@ const paragraphs = [
 const highlightStats = [
   { value: "8 yrs", label: "professional experience" },
   { value: "3-for-3", label: "profitable companies" },
-  { value: "1,718", label: "paid subscribers" },
-  { value: "$65K", label: "ARR" },
+  { value: "2,600+", label: "contributions last year" },
+  { value: "$10K", label: "RedHawk winner" },
 ];
 
 const companyMarks: Record<string, { letter: string; accent: string }> = {

@@ -99,7 +99,7 @@ export function SubpageShell({ children, accent = "amber" }: Props) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.42, ease }}
-          className="pb-12"
+          className="pb-6"
         >
           {children}
         </motion.section>

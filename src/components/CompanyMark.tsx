@@ -30,20 +30,32 @@ function AppointraMark({ size }: { size: number }) {
     <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
       <defs>
         <linearGradient id="ap-bg" x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stopColor="#1e3a8a" />
-          <stop offset="100%" stopColor="#0c1840" />
+          <stop offset="0%" stopColor="#dbeafe" />
+          <stop offset="100%" stopColor="#bae6fd" />
+        </linearGradient>
+        <linearGradient id="ap-stroke" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stopColor="#1e40af" />
+          <stop offset="100%" stopColor="#0c4a6e" />
         </linearGradient>
       </defs>
       <rect width="24" height="24" rx="5" fill="url(#ap-bg)" />
-      <rect x="5" y="8.5" width="14" height="9.5" rx="1.2" fill="#3b82f6" />
       <path
-        d="M5.6 9.2 L12 13.4 L18.4 9.2"
-        stroke="#ffffff"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
+        d="M6.5 19 L12 5 L17.5 19"
+        stroke="url(#ap-stroke)"
+        strokeWidth="2.2"
         fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
-      <circle cx="18" cy="7" r="2.6" fill="#fbbf24" />
+      <line
+        x1="12"
+        y1="5"
+        x2="12"
+        y2="22"
+        stroke="url(#ap-stroke)"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
@@ -57,17 +69,32 @@ function LeadBoostProMark({ size }: { size: number }) {
           <stop offset="100%" stopColor="#022c22" />
         </linearGradient>
       </defs>
-      <rect width="24" height="24" rx="5" fill="url(#lbp-bg)" />
-      <path
-        d="M5 17.5 L9 12.5 L13 15 L18.5 7"
+      <polygon
+        points="12,1.5 22,7 22,17 12,22.5 2,17 2,7"
+        fill="url(#lbp-bg)"
         stroke="#34d399"
-        strokeWidth="2.2"
+        strokeWidth="0.6"
+        strokeOpacity="0.4"
+      />
+      <rect x="7" y="13" width="2.2" height="5" rx="0.4" fill="#34d399" />
+      <rect x="10.9" y="10" width="2.2" height="8" rx="0.4" fill="#34d399" />
+      <rect x="14.8" y="7" width="2.2" height="11" rx="0.4" fill="#34d399" />
+      <path
+        d="M6.5 8.5 L11 11 L13 9 L18 6"
+        stroke="#a7f3d0"
+        strokeWidth="1.2"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle cx="18.5" cy="7" r="2.1" fill="#34d399" />
-      <circle cx="18.5" cy="7" r="0.9" fill="#022c22" />
+      <path
+        d="M16 5 L18 6 L17.2 8"
+        stroke="#a7f3d0"
+        strokeWidth="1.2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
