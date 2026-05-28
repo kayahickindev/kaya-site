@@ -149,21 +149,22 @@ export function ContributionGraph({
     return result;
   }, [weeks, remote]);
 
-  const displayCount = remoteTotal !== null
-    ? `${remoteTotal.toLocaleString()}`
-    : contributionCount ?? "2,600+";
+  const displayCount = contributionCount ?? (
+    remoteTotal !== null ? `${remoteTotal.toLocaleString()}` : "2,600+"
+  );
 
-  const cellSize = 10;
-  const gap = 2;
+  const cellSize = 13;
+  const gap = 3;
   const width = weeks * (cellSize + gap);
   const height = 7 * (cellSize + gap);
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex items-baseline justify-between">
+      <div className="flex items-baseline justify-end gap-3">
         <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
           A year of shipping
         </p>
+        <span aria-hidden className="h-3 w-px bg-neutral-400/30" />
         <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
           {displayCount} contributions
         </p>
@@ -173,7 +174,8 @@ export function ContributionGraph({
           width={width}
           height={height}
           viewBox={`0 0 ${width} ${height}`}
-          className="block"
+          className="block w-full"
+          preserveAspectRatio="xMidYMid meet"
           aria-label="GitHub-style contribution graph showing consistent activity"
         >
           {cells.map((cell, i) => (

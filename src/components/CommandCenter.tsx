@@ -166,6 +166,10 @@ export function CommandCenter() {
               </div>
             </div>
 
+            <Link href="/work" className="block" aria-label="See full work">
+              <MetricTiles metrics={metricTiles} accent="amber" />
+            </Link>
+
             <div className="flex flex-wrap items-center gap-2">
               <Link
                 href="/work"
@@ -174,13 +178,6 @@ export function CommandCenter() {
                 See work
                 <ArrowRight size={16} />
               </Link>
-            </div>
-
-            <Link href="/work" className="block" aria-label="See full work">
-              <MetricTiles metrics={metricTiles} accent="amber" />
-            </Link>
-
-            <div className="flex items-center gap-2">
               <SocialPill
                 href={siteConfig.social.github}
                 label="GitHub"
@@ -213,12 +210,12 @@ export function CommandCenter() {
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.08, ease }}
-              className="relative flex flex-col items-center justify-center gap-1 lg:col-span-5"
+              className="relative flex flex-col items-center justify-end gap-0 pb-2 lg:col-span-5 lg:-translate-x-3 xl:-translate-x-5"
             >
               <Link
                 href={`/work/${featured.slug}`}
                 aria-label={`Open ${featured.name} case study`}
-                className="group flex flex-col items-center gap-1.5 rounded-md text-center transition focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                className="group relative z-10 flex flex-col items-center gap-1.5 rounded-md text-center transition focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 <div className="inline-flex items-center gap-2">
                   <h2 className="text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl dark:text-white">
@@ -241,7 +238,7 @@ export function CommandCenter() {
               <Link
                 href={`/work/${featured.slug}`}
                 aria-label={`Open ${featured.name} case study`}
-                className="relative -mt-1 flex w-full items-center justify-center lg:-translate-x-3 xl:-translate-x-5"
+                className="relative -mt-3 flex w-full items-center justify-center"
               >
                 <div
                   aria-hidden

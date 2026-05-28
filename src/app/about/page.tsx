@@ -36,7 +36,7 @@ const highlightStats = [
   { value: "8 yrs", label: "professional experience" },
   { value: "3-for-3", label: "profitable companies" },
   { value: "200K+", label: "LOC shipped this year" },
-  { value: "2,600+", label: "contributions this year" },
+  { value: "3,000+", label: "contributions this year" },
 ];
 
 export default function AboutPage() {
@@ -106,7 +106,7 @@ export default function AboutPage() {
 
         <div className="relative overflow-hidden rounded-md border border-black/10 bg-gradient-to-b from-white/80 to-white/40 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur dark:border-white/10 dark:from-white/[0.05] dark:to-white/[0.015] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
           <div className="flex flex-col gap-3">
-            <ContributionGraph contributionCount="2,600+" palette="amber" />
+            <ContributionGraph contributionCount="3,000+" palette="amber" />
             <div className="flex items-center justify-end">
               <a
                 href={siteConfig.github.url}

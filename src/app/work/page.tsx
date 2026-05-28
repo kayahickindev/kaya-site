@@ -89,13 +89,13 @@ export default function WorkPage() {
             className={`${cardSurfaceFeaturedEmerald} group block p-0 transition hover:-translate-y-0.5 hover:border-emerald-400/50`}
           >
             <div className="relative grid grid-cols-1 gap-0 md:grid-cols-[1fr_1fr]">
+              <div className="pointer-events-none absolute right-4 top-4 z-10 md:right-5 md:top-5">
+                <KindChip slug={hero.slug} />
+              </div>
               <div className="flex flex-col gap-3 p-5 md:p-6">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="truncate text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
-                    {hero.role} · {hero.timeframe}
-                  </p>
-                  <KindChip slug={hero.slug} />
-                </div>
+                <p className="truncate text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
+                  {hero.role} · {hero.timeframe}
+                </p>
 
                 <div>
                   <div className="flex items-center gap-2.5">
