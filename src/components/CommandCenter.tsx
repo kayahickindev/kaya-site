@@ -266,11 +266,11 @@ export function CommandCenter() {
               <Link
                 href={`/work/${featured.slug}`}
                 aria-label={`Open ${featured.name} case study`}
-                className="relative w-full flex-1"
+                className="relative flex w-full flex-1 items-center justify-center"
               >
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-[-12%] bg-[radial-gradient(ellipse_60%_55%_at_60%_55%,rgba(251,191,36,0.28),transparent_65%)] dark:bg-[radial-gradient(ellipse_60%_55%_at_60%_55%,rgba(251,191,36,0.22),transparent_65%)]"
+                  className="pointer-events-none absolute inset-[-10%] bg-[radial-gradient(ellipse_55%_50%_at_50%_55%,rgba(251,191,36,0.26),transparent_65%)] dark:bg-[radial-gradient(ellipse_55%_50%_at_50%_55%,rgba(251,191,36,0.20),transparent_65%)]"
                 />
                 {featured.image ? (
                   <Image
@@ -280,7 +280,7 @@ export function CommandCenter() {
                     height={1250}
                     unoptimized
                     loading="eager"
-                    className="relative ml-auto h-full max-h-[600px] w-auto translate-x-[4%] scale-[1.5] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] sm:scale-[1.65] xl:translate-x-[8%] xl:scale-[1.85]"
+                    className="relative h-auto max-h-[560px] w-auto scale-[1.0] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] sm:scale-[1.1] xl:scale-[1.2]"
                   />
                 ) : null}
               </Link>
