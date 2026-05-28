@@ -43,7 +43,6 @@ export const projectDetails: ProjectDetail[] = [
       "Native iOS product architecture",
       "Backend and data model for user roadmaps",
       "Voice-AI mentor experience",
-      "Payments, analytics, and production iteration loop",
     ],
     stack: ["Swift", "SwiftUI", "StoreKit", "WebRTC", "Firebase", "OpenAI", "Claude"],
   },
@@ -86,7 +85,6 @@ export const projectDetails: ProjectDetail[] = [
       "Dataset assembly and model training",
       "iOS product and computer-vision flow",
       "App Store launch path",
-      "Consumer positioning and product scope",
     ],
     stack: ["iOS", "Custom LLM", "Computer vision", "Harvard dataset", "App Store"],
   },
@@ -107,7 +105,6 @@ export const projectDetails: ProjectDetail[] = [
     ownership: [
       "Outbound system design",
       "AI-assisted prospecting workflows",
-      "Client acquisition and delivery operations",
       "Agency growth and wind-down decision",
     ],
     stack: ["B2B outbound", "AI workflows", "Automation", "Operations"],
@@ -129,7 +126,6 @@ export const projectDetails: ProjectDetail[] = [
     ownership: [
       "Client websites and digital presence",
       "Marketing systems and consulting",
-      "Sales and delivery",
       "Small-business operating support",
     ],
     stack: ["Web development", "Marketing", "Consulting", "Local business systems"],

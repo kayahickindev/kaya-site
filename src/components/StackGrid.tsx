@@ -19,35 +19,18 @@ type GroupedItem = {
   items: { name: string; category: string }[];
 };
 
+const cyanAccent = "text-cyan-700 dark:text-cyan-300";
+const cyanBar = "from-cyan-400/60 to-transparent";
+
 const categoryMeta: Record<
   Category,
   { icon: LucideIcon; accent: string; bar: string }
 > = {
-  iOS: {
-    icon: Apple,
-    accent: "text-cyan-700 dark:text-cyan-300",
-    bar: "from-cyan-400/60 to-transparent",
-  },
-  Web: {
-    icon: Globe,
-    accent: "text-emerald-700 dark:text-emerald-300",
-    bar: "from-emerald-400/60 to-transparent",
-  },
-  Backend: {
-    icon: Braces,
-    accent: "text-amber-700 dark:text-amber-300",
-    bar: "from-amber-400/60 to-transparent",
-  },
-  AI: {
-    icon: BrainCircuit,
-    accent: "text-purple-700 dark:text-purple-300",
-    bar: "from-purple-400/60 to-transparent",
-  },
-  Workflow: {
-    icon: Workflow,
-    accent: "text-rose-700 dark:text-rose-300",
-    bar: "from-rose-400/60 to-transparent",
-  },
+  iOS: { icon: Apple, accent: cyanAccent, bar: cyanBar },
+  Web: { icon: Globe, accent: cyanAccent, bar: cyanBar },
+  Backend: { icon: Braces, accent: cyanAccent, bar: cyanBar },
+  AI: { icon: BrainCircuit, accent: cyanAccent, bar: cyanBar },
+  Workflow: { icon: Workflow, accent: cyanAccent, bar: cyanBar },
 };
 
 const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];

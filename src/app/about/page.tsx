@@ -30,7 +30,7 @@ const SIDEBAR_ICONS: Record<string, LucideIcon> = {
 
 const paragraphs = [
   "Working full-time in my family's business at 14, valedictorian out of high school, shipping companies ever since. I build consumer AI for behavior change.",
-  "Shipped two iOS apps to the App Store. Two crypto projects at $500K+ combined market cap. 200K+ lines of code and 2,600+ contributions this year. Self-funded my Miami University tuition. Graduated with honors.",
+  "Shipped two iOS apps to the App Store. Two crypto projects at $500K+ combined market cap. Self-funded my Miami University tuition. Graduated with honors.",
 ];
 
 const highlightStats = [
@@ -53,7 +53,7 @@ export default function AboutPage() {
       <div className="mx-auto flex max-w-6xl flex-col gap-6">
         <div className="relative">
           <div aria-hidden className="aurora" style={{ opacity: 0.6 }} />
-          <h1 className="relative text-4xl font-semibold leading-[0.9] tracking-tight text-neutral-950 sm:text-5xl xl:text-6xl dark:text-white">
+          <h1 className="relative text-4xl font-semibold leading-[0.9] tracking-tight text-neutral-950 sm:text-5xl dark:text-white">
             Builder, operator, founder.
           </h1>
         </div>
@@ -77,7 +77,7 @@ export default function AboutPage() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-2">
           {siteConfig.about.sidebar.map((item) => {
             const Icon = SIDEBAR_ICONS[item.icon] ?? MapPin;
             const detail = "detail" in item ? item.detail : undefined;

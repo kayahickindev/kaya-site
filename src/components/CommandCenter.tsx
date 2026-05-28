@@ -160,7 +160,7 @@ export function CommandCenter() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.48, ease }}
-            className="flex flex-col justify-center gap-3 py-2 lg:col-span-7 lg:pr-7"
+            className="flex flex-col justify-center gap-3 py-2 lg:col-span-7 lg:pr-3"
           >
             <div className="relative max-w-5xl">
               <div aria-hidden className="aurora" />
@@ -228,7 +228,7 @@ export function CommandCenter() {
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.08, ease }}
-              className="relative flex flex-col items-center justify-end gap-1 lg:col-span-5"
+              className="relative flex flex-col items-center justify-center gap-0 lg:col-span-5"
             >
               <Link
                 href={`/work/${featured.slug}`}

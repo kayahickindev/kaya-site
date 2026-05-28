@@ -27,7 +27,6 @@ export const siteConfig = {
       "I'm graduating from Miami University this month with a Marketing degree and an Entrepreneurship minor, based in Cleveland, OH. Most of my time goes toward thinking about how AI can build consumer products that change real behavior, not just engagement metrics.",
     ],
     sidebar: [
-      { label: "Based in", value: "Cleveland, OH", icon: "MapPin" },
       { label: "Education", value: "Miami University", detail: "BA Marketing, Minor in Entrepreneurship, May 2026", icon: "GraduationCap" },
     ],
   },

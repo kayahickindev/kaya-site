@@ -16,9 +16,6 @@ export const metadata: Metadata = {
   },
 };
 
-const heroAccent = "from-cyan-500/20 via-transparent to-emerald-500/15";
-const cardAccent = "from-emerald-500/15 via-transparent to-emerald-500/5";
-
 const heroMetrics: Record<string, { value: string; label: string }> = {
   myfutureself: { value: "$65K", label: "ARR · 1,718 paid · 4.7★" },
   "viral-loop": { value: "Live", label: "MVP shipped" },
@@ -69,10 +66,6 @@ export default function WorkPage() {
             href={`/work/${hero.slug}`}
             className={`${cardSurfaceFeaturedEmerald} group block p-0 transition hover:-translate-y-0.5 hover:border-emerald-400/50`}
           >
-            <div
-              aria-hidden
-              className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${heroAccent}`}
-            />
             <div className="relative grid grid-cols-1 gap-0 md:grid-cols-[1fr_1fr]">
               <div className="flex flex-col gap-3 p-5 md:p-6">
                 <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-neutral-500">
@@ -137,11 +130,7 @@ export default function WorkPage() {
               >
                 <div
                   aria-hidden
-                  className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${cardAccent} opacity-70 transition-opacity duration-300 group-hover:opacity-100`}
-                />
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute -inset-px bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,0%),rgba(16,185,129,0.18),transparent_55%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,0%),rgba(52,211,153,0.18),transparent_55%)]"
+                  className="pointer-events-none absolute -inset-px bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,0%),rgba(16,185,129,0.14),transparent_55%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,0%),rgba(52,211,153,0.14),transparent_55%)]"
                 />
 
                 <div className="relative min-w-0">

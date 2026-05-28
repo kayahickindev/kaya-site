@@ -96,7 +96,7 @@ const socials: Social[] = [
 
 export function ContactPanel() {
   return (
-    <div className="mx-auto flex min-h-[calc(100dvh-12rem)] w-full max-w-3xl flex-col items-center justify-center gap-6 py-6 text-center sm:gap-7">
+    <div className="mx-auto flex min-h-[calc(100dvh-12rem)] w-full max-w-3xl flex-col items-center justify-center gap-3 py-6 text-center">
       <div className={`${cardSurface} relative w-full overflow-hidden p-8 sm:p-10`}>
         <div aria-hidden className="aurora pointer-events-none absolute inset-0" style={{ opacity: 0.35 }} />
         <div

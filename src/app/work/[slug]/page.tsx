@@ -316,18 +316,18 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   ];
 
   return (
-    <SubpageShell>
-      <div className="flex h-full min-h-0 flex-col gap-3">
+    <SubpageShell accent="emerald">
+      <div className="flex h-full min-h-0 flex-col gap-2">
         <Link
           href="/work"
-          className="inline-flex w-fit items-center gap-2 text-xs font-medium text-neutral-500 transition hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
+          className="inline-flex w-fit items-center gap-2 text-xs font-medium text-neutral-500 transition hover:text-emerald-700 dark:text-neutral-400 dark:hover:text-emerald-300"
         >
           <ArrowLeft size={14} />
           All work
         </Link>
 
-        <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-12">
-          <div className="flex min-h-0 flex-col gap-3 lg:col-span-7">
+        <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 lg:grid-cols-12">
+          <div className="flex min-h-0 flex-col gap-4 lg:col-span-7">
             <div className="rounded-md border border-black/10 bg-white/55 p-4 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="min-w-0">
@@ -339,7 +339,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                   </h1>
                 </div>
                 {project.status ? (
-                  <span className="shrink-0 rounded-md border border-black/10 bg-white/60 px-2.5 py-1.5 text-[11px] font-medium text-neutral-700 dark:border-white/10 dark:bg-white/[0.05] dark:text-neutral-300">
+                  <span className="shrink-0 rounded-md border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-1.5 text-[11px] font-medium text-emerald-800 dark:border-emerald-300/30 dark:bg-emerald-300/10 dark:text-emerald-200">
                     {project.status}
                   </span>
                 ) : null}
@@ -379,7 +379,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
               <div className="flex min-h-0 flex-col rounded-md border border-black/10 bg-white/55 p-3 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
                 <div className="flex items-center gap-2 border-b border-black/10 pb-2 dark:border-white/10">
-                  <Target size={14} className="text-amber-700 dark:text-amber-200" />
+                  <Target size={14} className="text-emerald-600 dark:text-emerald-300" />
                   <h2 className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
                     Ownership
                   </h2>
@@ -390,7 +390,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                       key={item}
                       className="flex gap-2 text-xs leading-snug text-neutral-700 dark:text-neutral-300"
                     >
-                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-500 dark:bg-amber-300" />
+                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-emerald-500 dark:bg-emerald-300" />
                       <span>{item}</span>
                     </li>
                   ))}
