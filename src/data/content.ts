@@ -4,7 +4,6 @@ const EMAIL_DOMAIN = "successai.app";
 
 export const siteConfig = {
   name: "Kaya Hickin",
-  title: "Co-founder · Builder · Operator",
   url: "https://www.kayahickin.com",
 
   seo: {
@@ -13,101 +12,7 @@ export const siteConfig = {
       "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 1,718 paid subscribers, $65K ARR, 26K+ downloads, 52% average monthly growth, and a 4.7★ App Store rating. Solo-built iOS, backend, and voice-AI stack end-to-end. Building consumer AI for behavior change.",
   },
 
-  status: {
-    pill: "Currently shipping MyFutureSelf",
-  },
-
-  hero: {
-    eyebrow: "Co-founder · Builder · Operator",
-    headline: "I build products that move people forward.",
-    description:
-      "Co-founder and CTO at MyFutureSelf, an AI iOS app with 1,718 paying subscribers, 26,000+ downloads, $65K ARR, and 52% average monthly growth. I design, code, and ship.",
-    cta: {
-      primary: { text: "See what I've built", href: "#projects" },
-      secondary: { text: "Get in touch", href: "#contact" },
-    },
-  },
-
-  commandCenter: {
-    eyebrow: "Founder OS · Consumer AI · iOS",
-    headline: "I build consumer AI that changes behavior.",
-    description:
-      "Building voice AI that speaks as your future self.",
-    status: "Live: MyFutureSelf scaling",
-    availability: "Cleveland, OH",
-    routes: [
-      {
-        label: "About",
-        href: "/about",
-        kicker: "founder story",
-        description: "Why I build, what I am focused on, and the path so far.",
-      },
-      {
-        label: "Proof",
-        href: "/proof",
-        kicker: "numbers + velocity",
-        description: "Revenue, subscribers, downloads, awards, and shipping signal.",
-      },
-      {
-        label: "Stack",
-        href: "/stack",
-        kicker: "how I build",
-        description: "iOS, backend, AI voice, analytics, and agent workflow.",
-      },
-      {
-        label: "Contact",
-        href: "/contact",
-        kicker: "investors + builders",
-        description: "Reach out about consumer AI, MyFutureSelf, or what comes next.",
-      },
-    ],
-    proof: [
-      { value: "1,718", label: "paid subscribers" },
-      { value: "$65K", label: "ARR" },
-      { value: "26K+", label: "downloads" },
-      { value: "4.7★", label: "715 reviews" },
-      { value: "52%", label: "avg monthly growth" },
-    ],
-    rails: [
-      "SwiftUI",
-      "Realtime voice",
-      "Firebase",
-      "Claude Code",
-      "Codex",
-      "StoreKit",
-      "Mixpanel",
-      "Consumer AI",
-      "Behavior change",
-    ],
-  },
-
-  metrics: [
-    {
-      value: 1718,
-      label: "Paid Subscribers",
-      detail: "MyFutureSelf, server-validated via Apple",
-      prefix: "",
-      suffix: "",
-      format: true,
-    },
-    {
-      value: 26000,
-      label: "App Downloads",
-      detail: "MyFutureSelf, first 7 months on the App Store",
-      prefix: "",
-      suffix: "+",
-      format: true,
-    },
-    {
-      value: 4.7,
-      label: "App Store Rating",
-      detail: "From 715 verified reviews",
-      prefix: "",
-      suffix: "★",
-      format: false,
-      decimals: 1,
-    },
-  ],
+  availability: "Cleveland, OH",
 
   recognitions: [
     "Winner, RedHawk Business Accelerator (Miami University 2025)",
@@ -115,7 +20,6 @@ export const siteConfig = {
   ],
 
   about: {
-    heading: "About",
     paragraphs: [
       "I started my first company freshman year because I wanted to see if I could build something people would pay for. Turns out I could, so I kept going. Three companies later, I'm three for three on profitability.",
       "My main focus right now is MyFutureSelf, an AI app that helps people define who they want to become and then become that person through a 90-day personalized roadmap, an AI mentor that speaks as their future self, and daily action. As CTO, I led the technical build end to end: iOS, backend, and AI systems.",
@@ -130,7 +34,6 @@ export const siteConfig = {
   },
 
   techStack: {
-    heading: "How I build",
     items: [
       { name: "Swift / SwiftUI", category: "iOS" },
       { name: "Core Data / StoreKit", category: "iOS" },
@@ -288,19 +191,6 @@ export const siteConfig = {
   github: {
     username: "kayahickindev",
     url: "https://github.com/kayahickindev",
-    heading: "I ship constantly.",
-    description:
-      "2,600+ contributions in the last year. I'm AI-native in how I build, with Claude Code and Codex in my daily flow. Most of my code lives in Swift/SwiftUI for iOS and TypeScript/Next.js for web.",
-  },
-
-  contact: {
-    eyebrow: "Reach out",
-    heading: "Get in touch.",
-    body:
-      "I'm always looking for a technical co-founder at founding level with equity, for MyFutureSelf and for what comes next. Investors backing consumer AI and builders shipping ambitious products, drop a line too.",
-    primaryCta: {
-      label: "Email me",
-    },
   },
 
   // Email parts kept separate so the literal address never appears in source HTML.
@@ -316,11 +206,4 @@ export const siteConfig = {
     instagram: "https://www.instagram.com/kayahickin/",
     myfutureself: "https://myfutureselfapp.com/",
   },
-
-  nav: [
-    { label: "About", href: "/about" },
-    { label: "Proof", href: "/proof" },
-    { label: "Stack", href: "/stack" },
-    { label: "Contact", href: "/contact" },
-  ],
 };

@@ -8,6 +8,8 @@ import {
   BriefcaseBusiness,
   CheckCircle2,
   ExternalLink,
+  GraduationCap,
+  Sparkles,
   Target,
 } from "lucide-react";
 import { SubpageShell } from "@/components/SubpageShell";
@@ -224,9 +226,102 @@ function LeadBoostVisual() {
   );
 }
 
+function MfsUniversitiesVisual() {
+  return (
+    <div className="relative h-full min-h-0 overflow-hidden rounded-md border border-white/10 bg-neutral-950 p-5 text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(217,119,6,0.20),transparent_32%),linear-gradient(150deg,rgba(217,119,6,0.10),transparent_42%,rgba(168,85,247,0.12))]" />
+      <div className="relative flex h-full flex-col justify-between gap-4">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-amber-200/80">
+              Campus pilot
+            </p>
+            <h3 className="mt-2 text-2xl font-semibold leading-tight sm:text-3xl">
+              Future self, for college.
+            </h3>
+            <p className="mt-2 max-w-sm text-sm leading-relaxed text-neutral-300">
+              Web-based MyFutureSelf for university students, piloting at Miami University.
+            </p>
+          </div>
+          <GraduationCap className="text-amber-200/80" size={26} />
+        </div>
+        <div className="grid grid-cols-3 gap-2">
+          <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
+            <p className="text-xl font-semibold">Miami</p>
+            <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">University pilot</p>
+          </div>
+          <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
+            <p className="text-xl font-semibold">Web</p>
+            <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">Lovable build</p>
+          </div>
+          <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
+            <p className="text-xl font-semibold">2026</p>
+            <p className="mt-0.5 text-[10px] leading-snug text-neutral-400">Pilot live</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ViralLoopVisual() {
+  const posts = [
+    { tag: "Hook", views: "412K", color: "from-rose-400 to-pink-500" },
+    { tag: "Trend", views: "287K", color: "from-violet-400 to-fuchsia-500" },
+    { tag: "Story", views: "194K", color: "from-cyan-400 to-blue-500" },
+  ];
+
+  return (
+    <div className="relative h-full min-h-0 overflow-hidden rounded-md border border-white/10 bg-neutral-950 p-5 text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(244,114,182,0.20),transparent_32%),linear-gradient(150deg,rgba(168,85,247,0.12),transparent_42%,rgba(244,114,182,0.12))]" />
+      <div className="relative flex h-full flex-col justify-between gap-4">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-pink-200/80">
+              AI UGC pipeline
+            </p>
+            <h3 className="mt-2 text-2xl font-semibold leading-tight sm:text-3xl">
+              Done-for-you organic content.
+            </h3>
+            <p className="mt-2 max-w-sm text-sm leading-relaxed text-neutral-300">
+              Generates AI UGC and runs the organic influencer pipeline end-to-end.
+            </p>
+          </div>
+          <Sparkles className="text-pink-200/80" size={24} />
+        </div>
+        <div className="grid grid-cols-3 gap-2">
+          {posts.map((post) => (
+            <div
+              key={post.tag}
+              className="relative flex aspect-[9/14] flex-col justify-between overflow-hidden rounded-md border border-white/10 bg-white/[0.04] p-2"
+            >
+              <div className={`absolute inset-0 bg-gradient-to-br ${post.color} opacity-30`} />
+              <span className="relative inline-flex w-fit rounded bg-black/40 px-1.5 py-0.5 text-[9px] font-mono uppercase tracking-wide text-white/90">
+                {post.tag}
+              </span>
+              <div className="relative">
+                <p className="text-sm font-semibold leading-none">{post.views}</p>
+                <p className="text-[9px] leading-snug text-white/70">views</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ProjectVisual({ detail }: { detail: ProjectDetailItem }) {
   if (detail.slug === "myfutureself") {
     return <MyFutureSelfVisual image={detail.project.image} name={detail.project.name} />;
+  }
+
+  if (detail.slug === "mfs-universities") {
+    return <MfsUniversitiesVisual />;
+  }
+
+  if (detail.slug === "viral-loop") {
+    return <ViralLoopVisual />;
   }
 
   if (detail.slug === "dog-ai") {
@@ -292,11 +387,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                   </span>
                 ) : null}
               </div>
-              <p className="mt-3 text-xl leading-snug text-neutral-700 dark:text-neutral-300">
+              <p className="mt-3 text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
                 {project.tagline}
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
-                {project.description}
               </p>
               {actions.length > 0 ? (
                 <div className="mt-4 flex flex-wrap gap-2">

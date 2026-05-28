@@ -131,8 +131,10 @@ function CommandPalette({
   );
 }
 
-export function TopNav() {
+export function TopNav({ showLiveShipped }: { showLiveShipped?: boolean } = {}) {
   const pathname = usePathname();
+  const isHome = pathname === "/";
+  const liveShippedVisible = showLiveShipped ?? isHome;
   const [paletteOpen, setPaletteOpen] = useState(false);
 
   const actions = useMemo<Action[]>(
@@ -223,9 +225,11 @@ export function TopNav() {
         </div>
 
         <div className="flex shrink-0 items-center gap-2">
-          <div className="hidden sm:block">
-            <LiveShipped />
-          </div>
+          {liveShippedVisible ? (
+            <div className="hidden sm:block">
+              <LiveShipped />
+            </div>
+          ) : null}
           <button
             type="button"
             onClick={() => setPaletteOpen(true)}

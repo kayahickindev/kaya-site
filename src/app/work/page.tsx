@@ -30,34 +30,28 @@ const heroMetrics: Record<string, { value: string; label: string }> = {
 
 const cardHighlights: Record<string, string[]> = {
   myfutureself: [
-    "4.7★ from 715 App Store reviews",
     "26K+ downloads · 52% avg monthly growth",
     "Solo-built iOS, backend, and voice-AI stack",
   ],
   "mfs-universities": [
-    "Web-based MyFutureSelf for university students",
     "Pilot live at Miami University",
     "Built on Lovable for fast iteration",
   ],
   "viral-loop": [
     "Done-for-you AI UGC content pipeline",
-    "Organic influencer service, end-to-end",
     "MVP live, accepting clients",
   ],
   "dog-ai": [
     "Custom LLM, trained on tens of thousands of dog images",
     "Behavior dataset from Harvard",
-    "Live on the App Store as a paying product",
   ],
   appointra: [
     "$20k MRR in three months",
     "$2M+ in client pipeline generated",
-    "Hundreds of qualified meetings booked",
   ],
   "leadboost-pro": [
-    "Profitable from month one",
     "20+ custom websites freshman year",
-    "Dorm-room start, still live",
+    "Profitable from month one",
   ],
 };
 

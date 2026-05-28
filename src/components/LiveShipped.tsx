@@ -49,7 +49,7 @@ export function LiveShipped() {
       <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
       <span className="truncate">{label}</span>
       <span className="text-neutral-300 dark:text-neutral-700">/</span>
-      <span className="truncate">{siteConfig.commandCenter.availability}</span>
+      <span className="truncate">{siteConfig.availability}</span>
     </div>
   );
 }
