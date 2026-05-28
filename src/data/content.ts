@@ -165,7 +165,7 @@ export const siteConfig = {
       role: "Co-Founder",
       period: "Jan 2023 to Jun 2024",
       description:
-        "Dorm-room start, profitable from month one. Built 20+ custom websites freshman year. Marketing, web dev, and consulting for small businesses.",
+        "Dorm-room start, profitable from month one. Built 20+ custom websites freshman year. Marketing, web dev, and consulting for blue collar businesses.",
       metrics: [],
       active: false,
     },
