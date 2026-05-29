@@ -136,7 +136,7 @@ const metricTiles = [
     label: "App Store rating",
     suffix: "★",
     decimals: 1,
-    sparkline: [0.04, 0.07, 0.15, 0.29, 0.59, 1.18, 2.35, 4.7],
+    sparkline: [4.4, 4.44, 4.49, 4.53, 4.57, 4.61, 4.66, 4.7],
     accent: "rgb(251,191,36)",
   },
 ];
