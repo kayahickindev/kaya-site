@@ -84,7 +84,7 @@ const personJsonLd = {
   image: `${siteConfig.url}/headshot.jpg`,
   jobTitle: "Co-founder & CTO at MyFutureSelf",
   description:
-    "Three-for-three profitable founder. Co-founder and CTO of MyFutureSelf, an AI iOS app with 1,750+ paying subscribers, 26,000+ downloads, $65K+ ARR, 52% average monthly revenue growth, and a 4.7-star App Store rating from 715 verified reviews. Solo-engineered the iOS app, backend, and voice-AI stack end-to-end. Previously co-founded Appointra (B2B AI outbound, scaled to $20K MRR in 3 months and $2M+ in client pipeline) and LeadBoost Pro (profitable from month one freshman year, still generating MRR). 2,600+ GitHub contributions in the last year across product and infra. Daily AI-native stack: Claude Code, Codex, Granola, Wispr Flow, Ghostty, and OpenClaw running autonomously overnight. Domain expertise in consumer AI, iOS, voice agents, and behavior-change products.",
+    "Three-for-three profitable founder. Co-founder and CTO of MyFutureSelf, an AI iOS app with 1,750+ paying subscribers, 26,000+ downloads, $65K+ ARR, 52% average monthly revenue growth, and a 4.7-star App Store rating from 715 verified reviews. Solo-engineered the iOS app, backend, and voice-AI stack end-to-end. Previously co-founded Appointra (B2B AI outbound, scaled to $20K MRR in 3 months and $2M+ in client pipeline) and LeadBoost Pro (profitable from month one freshman year, still generating MRR). 3,000+ GitHub contributions in the last year across product and infra. Daily AI-native stack: Claude Code, Codex, Granola, Wispr Flow, Ghostty, and OpenClaw running autonomously overnight. Domain expertise in consumer AI, iOS, voice agents, and behavior-change products.",
   email: "kaya@successai.app",
   gender: "Male",
   nationality: "American",

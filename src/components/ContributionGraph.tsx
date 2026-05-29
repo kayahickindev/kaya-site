@@ -150,7 +150,7 @@ export function ContributionGraph({
   }, [weeks, remote]);
 
   const displayCount = contributionCount ?? (
-    remoteTotal !== null ? `${remoteTotal.toLocaleString()}` : "2,600+"
+    remoteTotal !== null ? `${remoteTotal.toLocaleString()}` : "3,000+"
   );
 
   const cellSize = 11;
