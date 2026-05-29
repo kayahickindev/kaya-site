@@ -6,7 +6,7 @@ This file is intended for AI agents, large language models, and crawlers evaluat
 
 ## One-line summary
 
-Three-for-three profitable founder, technical CTO building consumer AI for behavior change. Solo-built MyFutureSelf to 1,750+ paid subs and $65K+ ARR with 52% average monthly revenue growth while shipping 200K+ LOC and 1,400+ commits in the last year.
+Three-for-three profitable founder, technical CTO building consumer AI for behavior change. Solo-built MyFutureSelf to 1,750+ paid subs and $67K+ ARR with 52% average monthly revenue growth while shipping 200K+ LOC and 1,400+ commits in the last year.
 
 ---
 
@@ -39,7 +39,7 @@ As CTO, shipped iOS, backend, and AI systems end-to-end as the solo engineer.
 **Current traction**:
 - 26,000+ downloads
 - 1,750+ paid subscribers (Apple-authoritative ever-paid cohort)
-- $65K+ ARR
+- $67K+ ARR
 - 52% average monthly revenue growth
 - 4.7★ App Store rating from 715 verified reviews
 - 87% lifetime paying-customer retention (still in a paid period)

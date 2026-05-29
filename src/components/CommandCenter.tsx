@@ -117,11 +117,11 @@ const metricTiles = [
     accent: "rgb(34,197,94)",
   },
   {
-    value: 65,
+    value: 67,
     label: "ARR",
     prefix: "$",
     suffix: "K+",
-    sparkline: [0.5, 1, 2, 4, 8, 16, 33, 65],
+    sparkline: [0.5, 1, 2, 4, 8, 16, 33, 67],
     accent: "rgb(212,155,90)",
   },
   {

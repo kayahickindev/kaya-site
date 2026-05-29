@@ -9,7 +9,7 @@ export const siteConfig = {
   seo: {
     title: "Kaya Hickin — Technical Co-founder & CTO, MyFutureSelf",
     description:
-      "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 1,750+ paid subscribers, $65K+ ARR, 26K+ downloads, 52% average monthly growth, and a 4.7★ App Store rating. Solo-built iOS, backend, and voice-AI stack end-to-end. Building consumer AI for behavior change.",
+      "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 1,750+ paid subscribers, $67K+ ARR, 26K+ downloads, 52% average monthly growth, and a 4.7★ App Store rating. Solo-built iOS, backend, and voice-AI stack end-to-end. Building consumer AI for behavior change.",
   },
 
   availability: "Cleveland, OH",
@@ -72,7 +72,7 @@ export const siteConfig = {
       description:
         "A 90-day roadmap and a voice AI mentor that speaks as your future self.",
       highlights: [
-        "1,750+ paid subscribers · $65K+ ARR",
+        "1,750+ paid subscribers · $67K+ ARR",
         "26,000+ downloads · 4.7★ from 715 reviews",
         "52% average monthly revenue growth",
       ],

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 const heroMetrics: Record<string, { value: string; label: string }> = {
-  myfutureself: { value: "$65K+", label: "ARR · 1,750+ paid · 4.7★" },
+  myfutureself: { value: "$67K+", label: "ARR · 1,750+ paid · 4.7★" },
   "viral-loop": { value: "Live", label: "MVP shipped" },
   "dog-ai": { value: "Live", label: "App Store · paying product" },
   appointra: { value: "$20K", label: "MRR in 3 months" },
@@ -113,7 +113,7 @@ export default function WorkPage() {
 
                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                   <span className="text-3xl font-semibold tracking-tight text-emerald-700 sm:text-4xl dark:text-emerald-200">
-                    $65K+ ARR
+                    $67K+ ARR
                   </span>
                   <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
                     1,750+ paid · 4.7★
