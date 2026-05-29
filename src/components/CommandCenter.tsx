@@ -109,25 +109,26 @@ function SocialPill({
 
 const metricTiles = [
   {
-    value: 1718,
+    value: 1750,
     label: "paid subscribers",
     format: true,
-    sparkline: [12, 38, 90, 220, 480, 880, 1350, 1718],
+    suffix: "+",
+    sparkline: [14, 27, 55, 109, 219, 438, 875, 1750],
     accent: "rgb(34,197,94)",
   },
   {
     value: 65,
     label: "ARR",
     prefix: "$",
-    suffix: "K",
-    sparkline: [2, 6, 12, 22, 35, 48, 58, 65],
+    suffix: "K+",
+    sparkline: [0.5, 1, 2, 4, 8, 16, 33, 65],
     accent: "rgb(212,155,90)",
   },
   {
     value: 26,
     label: "downloads",
     suffix: "K+",
-    sparkline: [0.4, 1.2, 3, 6.5, 11, 16, 21, 26],
+    sparkline: [0.2, 0.4, 0.8, 1.6, 3.3, 6.5, 13, 26],
     accent: "rgb(34,211,238)",
   },
   {
@@ -135,7 +136,7 @@ const metricTiles = [
     label: "App Store rating",
     suffix: "★",
     decimals: 1,
-    sparkline: [4.4, 4.5, 4.6, 4.6, 4.7, 4.7, 4.7, 4.7],
+    sparkline: [0.04, 0.07, 0.15, 0.29, 0.59, 1.18, 2.35, 4.7],
     accent: "rgb(251,191,36)",
   },
 ];

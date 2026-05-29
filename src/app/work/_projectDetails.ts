@@ -34,7 +34,7 @@ export const projectDetails: ProjectDetail[] = [
       "As CTO, Kaya led the technical build end to end across native iOS, backend systems, and AI interaction design. The product is active and scaling with paying users.",
     ],
     outcomes: [
-      "1,718 paid subscribers and $65K ARR",
+      "1,750+ paid subscribers and $65K+ ARR",
       "26,000+ downloads on the App Store",
       "52% average monthly revenue growth",
       "4.7-star App Store rating from 715 verified reviews",
