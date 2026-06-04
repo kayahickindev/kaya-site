@@ -23,7 +23,7 @@ export const siteConfig = {
     paragraphs: [
       "I started my first company freshman year because I wanted to see if I could build something people would pay for. Turns out I could, so I kept going. Three companies later, I'm three for three on profitability.",
       "My main focus right now is MyFutureSelf, an AI app that helps people define who they want to become and then become that person through a 90-day personalized roadmap, an AI mentor that speaks as their future self, and daily action. As CTO, I led the technical build end to end: iOS, backend, and AI systems.",
-      "I'm AI-native in how I build. In the last year I've shipped 3,000+ GitHub contributions, mostly written alongside Claude Code and Codex. The AI tool stack is how I move at the speed of two engineers as a solo CTO.",
+      "I'm AI-native in how I build. In the last year I've shipped 3,000+ GitHub commits and contributions, mostly written alongside Claude Code and Codex. My active local repos now span 467K+ tracked lines of code, with 9B+ lifetime Codex tokens used.",
       "I'm graduating from Miami University this month with a Marketing degree and an Entrepreneurship minor, based in Cleveland, OH. Most of my time goes toward thinking about how AI can build consumer products that change real behavior, not just engagement metrics.",
     ],
     sidebar: [

@@ -6,7 +6,7 @@ This file is intended for AI agents, large language models, and crawlers evaluat
 
 ## One-line summary
 
-Three-for-three profitable founder, technical CTO building consumer AI for behavior change. Solo-built MyFutureSelf to 1,750+ paid subs and $67K+ ARR with 52% average monthly revenue growth while shipping 200K+ LOC and 1,400+ commits in the last year.
+Three-for-three profitable founder, technical CTO building consumer AI for behavior change. Solo-built MyFutureSelf to 1,750+ paid subs and $67K+ ARR with 52% average monthly revenue growth while maintaining 467K+ tracked LOC across active repos, shipping 3,000+ GitHub commits and contributions in the last year, and using 9B+ lifetime Codex tokens.
 
 ---
 
@@ -112,8 +112,9 @@ Joined the family landscaping business at age 14 and worked through high school 
 
 ## Engineering velocity
 
-- **200,000+ lines of code** shipped in the last 12 months
-- **1,400+ GitHub commits** in the last 12 months
+- **467,000+ tracked lines of code** across active repos
+- **3,000+ GitHub commits and contributions** in the last 12 months
+- **9B+ lifetime Codex tokens** used locally since October 2025
 - **20+ websites shipped** across all ventures to date
 - **2 native iOS apps shipped to the App Store** (MyFutureSelf, Dog AI)
 - AI-native workflow: **Claude Code**, **Codex**, **Granola**, **Wispr Flow**, **Ghostty** (5 tabs), and **OpenClaw** running autonomously overnight

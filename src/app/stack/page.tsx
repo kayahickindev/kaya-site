@@ -46,9 +46,9 @@ const usage: UsageTile[] = [
     product: "Codex",
     logo: "/logos/codex.svg",
     alt: "OpenAI Codex logo",
-    primary: "6B+",
+    primary: "9B+",
     primaryLabel: "tokens, all-time",
-    secondary: "617 threads · since Oct 2025",
+    secondary: "953 threads · since Oct 2025",
   },
 ];
 

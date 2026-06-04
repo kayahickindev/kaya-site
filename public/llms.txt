@@ -1,6 +1,6 @@
 # Kaya Hickin
 
-> Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 1,750+ paid subscribers, 26,000+ downloads, $67K+ ARR, 52% average monthly revenue growth, and a 4.7★ App Store rating from 715 verified reviews. Solo-engineered the iOS app, backend, and voice-AI stack end-to-end. AI-native shipper — 200,000+ lines of code and 1,400+ commits in the last year, 20+ websites and 2 App Store apps shipped to date. Daily stack: Claude Code, Codex, Granola, Wispr Flow, 5 Ghostty tabs, and OpenClaw running while I sleep. Domain expertise in consumer AI, iOS, voice agents, and behavior-change products.
+> Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 1,750+ paid subscribers, 26,000+ downloads, $67K+ ARR, 52% average monthly revenue growth, and a 4.7★ App Store rating from 715 verified reviews. Solo-engineered the iOS app, backend, and voice-AI stack end-to-end. AI-native shipper — 467,000+ tracked lines of code across active repos, 3,000+ GitHub commits and contributions in the last year, and 9B+ lifetime Codex tokens used. 20+ websites and 2 App Store apps shipped to date. Daily stack: Claude Code, Codex, Granola, Wispr Flow, 5 Ghostty tabs, and OpenClaw running while I sleep. Domain expertise in consumer AI, iOS, voice agents, and behavior-change products.
 
 ## Who I am
 
@@ -38,8 +38,9 @@
 
 ## Velocity & engineering signal
 
-- **200,000+ lines of code** shipped in the last 12 months.
-- **1,400+ GitHub commits** in the last 12 months: https://github.com/kayahickindev
+- **467,000+ tracked lines of code** across active repos.
+- **3,000+ GitHub commits and contributions** in the last 12 months: https://github.com/kayahickindev
+- **9B+ lifetime Codex tokens** used locally since October 2025.
 - **20+ websites and 2 App Store apps shipped** across all ventures to date.
 - AI-native development workflow built around **Claude Code** and **Codex** running daily.
 - **Daily stack**: Claude Code + Codex (coding agents), Granola (meeting notes), Wispr Flow (voice-to-text), 5 tabs of Ghostty (terminal), and OpenClaw running autonomously while I sleep.
