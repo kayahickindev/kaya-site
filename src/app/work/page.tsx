@@ -6,6 +6,8 @@ import { CompanyMark, hasCompanyMark } from "@/components/CompanyMark";
 import { SubpageShell } from "@/components/SubpageShell";
 import { TiltImage } from "@/components/TiltImage";
 import { siteConfig } from "@/data/content";
+import { getMarketingMetrics } from "@/lib/marketing-metrics";
+import type { MarketingMetricsSnapshot } from "@/lib/marketing-metrics";
 import { cardSurfaceHover, cardSurfaceFeaturedEmerald } from "@/lib/surfaces";
 import { projectDetails } from "./_projectDetails";
 
@@ -18,13 +20,23 @@ export const metadata: Metadata = {
   },
 };
 
-const heroMetrics: Record<string, { value: string; label: string }> = {
-  myfutureself: { value: "$67K+", label: "ARR · 1,750+ paid · 4.7★" },
-  "viral-loop": { value: "Live", label: "MVP shipped" },
-  "dog-ai": { value: "Live", label: "App Store · paying product" },
-  appointra: { value: "$20K", label: "MRR in 3 months" },
-  "leadboost-pro": { value: "20+", label: "sites built · month-one profitable" },
-};
+function heroMetrics(
+  metrics: MarketingMetricsSnapshot,
+): Record<string, { value: string; label: string }> {
+  return {
+    myfutureself: {
+      value: metrics.metrics.arr.display,
+      label: `ARR · ${metrics.metrics.paidSubscribersEver.display} active paid · ${metrics.metrics.appStoreRating.display}★`,
+    },
+    "viral-loop": { value: "Live", label: "MVP shipped" },
+    "dog-ai": { value: "Live", label: "App Store · paying product" },
+    appointra: { value: "$20K", label: "MRR in 3 months" },
+    "leadboost-pro": {
+      value: "20+",
+      label: "sites built · month-one profitable",
+    },
+  };
+}
 
 const cardHighlights: Record<string, string[]> = {
   myfutureself: [
@@ -35,10 +47,7 @@ const cardHighlights: Record<string, string[]> = {
     "Done-for-you AI UGC content pipeline",
     "Organic influencer distribution",
   ],
-  "dog-ai": [
-    "Custom multimodal LLM",
-    "Trained on Harvard dataset",
-  ],
+  "dog-ai": ["Custom multimodal LLM", "Trained on Harvard dataset"],
   appointra: [
     "$2M+ in client pipeline generated",
     "Cold-email infra for 8/9-figure founders",
@@ -69,7 +78,9 @@ function KindChip({ slug }: { slug: string }) {
   );
 }
 
-export default function WorkPage() {
+export default async function WorkPage() {
+  const metrics = await getMarketingMetrics();
+  const liveHeroMetrics = heroMetrics(metrics);
   const hero = projectDetails.find((d) => d.slug === "myfutureself");
   const rest = projectDetails.filter((d) => d.slug !== "myfutureself");
 
@@ -113,10 +124,11 @@ export default function WorkPage() {
 
                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                   <span className="text-3xl font-semibold tracking-tight text-emerald-700 sm:text-4xl dark:text-emerald-200">
-                    $67K+ ARR
+                    {metrics.metrics.arr.display} ARR
                   </span>
                   <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                    1,750+ paid · 4.7★
+                    {metrics.metrics.paidSubscribersEver.display} active paid ·{" "}
+                    {metrics.metrics.appStoreRating.display}★
                   </span>
                 </div>
 
@@ -150,7 +162,7 @@ export default function WorkPage() {
           {rest.map((detail) => {
             const { project } = detail;
             const highlights = cardHighlights[detail.slug] ?? [];
-            const hero = heroMetrics[detail.slug];
+            const hero = liveHeroMetrics[detail.slug];
 
             return (
               <Link

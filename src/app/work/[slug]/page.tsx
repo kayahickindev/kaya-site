@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { SubpageShell } from "@/components/SubpageShell";
 import { siteConfig } from "@/data/content";
+import { getMarketingMetrics } from "@/lib/marketing-metrics";
+import type { MarketingMetricsSnapshot } from "@/lib/marketing-metrics";
 import { getProjectDetail, projectDetails } from "../_projectDetails";
 
 type ProjectPageProps = {
@@ -62,7 +64,12 @@ function ActionLink({ action }: { action: ProjectAction }) {
 
   if (action.external) {
     return (
-      <a href={action.href} target="_blank" rel="noopener noreferrer" className={className}>
+      <a
+        href={action.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
         {action.label}
         <ExternalLink size={14} />
       </a>
@@ -108,21 +115,28 @@ function DogAiVisual() {
             Trained on the Harvard dataset.
           </p>
           <p className="mt-2 text-sm leading-relaxed text-neutral-300">
-            Built and trained the underlying model myself on Harvard&apos;s behavioral dataset, then wrapped it in a narrow consumer flow.
+            Built and trained the underlying model myself on Harvard&apos;s
+            behavioral dataset, then wrapped it in a narrow consumer flow.
           </p>
         </div>
         <div className="grid grid-cols-3 gap-2">
           <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
             <p className="text-xl font-semibold">Custom</p>
-            <p className="mt-0.5 text-[11px] leading-snug text-neutral-400">multimodal LLM</p>
+            <p className="mt-0.5 text-[11px] leading-snug text-neutral-400">
+              multimodal LLM
+            </p>
           </div>
           <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
             <p className="text-xl font-semibold">Harvard</p>
-            <p className="mt-0.5 text-[11px] leading-snug text-neutral-400">behavioral dataset</p>
+            <p className="mt-0.5 text-[11px] leading-snug text-neutral-400">
+              behavioral dataset
+            </p>
           </div>
           <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
             <p className="text-xl font-semibold">Live</p>
-            <p className="mt-0.5 text-[11px] leading-snug text-neutral-400">App Store, paid</p>
+            <p className="mt-0.5 text-[11px] leading-snug text-neutral-400">
+              App Store, paid
+            </p>
           </div>
         </div>
       </div>
@@ -132,9 +146,21 @@ function DogAiVisual() {
 
 function AppointraVisual() {
   const columns = [
-    { label: "Prospects", value: "2,400", items: ["Seed startups", "Hiring signals", "New funding"] },
-    { label: "Warm", value: "318", items: ["Replies", "Qualified", "Calendar fit"] },
-    { label: "Booked", value: "100s", items: ["Meetings", "Pipeline", "Revenue"] },
+    {
+      label: "Prospects",
+      value: "2,400",
+      items: ["Seed startups", "Hiring signals", "New funding"],
+    },
+    {
+      label: "Warm",
+      value: "318",
+      items: ["Replies", "Qualified", "Calendar fit"],
+    },
+    {
+      label: "Booked",
+      value: "100s",
+      items: ["Meetings", "Pipeline", "Revenue"],
+    },
   ];
 
   return (
@@ -143,19 +169,27 @@ function AppointraVisual() {
       <div className="relative flex h-full flex-col justify-between gap-3">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-[11px] font-mono uppercase text-blue-200/75">Outbound system</p>
+            <p className="text-[11px] font-mono uppercase text-blue-200/75">
+              Outbound system
+            </p>
             <h3 className="mt-1 text-2xl font-semibold">Pipeline engine</h3>
           </div>
           <BriefcaseBusiness className="text-blue-200/80" size={24} />
         </div>
         <div className="grid flex-1 gap-2 sm:grid-cols-3">
           {columns.map((column) => (
-            <div key={column.label} className="rounded-md border border-white/10 bg-white/[0.06] p-3">
+            <div
+              key={column.label}
+              className="rounded-md border border-white/10 bg-white/[0.06] p-3"
+            >
               <p className="text-[11px] text-neutral-400">{column.label}</p>
               <p className="mt-1 text-2xl font-semibold">{column.value}</p>
               <div className="mt-3 space-y-1.5">
                 {column.items.map((item) => (
-                  <div key={item} className="rounded bg-black/24 px-2 py-1 text-[11px] text-neutral-300">
+                  <div
+                    key={item}
+                    className="rounded bg-black/24 px-2 py-1 text-[11px] text-neutral-300"
+                  >
                     {item}
                   </div>
                 ))}
@@ -202,7 +236,10 @@ function LeadBoostVisual() {
               </h3>
               <div className="mt-4 flex flex-wrap gap-2">
                 {["Web", "SEO", "Ads", "Consulting"].map((tag) => (
-                  <span key={tag} className="rounded-md bg-white/[0.08] px-2 py-1 text-[11px]">
+                  <span
+                    key={tag}
+                    className="rounded-md bg-white/[0.08] px-2 py-1 text-[11px]"
+                  >
                     {tag}
                   </span>
                 ))}
@@ -212,9 +249,14 @@ function LeadBoostVisual() {
               {[70, 48, 86].map((width, index) => (
                 <div key={width} className="rounded-md bg-black/24 p-3">
                   <div className="mb-2 h-2 w-20 rounded-full bg-white/15" />
-                  <div className="h-2 rounded-full bg-amber-200/80" style={{ width: `${width}%` }} />
+                  <div
+                    className="h-2 rounded-full bg-amber-200/80"
+                    style={{ width: `${width}%` }}
+                  />
                   <div className="mt-1.5 h-2 w-2/3 rounded-full bg-white/10" />
-                  {index === 1 ? <div className="mt-1.5 h-2 w-1/2 rounded-full bg-white/10" /> : null}
+                  {index === 1 ? (
+                    <div className="mt-1.5 h-2 w-1/2 rounded-full bg-white/10" />
+                  ) : null}
                 </div>
               ))}
             </div>
@@ -245,7 +287,8 @@ function ViralLoopVisual() {
               Done-for-you organic content.
             </h3>
             <p className="mt-2 max-w-sm text-sm leading-relaxed text-neutral-300">
-              Generates AI UGC and runs the organic influencer pipeline end-to-end.
+              Generates AI UGC and runs the organic influencer pipeline
+              end-to-end.
             </p>
           </div>
           <Sparkles className="text-pink-200/80" size={24} />
@@ -256,12 +299,16 @@ function ViralLoopVisual() {
               key={post.tag}
               className="relative flex aspect-[9/14] flex-col justify-between overflow-hidden rounded-md border border-white/10 bg-white/[0.04] p-2"
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${post.color} opacity-30`} />
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${post.color} opacity-30`}
+              />
               <span className="relative inline-flex w-fit rounded bg-black/40 px-1.5 py-0.5 text-[11px] font-mono uppercase tracking-wide text-white/90">
                 {post.tag}
               </span>
               <div className="relative">
-                <p className="text-sm font-semibold leading-none">{post.views}</p>
+                <p className="text-sm font-semibold leading-none">
+                  {post.views}
+                </p>
                 <p className="text-[11px] leading-snug text-white/70">views</p>
               </div>
             </div>
@@ -274,7 +321,12 @@ function ViralLoopVisual() {
 
 function ProjectVisual({ detail }: { detail: ProjectDetailItem }) {
   if (detail.slug === "myfutureself") {
-    return <MyFutureSelfVisual image={detail.project.image} name={detail.project.name} />;
+    return (
+      <MyFutureSelfVisual
+        image={detail.project.image}
+        name={detail.project.name}
+      />
+    );
   }
 
   if (detail.slug === "viral-loop") {
@@ -292,6 +344,20 @@ function ProjectVisual({ detail }: { detail: ProjectDetailItem }) {
   return <LeadBoostVisual />;
 }
 
+function outcomesForDetail(
+  detail: ProjectDetailItem,
+  metrics: MarketingMetricsSnapshot,
+) {
+  if (detail.slug !== "myfutureself") return detail.outcomes;
+
+  return [
+    `${metrics.metrics.paidSubscribersEver.display} active paid subscribers and ${metrics.metrics.arr.display} ARR`,
+    "26,000+ downloads on the App Store",
+    "52% average monthly revenue growth",
+    `${metrics.metrics.appStoreRating.display}-star App Store rating from ${metrics.metrics.appStoreReviews.display} verified reviews`,
+  ];
+}
+
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   const detail = getProjectDetail(slug);
@@ -301,17 +367,28 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   }
 
   const { project } = detail;
+  const metrics = await getMarketingMetrics();
+  const outcomes = outcomesForDetail(detail, metrics);
   const actions: ProjectAction[] = [
     ...(project.links.website
-      ? [{ label: "Visit site", href: project.links.website, external: true, primary: true }]
+      ? [
+          {
+            label: "Visit site",
+            href: project.links.website,
+            external: true,
+            primary: true,
+          },
+        ]
       : []),
     ...(project.links.appStore
-      ? [{
-          label: project.links.website ? "App Store" : "Open App Store",
-          href: project.links.appStore,
-          external: true,
-          primary: !project.links.website,
-        }]
+      ? [
+          {
+            label: project.links.website ? "App Store" : "Open App Store",
+            href: project.links.appStore,
+            external: true,
+            primary: !project.links.website,
+          },
+        ]
       : []),
   ];
 
@@ -350,7 +427,10 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               {actions.length > 0 ? (
                 <div className="mt-4 flex flex-wrap gap-2">
                   {actions.map((action) => (
-                    <ActionLink key={`${action.label}-${action.href}`} action={action} />
+                    <ActionLink
+                      key={`${action.label}-${action.href}`}
+                      action={action}
+                    />
                   ))}
                 </div>
               ) : null}
@@ -359,13 +439,16 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 sm:grid-cols-2">
               <div className="flex min-h-0 flex-col rounded-md border border-black/10 bg-white/55 p-3 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
                 <div className="flex items-center gap-2 border-b border-black/10 pb-2 dark:border-white/10">
-                  <CheckCircle2 size={14} className="text-emerald-600 dark:text-emerald-300" />
+                  <CheckCircle2
+                    size={14}
+                    className="text-emerald-600 dark:text-emerald-300"
+                  />
                   <h2 className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
                     Outcomes
                   </h2>
                 </div>
                 <ul className="mt-2 grid flex-1 content-start gap-1.5">
-                  {detail.outcomes.map((outcome) => (
+                  {outcomes.map((outcome) => (
                     <li
                       key={outcome}
                       className="flex gap-2 text-xs leading-snug text-neutral-700 dark:text-neutral-300"
@@ -379,7 +462,10 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
               <div className="flex min-h-0 flex-col rounded-md border border-black/10 bg-white/55 p-3 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
                 <div className="flex items-center gap-2 border-b border-black/10 pb-2 dark:border-white/10">
-                  <Target size={14} className="text-emerald-600 dark:text-emerald-300" />
+                  <Target
+                    size={14}
+                    className="text-emerald-600 dark:text-emerald-300"
+                  />
                   <h2 className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
                     Ownership
                   </h2>
