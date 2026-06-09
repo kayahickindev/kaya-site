@@ -40,7 +40,7 @@ function heroMetrics(
 
 const cardHighlights: Record<string, string[]> = {
   myfutureself: [
-    "26K+ downloads · 52% avg monthly growth",
+    "30K+ downloads · 52% avg monthly growth",
     "Solo-built iOS, backend, and voice-AI stack",
   ],
   "viral-loop": [

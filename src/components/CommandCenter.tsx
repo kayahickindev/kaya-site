@@ -141,6 +141,10 @@ function metricTiles(metrics: MarketingMetricsSnapshot) {
     0,
     Math.round(metrics.metrics.paidSubscribersEver.raw),
   );
+  const downloadsThousands = Math.max(
+    0,
+    Math.round(metrics.metrics.appDownloads.raw / 1000),
+  );
   const arrThousands = Math.max(0, Math.round(metrics.metrics.arr.raw / 1000));
   const appStoreRating = metrics.metrics.appStoreRating.raw;
 
@@ -162,10 +166,10 @@ function metricTiles(metrics: MarketingMetricsSnapshot) {
       accent: "rgb(212,155,90)",
     },
     {
-      value: 26,
+      value: downloadsThousands,
       label: "downloads",
       suffix: "K+",
-      sparkline: [0.2, 0.4, 0.8, 1.6, 3.3, 6.5, 13, 26],
+      sparkline: [0.2, 0.4, 0.8, 1.6, 3.3, 6.5, 13, downloadsThousands],
       accent: "rgb(34,211,238)",
     },
     {

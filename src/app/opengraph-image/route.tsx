@@ -62,7 +62,7 @@ export async function GET() {
               lineHeight: 1.5,
             }}
           >
-            Building MyFutureSelf. 26,000+ downloads. 1,900+ active paid subscribers. $77K+ ARR.
+            Building MyFutureSelf. 30,000+ downloads. 1,900+ active paid subscribers. $77K+ ARR.
           </div>
         </div>
 

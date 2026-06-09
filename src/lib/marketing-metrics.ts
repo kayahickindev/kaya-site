@@ -7,6 +7,7 @@ export type MarketingMetric = {
 export type MarketingMetricsSnapshot = {
   generatedAt: string;
   metrics: {
+    appDownloads: MarketingMetric;
     appStoreRating: MarketingMetric;
     appStoreReviews: MarketingMetric;
     futureSelfActions: MarketingMetric;
@@ -19,6 +20,7 @@ export type MarketingMetricsSnapshot = {
 export const FALLBACK_MARKETING_METRICS: MarketingMetricsSnapshot = {
   generatedAt: "fallback",
   metrics: {
+    appDownloads: { raw: 30000, display: "30K+", label: "Downloads" },
     appStoreRating: { raw: 4.7, display: "4.7", label: "App Store Rating" },
     appStoreReviews: { raw: 751, display: "751", label: "App Store Reviews" },
     futureSelfActions: {
@@ -49,6 +51,18 @@ function isSnapshot(value: unknown): value is MarketingMetricsSnapshot {
   return Boolean(metrics && typeof metrics === "object");
 }
 
+function withMetricDefaults(
+  snapshot: MarketingMetricsSnapshot,
+): MarketingMetricsSnapshot {
+  return {
+    ...snapshot,
+    metrics: {
+      ...FALLBACK_MARKETING_METRICS.metrics,
+      ...snapshot.metrics,
+    },
+  };
+}
+
 export async function getMarketingMetrics(): Promise<MarketingMetricsSnapshot> {
   const url = process.env.MARKETING_METRICS_URL || DEFAULT_METRICS_URL;
 
@@ -56,7 +70,9 @@ export async function getMarketingMetrics(): Promise<MarketingMetricsSnapshot> {
     const response = await fetch(url, { next: { revalidate: 3600 } });
     if (!response.ok) return FALLBACK_MARKETING_METRICS;
     const data: unknown = await response.json();
-    return isSnapshot(data) ? data : FALLBACK_MARKETING_METRICS;
+    return isSnapshot(data) ?
+      withMetricDefaults(data) :
+      FALLBACK_MARKETING_METRICS;
   } catch {
     return FALLBACK_MARKETING_METRICS;
   }

@@ -37,7 +37,7 @@ Co-founded an AI iOS app that creates a personalized AI version of each user's f
 As CTO, shipped iOS, backend, and AI systems end-to-end as the solo engineer.
 
 **Current traction**:
-- 26,000+ downloads
+- 30,000+ downloads
 - 1,750+ paid subscribers (Apple-authoritative ever-paid cohort)
 - $67K+ ARR
 - 52% average monthly revenue growth

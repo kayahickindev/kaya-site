@@ -352,7 +352,7 @@ function outcomesForDetail(
 
   return [
     `${metrics.metrics.paidSubscribersEver.display} active paid subscribers and ${metrics.metrics.arr.display} ARR`,
-    "26,000+ downloads on the App Store",
+    `${metrics.metrics.appDownloads.display} downloads on the App Store`,
     "52% average monthly revenue growth",
     `${metrics.metrics.appStoreRating.display}-star App Store rating from ${metrics.metrics.appStoreReviews.display} verified reviews`,
   ];
