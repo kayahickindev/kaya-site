@@ -73,7 +73,7 @@ export const siteConfig = {
         "A 90-day roadmap and a voice AI mentor that speaks as your future self.",
       highlights: [
         "1,900+ active paid subscribers · $77K+ ARR",
-        "26,000+ downloads · 4.7★ from 715 reviews",
+        "26,000+ downloads · 4.7★ from 751 reviews",
         "52% average monthly revenue growth",
       ],
       links: {

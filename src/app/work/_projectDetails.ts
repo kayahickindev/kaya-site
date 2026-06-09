@@ -37,7 +37,7 @@ export const projectDetails: ProjectDetail[] = [
       "1,900+ active paid subscribers and $77K+ ARR",
       "26,000+ downloads on the App Store",
       "52% average monthly revenue growth",
-      "4.7-star App Store rating from 715 verified reviews",
+      "4.7-star App Store rating from 751 verified reviews",
     ],
     ownership: [
       "Native iOS product architecture",

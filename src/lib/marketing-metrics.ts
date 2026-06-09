@@ -20,7 +20,7 @@ export const FALLBACK_MARKETING_METRICS: MarketingMetricsSnapshot = {
   generatedAt: "fallback",
   metrics: {
     appStoreRating: { raw: 4.7, display: "4.7", label: "App Store Rating" },
-    appStoreReviews: { raw: 715, display: "715", label: "App Store Reviews" },
+    appStoreReviews: { raw: 751, display: "751", label: "App Store Reviews" },
     futureSelfActions: {
       raw: 105000,
       display: "105K+",
