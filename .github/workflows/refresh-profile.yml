@@ -1,0 +1,110 @@
+name: Refresh website and GitHub profile
+
+on:
+  schedule:
+    # The source snapshot refreshes at 00:15 America/New_York. 06:30 UTC is
+    # safely after that in both daylight and standard time.
+    - cron: "30 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: website-profile-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - name: Validate the live snapshot and refresh the GitHub profile
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PROFILE_METRICS_URL: https://kayahickin.com/api/profile-metrics
+          PROFILE_REPO_TOKEN: ${{ secrets.PROFILE_REPO_TOKEN }}
+        run: |
+          node --input-type=module <<'NODE'
+          const requiredMetrics = [
+            "appDownloads",
+            "appStoreRating",
+            "appStoreReviews",
+            "futureSelfActions",
+            "paidSubscribersEver",
+            "arr",
+          ];
+          const scheduled = process.env.EVENT_NAME === "schedule";
+          const maxAgeHours = scheduled ? 8 : 48;
+          const attempts = scheduled ? 5 : 1;
+          let snapshot;
+
+          for (let attempt = 1; attempt <= attempts; attempt += 1) {
+            const response = await fetch(process.env.PROFILE_METRICS_URL, {
+              headers: { "Cache-Control": "no-cache" },
+              redirect: "follow",
+            });
+            if (response.ok) {
+              const candidate = await response.json();
+              const generatedAt = Date.parse(candidate.generatedAt);
+              const ageHours = (Date.now() - generatedAt) / 3_600_000;
+              const metricsValid = requiredMetrics.every((name) => {
+                const raw = candidate.metrics?.[name]?.raw;
+                return typeof raw === "number" && Number.isFinite(raw) && raw > 0;
+              });
+              if (
+                candidate.generatedAt !== "fallback" &&
+                Number.isFinite(generatedAt) &&
+                ageHours >= -5 / 60 &&
+                ageHours <= maxAgeHours &&
+                metricsValid
+              ) {
+                snapshot = candidate;
+                break;
+              }
+              console.log(
+                `Snapshot attempt ${attempt}/${attempts} was not ready: ` +
+                  `generatedAt=${candidate.generatedAt}, ageHours=${ageHours.toFixed(2)}`,
+              );
+            } else {
+              console.log(
+                `Snapshot attempt ${attempt}/${attempts} returned HTTP ${response.status}`,
+              );
+            }
+
+            if (attempt < attempts) {
+              await new Promise((resolve) => setTimeout(resolve, 15 * 60 * 1000));
+            }
+          }
+
+          if (!snapshot) {
+            throw new Error(`No valid metrics snapshot arrived within ${maxAgeHours} hours`);
+          }
+          if (!process.env.PROFILE_REPO_TOKEN) {
+            throw new Error("PROFILE_REPO_TOKEN is not configured");
+          }
+
+          const dispatch = await fetch(
+            "https://api.github.com/repos/kayahickindev/kayahickindev/dispatches",
+            {
+              method: "POST",
+              headers: {
+                Accept: "application/vnd.github+json",
+                Authorization: `Bearer ${process.env.PROFILE_REPO_TOKEN}`,
+                "Content-Type": "application/json",
+                "User-Agent": "kaya-site-profile-refresh",
+                "X-GitHub-Api-Version": "2022-11-28",
+              },
+              body: JSON.stringify({
+                event_type: "profile-metrics-updated",
+                client_payload: { generatedAt: snapshot.generatedAt },
+              }),
+            },
+          );
+          if (!dispatch.ok) {
+            throw new Error(
+              `Profile dispatch failed: HTTP ${dispatch.status} ${await dispatch.text()}`,
+            );
+          }
+          console.log(`Dispatched profile refresh for ${snapshot.generatedAt}`);
+          NODE
