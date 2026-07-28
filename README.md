@@ -47,7 +47,7 @@ require `FOUNDER_METRICS_ACCESS_TOKEN`; if the token is missing, rejected, or
 the upstream payload is incomplete, the site marks the snapshot as fallback
 and `/api/profile-metrics` fails with `503` instead of silently presenting a
 fresh timestamp with stale numbers. The public profile endpoint exposes only
-rounded display values for ARR and active paid subscribers.
+rounded display values for annual run rate and active paid subscribers.
 
 Edit this file to update:
 - Hero text and CTAs

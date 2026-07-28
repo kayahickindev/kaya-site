@@ -26,7 +26,7 @@ function heroMetrics(
   return {
     myfutureself: {
       value: metrics.metrics.arr.display,
-      label: `ARR · ${metrics.metrics.paidSubscribersEver.display} active paid · ${metrics.metrics.appStoreRating.display}★`,
+      label: `Annual Run Rate · ${metrics.metrics.paidSubscribersEver.display} active paid · ${metrics.metrics.appStoreRating.display}★`,
     },
     "viral-loop": { value: "Live", label: "MVP shipped" },
     "dog-ai": { value: "Live", label: "App Store · paying product" },
@@ -38,25 +38,29 @@ function heroMetrics(
   };
 }
 
-const cardHighlights: Record<string, string[]> = {
-  myfutureself: [
-    "30K+ downloads · 52% avg monthly growth",
-    "Solo-built iOS, backend, and voice-AI stack",
-  ],
-  "viral-loop": [
-    "Done-for-you AI UGC content pipeline",
-    "Organic influencer distribution",
-  ],
-  "dog-ai": ["Custom multimodal LLM", "Trained on Harvard dataset"],
-  appointra: [
-    "$2M+ in client pipeline generated",
-    "Cold-email infra for 8/9-figure founders",
-  ],
-  "leadboost-pro": [
-    "Web dev, marketing, and consulting",
-    "Blue collar businesses",
-  ],
-};
+function cardHighlights(
+  metrics: MarketingMetricsSnapshot,
+): Record<string, string[]> {
+  return {
+    myfutureself: [
+      `${metrics.metrics.appDownloads.display} downloads · 52% avg monthly growth`,
+      "Solo-built iOS, backend, and voice-AI stack",
+    ],
+    "viral-loop": [
+      "Done-for-you AI UGC content pipeline",
+      "Organic influencer distribution",
+    ],
+    "dog-ai": ["Custom multimodal LLM", "Trained on Harvard dataset"],
+    appointra: [
+      "$2M+ in client pipeline generated",
+      "Cold-email infra for 8/9-figure founders",
+    ],
+    "leadboost-pro": [
+      "Web dev, marketing, and consulting",
+      "Blue collar businesses",
+    ],
+  };
+}
 
 const projectKind: Record<string, { label: string; icon: LucideIcon }> = {
   myfutureself: { label: "iOS App", icon: Smartphone },
@@ -81,6 +85,7 @@ function KindChip({ slug }: { slug: string }) {
 export default async function WorkPage() {
   const metrics = await getMarketingMetrics();
   const liveHeroMetrics = heroMetrics(metrics);
+  const liveCardHighlights = cardHighlights(metrics);
   const hero = projectDetails.find((d) => d.slug === "myfutureself");
   const rest = projectDetails.filter((d) => d.slug !== "myfutureself");
 
@@ -124,7 +129,7 @@ export default async function WorkPage() {
 
                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                   <span className="text-3xl font-semibold tracking-tight text-emerald-700 sm:text-4xl dark:text-emerald-200">
-                    {metrics.metrics.arr.display} ARR
+                    {metrics.metrics.arr.display} annual run rate
                   </span>
                   <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
                     {metrics.metrics.paidSubscribersEver.display} active paid ·{" "}
@@ -133,7 +138,7 @@ export default async function WorkPage() {
                 </div>
 
                 <ul className="grid gap-1 text-[13px] text-neutral-700 dark:text-neutral-300">
-                  {cardHighlights[hero.slug].map((h) => (
+                  {liveCardHighlights[hero.slug].map((h) => (
                     <li key={h} className="flex items-start gap-2">
                       <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-emerald-500 dark:bg-emerald-300" />
                       <span>{h}</span>
@@ -161,7 +166,7 @@ export default async function WorkPage() {
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {rest.map((detail) => {
             const { project } = detail;
-            const highlights = cardHighlights[detail.slug] ?? [];
+            const highlights = liveCardHighlights[detail.slug] ?? [];
             const hero = liveHeroMetrics[detail.slug];
 
             return (

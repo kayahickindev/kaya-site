@@ -33,7 +33,7 @@ function tractionDescription(metrics: MarketingMetricsSnapshot) {
   return (
     "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, " +
     `an AI iOS app with ${paidSubscribersEver.display} active paid ` +
-    `subscribers, ${arr.display} ARR, ${appDownloads.display} downloads, ` +
+    `subscribers, a ${arr.display} annual run rate, ${appDownloads.display} downloads, ` +
     "52% average monthly growth, and a " +
     `${appStoreRating.display}★ App Store rating from ` +
     `${appStoreReviews.display} verified reviews. Solo-built the iOS, ` +
@@ -193,7 +193,7 @@ function orgJsonLd(metrics: MarketingMetricsSnapshot) {
       "user—delivering a 90-day roadmap and voice-based AI coaching. " +
       `Current traction: ${metrics.metrics.appDownloads.display} downloads, ` +
       `${metrics.metrics.paidSubscribersEver.display} active paid subscribers, ` +
-      `${metrics.metrics.arr.display} ARR, 52% average monthly revenue growth, ` +
+      `a ${metrics.metrics.arr.display} annual run rate, 52% average monthly revenue growth, ` +
       `and a ${metrics.metrics.appStoreRating.display}★ App Store rating from ` +
       `${metrics.metrics.appStoreReviews.display} verified reviews.`,
     sameAs: [
