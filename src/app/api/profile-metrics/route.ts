@@ -1,6 +1,7 @@
 import {
   FALLBACK_MARKETING_METRICS,
   getMarketingMetrics,
+  publicMarketingMetricsSnapshot,
 } from "@/lib/marketing-metrics";
 
 const PUBLIC_CACHE_HEADERS = {
@@ -20,5 +21,8 @@ export async function GET() {
     );
   }
 
-  return Response.json(snapshot, { headers: PUBLIC_CACHE_HEADERS });
+  return Response.json(
+    publicMarketingMetricsSnapshot(snapshot),
+    { headers: PUBLIC_CACHE_HEADERS },
+  );
 }

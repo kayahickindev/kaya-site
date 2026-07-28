@@ -36,8 +36,8 @@ const paragraphs = [
 const highlightStats = [
   { value: "8 yrs", label: "professional experience" },
   { value: "3-for-3", label: "profitable companies" },
-  { value: "467K+", label: "tracked LOC" },
-  { value: "3,000+", label: "GitHub commits" },
+  { value: "1.9M+", label: "tracked LOC" },
+  { value: "6,000+", label: "GitHub contributions" },
 ];
 
 export default function AboutPage() {

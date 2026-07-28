@@ -5,6 +5,10 @@ import { Analytics } from "@vercel/analytics/next";
 import { Providers } from "./providers";
 import "./globals.css";
 import { siteConfig } from "@/data/content";
+import {
+  getMarketingMetrics,
+  type MarketingMetricsSnapshot,
+} from "@/lib/marketing-metrics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,152 +27,187 @@ const instrumentSerif = Instrument_Serif({
   style: ["normal", "italic"],
 });
 
-export const metadata: Metadata = {
-  title: siteConfig.seo.title,
-  description: siteConfig.seo.description,
-  metadataBase: new URL(siteConfig.url),
-  applicationName: siteConfig.name,
-  authors: [{ name: siteConfig.name, url: siteConfig.url }],
-  creator: siteConfig.name,
-  publisher: siteConfig.name,
-  keywords: [
-    "Kaya Hickin",
-    "MyFutureSelf",
-    "Appointra",
-    "consumer AI founder",
-    "technical co-founder",
-    "iOS engineer",
-    "Swift",
-    "SwiftUI",
-    "voice AI",
-    "Claude Code",
-    "Codex",
-    "AI-native developer",
-    "behavior change",
-    "a16z Speedrun",
-    "Y Combinator",
-    "consumer AI startup",
-    "three-time founder",
-  ],
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" },
-  },
-  openGraph: {
-    title: siteConfig.seo.title,
-    description: siteConfig.seo.description,
-    url: siteConfig.url,
-    siteName: siteConfig.name,
-    type: "profile",
-    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.seo.title,
-    description: siteConfig.seo.description,
-    images: ["/opengraph-image"],
-    creator: "@KayaHickin",
-  },
-  alternates: {
-    canonical: siteConfig.url,
-  },
-};
+function tractionDescription(metrics: MarketingMetricsSnapshot) {
+  const { appDownloads, appStoreRating, appStoreReviews, paidSubscribersEver, arr } =
+    metrics.metrics;
+  return (
+    "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, " +
+    `an AI iOS app with ${paidSubscribersEver.display} active paid ` +
+    `subscribers, ${arr.display} ARR, ${appDownloads.display} downloads, ` +
+    "52% average monthly growth, and a " +
+    `${appStoreRating.display}★ App Store rating from ` +
+    `${appStoreReviews.display} verified reviews. Solo-built the iOS, ` +
+    "backend, and voice-AI stack end-to-end. Building consumer AI for " +
+    "behavior change."
+  );
+}
 
-const personJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Kaya Hickin",
-  alternateName: "Kaya",
-  url: siteConfig.url,
-  image: `${siteConfig.url}/headshot.jpg`,
-  jobTitle: "Co-founder & CTO at MyFutureSelf",
-  description:
-    "Three-for-three profitable founder. Co-founder and CTO of MyFutureSelf, an AI iOS app with 1,900+ active paid subscribers, 30,000+ downloads, $77K+ ARR, 52% average monthly revenue growth, and a 4.7-star App Store rating from 751 verified reviews. Solo-engineered the iOS app, backend, and voice-AI stack end-to-end. Previously co-founded Appointra (B2B AI outbound, scaled to $20K MRR in 3 months and $2M+ in client pipeline) and LeadBoost Pro (profitable from month one freshman year, still generating MRR). 3,000+ GitHub commits and contributions in the last year across product and infra, 467K+ tracked LOC across active repos, and 9B+ lifetime Codex tokens used. Daily AI-native stack: Claude Code, Codex, Granola, Wispr Flow, Ghostty, and OpenClaw running autonomously overnight. Domain expertise in consumer AI, iOS, voice agents, and behavior-change products.",
-  email: "kaya@successai.app",
-  gender: "Male",
-  nationality: "American",
-  homeLocation: { "@type": "Place", name: "Cleveland, Ohio, USA" },
-  workLocation: { "@type": "Place", name: "Cleveland, Ohio, USA" },
-  alumniOf: [
-    {
-      "@type": "CollegeOrUniversity",
-      name: "Miami University, Farmer School of Business",
-      sameAs: "https://miamioh.edu/fsb/",
+export async function generateMetadata(): Promise<Metadata> {
+  const metrics = await getMarketingMetrics();
+  const description = tractionDescription(metrics);
+  return {
+    title: siteConfig.seo.title,
+    description,
+    metadataBase: new URL(siteConfig.url),
+    applicationName: siteConfig.name,
+    authors: [{ name: siteConfig.name, url: siteConfig.url }],
+    creator: siteConfig.name,
+    publisher: siteConfig.name,
+    keywords: [
+      "Kaya Hickin",
+      "MyFutureSelf",
+      "Appointra",
+      "consumer AI founder",
+      "technical co-founder",
+      "iOS engineer",
+      "Swift",
+      "SwiftUI",
+      "voice AI",
+      "Claude Code",
+      "Codex",
+      "AI-native developer",
+      "behavior change",
+      "a16z Speedrun",
+      "Y Combinator",
+      "consumer AI startup",
+      "three-time founder",
+    ],
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" },
     },
-  ],
-  award: [
-    "Winner, RedHawk Venture Pitch Competition, Miami University ($10,000 prize)",
-    "4th of 250 teams, TCU Values & Ventures Pitch Competition ($2,500 prize)",
-    "Valedictorian, Crestwood High School",
-    "Dean's List, Miami University (8 consecutive semesters)",
-  ],
-  knowsAbout: [
-    "Consumer AI",
-    "iOS engineering",
-    "Swift",
-    "SwiftUI",
-    "Voice AI",
-    "WebRTC",
-    "OpenAI Realtime API",
-    "Claude API",
-    "Firebase",
-    "Cloud Functions",
-    "Next.js",
-    "TypeScript",
-    "Behavior change product design",
-    "B2B outbound systems",
-    "Cold email infrastructure (DNS, SPF, DKIM, warmup)",
-    "AI-native software development with Claude Code, Codex, and autonomous overnight agents",
-    "Granola",
-    "Wispr Flow",
-    "Ghostty",
-    "OpenClaw",
-  ],
-  worksFor: {
+    openGraph: {
+      title: siteConfig.seo.title,
+      description,
+      url: siteConfig.url,
+      siteName: siteConfig.name,
+      type: "profile",
+      images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: siteConfig.seo.title,
+      description,
+      images: ["/opengraph-image"],
+      creator: "@KayaHickin",
+    },
+    alternates: {
+      canonical: siteConfig.url,
+    },
+  };
+}
+
+function personJsonLd(metrics: MarketingMetricsSnapshot) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Kaya Hickin",
+    alternateName: "Kaya",
+    url: siteConfig.url,
+    image: `${siteConfig.url}/headshot.jpg`,
+    jobTitle: "Co-founder & CTO at MyFutureSelf",
+    description:
+      tractionDescription(metrics) +
+      " Previously co-founded Appointra (B2B AI outbound, scaled to $20K MRR " +
+      "in 3 months and $2M+ in client pipeline) and LeadBoost Pro (profitable " +
+      "from month one freshman year). 6,000+ GitHub contributions " +
+      "in the last year across product and infra, 1.9M+ tracked LOC across " +
+      "active repos, and 9B+ lifetime Codex tokens used.",
+    email: "kaya@successai.app",
+    gender: "Male",
+    nationality: "American",
+    homeLocation: { "@type": "Place", name: "Cleveland, Ohio, USA" },
+    workLocation: { "@type": "Place", name: "Cleveland, Ohio, USA" },
+    alumniOf: [
+      {
+        "@type": "CollegeOrUniversity",
+        name: "Miami University, Farmer School of Business",
+        sameAs: "https://miamioh.edu/fsb/",
+      },
+    ],
+    award: [
+      "Winner, RedHawk Venture Pitch Competition, Miami University ($10,000 prize)",
+      "4th of 250 teams, TCU Values & Ventures Pitch Competition ($2,500 prize)",
+      "Valedictorian, Crestwood High School",
+      "Dean's List, Miami University (8 consecutive semesters)",
+    ],
+    knowsAbout: [
+      "Consumer AI",
+      "iOS engineering",
+      "Swift",
+      "SwiftUI",
+      "Voice AI",
+      "WebRTC",
+      "OpenAI Realtime API",
+      "Claude API",
+      "Firebase",
+      "Cloud Functions",
+      "Next.js",
+      "TypeScript",
+      "Behavior change product design",
+      "B2B outbound systems",
+      "Cold email infrastructure (DNS, SPF, DKIM, warmup)",
+      "AI-native software development with Claude Code, Codex, and autonomous overnight agents",
+      "Granola",
+      "Wispr Flow",
+      "Ghostty",
+      "OpenClaw",
+    ],
+    worksFor: {
+      "@type": "Organization",
+      name: "MyFutureSelf",
+      url: "https://myfutureselfapp.com",
+      description:
+        "AI iOS app delivering personalized future-self mentorship through a 90-day roadmap and a voice AI mentor.",
+    },
+    sameAs: [
+      "https://github.com/kayahickindev",
+      "https://x.com/KayaHickin",
+      "https://www.linkedin.com/in/kayahickin/",
+      "https://www.instagram.com/kayahickin/",
+      "https://myfutureselfapp.com/",
+      "https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360",
+    ],
+    hasOccupation: [
+      {
+        "@type": "Occupation",
+        name: "Co-founder & CTO, MyFutureSelf",
+        occupationLocation: { "@type": "City", name: "Cleveland, Ohio" },
+        skills:
+          "iOS engineering (Swift/SwiftUI), backend (Node.js/Firebase/Cloud Functions), voice AI (WebRTC, OpenAI Realtime), AI integration (Claude, OpenAI), product design, growth, AI-native development with Claude Code and Codex",
+      },
+    ],
+  };
+}
+
+function orgJsonLd(metrics: MarketingMetricsSnapshot) {
+  return {
+    "@context": "https://schema.org",
     "@type": "Organization",
     name: "MyFutureSelf",
     url: "https://myfutureselfapp.com",
+    founder: { "@type": "Person", name: "Kaya Hickin", url: siteConfig.url },
     description:
-      "AI iOS app delivering personalized future-self mentorship through a 90-day roadmap and a voice AI mentor.",
-  },
-  sameAs: [
-    "https://github.com/kayahickindev",
-    "https://x.com/KayaHickin",
-    "https://www.linkedin.com/in/kayahickin/",
-    "https://www.instagram.com/kayahickin/",
-    "https://myfutureselfapp.com/",
-    "https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360",
-  ],
-  hasOccupation: [
-    {
-      "@type": "Occupation",
-      name: "Co-founder & CTO, MyFutureSelf",
-      occupationLocation: { "@type": "City", name: "Cleveland, Ohio" },
-      skills:
-        "iOS engineering (Swift/SwiftUI), backend (Node.js/Firebase/Cloud Functions), voice AI (WebRTC, OpenAI Realtime), AI integration (Claude, OpenAI), product design, growth, AI-native development with Claude Code and Codex",
-    },
-  ],
-};
+      "AI iOS app that creates a personalized future-self mentor for each " +
+      "user—delivering a 90-day roadmap and voice-based AI coaching. " +
+      `Current traction: ${metrics.metrics.appDownloads.display} downloads, ` +
+      `${metrics.metrics.paidSubscribersEver.display} active paid subscribers, ` +
+      `${metrics.metrics.arr.display} ARR, 52% average monthly revenue growth, ` +
+      `and a ${metrics.metrics.appStoreRating.display}★ App Store rating from ` +
+      `${metrics.metrics.appStoreReviews.display} verified reviews.`,
+    sameAs: [
+      "https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360",
+    ],
+  };
+}
 
-const orgJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "MyFutureSelf",
-  url: "https://myfutureselfapp.com",
-  founder: { "@type": "Person", name: "Kaya Hickin", url: siteConfig.url },
-  description:
-    "AI iOS app that creates a personalized future-self mentor for each user — delivering a 90-day roadmap and voice-based AI coaching. Current traction: 30,000+ downloads, 1,900+ active paid subscribers, $77K+ ARR, 52% average monthly revenue growth, and a 4.7★ App Store rating from 751 verified reviews.",
-  sameAs: [
-    "https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360",
-  ],
-};
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const metrics = await getMarketingMetrics();
   return (
     <html
       lang="en"
@@ -181,7 +220,7 @@ export default function RootLayout({
           type="application/ld+json"
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
+            __html: JSON.stringify(personJsonLd(metrics)).replace(/</g, "\\u003c"),
           }}
         />
         <Script
@@ -189,7 +228,7 @@ export default function RootLayout({
           type="application/ld+json"
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(orgJsonLd).replace(/</g, "\\u003c"),
+            __html: JSON.stringify(orgJsonLd(metrics)).replace(/</g, "\\u003c"),
           }}
         />
         <Providers>{children}</Providers>

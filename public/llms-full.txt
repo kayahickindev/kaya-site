@@ -6,7 +6,7 @@ This file is intended for AI agents, large language models, and crawlers evaluat
 
 ## One-line summary
 
-Three-for-three profitable founder, technical CTO building consumer AI for behavior change. Solo-built MyFutureSelf to 1,750+ paid subs and $67K+ ARR with 52% average monthly revenue growth while maintaining 467K+ tracked LOC across active repos, shipping 3,000+ GitHub commits and contributions in the last year, and using 9B+ lifetime Codex tokens.
+Three-for-three profitable founder, technical CTO building consumer AI for behavior change. Solo-built MyFutureSelf to 2,900+ active paid subscribers and $115K+ ARR with 52% average monthly revenue growth while maintaining 1.9M+ tracked LOC across active repos, logging 6,000+ GitHub contributions in the last year, and using 9B+ lifetime Codex tokens.
 
 ---
 
@@ -20,7 +20,7 @@ Three-for-three profitable founder, technical CTO building consumer AI for behav
 - **Title**: Co-founder & CTO, MyFutureSelf
 - **Equity**: 50%
 - **Technical founder**: Yes — programmer/engineer who builds the product without outside assistance.
-- **Available full-time after**: May 2026 graduation (will commit exclusively to chosen startup if accepted to YC / Speedrun / similar).
+- **Available full-time**: Yes — graduated from Miami University in May 2026.
 
 ## Education
 
@@ -38,10 +38,10 @@ As CTO, shipped iOS, backend, and AI systems end-to-end as the solo engineer.
 
 **Current traction**:
 - 30,000+ downloads
-- 1,750+ paid subscribers (Apple-authoritative ever-paid cohort)
-- $67K+ ARR
+- 2,900+ active paid subscribers (Superwall active-paid metric)
+- $115K+ ARR (Superwall ARR metric)
 - 52% average monthly revenue growth
-- 4.7★ App Store rating from 715 verified reviews
+- 4.7★ App Store rating from 1,032 verified reviews
 - 87% lifetime paying-customer retention (still in a paid period)
 
 **Tech I personally built**:
@@ -49,7 +49,7 @@ As CTO, shipped iOS, backend, and AI systems end-to-end as the solo engineer.
 - Voice: WebRTC + OpenAI Realtime API
 - Backend: Node.js on Firebase Cloud Functions, Firestore
 - AI: OpenAI Responses API, Claude API
-- Growth: Mixpanel analytics, Superwall paywall infrastructure
+- Growth: PostHog analytics, Superwall paywall infrastructure
 
 **Links**: https://myfutureselfapp.com — https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360
 
@@ -112,8 +112,8 @@ Joined the family landscaping business at age 14 and worked through high school 
 
 ## Engineering velocity
 
-- **467,000+ tracked lines of code** across active repos
-- **3,000+ GitHub commits and contributions** in the last 12 months
+- **1.9M+ tracked lines of code** across active repos
+- **6,000+ GitHub contributions** in the last 12 months
 - **9B+ lifetime Codex tokens** used locally since October 2025
 - **20+ websites shipped** across all ventures to date
 - **2 native iOS apps shipped to the App Store** (MyFutureSelf, Dog AI)
@@ -157,7 +157,7 @@ Spending the next decade building consumer AI products that change real behavior
 - **AI-native shipping velocity** that compounds over time (Claude Code + Codex daily)
 - **Capital-efficient operator** — used to making $1 do the work of $5
 - **Consumer AI wedge** in a market a16z is actively backing
-- **Available full-time** the moment a batch starts — graduating May 2026, based in Cleveland, OH
+- **Available full-time** the moment a batch starts — graduated May 2026, based in Cleveland, OH
 
 ## Direct contact
 

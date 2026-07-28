@@ -26,14 +26,13 @@ jobs:
           PROFILE_REPO_TOKEN: ${{ secrets.PROFILE_REPO_TOKEN }}
         run: |
           node --input-type=module <<'NODE'
-          const requiredMetrics = [
+          const requiredRawMetrics = [
             "appDownloads",
             "appStoreRating",
             "appStoreReviews",
             "futureSelfActions",
-            "paidSubscribersEver",
-            "arr",
           ];
+          const requiredDisplayMetrics = ["paidSubscribersEver", "arr"];
           const scheduled = process.env.EVENT_NAME === "schedule";
           const maxAgeHours = scheduled ? 8 : 48;
           const attempts = scheduled ? 5 : 1;
@@ -48,16 +47,21 @@ jobs:
               const candidate = await response.json();
               const generatedAt = Date.parse(candidate.generatedAt);
               const ageHours = (Date.now() - generatedAt) / 3_600_000;
-              const metricsValid = requiredMetrics.every((name) => {
+              const rawMetricsValid = requiredRawMetrics.every((name) => {
                 const raw = candidate.metrics?.[name]?.raw;
                 return typeof raw === "number" && Number.isFinite(raw) && raw > 0;
+              });
+              const displayMetricsValid = requiredDisplayMetrics.every((name) => {
+                const display = candidate.metrics?.[name]?.display;
+                return typeof display === "string" && display.length > 0;
               });
               if (
                 candidate.generatedAt !== "fallback" &&
                 Number.isFinite(generatedAt) &&
                 ageHours >= -5 / 60 &&
                 ageHours <= maxAgeHours &&
-                metricsValid
+                rawMetricsValid &&
+                displayMetricsValid
               ) {
                 snapshot = candidate;
                 break;
