@@ -1,10 +1,16 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "fs/promises";
 import { join } from "path";
+import { getMarketingMetrics } from "@/lib/marketing-metrics";
 
 export const runtime = "nodejs";
 
 export async function GET() {
+  const metrics = await getMarketingMetrics();
+  const summary =
+    `Building MyFutureSelf. ${metrics.metrics.appDownloads.display} downloads. ` +
+    `${metrics.metrics.paidSubscribersEver.display} active paid subscribers. ` +
+    `${metrics.metrics.arr.display} ARR.`;
   const headshotPath = join(process.cwd(), "public", "headshot.jpg");
   const headshotBuffer = await readFile(headshotPath);
   const headshotBase64 = `data:image/jpeg;base64,${headshotBuffer.toString("base64")}`;
@@ -62,7 +68,7 @@ export async function GET() {
               lineHeight: 1.5,
             }}
           >
-            Building MyFutureSelf. 30,000+ downloads. 1,900+ active paid subscribers. $77K+ ARR.
+            {summary}
           </div>
         </div>
 

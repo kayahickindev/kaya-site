@@ -9,7 +9,7 @@ export const siteConfig = {
   seo: {
     title: "Kaya Hickin — Technical Co-founder & CTO, MyFutureSelf",
     description:
-      "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 1,900+ active paid subscribers, $77K+ ARR, 30K+ downloads, 52% average monthly growth, and a 4.7★ App Store rating. Solo-built iOS, backend, and voice-AI stack end-to-end. Building consumer AI for behavior change.",
+      "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 2,900+ active paid subscribers, $115K+ ARR, 30K+ downloads, 52% average monthly growth, and a 4.7★ App Store rating. Solo-built iOS, backend, and voice-AI stack end-to-end. Building consumer AI for behavior change.",
   },
 
   availability: "Cleveland, OH",
@@ -23,8 +23,8 @@ export const siteConfig = {
     paragraphs: [
       "I started my first company freshman year because I wanted to see if I could build something people would pay for. Turns out I could, so I kept going. Three companies later, I'm three for three on profitability.",
       "My main focus right now is MyFutureSelf, an AI app that helps people define who they want to become and then become that person through a 90-day personalized roadmap, an AI mentor that speaks as their future self, and daily action. As CTO, I led the technical build end to end: iOS, backend, and AI systems.",
-      "I'm AI-native in how I build. In the last year I've shipped 3,000+ GitHub commits and contributions, mostly written alongside Claude Code and Codex. My active local repos now span 467K+ tracked lines of code, with 9B+ lifetime Codex tokens used.",
-      "I'm graduating from Miami University this month with a Marketing degree and an Entrepreneurship minor, based in Cleveland, OH. Most of my time goes toward thinking about how AI can build consumer products that change real behavior, not just engagement metrics.",
+      "I'm AI-native in how I build. In the last year I've logged 6,000+ GitHub contributions, mostly written alongside Claude Code and Codex. My active local repos now span 1.9M+ tracked lines of code, with 9B+ lifetime Codex tokens used.",
+      "I graduated from Miami University with a Marketing degree and an Entrepreneurship minor and am based in Cleveland, OH. Most of my time goes toward thinking about how AI can build consumer products that change real behavior, not just engagement metrics.",
     ],
     sidebar: [
       { label: "Education", value: "Miami University", detail: "BA Marketing, Minor in Entrepreneurship, May 2026", icon: "GraduationCap" },
@@ -49,7 +49,7 @@ export const siteConfig = {
       { name: "Cloud Functions", category: "Backend" },
       { name: "Supabase", category: "Backend" },
       { name: "Stripe", category: "Backend" },
-      { name: "Mixpanel", category: "Backend" },
+      { name: "PostHog", category: "Backend" },
       { name: "OpenAI Responses API", category: "AI" },
       { name: "Claude API", category: "AI" },
       { name: "Realtime / Voice", category: "AI" },
@@ -72,8 +72,8 @@ export const siteConfig = {
       description:
         "A 90-day roadmap and a voice AI mentor that speaks as your future self.",
       highlights: [
-        "1,900+ active paid subscribers · $77K+ ARR",
-        "30,000+ downloads · 4.7★ from 751 reviews",
+        "2,900+ active paid subscribers · $115K+ ARR",
+        "30,000+ downloads · 4.7★ from 1,032 reviews",
         "52% average monthly revenue growth",
       ],
       links: {

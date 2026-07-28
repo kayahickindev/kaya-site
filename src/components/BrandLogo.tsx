@@ -17,7 +17,7 @@ type BrandKey =
   | "claudecode"
   | "codex"
   | "cursor"
-  | "mixpanel"
+  | "posthog"
   | "superwall"
   | "granola"
   | "wispr"
@@ -51,7 +51,7 @@ function detect(name: string): BrandKey | null {
   if (n.includes("claude code")) return "claudecode";
   if (n.includes("codex")) return "codex";
   if (n.includes("cursor")) return "cursor";
-  if (n.includes("mixpanel")) return "mixpanel";
+  if (n.includes("posthog")) return "posthog";
   if (n.includes("superwall")) return "superwall";
   if (n.includes("granola")) return "granola";
   if (n.includes("wispr")) return "wispr";
@@ -195,12 +195,13 @@ function Icon({ brand, size = 14 }: { brand: BrandKey; size?: number }) {
           <path d="M4 3l9 18 2.4-7.6L23 11z" />
         </svg>
       );
-    case "mixpanel":
+    case "posthog":
       return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="#7856FF" aria-hidden>
-          <circle cx="4" cy="12" r="2" />
-          <circle cx="12" cy="12" r="3" />
-          <circle cx="20" cy="12" r="1.5" />
+        <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
+          <circle cx="12" cy="12" r="10" fill="#F9BD2B" />
+          <circle cx="9" cy="10" r="1.4" fill="#1D1F27" />
+          <circle cx="15" cy="10" r="1.4" fill="#1D1F27" />
+          <path d="M8 15c2.5 1.7 5.5 1.7 8 0" fill="none" stroke="#1D1F27" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       );
     case "superwall":
