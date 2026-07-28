@@ -6,7 +6,7 @@ This file is intended for AI agents, large language models, and crawlers evaluat
 
 ## One-line summary
 
-Three-for-three profitable founder, technical CTO building consumer AI for behavior change. Solo-built MyFutureSelf to 2,900+ active paid subscribers and $115K+ ARR with 52% average monthly revenue growth while maintaining 1.9M+ tracked LOC across active repos, logging 6,000+ GitHub contributions in the last year, and using 9B+ lifetime Codex tokens.
+Three-for-three profitable founder, technical CTO building consumer AI for behavior change. Solo-built MyFutureSelf to 2,900+ active paid subscribers and a $115K+ annual run rate with 52% average monthly revenue growth while maintaining 1.9M+ tracked LOC across active repos, logging 6,000+ GitHub contributions in the last year, and using 9B+ lifetime Codex tokens.
 
 ---
 
@@ -39,7 +39,7 @@ As CTO, shipped iOS, backend, and AI systems end-to-end as the solo engineer.
 **Current traction**:
 - 30,000+ downloads
 - 2,900+ active paid subscribers (Superwall active-paid metric)
-- $115K+ ARR (Superwall ARR metric)
+- $115K+ annual run rate (Superwall metric)
 - 52% average monthly revenue growth
 - 4.7★ App Store rating from 1,032 verified reviews
 - 87% lifetime paying-customer retention (still in a paid period)

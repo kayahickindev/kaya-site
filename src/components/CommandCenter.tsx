@@ -159,7 +159,7 @@ function metricTiles(metrics: MarketingMetricsSnapshot) {
     },
     {
       value: arrThousands,
-      label: "ARR",
+      label: "Annual Run Rate",
       prefix: "$",
       suffix: "K+",
       sparkline: [0.5, 1, 2, 4, 8, 16, 33, arrThousands],

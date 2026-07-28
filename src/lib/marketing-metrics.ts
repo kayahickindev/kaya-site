@@ -51,7 +51,7 @@ export const FALLBACK_MARKETING_METRICS: MarketingMetricsSnapshot = {
       display: "3K+",
       label: "Active Paid Subscribers",
     },
-    arr: { raw: 115409, display: "$115K+", label: "ARR" },
+    arr: { raw: 115409, display: "$115K+", label: "Annual Run Rate" },
   },
 };
 

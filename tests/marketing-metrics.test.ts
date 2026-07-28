@@ -22,7 +22,7 @@ const currentSnapshot = {
       display: "3K+",
       label: "Active Paid Subscribers",
     },
-    arr: { raw: 115409, display: "$115K+", label: "ARR" },
+    arr: { raw: 115409, display: "$115K+", label: "Annual Run Rate" },
   },
 };
 
@@ -53,7 +53,7 @@ test("removes exact private values from the public profile snapshot", () => {
 
   assert.deepEqual(publicSnapshot.metrics.arr, {
     display: "$115K+",
-    label: "ARR",
+    label: "Annual Run Rate",
   });
   assert.deepEqual(publicSnapshot.metrics.paidSubscribersEver, {
     display: "3K+",
