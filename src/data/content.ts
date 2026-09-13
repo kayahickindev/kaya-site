@@ -1,6 +1,6 @@
 import { profile, awards } from "./profile";
 
-// Email is split to prevent plain-text scraping. Reassembled on click only.
+// Centralized email parts for contact links and display.
 const EMAIL_USER = "kaya";
 const EMAIL_DOMAIN = "successai.app";
 
@@ -171,7 +171,7 @@ export const siteConfig = {
     url: "https://github.com/kayahickindev",
   },
 
-  // Email parts kept separate so the literal address never appears in source HTML.
+  // Contact address used by the contact page.
   emailParts: {
     user: EMAIL_USER,
     domain: EMAIL_DOMAIN,

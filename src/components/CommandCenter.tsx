@@ -1,321 +1,131 @@
-"use client";
-
-import { type ComponentType } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { profile } from "@/data/profile";
-import { siteConfig } from "@/data/content";
-import { metricsCaption, type PublicMarketingMetricsSnapshot } from "@/lib/marketing-metrics";
-import { Footer } from "./Footer";
-import { MetricTiles } from "./MetricTiles";
-import { RevealHeadline } from "./RevealHeadline";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { TopNav } from "./TopNav";
-
-const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];
-
-function GitHubIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden
-    >
-      <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-    </svg>
-  );
-}
-
-function TwitterIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden
-    >
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  );
-}
-
-function LinkedInIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden
-    >
-      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-    </svg>
-  );
-}
-
-function InstagramIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden
-    >
-      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-    </svg>
-  );
-}
-
-function SignalField() {
-  const reducedMotion = useReducedMotion();
-
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-0 overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:72px_72px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_10%,rgba(8,145,178,0.18),transparent_55%),radial-gradient(circle_at_10%_90%,rgba(217,119,6,0.14),transparent_55%)] dark:bg-[radial-gradient(circle_at_85%_10%,rgba(34,211,238,0.14),transparent_55%),radial-gradient(circle_at_10%_90%,rgba(251,191,36,0.12),transparent_55%)]" />
-      {Array.from({ length: 12 }).map((_, i) => {
-        const left = (i * 37) % 100;
-        const top = (i * 53) % 100;
-        const delay = (i % 9) * 0.28;
-        const tint =
-          i % 2 === 0
-            ? "bg-cyan-700/35 shadow-[0_0_12px_rgba(8,145,178,0.30)] dark:bg-cyan-300/45 dark:shadow-[0_0_14px_rgba(34,211,238,0.30)]"
-            : "bg-amber-700/35 shadow-[0_0_12px_rgba(217,119,6,0.30)] dark:bg-amber-300/45 dark:shadow-[0_0_14px_rgba(251,191,36,0.30)]";
-        return (
-          <motion.span
-            key={i}
-            className={`absolute h-1 w-1 rounded-full ${tint}`}
-            style={{ left: `${left}%`, top: `${top}%` }}
-            animate={
-              reducedMotion
-                ? undefined
-                : { opacity: [0.18, 0.6, 0.18], scale: [0.8, 1.05, 0.8] }
-            }
-            transition={{
-              duration: 6.8 + (i % 5),
-              delay,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        );
-      })}
-    </div>
-  );
-}
-
-function SocialPill({
-  href,
-  label,
-  icon: Icon,
-  brandClass,
-}: {
-  href: string;
-  label: string;
-  icon: ComponentType<{ size?: number }>;
-  brandClass: string;
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={label}
-      title={label}
-      className={`group grid h-10 w-10 place-items-center rounded-md border border-black/10 bg-white/55 text-neutral-700 backdrop-blur transition hover:-translate-y-0.5 dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-200 ${brandClass}`}
-    >
-      <Icon size={16} />
-    </a>
-  );
-}
-
-function metricTiles(snapshot: PublicMarketingMetricsSnapshot) {
-  const m = snapshot.metrics;
-  return [
-    { display: m.paidSubscribersEver.display, label: "Active paid subscribers" },
-    { display: m.arr.display, label: "Annual run rate" },
-    { display: m.appDownloads.display, label: "Downloads" },
-    { display: `${m.appStoreRating.display}★`, label: "App rating" },
-  ];
-}
-
+import { Footer } from "./Footer";
+import { SelectedWork } from "./SelectedWork";
+import { profile } from "@/data/profile";
+import type { PublicMarketingMetricsSnapshot } from "@/lib/marketing-metrics";
 export function CommandCenter({
   metrics,
 }: {
   metrics: PublicMarketingMetricsSnapshot;
 }) {
-  const featured = siteConfig.projects.find((project) => project.featured);
-  const liveMetricTiles = metricTiles(metrics);
-
+  const m = metrics.metrics;
   return (
-    <main className="relative min-h-dvh overflow-hidden bg-[#f4f1ea] text-neutral-950 dark:bg-[#050505] dark:text-white">
-      <SignalField />
-      <div className="relative z-10 grid min-h-dvh grid-rows-[auto_1fr_auto] gap-4 px-4 py-3 sm:px-5 sm:py-4 lg:px-7">
-        <TopNav />
-
-        <section className="grid grid-cols-1 gap-6 pb-6 lg:grid-cols-12">
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.48, ease }}
-            className="flex flex-col justify-center gap-2.5 py-1 lg:col-span-7 lg:pr-3"
-          >
-            <div className="group flex w-fit items-center gap-3">
-              <span className="relative block h-14 w-14 shrink-0 overflow-hidden rounded-2xl border border-black/10 shadow-[0_4px_16px_-6px_rgba(0,0,0,0.4)] ring-1 ring-amber-400/25 dark:border-white/15">
-                <Image
-                  src="/headshot.jpg"
-                  alt="Kaya Hickin"
-                  width={56}
-                  height={56}
-                  priority
-                  className="h-full w-full object-cover grayscale transition duration-500 group-hover:grayscale-0"
-                />
-              </span>
-              <span className="leading-tight">
-                <span className="block text-sm font-semibold text-neutral-950 dark:text-white">
-                  Kaya Hickin
-                </span>
-                <span className="block text-[11px] text-neutral-500 dark:text-neutral-300">
-                  Co-founder &amp; CTO · {profile.location}
-                </span>
-              </span>
+    <div className="site-shell home-shell">
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
+      <TopNav />
+      <main id="main-content">
+        <section className="portrait-hero" aria-labelledby="hero-name">
+          <div className="hero-copy">
+            <p className="eyebrow">
+              <span className="status-dot" /> Founder. Full-stack developer.
+            </p>
+            <h1 id="hero-name">
+              Kaya
+              <br />
+              <span>Hickin</span>
+              <span className="name-period">.</span>
+            </h1>
+            <div className="hero-intro">
+              <h2>I build AI for real life.</h2>
+              <p>
+                Co-founder &amp; CTO of{" "}
+                <Link href="/work/myfutureself">MyFutureSelf</Link>.<br />
+                Backed by Cintrifuse Capital.
+              </p>
             </div>
-
-            <div className="relative max-w-5xl">
-              <div aria-hidden className="aurora" />
-              <div className="relative">
-                <RevealHeadline
-                  words={[
-                    "I",
-                    "build",
-                    "consumer",
-                    "AI",
-                    "that",
-                    "changes",
-                    "behavior.",
-                  ]}
-                  className="text-4xl font-semibold leading-[0.95] text-neutral-950 sm:text-5xl sm:leading-[0.92] xl:text-6xl 2xl:text-7xl dark:text-white"
-                />
+            <a className="text-link hero-cta" href="#selected-work">
+              Explore my work <ArrowDown size={18} aria-hidden />
+            </a>
+          </div>
+          <div className="hero-photo">
+            <Image
+              src="/portraits/kaya.jpg"
+              alt="Kaya Hickin, co-founder and CTO of MyFutureSelf"
+              fill
+              preload
+              sizes="(max-width: 700px) 100vw, 58vw"
+            />
+            <span className="photo-caption">Cincinnati, OH ↗</span>
+          </div>
+        </section>
+        <section className="section" id="selected-work">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">Selected work</p>
+              <h2>Ideas, shipped.</h2>
+            </div>
+            <Link className="text-link" href="/work">
+              All projects <ArrowUpRight size={18} aria-hidden />
+            </Link>
+          </div>
+          <SelectedWork />
+          <div className="metrics-strip" aria-label="MyFutureSelf traction">
+            {[
+              [m.appDownloads.display, "MyFutureSelf downloads"],
+              [m.paidSubscribersEver.display, "Active paid subscribers"],
+              [`${m.appStoreRating.display}/5`, "App rating"],
+              [m.futureSelfActions.display, "Future Self Actions"],
+            ].map(([v, l]) => (
+              <div key={l}>
+                <p>{v}</p>
+                <span>{l}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section className="section home-story">
+          <div>
+            <p className="eyebrow">A builder, through and through</p>
+            <h2>
+              From the first line
+              <br />
+              to the <em>whole thing.</em>
+            </h2>
+            <Link className="text-link" href="/about">
+              A little more about me <ArrowUpRight size={18} aria-hidden />
+            </Link>
+          </div>
+          <div className="story-right">
+            <p className="lead">
+              Mobile. Web. Backend. AI. I build the systems behind the
+              experience, and the experience itself.
+            </p>
+            <div className="engineering-stats">
+              <div>
+                <strong>{profile.github.display}</strong>
+                <span>GitHub contributions in a year</span>
+              </div>
+              <div>
+                <strong>{profile.tokens.display}</strong>
+                <span>Tokens across Codex &amp; Claude coding workflows</span>
               </div>
             </div>
-
-            <p className="max-w-xl text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
-              {profile.introduction}
-            </p>
-            <Link href="/proof" className="w-fit text-sm font-medium text-amber-800 underline decoration-amber-500/40 underline-offset-4 dark:text-amber-200">
-              Backed by Cintrifuse Capital · Full-stack developer
+            <Link className="text-link" href="/stack">
+              Explore my stack <ArrowUpRight size={18} aria-hidden />
             </Link>
-
-            <div>
-              <p className="mb-1.5 text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-300">
-                MyFutureSelf traction
-              </p>
-              <MetricTiles metrics={liveMetricTiles} accent="amber" />
-              <Link href="/proof#metrics" className="mt-2 block text-xs text-neutral-600 underline decoration-neutral-400/40 underline-offset-4 dark:text-neutral-400">
-                {metricsCaption(metrics)} · definitions
-              </Link>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              <Link
-                href="/work"
-                className="inline-flex h-10 items-center gap-2 rounded-md border border-amber-400/40 bg-amber-400/15 px-4 text-sm font-medium text-amber-800 backdrop-blur transition hover:-translate-y-0.5 hover:border-amber-400/60 hover:bg-amber-400/25 dark:text-amber-200 dark:hover:bg-amber-400/20"
-              >
-                See work
-                <ArrowRight size={16} />
-              </Link>
-              <SocialPill
-                href={siteConfig.social.github}
-                label="GitHub"
-                icon={GitHubIcon}
-                brandClass="hover:bg-[#181717] hover:text-white hover:border-[#181717] dark:hover:bg-white dark:hover:text-neutral-950"
-              />
-              <SocialPill
-                href={siteConfig.social.linkedin}
-                label="LinkedIn"
-                icon={LinkedInIcon}
-                brandClass="hover:bg-[#0a66c2] hover:text-white hover:border-[#0a66c2]"
-              />
-              <SocialPill
-                href={siteConfig.social.twitter}
-                label="X / Twitter"
-                icon={TwitterIcon}
-                brandClass="hover:bg-black hover:text-white hover:border-black dark:hover:bg-white dark:hover:text-neutral-950"
-              />
-              <SocialPill
-                href={siteConfig.social.instagram}
-                label="Instagram"
-                icon={InstagramIcon}
-                brandClass="hover:bg-gradient-to-tr hover:from-amber-500 hover:via-pink-600 hover:to-purple-700 hover:text-white hover:border-transparent"
-              />
-            </div>
-          </motion.div>
-
-          {featured && (
-            <motion.div
-              initial={{ opacity: 0, x: 16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.08, ease }}
-              className="relative flex flex-col items-center justify-end gap-0 pb-2 lg:col-span-5 lg:-translate-x-3 xl:-translate-x-5"
-            >
-              <Link
-                href={`/work/${featured.slug}`}
-                aria-label={`Open ${featured.name} case study`}
-                className="group relative z-10 flex flex-col items-center gap-1.5 rounded-md text-center transition focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-              >
-                <div className="inline-flex items-center gap-2">
-                  <h2 className="text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl dark:text-white">
-                    {featured.name}
-                  </h2>
-                  <ArrowUpRight
-                    size={20}
-                    className="text-neutral-500 dark:text-neutral-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-amber-600 dark:group-hover:text-amber-300"
-                  />
-                </div>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/15 px-2.5 py-1 text-[11px] font-medium text-amber-800 backdrop-blur transition group-hover:-translate-y-0.5 group-hover:border-amber-400/60 group-hover:bg-amber-400/25 dark:text-amber-200">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 accent-pulse" />
-                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-500 dark:bg-amber-300" />
-                  </span>
-                  Current focus
-                </span>
-              </Link>
-
-              <Link
-                href={`/work/${featured.slug}`}
-                aria-label={`Open ${featured.name} case study`}
-                className="relative -mt-16 flex w-full items-center justify-center xl:-mt-24"
-              >
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-[-8%] bg-[radial-gradient(ellipse_60%_55%_at_50%_55%,rgba(251,191,36,0.26),transparent_65%)] dark:bg-[radial-gradient(ellipse_60%_55%_at_50%_55%,rgba(251,191,36,0.20),transparent_65%)]"
-                />
-                {featured.image ? (
-                  <Image
-                    src={featured.image}
-                    alt={`${featured.name} app screenshots`}
-                    width={781}
-                    height={1250}
-                    unoptimized
-                    loading="eager"
-                    className="relative h-auto max-h-[520px] w-auto scale-[1.05] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] sm:scale-[1.18] xl:scale-[1.22]"
-                  />
-                ) : null}
-              </Link>
-            </motion.div>
-          )}
+          </div>
         </section>
-
-        <Footer />
-      </div>
-    </main>
+        <section className="recognition-band">
+          <p className="eyebrow">Along the way</p>
+          <div>
+            <Link href="/proof">
+              Miami University<span>Cum laude · Startup Catalyst Award</span>
+            </Link>
+            <Link href="/about">
+              Founders Inc<span>Off Season II · San Francisco</span>
+            </Link>
+            <Link href="/about">
+              Series Build<span>Inaugural cohort · New York City</span>
+            </Link>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
   );
 }
