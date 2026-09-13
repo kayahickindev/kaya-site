@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
+import { profile, programs } from "@/data/profile";
+import { profilePageJsonLd } from "@/lib/profile-content";
 import {
   ArrowUpRight,
   GraduationCap,
@@ -28,21 +31,17 @@ const SIDEBAR_ICONS: Record<string, LucideIcon> = {
   Target,
 };
 
-const paragraphs = [
-  "Working full-time in my family's business at 14, valedictorian out of high school, shipping companies ever since. I build consumer AI for behavior change.",
-  "Shipped two iOS apps to the App Store. Two crypto projects at $500K+ combined market cap. Self-funded my Miami University tuition. Graduated with honors.",
-];
-
 const highlightStats = [
-  { value: "8 yrs", label: "professional experience" },
-  { value: "3-for-3", label: "profitable companies" },
-  { value: "1.9M+", label: "tracked LOC" },
-  { value: "6,000+", label: "GitHub contributions" },
+  { value: profile.github.display, label: "GitHub contributions in one year*" },
+  { value: profile.tokens.display, label: "Codex + Claude tokens, reported*" },
+  { value: "Cum laude", label: "Miami University · 2026" },
+  { value: "15 countries", label: "traveled outside the US" },
 ];
 
 export default function AboutPage() {
   return (
     <SubpageShell accent="amber">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageJsonLd("/about", "About Kaya Hickin")).replace(/</g, "\\u003c") }} />
       <div className="flex flex-col gap-4">
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
           <div className="flex flex-col gap-4 lg:col-span-7">
@@ -62,7 +61,7 @@ export default function AboutPage() {
                   Kaya Hickin
                 </span>
                 <span className="block text-xs text-neutral-500 dark:text-neutral-300">
-                  Founder &amp; CTO · Cleveland, OH
+                  Co-founder &amp; CTO · {profile.location}
                 </span>
               </span>
             </div>
@@ -73,7 +72,7 @@ export default function AboutPage() {
               </h1>
             </div>
             <div className="max-w-prose space-y-3 text-base leading-relaxed text-neutral-700 xl:text-lg dark:text-neutral-300">
-              {paragraphs.map((p) => (
+              {profile.about.map((p) => (
                 <p key={p}>{p}</p>
               ))}
             </div>
@@ -93,6 +92,7 @@ export default function AboutPage() {
               ))}
             </div>
 
+            <Link href="/proof#engineering" className="text-xs text-neutral-600 underline underline-offset-4 dark:text-neutral-400">*Recorded September 13, 2026. Details and sources.</Link>
             {siteConfig.about.sidebar.map((item) => {
               const Icon = SIDEBAR_ICONS[item.icon] ?? MapPin;
               const detail = "detail" in item ? item.detail : undefined;
@@ -117,6 +117,18 @@ export default function AboutPage() {
             })}
           </div>
         </div>
+
+        <section className={`${cardSurfaceFeatured} space-y-4 p-5`} aria-labelledby="founder-programs">
+          <h2 id="founder-programs" className="text-xl font-semibold">Built alongside other founders.</h2>
+          <div className="grid gap-4 sm:grid-cols-2">{programs.map((p) => <div key={p.name}><h3 className="font-medium">{p.name}</h3><p className="mt-1 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">{p.detail}</p></div>)}</div>
+          <Link href="/proof" className="inline-flex items-center gap-1 text-sm font-medium text-amber-800 underline underline-offset-4 dark:text-amber-200">Awards, scholarships, and credentials <ArrowUpRight size={14} /></Link>
+        </section>
+
+        <section className={`${cardSurfaceFeatured} space-y-3 p-5`} aria-labelledby="beyond-building">
+          <h2 id="beyond-building" className="text-xl font-semibold">Beyond building.</h2>
+          <p className="max-w-3xl text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">{profile.travel.description}</p>
+          <ul className="flex flex-wrap gap-2">{profile.travel.countries.map((country) => <li key={country} className="rounded-full border border-black/10 px-3 py-1 text-xs dark:border-white/15">{country}</li>)}</ul>
+        </section>
 
         <div className="flex flex-col gap-3">
           <PathTimeline />

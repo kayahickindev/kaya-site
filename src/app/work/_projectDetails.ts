@@ -30,21 +30,17 @@ export const projectDetails: ProjectDetail[] = [
     role: "Co-founder · CTO",
     timeframe: "Jan 2025 to Present",
     overview: [
-      "MyFutureSelf is the main company and product: an AI iOS app built around a 90-day roadmap, daily action, and a voice AI mentor that speaks as the user's future self.",
-      "As CTO, Kaya led the technical build end to end across native iOS, backend systems, and AI interaction design. The product is active and scaling with paying users.",
+      "MyFutureSelf is the main company and product: a consumer AI product built around a 90-day roadmap, daily action, and a voice AI mentor that speaks as the user's future self.",
+      "As CTO, Kaya led the technical build end to end across mobile, web, backend systems, and AI interaction design. The product is active and scaling with paying users.",
     ],
-    outcomes: [
-      "2,900+ active paid subscribers and a $115K+ annual run rate",
-      "30,000+ downloads on the App Store",
-      "52% average monthly revenue growth",
-      "4.7-star App Store rating from 1,032 verified reviews",
-    ],
+    outcomes: ["Backed by Cintrifuse Capital"],
     ownership: [
-      "Native iOS product architecture",
+      "iOS, Android, and web product engineering",
       "Backend and data model for user roadmaps",
-      "Voice-AI mentor experience",
+      "Real-time voice and personalized AI experiences",
+      "Subscriptions, analytics, accessibility, and release infrastructure",
     ],
-    stack: ["Swift", "SwiftUI", "StoreKit", "WebRTC", "Firebase", "OpenAI", "Claude"],
+    stack: ["Swift", "SwiftUI", "React Native", "Next.js", "TypeScript", "WebRTC", "Firebase", "OpenAI", "Claude"],
   },
   {
     slug: "viral-loop",
@@ -69,23 +65,23 @@ export const projectDetails: ProjectDetail[] = [
   {
     slug: "dog-ai",
     project: projectByName("Dog AI"),
-    role: "Side quest",
+    role: "Developer · Model training",
     timeframe: "2025",
     overview: [
-      "Dog AI is an iOS app that interprets dog behavior from a photo or video. I built and trained the underlying multimodal LLM on a Harvard behavioral dataset, then wrapped it in a fast, narrow consumer flow.",
-      "Weekend build that became a paying App Store product. Custom multimodal model, not a wrapped API.",
+      "Dog AI is an iOS app that interprets dog behavior from a photo or video. I built and trained the underlying multimodal model, assembled the dataset, and implemented the iOS experience.",
+      "Took the product from model development through the camera experience, monetization, and App Store launch.",
     ],
     outcomes: [
-      "Custom multimodal LLM trained on Harvard behavioral data",
+      "Custom multimodal model built and trained for Dog AI",
       "Live on the App Store as a paying product",
-      "Weekend prototype to monetized launch",
+      "Model training through monetized iOS launch",
     ],
     ownership: [
       "Dataset assembly and model training",
       "iOS product and computer-vision flow",
       "App Store launch path",
     ],
-    stack: ["iOS", "Custom LLM", "Computer vision", "Harvard dataset", "App Store"],
+    stack: ["iOS", "Custom LLM", "Computer vision", "App Store"],
   },
   {
     slug: "appointra",

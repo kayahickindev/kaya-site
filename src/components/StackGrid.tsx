@@ -3,6 +3,7 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import {
   Apple,
+  Smartphone,
   BrainCircuit,
   Braces,
   Globe,
@@ -12,7 +13,7 @@ import {
 import { BrandLogo } from "./BrandLogo";
 import { cardSurface } from "@/lib/surfaces";
 
-type Category = "iOS" | "Web" | "Backend" | "AI" | "Workflow";
+type Category = "iOS" | "Android" | "Web" | "Backend" | "AI" | "Workflow";
 
 type GroupedItem = {
   category: Category;
@@ -27,6 +28,7 @@ const categoryMeta: Record<
   { icon: LucideIcon; accent: string; bar: string }
 > = {
   iOS: { icon: Apple, accent: cyanAccent, bar: cyanBar },
+  Android: { icon: Smartphone, accent: cyanAccent, bar: cyanBar },
   Web: { icon: Globe, accent: cyanAccent, bar: cyanBar },
   Backend: { icon: Braces, accent: cyanAccent, bar: cyanBar },
   AI: { icon: BrainCircuit, accent: cyanAccent, bar: cyanBar },
@@ -57,7 +59,7 @@ export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
   const reducedMotion = useReducedMotion();
 
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
       {grouped.map((group, columnIndex) => {
         const meta = categoryMeta[group.category];
         const Icon = meta.icon;
@@ -94,7 +96,7 @@ export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
                   className="flex items-center gap-2.5 rounded-md bg-neutral-950/[0.04] px-2.5 py-3.5 text-sm text-neutral-800 transition hover:bg-neutral-950/[0.07] dark:bg-white/[0.04] dark:text-neutral-200 dark:hover:bg-white/[0.07]"
                 >
                   <BrandLogo name={item.name} size={22} />
-                  <span className="truncate">{item.name}</span>
+                  <span className="min-w-0 break-words">{item.name}</span>
                 </motion.li>
               ))}
             </ul>

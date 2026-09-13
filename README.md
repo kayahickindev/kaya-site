@@ -1,125 +1,35 @@
 # kayahickin.com
 
-Personal founder portfolio site for Kaya Hickin. Built with Next.js, Tailwind CSS, and Framer Motion.
+Kaya Hickin's personal website. Next.js 16, React, Tailwind CSS, and Framer Motion. Deployed through the existing Vercel integration for `kayahickindev/kaya-site`.
 
-## Stack
-
-- **Framework**: Next.js 16 (App Router)
-- **Styling**: Tailwind CSS v4
-- **Animations**: Framer Motion
-- **Theme**: next-themes (dark/light toggle)
-- **Icons**: Lucide React
-- **Deployment**: Vercel
-
-## Getting Started
+## Development
 
 ```bash
-npm install
+npm ci
 npm run dev
+npm run lint
+npm test
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+## Content ownership
 
-## Deploy to Vercel
+- `src/data/profile.ts`: biography, dated GitHub and coding-usage figures, education, awards, scholarships, programs, and travel.
+- `src/data/credentials.ts`: exact credential and training names, issuers, dates, and available public links. Private supporting records stay outside this repository.
+- `src/data/content.ts`: project summaries, technical stack, timeline, social links, and default SEO copy.
+- `src/app/work/_projectDetails.ts`: project ownership, implementation, and outcomes.
+- `src/lib/profile-content.ts`: structured identity data and both LLM-readable routes, generated from the same public biography facts.
 
-1. Push this repo to GitHub
-2. Go to [vercel.com/new](https://vercel.com/new)
-3. Import the GitHub repository
-4. Click **Deploy** — no configuration needed
+The Proof page provides metric definitions and dated evidence. GitHub contributions are broader than commits. Coding-tool token usage is self-reported and separate from model-training volume. Program participation, invitations, certifications, and completed courses retain their exact labels.
 
-Or use the Vercel CLI:
+## Metrics and failure behavior
 
-```bash
-npx vercel
-```
+Live MyFutureSelf metrics are fetched server-side and revalidated hourly. Production requires `FOUNDER_METRICS_ACCESS_TOKEN`. Keep that secret in the existing Vercel project; never commit it.
 
-## Editing Content
+When the token or upstream feed is unavailable, pages show the recorded public snapshot with its original date. `/api/profile-metrics` returns 503 on fallback. Exact private subscriber and sales values stay server-side; client components and the public endpoint receive only their rounded display strings. Annual run rate means the last completed calendar month's gross sales multiplied by 12.
 
-All site copy, links, and metrics are centralized in a single file:
+The GitHub graph displays only actual dated entries from the public activity feed. During loading or failure, it shows the dated verified total and a link to GitHub. No synthetic activity, sparklines, or count-up zeros are generated.
 
-```
-src/data/content.ts
-```
+## Publishing
 
-Live MyFutureSelf traction is loaded server-side from the protected marketing
-metrics snapshot and revalidated hourly. Production and preview deployments
-require `FOUNDER_METRICS_ACCESS_TOKEN`; if the token is missing, rejected, or
-the upstream payload is incomplete, the site marks the snapshot as fallback
-and `/api/profile-metrics` fails with `503` instead of silently presenting a
-fresh timestamp with stale numbers. The public profile endpoint exposes only
-rounded display values for annual run rate and active paid subscribers.
-
-Edit this file to update:
-- Hero text and CTAs
-- Metrics / proof points
-- About section paragraphs
-- Project cards (names, descriptions, links, tags)
-- Timeline entries
-- GitHub section copy
-- Interests
-- Co-founder section
-- Contact links
-- Navigation items
-- SEO metadata
-
-## Adding a Headshot
-
-1. Add your image to `public/headshot.jpg` (or `.png`, `.webp`)
-2. Open `src/components/Hero.tsx`
-3. In the headshot placeholder area, replace the `<span>KH</span>` div with:
-
-```tsx
-import Image from 'next/image';
-
-<Image
-  src="/headshot.jpg"
-  alt="Kaya Hickin"
-  fill
-  className="object-cover"
-  priority
-/>
-```
-
-## Updating Social Links
-
-In `src/data/content.ts`, update the `social` object:
-
-```ts
-social: {
-  github: "https://github.com/kayahickindev",
-  twitter: "https://x.com/yourusername",
-  linkedin: "https://linkedin.com/in/yourusername",
-  email: "mailto:you@domain.com",
-  myfutureself: "https://myfutureselfapp.com/",
-},
-```
-
-Then update the display text in `src/components/Contact.tsx` if needed.
-
-## Project Structure
-
-```
-src/
-├── app/
-│   ├── globals.css      # Tailwind config + custom styles
-│   ├── layout.tsx       # Root layout with fonts, metadata, theme
-│   ├── page.tsx         # Page assembly
-│   └── providers.tsx    # Theme provider
-├── components/
-│   ├── Header.tsx       # Fixed nav with theme toggle
-│   ├── Hero.tsx         # Hero section with headshot placeholder
-│   ├── Metrics.tsx      # Animated proof point counters
-│   ├── About.tsx        # About section
-│   ├── Projects.tsx     # Project cards grid
-│   ├── Timeline.tsx     # Experience timeline
-│   ├── GitHub.tsx       # Live contribution graph + stats
-│   ├── Interests.tsx    # Interest tags
-│   ├── CoFounder.tsx    # Co-founder CTA section
-│   ├── Contact.tsx      # Contact links
-│   └── Footer.tsx       # Footer
-├── data/
-│   └── content.ts       # All site content (edit this)
-└── lib/
-    ├── animations.tsx   # Reusable animation components
-    └── hooks.ts         # Custom hooks (counter, scroll)
-```
+Work in an isolated worktree. Review the diff, run lint, tests, and the production build, then verify responsive rendering and the metadata, JSON-LD, sitemap, Open Graph image, and LLM routes. Use the repository's existing Vercel integration and verify the deployed source commit and custom domain after an authorized publication.

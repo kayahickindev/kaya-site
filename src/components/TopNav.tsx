@@ -13,6 +13,7 @@ const navItems = [
   { label: "About", href: "/about" },
   { label: "Work", href: "/work" },
   { label: "Stack", href: "/stack" },
+  { label: "Proof", href: "/proof" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -25,7 +26,7 @@ function ThemeToggle() {
   };
 
   return (
-    <div className="flex items-center justify-end">
+    <div className="col-start-2 row-start-1 flex items-center justify-end sm:col-start-3">
       <button
         type="button"
         onClick={toggleTheme}
@@ -49,7 +50,7 @@ export function TopNav() {
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.42, ease }}
-      className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 text-sm"
+      className="grid grid-cols-[1fr_auto] sm:grid-cols-[1fr_auto_1fr] items-center gap-2 text-sm"
     >
       <Link
         href="/"
@@ -64,7 +65,7 @@ export function TopNav() {
         </span>
       </Link>
 
-      <nav className="flex items-center gap-0.5 rounded-full border border-black/10 bg-white/45 px-1 py-1 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
+      <nav className="col-span-2 row-start-2 justify-self-center sm:col-span-1 sm:col-start-2 sm:row-start-1 flex items-center gap-0.5 rounded-full border border-black/10 bg-white/45 px-1 py-1 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
         {navItems.map((item) => {
           const active =
             item.href === pathname ||
@@ -74,7 +75,7 @@ export function TopNav() {
               key={item.href}
               href={item.href}
               aria-current={active ? "page" : undefined}
-              className={`relative rounded-full px-3 py-1.5 text-xs font-medium transition sm:text-sm ${
+              className={`relative rounded-full px-2.5 py-1.5 sm:px-3 text-xs font-medium transition sm:text-sm ${
                 active
                   ? "text-neutral-950 dark:text-white"
                   : "text-neutral-700 hover:bg-neutral-950/[0.055] hover:text-neutral-950 dark:text-neutral-300 dark:hover:bg-white/[0.07] dark:hover:text-white"
