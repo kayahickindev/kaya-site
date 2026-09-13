@@ -6,7 +6,7 @@ const EMAIL_DOMAIN = "successai.app";
 
 export const siteConfig = {
   name: "Kaya Hickin",
-  url: "https://www.kayahickin.com",
+  url: "https://kayahickin.com",
 
   seo: {
     title: "Kaya Hickin | Full-Stack Developer & MyFutureSelf CTO",
