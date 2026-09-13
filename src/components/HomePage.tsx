@@ -1,13 +1,14 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight, Mail } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { TopNav } from "./TopNav";
 import { Footer } from "./Footer";
 import { ProductBand } from "./ProductBand";
-import { TravelFilm } from "./TravelFilm";
-import { profile, programs, awards, publicTools } from "@/data/profile";
+import { HeroSlides } from "./HeroSlides";
+import { ModelSchematic } from "./ModelSchematic";
+import { SocialTiles } from "./SocialIcons";
+import { profile, programs, awards } from "@/data/profile";
 import { siteConfig } from "@/data/content";
-import { heroPortrait, myFutureSelf, dogAi } from "@/data/assets";
+import { myFutureSelf } from "@/data/assets";
 import type { PublicMarketingMetricsSnapshot } from "@/lib/marketing-metrics";
 
 const email = `${siteConfig.emailParts.user}@${siteConfig.emailParts.domain}`;
@@ -43,8 +44,8 @@ export function HomePage({
               <p>
                 Co-founder &amp; CTO of{" "}
                 <Link href="/work/myfutureself">MyFutureSelf</Link>, backed by
-                Cintrifuse Capital. I ship every layer myself: native iOS,
-                Android, web, backend, and the real-time voice AI.
+                Cintrifuse Capital. I ship every layer, from native iOS to the
+                real-time voice AI.
               </p>
             </div>
             <div className="hero-cta">
@@ -57,21 +58,7 @@ export function HomePage({
                 </Link>
               </div>
             </div>
-            <div className="hero-photo">
-              <div className="hero-motion">
-                <Image
-                  src={heroPortrait.src}
-                  alt={heroPortrait.alt}
-                  fill
-                  preload
-                  quality={85}
-                  sizes="(max-width: 760px) 100vw, 56vw"
-                />
-              </div>
-              {heroPortrait.place && (
-                <span className="photo-place">{heroPortrait.place}</span>
-              )}
-            </div>
+            <HeroSlides />
           </section>
         </div>
 
@@ -82,7 +69,7 @@ export function HomePage({
           name="MyFutureSelf"
           label="Co-founder & CTO · 2025 to now"
           title="A voice AI mentor that speaks as your future self."
-          lead="A 90-day roadmap, daily actions, and a Future You who calls. I built it end to end."
+          lead="A Future You who calls, and a 90-day plan of daily actions. Built end to end."
           screens={myFutureSelf.home}
           links={[
             { label: "App Store", href: mfs.links.appStore! },
@@ -111,12 +98,12 @@ export function HomePage({
 
         <ProductBand
           variant="dog"
-          icon={dogAi.icon}
+          icon={dogAiIcon}
           name="Dog AI"
           label="Model training · iOS · 2025"
-          title="A custom multimodal model, shipped as an iPhone app."
-          lead="Reads a dog's mood from a photo. I assembled the dataset, trained the model, and shipped the app."
-          screens={dogAi.home}
+          title="I trained the model that reads a dog’s mood."
+          lead="A custom multimodal model on a dataset I assembled, shipped as an iPhone app."
+          visual={<ModelSchematic />}
           links={[{ label: "App Store", href: dog.links.appStore! }]}
           detailHref="/work/dog-ai"
           detailLabel="The full story"
@@ -130,46 +117,20 @@ export function HomePage({
               <h2 className="h-section" id="build-title">
                 Mobile, web, backend, and AI. The whole thing.
               </h2>
-            </div>
-            <div>
-              <div className="figures" style={{ marginTop: 8 }}>
-                <div>
-                  <strong className="big-number">{profile.github.display}</strong>
-                  <span>GitHub contributions in the last year</span>
-                </div>
-                <div>
-                  <strong className="big-number">{profile.tokens.display}</strong>
-                  <span>Tokens across Codex and Claude coding workflows</span>
-                </div>
-              </div>
-              <ul className="stack-line" aria-label="Core stack">
-                {[
-                  "Swift & SwiftUI",
-                  "React Native",
-                  "TypeScript & Next.js",
-                  "Firebase",
-                  "WebRTC voice",
-                  "OpenAI",
-                  "Claude",
-                ].map((s) => (
-                  <li key={s}>{s}</li>
-                ))}
-              </ul>
               <div className="action-row">
                 <Link className="btn btn-ghost" href="/stack">
                   Full stack <ArrowUpRight size={17} aria-hidden />
                 </Link>
-                {publicTools.map((t) => (
-                  <a
-                    key={t.url}
-                    className="arrow-link"
-                    href={t.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {t.name} <ArrowUpRight size={18} aria-hidden />
-                  </a>
-                ))}
+              </div>
+            </div>
+            <div className="figures">
+              <div>
+                <strong className="big-number">{profile.github.display}</strong>
+                <span>GitHub contributions in the last year</span>
+              </div>
+              <div>
+                <strong className="big-number">{profile.tokens.display}</strong>
+                <span>Tokens across Codex and Claude coding workflows</span>
               </div>
             </div>
           </div>
@@ -198,29 +159,24 @@ export function HomePage({
             </h2>
             <div className="recognition">
               <div>
-                <h3>Backed by Cintrifuse Capital</h3>
-                <p>{programs[0].detail}</p>
+                <h3>Cintrifuse Capital</h3>
+                <p>MyFutureSelf investor</p>
               </div>
               <a href={catalyst.url ?? "/proof"}>
                 <h3>{catalyst.name}</h3>
-                <p>
-                  {catalyst.issuer}. Miami’s Altman Institute for
-                  Entrepreneurship.
-                </p>
+                <p>{catalyst.issuer}</p>
               </a>
               <Link href="/proof#awards">
                 <h3>{pitch.name}</h3>
-                <p>
-                  {pitch.issuer}. {pitch.detail}
-                </p>
+                <p>$10,000 team prize, 2025</p>
               </Link>
               <div>
                 <h3>Founders Inc</h3>
-                <p>{programs[1].detail}</p>
+                <p>Off Season II, San Francisco</p>
               </div>
               <div>
                 <h3>Series Build</h3>
-                <p>{programs[2].detail}</p>
+                <p>Inaugural cohort, New York City</p>
               </div>
               <div>
                 <h3>Y Combinator Startup School</h3>
@@ -245,10 +201,6 @@ export function HomePage({
               </h2>
             </div>
             <div>
-              <p className="lead">
-                Fall 2024 at Miami’s Dolibois European Center. Sweden is the
-                one I keep going back to.
-              </p>
               <ul className="countries" aria-label="Countries visited">
                 {profile.travel.countries.map((c) => (
                   <li key={c}>{c}</li>
@@ -261,37 +213,18 @@ export function HomePage({
               </div>
             </div>
           </div>
-          <div className="wrap">
-            <TravelFilm />
-          </div>
         </section>
 
         <section className="band contact-band" aria-labelledby="contact-title">
           <div className="wrap">
             <p className="label">Contact</p>
             <h2 className="h-section" id="contact-title">
-              Building something ambitious? Let’s talk.
+              Let’s talk.
             </h2>
             <a className="contact-email" href={`mailto:${email}`}>
               {email}
             </a>
-            <div className="social-row">
-              <a className="btn" href={`mailto:${email}`}>
-                <Mail size={17} aria-hidden /> Email me
-              </a>
-              <a href={siteConfig.social.linkedin} rel="me">
-                LinkedIn <ArrowUpRight size={16} aria-hidden />
-              </a>
-              <a href={siteConfig.social.github} rel="me">
-                GitHub <ArrowUpRight size={16} aria-hidden />
-              </a>
-              <a href={siteConfig.social.twitter} rel="me">
-                X <ArrowUpRight size={16} aria-hidden />
-              </a>
-              <a href={siteConfig.social.instagram} rel="me">
-                Instagram <ArrowUpRight size={16} aria-hidden />
-              </a>
-            </div>
+            <SocialTiles />
           </div>
         </section>
       </main>
@@ -301,3 +234,5 @@ export function HomePage({
     </>
   );
 }
+
+const dogAiIcon = "/products/dog-ai/icon.png";

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SubpageShell } from "@/components/SubpageShell";
 import { ProductBand } from "@/components/ProductBand";
+import { ModelSchematic } from "@/components/ModelSchematic";
 import { siteConfig } from "@/data/content";
 import { publicTools } from "@/data/profile";
 import { myFutureSelf, dogAi } from "@/data/assets";
@@ -20,10 +21,7 @@ export default function WorkPage() {
       <header className="page-head">
         <p className="label">Work</p>
         <h1 className="h-page">From idea to in your hands.</h1>
-        <p className="lead">
-          Consumer AI, a custom model, and three companies built from the
-          ground up.
-        </p>
+        <p className="lead">Consumer AI, a custom model, and three companies.</p>
       </header>
       <div style={{ margin: "0 calc(-1 * var(--gutter))" }}>
         <ProductBand
@@ -33,7 +31,7 @@ export default function WorkPage() {
           name="MyFutureSelf"
           label="Co-founder & CTO · 2025 to now"
           title={mfs.tagline}
-          lead="A 90-day roadmap, daily actions, and a Future You who calls, chats, and keeps score. I built the original product end to end and lead engineering across iOS, Android, web, backend, and real-time voice."
+          lead="A Future You who calls, and a 90-day plan of daily actions. Built end to end."
           screens={myFutureSelf.home}
           links={[
             { label: "App Store", href: mfs.links.appStore! },
@@ -48,9 +46,9 @@ export default function WorkPage() {
           icon={dogAi.icon}
           name="Dog AI"
           label="Model training · iOS · 2025"
-          title={dog.tagline}
-          lead="Dog AI reads a dog's mood from a photo or video. I assembled the dataset, trained the multimodal model behind it, and built the iOS camera experience through to a paid App Store launch."
-          screens={dogAi.home}
+          title="I trained the model that reads a dog’s mood."
+          lead="A custom multimodal model on a dataset I assembled, shipped as an iPhone app."
+          visual={<ModelSchematic />}
           links={[{ label: "App Store", href: dog.links.appStore! }]}
           detailHref="/work/dog-ai"
           detailLabel="The full story"

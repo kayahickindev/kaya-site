@@ -17,7 +17,7 @@ export async function GET() {
   const [regular, semibold, portrait] = await Promise.all([
     readFile(join(fonts, "Geist-Regular.ttf")),
     readFile(join(fonts, "Geist-SemiBold.ttf")),
-    tryRead(join(root, "public", "portraits", "kaya-og.jpg")).then(
+    tryRead(join(root, "public", "hero", "tekapo-og.jpg")).then(
       (buffer) =>
         buffer ?? readFile(join(root, "public", "portraits", "kaya.jpg")),
     ),

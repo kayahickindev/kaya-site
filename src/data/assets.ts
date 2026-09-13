@@ -8,14 +8,47 @@ export type Screen = {
   height: number;
 };
 
-export const heroPortrait = {
-  src: "/portraits/kaya-lake.jpg",
-  alt: "Kaya Hickin in a black jacket standing in tall grass and purple lupins beside a turquoise glacial lake with mountains behind",
-  // Personal photo, Kaya's own library. Also the Instagram post in the top-right
-  // of the profile grid. Location is captioned only where the photo's own
-  // metadata confirms it.
-  place: "",
+// Hero slideshow: Kaya's own travel photos, exported as originals from his
+// library. Tekapo (2025-12-15) and the sailboat (2026-01-31) arrived over
+// iMessage at 1153x2048; the rest are camera originals encoded at 1600px.
+// `position` is the object-position focal point and `zoom` widens the frame so
+// the subject sits centred when it stands off to one side of the original.
+export type HeroSlide = {
+  src: string;
+  alt: string;
+  position: string;
+  zoom?: number;
 };
+export const heroSlides: HeroSlide[] = [
+  {
+    src: "/hero/tekapo.jpg",
+    alt: "Kaya Hickin in a black jacket beside a turquoise glacial lake with mountains behind",
+    position: "50% 40%",
+    zoom: 1.56,
+  },
+  {
+    src: "/hero/pololu.webp",
+    alt: "Kaya with arms out on a green cliff above the surf at Pololū Valley",
+    position: "50% 46%",
+    zoom: 1.4,
+  },
+  {
+    src: "/hero/merzouga.webp",
+    alt: "Kaya riding a camel across orange sand dunes near Merzouga",
+    position: "50% 40%",
+  },
+  {
+    src: "/hero/sailboat.jpg",
+    alt: "Kaya standing on the bow of a sailboat at sunset holding a rope",
+    position: "50% 45%",
+  },
+  {
+    src: "/hero/kilauea.webp",
+    alt: "Two silhouettes watching the red glow of Kīlauea erupting at night",
+    position: "50% 55%",
+  },
+];
+export const heroPortrait = heroSlides[0];
 
 export const studioPortrait = {
   src: "/portraits/kaya.jpg",
@@ -85,6 +118,22 @@ const dogScreen = (name: string, alt: string): Screen => ({
 
 export const dogAi = {
   icon: "/products/dog-ai/icon.png",
+  // The sample scan from the listing's first screenshot and the six scores the
+  // app returned for it on the second, shown as the model's input and output.
+  sample: {
+    src: "/products/dog-ai/sample-dog.webp",
+    alt: "A golden retriever puppy standing on grass, the photo Dog AI scored",
+    width: 720,
+    height: 1264,
+    scores: [
+      { mood: "relaxed", score: 80 },
+      { mood: "happy", score: 70 },
+      { mood: "curious", score: 70 },
+      { mood: "playful", score: 20 },
+      { mood: "tired", score: 10 },
+      { mood: "anxious", score: 0 },
+    ],
+  },
   home: [
     dogScreen(
       "scan",
@@ -114,68 +163,3 @@ export const dogAi = {
     ),
   ],
 };
-
-// Travel photography from Kaya's own library, exported as unmodified originals
-// from Photos and encoded at 1000 to 1400px wide. Every caption is backed by the
-// photo's own GPS: Lake Tekapo 2025-12-15, Merzouga 2024-11-29, Pololū 2025-02-26,
-// Munich 2024-10-05, Kīlauea 2025-02-27, Matosinhos 2024-11-16, Sydney 2026-01-21,
-// Stockholm County 2025-08-06.
-export type TravelPhoto = Screen & { place: string };
-const photo = (
-  name: string,
-  place: string,
-  alt: string,
-  width = 1000,
-  height = 1334,
-): TravelPhoto => ({ src: `/travel/${name}.webp`, alt, place, width, height });
-
-export const travel: TravelPhoto[] = [
-  photo(
-    "tekapo-lupins",
-    "Lake Tekapo, New Zealand",
-    "A field of purple and pink lupins under a cloudy sky at Lake Tekapo",
-    1400,
-    1867,
-  ),
-  photo(
-    "merzouga",
-    "Merzouga, Morocco",
-    "Kaya riding a camel across orange sand dunes near Merzouga",
-    1400,
-    1867,
-  ),
-  photo(
-    "pololu",
-    "Pololū Valley, Hawaii",
-    "Kaya with arms out on a green cliff above the black sand of Pololū Valley",
-  ),
-  photo(
-    "munich",
-    "Munich, Germany",
-    "A group of friends in lederhosen at a beer hall in Munich",
-    1400,
-    1867,
-  ),
-  photo(
-    "porto",
-    "Matosinhos, Portugal",
-    "Kaya and a friend in wetsuits holding two blue surfboards on the beach at Matosinhos",
-  ),
-  photo(
-    "kilauea",
-    "Kīlauea, Hawaii",
-    "Two silhouettes watching the red glow of Kīlauea erupting at night",
-    1400,
-    1867,
-  ),
-  photo(
-    "sydney",
-    "Sydney, Australia",
-    "Two friends standing on sandstone rocks beneath an overhang by the surf in Sydney",
-  ),
-  photo(
-    "stockholm",
-    "Stockholm, Sweden",
-    "Kaya with luggage on a wooden jetty on the Stockholm coast",
-  ),
-];

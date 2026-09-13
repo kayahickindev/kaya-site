@@ -46,6 +46,7 @@ export function ProductBand({
   title,
   lead,
   screens,
+  visual,
   links,
   detailHref,
   detailLabel,
@@ -60,7 +61,8 @@ export function ProductBand({
   label: string;
   title: ReactNode;
   lead: ReactNode;
-  screens: Screen[];
+  screens?: Screen[];
+  visual?: ReactNode;
   links: { label: string; href: string }[];
   detailHref?: string;
   detailLabel?: string;
@@ -109,8 +111,13 @@ export function ProductBand({
             </div>
           </div>
           <div>
-            <Screens screens={screens} eager={eager} />
-            <p className="snap-hint">Swipe to see more screens.</p>
+            {visual ??
+              (screens && (
+                <>
+                  <Screens screens={screens} eager={eager} />
+                  <p className="snap-hint">Swipe to see more screens.</p>
+                </>
+              ))}
           </div>
         </div>
         {children}

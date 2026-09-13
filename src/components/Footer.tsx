@@ -1,25 +1,13 @@
 import Link from "next/link";
-import { siteConfig } from "@/data/content";
+import { profile } from "@/data/profile";
+import { SocialRow } from "./SocialIcons";
 export function Footer() {
   return (
     <footer className="site-footer">
       <p>
-        <Link href="/">Kaya Hickin</Link> · Cincinnati, Ohio
+        <Link href="/">Kaya Hickin</Link> · {profile.location}
       </p>
-      <nav aria-label="Social links">
-        <a href={siteConfig.social.github} rel="me">
-          GitHub
-        </a>
-        <a href={siteConfig.social.linkedin} rel="me">
-          LinkedIn
-        </a>
-        <a href={siteConfig.social.twitter} rel="me">
-          X
-        </a>
-        <a href={siteConfig.social.instagram} rel="me">
-          Instagram
-        </a>
-      </nav>
+      <SocialRow />
     </footer>
   );
 }

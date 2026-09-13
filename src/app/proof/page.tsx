@@ -53,10 +53,7 @@ export default function ProofPage() {
       <header className="page-head">
         <p className="label">Credentials &amp; recognition</p>
         <h1 className="h-page">Built on doing the work.</h1>
-        <p className="lead">
-          Technical certifications, startup awards, scholarships, and the
-          education behind the products.
-        </p>
+        <p className="lead">Certifications, awards, scholarships, and honors.</p>
       </header>
       <section
         id="credentials"
@@ -115,12 +112,10 @@ export default function ProofPage() {
           <details className="disclosure">
             <summary>Engineering experience</summary>
             <div className="disclosure-body">
-              Full-stack product engineering for MyFutureSelf across iOS,
-              Android, web, backend, and AI. Custom multimodal model training
-              and iOS development for Dog AI. Real-time voice, subscriptions,
-              analytics, accessibility, and release infrastructure.{" "}
+              Full-stack engineering for MyFutureSelf across iOS, Android, web,
+              backend, and AI, plus model training and iOS for Dog AI.{" "}
               <Link href="/work" className="inline-link">
-                Explore the projects.
+                See the work.
               </Link>
             </div>
           </details>
@@ -183,7 +178,7 @@ export default function ProofPage() {
           </li>
           <li>
             <h3>Dolibois European Center · Luxembourg, fall 2024</h3>
-            <p>Study abroad on the Luxembourg Exchange Scholarship.</p>
+            <p>Luxembourg Exchange Scholarship.</p>
           </li>
           <li>
             <h3>Valedictorian · Crestwood High School, 2022</h3>

@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { SubpageShell } from "@/components/SubpageShell";
 import { Screens } from "@/components/ProductBand";
+import { ModelSchematic } from "@/components/ModelSchematic";
 import { siteConfig } from "@/data/content";
 import { myFutureSelf, dogAi } from "@/data/assets";
 import { getMarketingMetrics } from "@/lib/marketing-metrics";
@@ -84,8 +85,12 @@ export default async function ProjectPage({ params }: Props) {
             )}
           </div>
         </div>
-        {screens.length > 0 ? (
-          <div className={`band-${slug === "dog-ai" ? "dog" : "mfs"} detail-screens`}>
+        {slug === "dog-ai" ? (
+          <div className="band-dog detail-screens">
+            <ModelSchematic />
+          </div>
+        ) : screens.length > 0 ? (
+          <div className="band-mfs detail-screens">
             <Screens screens={screens} eager sizes="(max-width: 760px) 64vw, 16vw" />
             <p className="snap-hint">Swipe to see more screens.</p>
           </div>
@@ -114,6 +119,22 @@ export default async function ProjectPage({ params }: Props) {
             </div>
           ))}
         </dl>
+      )}
+      {slug === "dog-ai" && (
+        <section className="band" aria-labelledby="app-title">
+          <div className="split">
+            <div>
+              <p className="label">The app</p>
+              <h2 className="h-section" id="app-title">
+                Scan, score, track.
+              </h2>
+            </div>
+            <div className="band-dog detail-screens">
+              <Screens screens={screens} sizes="(max-width: 760px) 64vw, 14vw" />
+              <p className="snap-hint">Swipe to see more screens.</p>
+            </div>
+          </div>
+        </section>
       )}
       <section className="band split" aria-labelledby="overview-title">
         <div>

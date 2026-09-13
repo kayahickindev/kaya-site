@@ -24,10 +24,10 @@ export const identityGraph = {
       "@id": personId,
       name: siteConfig.name,
       url: siteConfig.url,
-      image: [`${siteConfig.url}/portraits/kaya-lake.jpg`, `${siteConfig.url}/portraits/kaya.jpg`],
+      image: [`${siteConfig.url}/hero/tekapo.jpg`, `${siteConfig.url}/portraits/kaya.jpg`],
       jobTitle: profile.role,
       description: profile.biography,
-      workLocation: { "@type": "City", name: "Cincinnati, Ohio" },
+      homeLocation: { "@type": "City", name: "Cleveland, Ohio" },
       alumniOf: {
         "@type": "CollegeOrUniversity",
         name: "Miami University",
