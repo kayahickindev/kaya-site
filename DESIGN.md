@@ -31,13 +31,19 @@ screens do the storytelling.
 - `.wrap` is the 1480px container with a fluid gutter. `.band` sections span the
   viewport; product bands are full-bleed.
 - Hero: desktop is a split grid, name and intro left, the photo bleeding to the right
-  edge at near its natural proportion. Phones show the photo first at 4:5 with the
-  name over the lupins at the bottom, so the face stays clear; role and calls to
-  action follow on paper.
+  edge. The photo is zoomed so Kaya sits centred in the crop (he stands in the left
+  third of the original frame). Phones show the photo first at 4:5 with the name over
+  the lupins at the bottom, so the face stays clear; role and calls to action follow
+  on paper.
 - Hero motion is a one-time settle (scale 1.07 to 1 over 6s) plus a very slow drift.
   Both are CSS only and disabled under `prefers-reduced-motion`.
 - Product screens are real captures with rounded corners and a soft shadow, three up
   on desktop, a snap-scrolling strip on phones. No fabricated device frames or UI.
+- Travel is a slowly revolving film strip of eight photos: pure CSS, loops without
+  JavaScript, pauses on hover or with its Pause control, and turns into a plain
+  scrollable row under reduced motion.
+- Copy stays short. The hero is two sentences; section leads are one or two lines;
+  the numbers, chips, and photos carry the rest.
 - Disclosures are native `details` elements. Everything important renders on the
   server and reads without JavaScript; only the theme toggle and copy button need it.
 
@@ -66,7 +72,8 @@ screens do the storytelling.
   the app's 1024px AppIcon.
 - Dog AI screens in `public/products/dog-ai/` and their source are recorded in
   `src/data/assets.ts`.
-- Travel photos in `public/travel/` come from Kaya's library with GPS-confirmed
-  places. Company logos live in `public/logos/`.
+- Travel photos in `public/travel/` are unmodified originals exported from Kaya's
+  Photos library, each captioned with its GPS-confirmed place. Company logos live in
+  `public/logos/`.
 - Never reuse the retired composite `mfs-hero.webp` or the tiny App Store crop of
   Dog AI; both were rejected as outdated.
