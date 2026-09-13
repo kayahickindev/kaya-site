@@ -2,7 +2,7 @@ import { profile, awards } from "./profile";
 
 // Centralized email parts for contact links and display.
 const EMAIL_USER = "kaya";
-const EMAIL_DOMAIN = "successai.app";
+const EMAIL_DOMAIN = "myfutureselfapp.com";
 
 export const siteConfig = {
   name: "Kaya Hickin",

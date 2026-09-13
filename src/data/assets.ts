@@ -116,37 +116,66 @@ export const dogAi = {
 };
 
 // Travel photography from Kaya's own library, exported as unmodified originals
-// from Photos (Lake Tekapo 2025-12-15, Merzouga 2024-11-29, Kīlauea 2025-02-27,
-// Munich 2024-10-05) and encoded at 1400px wide. Every caption below is backed by
-// the photo's own GPS.
-export type TravelPhoto = Screen & { place?: string };
+// from Photos and encoded at 1000 to 1400px wide. Every caption is backed by the
+// photo's own GPS: Lake Tekapo 2025-12-15, Merzouga 2024-11-29, Pololū 2025-02-26,
+// Munich 2024-10-05, Kīlauea 2025-02-27, Matosinhos 2024-11-16, Sydney 2026-01-21,
+// Stockholm County 2025-08-06.
+export type TravelPhoto = Screen & { place: string };
+const photo = (
+  name: string,
+  place: string,
+  alt: string,
+  width = 1000,
+  height = 1334,
+): TravelPhoto => ({ src: `/travel/${name}.webp`, alt, place, width, height });
+
 export const travel: TravelPhoto[] = [
-  {
-    src: "/travel/tekapo-lupins.webp",
-    alt: "A field of purple and pink lupins under a cloudy sky at Lake Tekapo, New Zealand",
-    width: 1400,
-    height: 1867,
-    place: "Lake Tekapo, New Zealand",
-  },
-  {
-    src: "/travel/merzouga.webp",
-    alt: "Kaya riding a camel across orange sand dunes near Merzouga, Morocco",
-    width: 1400,
-    height: 1867,
-    place: "Merzouga, Morocco",
-  },
-  {
-    src: "/travel/kilauea.webp",
-    alt: "Two silhouettes watching the red glow of Kīlauea erupting at night",
-    width: 1400,
-    height: 1867,
-    place: "Kīlauea, Hawaii",
-  },
-  {
-    src: "/travel/munich.webp",
-    alt: "A group of friends in lederhosen at a beer hall in Munich",
-    width: 1400,
-    height: 1867,
-    place: "Munich, Germany",
-  },
+  photo(
+    "tekapo-lupins",
+    "Lake Tekapo, New Zealand",
+    "A field of purple and pink lupins under a cloudy sky at Lake Tekapo",
+    1400,
+    1867,
+  ),
+  photo(
+    "merzouga",
+    "Merzouga, Morocco",
+    "Kaya riding a camel across orange sand dunes near Merzouga",
+    1400,
+    1867,
+  ),
+  photo(
+    "pololu",
+    "Pololū Valley, Hawaii",
+    "Kaya with arms out on a green cliff above the black sand of Pololū Valley",
+  ),
+  photo(
+    "munich",
+    "Munich, Germany",
+    "A group of friends in lederhosen at a beer hall in Munich",
+    1400,
+    1867,
+  ),
+  photo(
+    "porto",
+    "Matosinhos, Portugal",
+    "Kaya and a friend in wetsuits holding two blue surfboards on the beach at Matosinhos",
+  ),
+  photo(
+    "kilauea",
+    "Kīlauea, Hawaii",
+    "Two silhouettes watching the red glow of Kīlauea erupting at night",
+    1400,
+    1867,
+  ),
+  photo(
+    "sydney",
+    "Sydney, Australia",
+    "Two friends standing on sandstone rocks beneath an overhang by the surf in Sydney",
+  ),
+  photo(
+    "stockholm",
+    "Stockholm, Sweden",
+    "Kaya with luggage on a wooden jetty on the Stockholm coast",
+  ),
 ];

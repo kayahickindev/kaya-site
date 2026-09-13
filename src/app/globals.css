@@ -371,12 +371,15 @@ p {
 }
 .hero-motion {
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 156%;
   animation: hero-drift 26s ease-in-out 6s infinite alternate;
 }
 .hero-photo img {
   object-fit: cover;
-  object-position: 50% 28%;
+  object-position: 50% 40%;
   animation: hero-settle 6s cubic-bezier(0.2, 0.6, 0.2, 1) both;
 }
 @keyframes hero-settle {
@@ -642,27 +645,41 @@ p {
 .recognition a:hover h3 {
   color: var(--accent);
 }
-.mosaic {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(10px, 1.2vw, 18px);
-  margin-top: clamp(40px, 5vw, 72px);
-}
-.mosaic figure {
+.film {
   position: relative;
-  margin: 0;
   overflow: hidden;
-  border-radius: 18px;
-  background: var(--panel);
+  margin: clamp(40px, 5vw, 72px) calc(-1 * var(--gutter)) 0;
+}
+.film-track {
+  display: flex;
+  width: max-content;
+  animation: film-roll 75s linear infinite;
+}
+.film:hover .film-track,
+.film:focus-within .film-track,
+.film:has(.film-pause:checked) .film-track {
+  animation-play-state: paused;
+}
+@keyframes film-roll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.film-item {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(210px, 21vw, 300px);
   aspect-ratio: 4 / 5;
+  margin: 0;
+  margin-right: clamp(10px, 1.2vw, 18px);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--panel);
 }
-.mosaic figure:nth-child(even) {
-  transform: translateY(28px);
-}
-.mosaic figure img {
+.film-item img {
   object-fit: cover;
 }
-.mosaic figcaption {
+.film-item figcaption {
   position: absolute;
   left: 14px;
   bottom: 12px;
@@ -673,6 +690,42 @@ p {
   backdrop-filter: blur(8px);
   padding: 6px 11px;
   border-radius: 999px;
+}
+.film-controls {
+  position: absolute;
+  top: 12px;
+  right: var(--gutter);
+  z-index: 2;
+}
+.film-pause {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.film-controls label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  background: rgba(10, 14, 18, 0.55);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+.film-pause:focus-visible + label {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+.film .when-paused,
+.film:has(.film-pause:checked) .when-playing {
+  display: none;
+}
+.film:has(.film-pause:checked) .when-paused {
+  display: inline;
 }
 .countries {
   display: flex;
@@ -1034,7 +1087,7 @@ p {
     max-height: 78svh;
   }
   .hero-photo img {
-    object-position: 50% 18%;
+    object-position: 50% 38%;
   }
   .hero-name {
     grid-area: 1 / 1 / 2 / 2;
@@ -1182,13 +1235,11 @@ p {
   .recognition {
     margin-top: 32px;
   }
-  .mosaic {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
+  .film {
     margin-top: 32px;
   }
-  .mosaic figure:nth-child(even) {
-    transform: translateY(16px);
+  .film-track {
+    animation-duration: 60s;
   }
   .countries {
     font-size: 15px;
@@ -1245,6 +1296,18 @@ p {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .film {
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding-inline: var(--gutter);
+  }
+  .film-item {
+    scroll-snap-align: start;
+  }
+  .film-copy,
+  .film-controls {
+    display: none;
   }
   *,
   *::before,

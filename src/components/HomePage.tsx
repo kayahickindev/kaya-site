@@ -4,7 +4,7 @@ import { ArrowDown, ArrowUpRight, Mail } from "lucide-react";
 import { TopNav } from "./TopNav";
 import { Footer } from "./Footer";
 import { ProductBand } from "./ProductBand";
-import { TravelMosaic } from "./TravelMosaic";
+import { TravelFilm } from "./TravelFilm";
 import { profile, programs, awards, publicTools } from "@/data/profile";
 import { siteConfig } from "@/data/content";
 import { heroPortrait, myFutureSelf, dogAi } from "@/data/assets";
@@ -42,9 +42,9 @@ export function HomePage({
               <h2>Full-stack developer. AI builder. Founder.</h2>
               <p>
                 Co-founder &amp; CTO of{" "}
-                <Link href="/work/myfutureself">MyFutureSelf</Link>, a consumer
-                AI company backed by Cintrifuse Capital. I build the whole
-                product: iOS, Android, web, backend, and real-time voice AI.
+                <Link href="/work/myfutureself">MyFutureSelf</Link>, backed by
+                Cintrifuse Capital. I ship every layer myself: native iOS,
+                Android, web, backend, and the real-time voice AI.
               </p>
             </div>
             <div className="hero-cta">
@@ -82,7 +82,7 @@ export function HomePage({
           name="MyFutureSelf"
           label="Co-founder & CTO · 2025 to now"
           title="A voice AI mentor that speaks as your future self."
-          lead="A 90-day roadmap, daily actions, and a Future You who calls, chats, and keeps score. I built the original product end to end and lead engineering across iOS, Android, web, backend, and real-time voice."
+          lead="A 90-day roadmap, daily actions, and a Future You who calls. I built it end to end."
           screens={myFutureSelf.home}
           links={[
             { label: "App Store", href: mfs.links.appStore! },
@@ -115,7 +115,7 @@ export function HomePage({
           name="Dog AI"
           label="Model training · iOS · 2025"
           title="A custom multimodal model, shipped as an iPhone app."
-          lead="Dog AI reads a dog's mood from a photo or video. I assembled the dataset, trained the multimodal model behind it, and built the iOS camera experience through to a paid App Store launch."
+          lead="Reads a dog's mood from a photo. I assembled the dataset, trained the model, and shipped the app."
           screens={dogAi.home}
           links={[{ label: "App Store", href: dog.links.appStore! }]}
           detailHref="/work/dog-ai"
@@ -132,14 +132,7 @@ export function HomePage({
               </h2>
             </div>
             <div>
-              <p className="lead">
-                I take an idea from the first line of Swift to a product with
-                paying subscribers. Most days that means a native iOS app, a
-                React Native Android app, a Next.js web layer, a Firebase
-                backend, and OpenAI and Claude models, with Codex and Claude
-                Code as daily tools.
-              </p>
-              <div className="figures">
+              <div className="figures" style={{ marginTop: 8 }}>
                 <div>
                   <strong className="big-number">{profile.github.display}</strong>
                   <span>GitHub contributions in the last year</span>
@@ -239,10 +232,6 @@ export function HomePage({
                 Credentials, awards &amp; scholarships{" "}
                 <ArrowUpRight size={17} aria-hidden />
               </Link>
-              <p className="muted" style={{ fontSize: 16 }}>
-                Miami University, cum laude · DHS Trusted Tester · Microsoft
-                Applied Skills
-              </p>
             </div>
           </div>
         </section>
@@ -257,10 +246,8 @@ export function HomePage({
             </div>
             <div>
               <p className="lead">
-                I studied abroad at Miami University’s Dolibois European Center
-                in Luxembourg in fall 2024, and I’ve traveled to 15 countries
-                across Europe, North America, Africa, and Oceania. Sweden is a
-                favorite. I’ve been back more than once.
+                Fall 2024 at Miami’s Dolibois European Center. Sweden is the
+                one I keep going back to.
               </p>
               <ul className="countries" aria-label="Countries visited">
                 {profile.travel.countries.map((c) => (
@@ -275,7 +262,7 @@ export function HomePage({
             </div>
           </div>
           <div className="wrap">
-            <TravelMosaic />
+            <TravelFilm />
           </div>
         </section>
 

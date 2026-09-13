@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { profile, programs } from "@/data/profile";
 import { profilePageJsonLd } from "@/lib/profile-content";
 import { SubpageShell } from "@/components/SubpageShell";
-import { TravelMosaic } from "@/components/TravelMosaic";
+import { TravelFilm } from "@/components/TravelFilm";
 import { siteConfig } from "@/data/content";
 import { studioPortrait } from "@/data/assets";
 export const metadata: Metadata = {
@@ -153,7 +153,7 @@ export default function AboutPage() {
             </ul>
           </div>
         </div>
-        <TravelMosaic />
+        <TravelFilm />
       </section>
 
       <section className="band split" aria-labelledby="faq-title">
