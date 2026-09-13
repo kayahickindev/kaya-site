@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 export default function AboutPage() {
   return (
-    <SubpageShell>
+    <SubpageShell current="/about">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

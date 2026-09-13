@@ -20,6 +20,7 @@ export function HeroSlides() {
               "--i": i,
               "--zoom": s.zoom ?? 1,
               "--pos": s.position,
+              "--pos-m": s.positionMobile ?? s.position,
             } as CSSProperties
           }
         >

@@ -24,7 +24,7 @@ export const identityGraph = {
       "@id": personId,
       name: siteConfig.name,
       url: siteConfig.url,
-      image: [`${siteConfig.url}/hero/tekapo.jpg`, `${siteConfig.url}/portraits/kaya.jpg`],
+      image: [`${siteConfig.url}/hero/tekapo-lake.jpg`, `${siteConfig.url}/portraits/kaya.jpg`],
       jobTitle: profile.role,
       description: profile.biography,
       homeLocation: { "@type": "City", name: "Cleveland, Ohio" },

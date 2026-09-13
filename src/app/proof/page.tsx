@@ -34,7 +34,7 @@ const featured = [
 ];
 export default function ProofPage() {
   return (
-    <SubpageShell>
+    <SubpageShell current="/proof">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

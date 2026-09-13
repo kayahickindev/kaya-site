@@ -1,0 +1,55 @@
+{
+  "viewBox": "0 0 1000 444",
+  "pins": [
+    {
+      "name": "Lake Tekapo",
+      "x": 927.0,
+      "y": 400.3
+    },
+    {
+      "name": "Merzouga",
+      "x": 489.5,
+      "y": 159.2
+    },
+    {
+      "name": "Kilauea",
+      "x": 78.0,
+      "y": 196.7
+    },
+    {
+      "name": "Munich",
+      "x": 528.3,
+      "y": 104.8
+    },
+    {
+      "name": "Luxembourg City",
+      "x": 514.9,
+      "y": 100.2
+    },
+    {
+      "name": "Stockholm",
+      "x": 541.1,
+      "y": 70.8
+    },
+    {
+      "name": "Sydney",
+      "x": 895.5,
+      "y": 367.9
+    },
+    {
+      "name": "Cleveland",
+      "x": 292.9,
+      "y": 125.7
+    },
+    {
+      "name": "Cincinnati",
+      "x": 283.5,
+      "y": 133.4
+    },
+    {
+      "name": "Matosinhos",
+      "x": 477.9,
+      "y": 126.8
+    }
+  ]
+}

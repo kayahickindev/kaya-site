@@ -50,7 +50,7 @@ export default async function ProjectPage({ params }: Props) {
         ? dogAi.icon
         : logos[slug];
   return (
-    <SubpageShell>
+    <SubpageShell current="/work">
       <Link href="/work" className="arrow-link">
         <ArrowLeft size={16} aria-hidden />
         All work

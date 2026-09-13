@@ -17,7 +17,7 @@ export default function WorkPage() {
   const mfs = siteConfig.projects.find((p) => p.slug === "myfutureself")!;
   const dog = siteConfig.projects.find((p) => p.slug === "dog-ai")!;
   return (
-    <SubpageShell>
+    <SubpageShell current="/work">
       <header className="page-head">
         <p className="label">Work</p>
         <h1 className="h-page">From idea to in your hands.</h1>

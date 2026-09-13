@@ -19,7 +19,7 @@ export default function StackPage() {
     }),
   );
   return (
-    <SubpageShell>
+    <SubpageShell current="/stack">
       <header className="page-head">
         <p className="label">Stack</p>
         <h1 className="h-page">Full stack. All in.</h1>

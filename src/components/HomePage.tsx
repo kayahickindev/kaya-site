@@ -1,17 +1,39 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { Accessibility, ArrowDown, ArrowUpRight, Cloud, ShieldCheck } from "lucide-react";
 import { TopNav } from "./TopNav";
 import { Footer } from "./Footer";
-import { ProductBand } from "./ProductBand";
 import { HeroSlides } from "./HeroSlides";
+import { VoiceCall } from "./VoiceCall";
+import { StackLayers } from "./StackLayers";
 import { ModelSchematic } from "./ModelSchematic";
+import { WorldMap } from "./WorldMap";
 import { SocialTiles } from "./SocialIcons";
-import { profile, programs, awards } from "@/data/profile";
+import { ChapterNav } from "./ChapterNav";
+import { Reveal } from "./Reveal";
+import { CountUp } from "./CountUp";
+import { profile } from "@/data/profile";
 import { siteConfig } from "@/data/content";
-import { myFutureSelf } from "@/data/assets";
+import { recognition } from "@/data/recognition";
+import { myFutureSelf, dogAi } from "@/data/assets";
 import type { PublicMarketingMetricsSnapshot } from "@/lib/marketing-metrics";
 
 const email = `${siteConfig.emailParts.user}@${siteConfig.emailParts.domain}`;
+
+const chapters = [
+  { label: "Product", href: "#product" },
+  { label: "Builder", href: "#builder" },
+  { label: "Model", href: "#model" },
+  { label: "World", href: "#world" },
+  { label: "Backing", href: "#backing" },
+  { label: "Contact", href: "#contact" },
+];
+
+const credentials = [
+  { Icon: Accessibility, name: "DHS Trusted Tester", line: "Web accessibility" },
+  { Icon: Cloud, name: "Microsoft Applied Skills", line: "Secure AI in the cloud" },
+  { Icon: ShieldCheck, name: "Fortinet NSE 1", line: "Cybersecurity" },
+];
 
 export function HomePage({
   metrics,
@@ -21,204 +43,260 @@ export function HomePage({
   const m = metrics.metrics;
   const mfs = siteConfig.projects.find((p) => p.slug === "myfutureself")!;
   const dog = siteConfig.projects.find((p) => p.slug === "dog-ai")!;
-  const catalyst = awards[0];
-  const pitch = awards[1];
   return (
     <>
-      <div className="wrap">
-        <a href="#main-content" className="skip-link">
-          Skip to content
-        </a>
-        <TopNav />
-      </div>
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
       <main id="main-content">
-        <div className="wrap">
-          <section className="hero" aria-labelledby="hero-name">
+        <section className="hero" aria-labelledby="hero-name">
+          <HeroSlides />
+          <div className="hero-scrim" aria-hidden />
+          <div className="wrap hero-top">
+            <TopNav overlay />
+          </div>
+          <div className="wrap hero-content">
             <h1 className="display hero-name" id="hero-name">
               Kaya
               <br />
               Hickin
             </h1>
-            <div className="hero-intro">
-              <h2>Full-stack developer. AI builder. Founder.</h2>
-              <p>
-                Co-founder &amp; CTO of{" "}
-                <Link href="/work/myfutureself">MyFutureSelf</Link>, backed by
-                Cintrifuse Capital. I ship every layer, from native iOS to the
-                real-time voice AI.
+            <p className="hero-line">
+              Full-stack developer and founder. Co‑founder &amp; CTO of{" "}
+              <Link href="/work/myfutureself">MyFutureSelf</Link>.
+            </p>
+            <ul className="proof" aria-label="At a glance">
+              <li>
+                <strong>{m.appDownloads.display}</strong>
+                <span>MyFutureSelf downloads</span>
+              </li>
+              <li>
+                <strong>{profile.github.display}</strong>
+                <span>GitHub contributions, last year</span>
+              </li>
+              <li>
+                <strong>{profile.travel.countries.length}</strong>
+                <span>countries</span>
+              </li>
+            </ul>
+            <a className="btn btn-light" href="#product">
+              See the work <ArrowDown size={17} aria-hidden />
+            </a>
+          </div>
+        </section>
+
+        <section className="scene scene-mfs" id="product" aria-labelledby="product-title">
+          <div className="wrap">
+            <div className="scene-head">
+              <p className="product-mark">
+                <Image src={myFutureSelf.icon} alt="" width={36} height={36} />
+                MyFutureSelf
+              </p>
+              <h2 className="h-scene" id="product-title">
+                Your future self, calling.
+              </h2>
+              <p className="scene-line">
+                A voice AI mentor who calls, plus a 90-day plan of daily actions.
+                I built it end to end.
               </p>
             </div>
-            <div className="hero-cta">
-              <div className="action-row">
-                <a className="btn" href="#work">
-                  See the work <ArrowDown size={17} aria-hidden />
-                </a>
-                <Link className="arrow-link" href="/about">
-                  About me <ArrowUpRight size={18} aria-hidden />
-                </Link>
-              </div>
-            </div>
-            <HeroSlides />
-          </section>
-        </div>
-
-        <ProductBand
-          variant="mfs"
-          id="work"
-          icon={myFutureSelf.icon}
-          name="MyFutureSelf"
-          label="Co-founder & CTO · 2025 to now"
-          title="A voice AI mentor that speaks as your future self."
-          lead="A Future You who calls, and a 90-day plan of daily actions. Built end to end."
-          screens={myFutureSelf.home}
-          links={[
-            { label: "App Store", href: mfs.links.appStore! },
-            { label: "myfutureselfapp.com", href: mfs.links.website! },
-          ]}
-          detailHref="/work/myfutureself"
-        >
-          <dl className="metrics" aria-label="MyFutureSelf traction">
-            {[
-              [m.appDownloads.display, "Downloads"],
-              [m.paidSubscribersEver.display, "Active paid subscribers"],
-              [`${m.appStoreRating.display} / 5`, "App Store rating"],
-              [m.futureSelfActions.display, "Future Self Actions taken"],
-            ].map(([v, l]) => (
-              <div key={l}>
+            <Reveal className="scene-visual">
+              <VoiceCall />
+            </Reveal>
+            <dl className="metrics">
+              <div>
                 <dd>
-                  <strong>{v}</strong>
+                  <strong>
+                    <CountUp display={m.appDownloads.display} />
+                  </strong>
                 </dd>
                 <dt>
-                  <span>{l}</span>
+                  <span>Downloads</span>
                 </dt>
               </div>
-            ))}
-          </dl>
-        </ProductBand>
+              <div>
+                <dd>
+                  <strong>{m.paidSubscribersEver.display}</strong>
+                </dd>
+                <dt>
+                  <span>Active paid subscribers</span>
+                </dt>
+              </div>
+              <div>
+                <dd>
+                  <strong>
+                    <CountUp display={m.appStoreRating.display} /> / 5
+                  </strong>
+                </dd>
+                <dt>
+                  <span>App Store rating</span>
+                </dt>
+              </div>
+              <div>
+                <dd>
+                  <strong>
+                    <CountUp display={m.futureSelfActions.display} />
+                  </strong>
+                </dd>
+                <dt>
+                  <span>Future Self Actions taken</span>
+                </dt>
+              </div>
+            </dl>
+            <div className="action-row" style={{ justifyContent: "center" }}>
+              <a className="btn" href={mfs.links.appStore} target="_blank" rel="noopener noreferrer">
+                App Store <ArrowUpRight size={17} aria-hidden />
+              </a>
+              <a className="btn btn-ghost" href={mfs.links.website} target="_blank" rel="noopener noreferrer">
+                myfutureselfapp.com <ArrowUpRight size={17} aria-hidden />
+              </a>
+              <Link className="arrow-link" href="/work/myfutureself">
+                How I built it <ArrowUpRight size={18} aria-hidden />
+              </Link>
+            </div>
+          </div>
+        </section>
 
-        <ProductBand
-          variant="dog"
-          icon={dogAiIcon}
-          name="Dog AI"
-          label="Model training · iOS · 2025"
-          title="I trained the model that reads a dog’s mood."
-          lead="A custom multimodal model on a dataset I assembled, shipped as an iPhone app."
-          visual={<ModelSchematic />}
-          links={[{ label: "App Store", href: dog.links.appStore! }]}
-          detailHref="/work/dog-ai"
-          detailLabel="The full story"
-          flip
-        />
-
-        <section className="band" aria-labelledby="build-title">
-          <div className="wrap split">
-            <div>
+        <section className="scene scene-builder" id="builder" aria-labelledby="builder-title">
+          <div className="wrap scene-split">
+            <div className="scene-head">
               <p className="label">How I build</p>
-              <h2 className="h-section" id="build-title">
-                Mobile, web, backend, and AI. The whole thing.
+              <h2 className="h-scene" id="builder-title">
+                One person. Every layer.
               </h2>
+              <p className="scene-line">
+                Native iOS, Android, web, backend, and the voice AI. Shipped by
+                me, with Codex and Claude Code every day.
+              </p>
+              <div className="figures">
+                <div>
+                  <strong className="big-number">{profile.github.display}</strong>
+                  <span>GitHub contributions in the last year</span>
+                </div>
+                <div>
+                  <strong className="big-number">{profile.tokens.display}</strong>
+                  <span>Tokens across Codex and Claude coding workflows</span>
+                </div>
+              </div>
               <div className="action-row">
                 <Link className="btn btn-ghost" href="/stack">
                   Full stack <ArrowUpRight size={17} aria-hidden />
                 </Link>
-              </div>
-            </div>
-            <div className="figures">
-              <div>
-                <strong className="big-number">{profile.github.display}</strong>
-                <span>GitHub contributions in the last year</span>
-              </div>
-              <div>
-                <strong className="big-number">{profile.tokens.display}</strong>
-                <span>Tokens across Codex and Claude coding workflows</span>
-              </div>
-            </div>
-          </div>
-          <div className="wrap">
-            <nav className="past-work" aria-label="Earlier companies">
-              {siteConfig.projects
-                .filter((p) =>
-                  ["appointra", "leadboost-pro", "viral-loop"].includes(p.slug),
-                )
-                .map((p) => (
-                  <Link href={`/work/${p.slug}`} key={p.slug}>
-                    <h3>{p.name}</h3>
-                    <p>{p.tagline}</p>
-                    <ArrowUpRight size={20} aria-hidden />
-                  </Link>
-                ))}
-            </nav>
-          </div>
-        </section>
-
-        <section className="band band-panel" aria-labelledby="recognition-title">
-          <div className="wrap">
-            <p className="label">Recognition</p>
-            <h2 className="h-section" id="recognition-title">
-              Backed, awarded, and invited.
-            </h2>
-            <div className="recognition">
-              <div>
-                <h3>Cintrifuse Capital</h3>
-                <p>MyFutureSelf investor</p>
-              </div>
-              <a href={catalyst.url ?? "/proof"}>
-                <h3>{catalyst.name}</h3>
-                <p>{catalyst.issuer}</p>
-              </a>
-              <Link href="/proof#awards">
-                <h3>{pitch.name}</h3>
-                <p>$10,000 team prize, 2025</p>
-              </Link>
-              <div>
-                <h3>Founders Inc</h3>
-                <p>Off Season II, San Francisco</p>
-              </div>
-              <div>
-                <h3>Series Build</h3>
-                <p>Inaugural cohort, New York City</p>
-              </div>
-              <div>
-                <h3>Y Combinator Startup School</h3>
-                <p>{programs[3].detail}</p>
-              </div>
-            </div>
-            <div className="action-row" style={{ marginTop: 44 }}>
-              <Link className="btn btn-ghost" href="/proof">
-                Credentials, awards &amp; scholarships{" "}
-                <ArrowUpRight size={17} aria-hidden />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <section className="band" aria-labelledby="travel-title">
-          <div className="wrap split">
-            <div>
-              <p className="label">Beyond the keyboard</p>
-              <h2 className="h-section" id="travel-title">
-                15 countries, and a semester in Luxembourg.
-              </h2>
-            </div>
-            <div>
-              <ul className="countries" aria-label="Countries visited">
-                {profile.travel.countries.map((c) => (
-                  <li key={c}>{c}</li>
-                ))}
-              </ul>
-              <div className="action-row">
-                <Link className="arrow-link" href="/about">
-                  More about me <ArrowUpRight size={18} aria-hidden />
+                <Link className="arrow-link" href="/work">
+                  All work <ArrowUpRight size={18} aria-hidden />
                 </Link>
               </div>
             </div>
+            <Reveal className="scene-visual">
+              <StackLayers />
+            </Reveal>
           </div>
         </section>
 
-        <section className="band contact-band" aria-labelledby="contact-title">
+        <section className="scene scene-dog" id="model" aria-labelledby="model-title">
+          <div className="wrap scene-split flip">
+            <div className="scene-head">
+              <p className="product-mark">
+                <Image src={dogAi.icon} alt="" width={36} height={36} />
+                Dog AI
+              </p>
+              <h2 className="h-scene" id="model-title">
+                I trained the model.
+              </h2>
+              <p className="scene-line">
+                A custom multimodal model that reads a dog’s mood, on a dataset
+                I assembled, shipped as an iPhone app.
+              </p>
+              <div className="action-row">
+                <a className="btn" href={dog.links.appStore} target="_blank" rel="noopener noreferrer">
+                  App Store <ArrowUpRight size={17} aria-hidden />
+                </a>
+                <Link className="arrow-link" href="/work/dog-ai">
+                  The full story <ArrowUpRight size={18} aria-hidden />
+                </Link>
+              </div>
+            </div>
+            <Reveal className="scene-visual">
+              <ModelSchematic />
+            </Reveal>
+          </div>
+        </section>
+
+        <section className="scene scene-world" id="world" aria-labelledby="world-title">
           <div className="wrap">
+            <div className="scene-head centered">
+              <p className="label">Beyond the keyboard</p>
+              <h2 className="h-scene" id="world-title">
+                15 countries, and a semester in Luxembourg.
+              </h2>
+            </div>
+            <Reveal className="scene-visual">
+              <WorldMap />
+            </Reveal>
+            <ul className="countries centered" aria-label="Countries visited">
+              {profile.travel.countries.map((c) => (
+                <li key={c}>{c}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section className="scene scene-backing" id="backing" aria-labelledby="backing-title">
+          <div className="wrap">
+            <div className="scene-head centered">
+              <p className="label">Backing and recognition</p>
+              <h2 className="h-scene" id="backing-title">
+                Backed, awarded, invited.
+              </h2>
+            </div>
+            <ul className="logo-wall" aria-label="Backers, awards and programs">
+              {recognition.map((r) => {
+                const inner = (
+                  <>
+                    <span className="logo-box">
+                      {r.logo ? (
+                        <Image src={r.logo} alt={`${r.name} logo`} width={200} height={72} sizes="200px" />
+                      ) : (
+                        <strong>{r.name}</strong>
+                      )}
+                    </span>
+                    <span className="logo-line">{r.line}</span>
+                  </>
+                );
+                return (
+                  <li key={r.name}>
+                    {r.href ? (
+                      <a href={r.href} target="_blank" rel="noopener noreferrer">
+                        {inner}
+                      </a>
+                    ) : (
+                      inner
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+            <ul className="badges" aria-label="Certifications">
+              {credentials.map(({ Icon, name, line }) => (
+                <li key={name}>
+                  <Icon size={22} aria-hidden />
+                  <strong>{name}</strong>
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="action-row" style={{ justifyContent: "center" }}>
+              <Link className="btn btn-ghost" href="/proof">
+                All credentials, awards &amp; scholarships <ArrowUpRight size={17} aria-hidden />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="scene scene-contact" id="contact" aria-labelledby="contact-title">
+          <div className="wrap contact-page">
             <p className="label">Contact</p>
-            <h2 className="h-section" id="contact-title">
+            <h2 className="h-scene" id="contact-title">
               Let’s talk.
             </h2>
             <a className="contact-email" href={`mailto:${email}`}>
@@ -231,8 +309,7 @@ export function HomePage({
       <div className="wrap">
         <Footer />
       </div>
+      <ChapterNav items={chapters} spy />
     </>
   );
 }
-
-const dogAiIcon = "/products/dog-ai/icon.png";
