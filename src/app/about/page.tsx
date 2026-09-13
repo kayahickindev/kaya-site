@@ -5,7 +5,9 @@ import { ArrowUpRight } from "lucide-react";
 import { profile, programs } from "@/data/profile";
 import { profilePageJsonLd } from "@/lib/profile-content";
 import { SubpageShell } from "@/components/SubpageShell";
+import { TravelMosaic } from "@/components/TravelMosaic";
 import { siteConfig } from "@/data/content";
+import { studioPortrait } from "@/data/assets";
 export const metadata: Metadata = {
   title: `About | ${siteConfig.name}`,
   description: profile.biography,
@@ -22,84 +24,89 @@ export default function AboutPage() {
           ).replace(/</g, "\\u003c"),
         }}
       />
-      <section className="about-intro">
+      <section className="about-grid page-head" style={{ maxWidth: "none" }}>
         <div>
-          <p className="eyebrow">A little about me</p>
-          <h1 className="page-title">
-            Always
-            <br />
-            <em>building.</em>
-          </h1>
-          <div className="prose-short">
+          <p className="label">About</p>
+          <h1 className="h-page">Always building.</h1>
+          <div className="prose" style={{ marginTop: 28 }}>
             <p>
-              I’m Kaya Hickin, co-founder and CTO of MyFutureSelf, a consumer AI
-              company backed by Cintrifuse Capital.
+              I’m Kaya Hickin, co-founder and CTO of MyFutureSelf, a consumer
+              AI company backed by Cintrifuse Capital, based in Cincinnati,
+              Ohio.
             </p>
             <p>
-              I built the original product end to end. Today, I lead engineering
-              across mobile, web, backend, and AI, including real-time voice and
-              personalized mentorship.
+              I built the original product end to end. Today I lead
+              engineering across its iOS and Android apps, web, backend, and
+              AI systems, including real-time voice and personalized
+              mentorship. Codex and Claude are part of my daily workflow.
             </p>
             <p>
               I also trained the custom multimodal model behind Dog AI and
-              shipped its iOS app. I like taking an idea all the way to
-              something people can use.
+              shipped its iOS app. Before that I co-founded Appointra, a B2B
+              outbound agency, and LeadBoost Pro, the first company I ran. I
+              like taking an idea all the way to something people pay for.
             </p>
           </div>
-          <Link className="text-link" href="/work">
-            See what I’m building <ArrowUpRight size={18} aria-hidden />
-          </Link>
+          <div className="action-row">
+            <Link className="btn" href="/work">
+              See the work <ArrowUpRight size={17} aria-hidden />
+            </Link>
+            <Link className="arrow-link" href="/contact">
+              Get in touch <ArrowUpRight size={18} aria-hidden />
+            </Link>
+          </div>
         </div>
         <div className="about-portrait">
           <Image
-            src="/portraits/kaya.jpg"
-            alt="Portrait of Kaya Hickin"
+            src={studioPortrait.src}
+            alt={studioPortrait.alt}
             fill
             preload
-            sizes="(max-width: 700px) 100vw, 45vw"
+            sizes="(max-width: 760px) 100vw, (max-width: 1100px) 520px, 40vw"
           />
         </div>
       </section>
-      <section className="split-section">
+
+      <section className="band split" aria-labelledby="journey-title">
         <div>
-          <p className="eyebrow">The founder journey</p>
-          <h2>
-            Cincinnati roots.
-            <br />
-            <em>A wider world.</em>
+          <p className="label">The founder journey</p>
+          <h2 className="h-section" id="journey-title">
+            Cincinnati roots. A wider world.
           </h2>
-          <p className="lead">Good company makes ambitious ideas bigger.</p>
         </div>
-        <div>
-          <div className="place-photo">
-            <Image
-              src="/portraits/san-francisco.png"
-              alt="The Golden Gate Bridge in San Francisco at sunset"
-              fill
-              sizes="(max-width: 700px) 100vw, 55vw"
-            />
-          </div>
-          <ul className="clean-list">
-            {programs.map((p) => (
-              <li key={p.name}>
-                <h3>{p.name}</h3>
-                <p>{p.detail}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-      <section className="split-section">
-        <div>
-          <p className="eyebrow">Education</p>
-          <h2>Curiosity came first.</h2>
-          <Link href="/proof" className="text-link">
-            Awards &amp; credentials <ArrowUpRight size={18} aria-hidden />
-          </Link>
-        </div>
-        <ul className="clean-list">
+        <ul className="rows">
+          {programs.map((p) => (
+            <li key={p.name}>
+              <h3>{p.name}</h3>
+              <p>{p.detail}</p>
+            </li>
+          ))}
           <li>
-            <h3>Miami University · Cum laude</h3>
+            <h3>Appointra, then MyFutureSelf</h3>
+            <p>
+              Co-founded Appointra with Giancarlo Sarti in 2024, scaled it to
+              $20k MRR in three months, then wound it down to build
+              MyFutureSelf full-time.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section className="band split" aria-labelledby="education-title">
+        <div>
+          <p className="label">Education</p>
+          <h2 className="h-section" id="education-title">
+            Curiosity came first.
+          </h2>
+          <div className="action-row">
+            <Link href="/proof" className="arrow-link">
+              Awards &amp; credentials <ArrowUpRight size={18} aria-hidden />
+            </Link>
+          </div>
+        </div>
+        <ul className="rows">
+          <li>
+            <h3>Miami University · Cum laude, May 2026</h3>
             <p>
               B.S. in Business, Marketing major, Entrepreneurship minor. Farmer
               School of Business. 3.74 GPA.
@@ -113,55 +120,56 @@ export default function AboutPage() {
             </p>
           </li>
           <li>
-            <h3>Crestwood High School · Valedictorian</h3>
+            <h3>Luxembourg, fall 2024</h3>
+            <p>
+              A semester abroad at Miami University’s Dolibois European Center,
+              on a Luxembourg Exchange Scholarship.
+            </p>
+          </li>
+          <li>
+            <h3>Crestwood High School · Valedictorian, 2022</h3>
             <p>Graduated at the top of my class.</p>
           </li>
         </ul>
       </section>
-      <section className="split-section">
-        <div>
-          <p className="eyebrow">Beyond the keyboard</p>
-          <p className="travel-count">
-            15<span className="text-4xl">↗</span>
-          </p>
-          <h2>
-            Countries.
-            <br />
-            <em>More perspectives.</em>
-          </h2>
-        </div>
-        <div>
-          <p className="lead">
-            I studied abroad in Luxembourg at Miami University’s Dolibois
-            European Center. Since then, the world has felt a little more
-            connected.
-          </p>
-          <div className="prose-short mt-5">
-            <p>
-              From the Sahara to New Zealand, I love seeing how differently
-              people live. Sweden is a favorite. I’ve been back more than once.
-            </p>
+
+      <section className="band" aria-labelledby="travel-title">
+        <div className="split">
+          <div>
+            <p className="label">Beyond the keyboard</p>
+            <h2 className="h-section" id="travel-title">
+              15 countries. More perspectives.
+            </h2>
           </div>
-          <p className="eyebrow mt-8">Countries visited outside the US</p>
-          <ul className="country-list">
-            {profile.travel.countries.map((c) => (
-              <li key={c}>{c}</li>
-            ))}
-          </ul>
+          <div>
+            <p className="lead">{profile.travel.description}</p>
+            <p className="label" style={{ marginTop: 28 }}>
+              Countries visited outside the US
+            </p>
+            <ul className="countries" aria-label="Countries visited">
+              {profile.travel.countries.map((c) => (
+                <li key={c}>{c}</li>
+              ))}
+            </ul>
+          </div>
         </div>
+        <TravelMosaic />
       </section>
-      <section className="split-section">
+
+      <section className="band split" aria-labelledby="faq-title">
         <div>
-          <p className="eyebrow">Quick answers</p>
-          <h2>The short version.</h2>
+          <p className="label">Quick answers</p>
+          <h2 className="h-section" id="faq-title">
+            The short version.
+          </h2>
         </div>
         <div>
           <details className="disclosure">
             <summary>What does Kaya Hickin build?</summary>
             <div className="disclosure-body">
-              I build consumer AI products across iOS, Android, web, backend,
-              and real-time voice. I’m the co-founder and CTO of MyFutureSelf
-              and built and trained the custom multimodal model for Dog AI.{" "}
+              Consumer AI products across iOS, Android, web, backend, and
+              real-time voice. I’m the co-founder and CTO of MyFutureSelf, and
+              I built and trained the custom multimodal model for Dog AI.{" "}
               <Link className="inline-link" href="/work">
                 Explore my work.
               </Link>
@@ -172,9 +180,9 @@ export default function AboutPage() {
             <div className="disclosure-body">
               I’m a full-stack developer working with Swift, SwiftUI, React
               Native, TypeScript, Next.js, Firebase, and AI systems. My work
-              includes {profile.github.display} GitHub contributions in a year
-              and {profile.tokens.display} tokens across Codex and Claude coding
-              workflows.{" "}
+              includes {profile.github.display} GitHub contributions in the
+              last year and {profile.tokens.display} tokens across Codex and
+              Claude coding workflows.{" "}
               <Link className="inline-link" href="/stack">
                 See my stack.
               </Link>
@@ -186,6 +194,15 @@ export default function AboutPage() {
               Cincinnati, Ohio. I’ve also built alongside founders in San
               Francisco through Founders Inc’s Off Season II and in New York
               City through Series Build’s inaugural cohort.
+            </div>
+          </details>
+          <details className="disclosure">
+            <summary>Where did Kaya study?</summary>
+            <div className="disclosure-body">
+              Miami University’s Farmer School of Business, graduating cum
+              laude in May 2026 with a B.S. in Business, a Marketing major, and
+              an Entrepreneurship minor, including a fall 2024 semester at the
+              Dolibois European Center in Luxembourg.
             </div>
           </details>
         </div>

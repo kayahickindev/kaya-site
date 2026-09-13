@@ -14,11 +14,11 @@ export function TopNav() {
   const pathname = usePathname();
   const { setTheme } = useTheme();
   return (
-    <header className="site-nav">
-      <Link href="/" aria-label="Kaya Hickin home" className="wordmark">
-        kh<span>.</span>
+    <header className="site-header">
+      <Link href="/" className="wordmark">
+        Kaya Hickin<span>.</span>
       </Link>
-      <nav aria-label="Primary navigation">
+      <nav className="site-nav" aria-label="Primary">
         {items.map((item) => (
           <Link
             key={item.href}
@@ -46,8 +46,8 @@ export function TopNav() {
           )
         }
       >
-        <Sun size={18} className="hidden dark:block" />
-        <Moon size={18} className="block dark:hidden" />
+        <Sun size={18} className="hidden dark:block" aria-hidden />
+        <Moon size={18} className="block dark:hidden" aria-hidden />
       </button>
     </header>
   );

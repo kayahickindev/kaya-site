@@ -14,56 +14,45 @@ export function ContactPanel() {
     }
   }
   return (
-    <section className="contact-main">
+    <section className="contact-grid">
       <div>
-        <p className="eyebrow">Say hello</p>
-        <h1>
-          Good things
-          <br />
-          start with
-          <br />
-          <em>a conversation.</em>
-        </h1>
-        <p className="lead">
+        <p className="label">Contact</p>
+        <h1 className="h-page">Good things start with a conversation.</h1>
+        <p className="lead muted" style={{ marginTop: 24 }}>
           AI engineers, founders, investors, and people building something
-          ambitious. Let’s talk.
+          ambitious. Cincinnati, Ohio, and wherever the work is.
         </p>
       </div>
-      <div className="self-center">
-        <p className="eyebrow mb-5">Cincinnati, Ohio</p>
-        <p className="contact-address">
-          kaya@
+      <div>
+        <p className="label">Email</p>
+        <a className="contact-email" href={`mailto:${address}`}>
+          {siteConfig.emailParts.user}@
           <wbr />
-          successai.app
-        </p>
+          {siteConfig.emailParts.domain}
+        </a>
         <div className="action-row">
-          <a className="button-link" href={`mailto:${address}`}>
-            <Mail size={16} aria-hidden />
+          <a className="btn" href={`mailto:${address}`}>
+            <Mail size={17} aria-hidden />
             Email me
           </a>
-          <button className="text-link" type="button" onClick={copy}>
-            <Copy size={15} aria-hidden />
+          <button className="btn btn-ghost" type="button" onClick={copy}>
+            <Copy size={16} aria-hidden />
             Copy address
           </button>
         </div>
         <p className="copy-status" role="status">
           {status}
         </p>
-        <div className="contact-links">
+        <div className="social-row">
           {[
-            { label: "GitHub", href: siteConfig.social.github },
             { label: "LinkedIn", href: siteConfig.social.linkedin },
+            { label: "GitHub", href: siteConfig.social.github },
             { label: "X", href: siteConfig.social.twitter },
             { label: "Instagram", href: siteConfig.social.instagram },
           ].map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a key={s.label} href={s.href} rel="me">
               {s.label}
-              <ArrowUpRight size={18} aria-hidden />
+              <ArrowUpRight size={16} aria-hidden />
             </a>
           ))}
         </div>

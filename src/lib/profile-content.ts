@@ -24,7 +24,7 @@ export const identityGraph = {
       "@id": personId,
       name: siteConfig.name,
       url: siteConfig.url,
-      image: `${siteConfig.url}/portraits/kaya.jpg`,
+      image: [`${siteConfig.url}/portraits/kaya-lake.jpg`, `${siteConfig.url}/portraits/kaya.jpg`],
       jobTitle: profile.role,
       description: profile.biography,
       workLocation: { "@type": "City", name: "Cincinnati, Ohio" },
@@ -100,7 +100,7 @@ export function profilePageJsonLd(path: string, name: string) {
 }
 
 export function profileText(metrics: MarketingMetricsSnapshot, full: boolean) {
-  const intro = `# Kaya Hickin\n\n> ${profile.biography}\n\nLocation: ${profile.location}. Biography updated ${profile.updatedLabel}.\n\n## Pages\n\n- [About](${siteConfig.url}/about)\n- [Work](${siteConfig.url}/work)\n- [Stack](${siteConfig.url}/stack)\n- [Awards and credentials](${siteConfig.url}/proof)\n- [Contact](${siteConfig.url}/contact)\n\n## MyFutureSelf traction\n\n${metricsCaption(metrics)}.\n${tractionLines(
+  const intro = `# Kaya Hickin\n\n> ${profile.biography}\n\nLocation: ${profile.location}.\n\n## Pages\n\n- [About](${siteConfig.url}/about)\n- [Work](${siteConfig.url}/work)\n- [Stack](${siteConfig.url}/stack)\n- [Awards and credentials](${siteConfig.url}/proof)\n- [Contact](${siteConfig.url}/contact)\n\n## MyFutureSelf traction\n\n${metricsCaption(metrics)}.\n${tractionLines(
     metrics,
   )
     .map((l) => `- ${l}`)

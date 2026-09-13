@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SubpageShell } from "@/components/SubpageShell";
-import { SelectedWork } from "@/components/SelectedWork";
-import { ProjectVisual } from "@/components/ProjectVisual";
+import { ProductBand } from "@/components/ProductBand";
 import { siteConfig } from "@/data/content";
 import { publicTools } from "@/data/profile";
+import { myFutureSelf, dogAi } from "@/data/assets";
 export const metadata: Metadata = {
   title: `Work | ${siteConfig.name}`,
   description:
@@ -13,75 +13,99 @@ export const metadata: Metadata = {
   alternates: { canonical: `${siteConfig.url}/work` },
 };
 export default function WorkPage() {
+  const mfs = siteConfig.projects.find((p) => p.slug === "myfutureself")!;
+  const dog = siteConfig.projects.find((p) => p.slug === "dog-ai")!;
   return (
     <SubpageShell>
-      <header className="page-heading">
-        <p className="eyebrow">Products &amp; companies</p>
-        <h1 className="page-title">
-          From idea
-          <br />
-          <em>to in your hands.</em>
-        </h1>
+      <header className="page-head">
+        <p className="label">Work</p>
+        <h1 className="h-page">From idea to in your hands.</h1>
         <p className="lead">
-          Consumer AI, custom models, and businesses built from the ground up.
+          Consumer AI, a custom model, and three companies built from the
+          ground up.
         </p>
       </header>
-      <SelectedWork />
-      <section className="section">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">More from the journey</p>
-            <h2>Always making.</h2>
-          </div>
+      <div style={{ margin: "0 calc(-1 * var(--gutter))" }}>
+        <ProductBand
+          variant="mfs"
+          id="myfutureself"
+          icon={myFutureSelf.icon}
+          name="MyFutureSelf"
+          label="Co-founder & CTO · 2025 to now"
+          title={mfs.tagline}
+          lead="A 90-day roadmap, daily actions, and a Future You who calls, chats, and keeps score. I built the original product end to end and lead engineering across iOS, Android, web, backend, and real-time voice."
+          screens={myFutureSelf.home}
+          links={[
+            { label: "App Store", href: mfs.links.appStore! },
+            { label: "myfutureselfapp.com", href: mfs.links.website! },
+          ]}
+          detailHref="/work/myfutureself"
+          eager
+        />
+        <ProductBand
+          variant="dog"
+          id="dog-ai"
+          icon={dogAi.icon}
+          name="Dog AI"
+          label="Model training · iOS · 2025"
+          title={dog.tagline}
+          lead="Dog AI reads a dog's mood from a photo or video. I assembled the dataset, trained the multimodal model behind it, and built the iOS camera experience through to a paid App Store launch."
+          screens={dogAi.home}
+          links={[{ label: "App Store", href: dog.links.appStore! }]}
+          detailHref="/work/dog-ai"
+          detailLabel="The full story"
+          flip
+        />
+      </div>
+      <section className="band split" aria-labelledby="companies-title">
+        <div>
+          <p className="label">Earlier companies</p>
+          <h2 className="h-section" id="companies-title">
+            Always making.
+          </h2>
         </div>
-        <div className="small-projects">
+        <nav className="past-work" style={{ marginTop: 0 }} aria-label="Earlier companies">
           {siteConfig.projects
-            .filter((p) => !["myfutureself", "dog-ai"].includes(p.slug))
+            .filter((p) =>
+              ["appointra", "leadboost-pro", "viral-loop"].includes(p.slug),
+            )
             .map((p) => (
-              <Link
-                className="project-link"
-                href={`/work/${p.slug}`}
-                key={p.slug}
-              >
-                <ProjectVisual slug={p.slug} />
-                <div className="project-caption">
-                  <div>
-                    <h3>{p.name}</h3>
-                    <p>{p.tagline}</p>
-                  </div>
-                </div>
+              <Link href={`/work/${p.slug}`} key={p.slug}>
+                <h3>{p.name}</h3>
+                <p>{p.tagline}</p>
+                <ArrowUpRight size={20} aria-hidden />
               </Link>
             ))}
-        </div>
+        </nav>
       </section>
-      <section className="split-section">
+      <section className="band split" aria-labelledby="oss-title">
         <div>
-          <p className="eyebrow">Open source</p>
-          <h2>
-            Tools for
-            <br />
-            <em>other builders.</em>
+          <p className="label">Open source</p>
+          <h2 className="h-section" id="oss-title">
+            Tools for other builders.
           </h2>
-          <a className="text-link" href={siteConfig.github.url}>
-            Find me on GitHub <ArrowUpRight size={18} aria-hidden />
-          </a>
-        </div>
-        <div className="tools-list">
-          {publicTools.map((t) => (
-            <a
-              key={t.name}
-              href={t.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div>
-                <h3>{t.name}</h3>
-                <p>{t.description}</p>
-              </div>
-              <ArrowUpRight size={22} aria-hidden />
+          <div className="action-row">
+            <a className="arrow-link" href={siteConfig.github.url} rel="me">
+              Find me on GitHub <ArrowUpRight size={18} aria-hidden />
             </a>
-          ))}
+          </div>
         </div>
+        <ul className="rows">
+          {publicTools.map((t) => (
+            <li key={t.name}>
+              <h3>{t.name}</h3>
+              <p>{t.description}</p>
+              <a
+                className="arrow-link"
+                href={t.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View on GitHub <ArrowUpRight size={16} aria-hidden />
+              </a>
+            </li>
+          ))}
+        </ul>
       </section>
     </SubpageShell>
   );
