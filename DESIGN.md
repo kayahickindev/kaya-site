@@ -31,19 +31,21 @@ screens do the storytelling.
 - `.wrap` is the 1480px container with a fluid gutter. `.band` sections span the
   viewport; product bands are full-bleed.
 - Hero: desktop is a split grid, name and intro left, the photo bleeding to the right
-  edge. The photo is zoomed so Kaya sits centred in the crop (he stands in the left
-  third of the original frame). Phones show the photo first at 4:5 with the name over
-  the lupins at the bottom, so the face stays clear; role and calls to action follow
-  on paper.
-- Hero motion is a one-time settle (scale 1.07 to 1 over 6s) plus a very slow drift.
-  Both are CSS only and disabled under `prefers-reduced-motion`.
+  edge. The photo slot is a slow crossfade through five travel photos (Lake Tekapo,
+  Pololū, Merzouga, a sailboat at sunset, Kīlauea), seven seconds each with a gentle
+  settle, pure CSS and off under `prefers-reduced-motion` (only the first photo
+  shows). Each slide carries its own focal point and an optional zoom so the subject
+  sits centred. Phones show the photos first at 4:5 with the name over the bottom
+  edge, so the face stays clear; role and calls to action follow on paper.
 - Product screens are real captures with rounded corners and a soft shadow, three up
   on desktop, a snap-scrolling strip on phones. No fabricated device frames or UI.
-- Travel is a slowly revolving film strip of eight photos: pure CSS, loops without
-  JavaScript, pauses on hover or with its Pause control, and turns into a plain
-  scrollable row under reduced motion.
-- Copy stays short. The hero is two sentences; section leads are one or two lines;
-  the numbers, chips, and photos carry the rest.
+- Dog AI is shown as its model, not its app: a schematic with the real sample photo
+  going in, a custom multimodal model block, and the six real mood scores coming out.
+  The app screens sit lower on the project page.
+- Copy stays short everywhere. The hero is two sentences; section leads are one line;
+  numbers, logos, and photos carry the rest.
+- Social links are logos with labels: four brand tiles on Contact and the home page,
+  an icon row in the footer.
 - Disclosures are native `details` elements. Everything important renders on the
   server and reads without JavaScript; only the theme toggle and copy button need it.
 
@@ -62,18 +64,18 @@ screens do the storytelling.
 
 ## Assets and provenance
 
-- Hero: `public/portraits/kaya-lake.jpg`, Kaya's own library, Lake Tekapo, New
-  Zealand, 2025-12-15. Best available copy is 1153x2048 (it arrived over iMessage; the
-  camera original belongs to the friend who took it).
+- Hero slides in `public/hero/`: Kaya's own library. Tekapo (2025-12-15) and the
+  sailboat (2026-01-31) arrived over iMessage at 1153x2048; Pololū, Merzouga, and
+  Kīlauea are camera originals exported from Photos and encoded at 1600px.
 - Studio portrait `public/portraits/kaya.jpg` stays on About.
 - MyFutureSelf screens in `public/products/myfutureself/` are simulator captures from
   the iOS main branch tip on 2026-09-13 (commit 4adb2f594, the 2.30 release line;
   chat from 92566ef9d, 2026-09-12), encoded from 1206x2622 at 900px wide. The icon is
   the app's 1024px AppIcon.
-- Dog AI screens in `public/products/dog-ai/` and their source are recorded in
-  `src/data/assets.ts`.
-- Travel photos in `public/travel/` are unmodified originals exported from Kaya's
-  Photos library, each captioned with its GPS-confirmed place. Company logos live in
-  `public/logos/`.
+- Dog AI assets in `public/products/dog-ai/`: the four App Store screens for 1.9.3
+  (real UI cropped from Apple's composite), the sample scan photo cropped from the
+  first of them, and the six scores the app returned on the second.
+- Company logos live in `public/logos/`. Kaya is from Cleveland, Ohio; the site says
+  so wherever a place is named.
 - Never reuse the retired composite `mfs-hero.webp` or the tiny App Store crop of
   Dog AI; both were rejected as outdated.
