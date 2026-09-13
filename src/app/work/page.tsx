@@ -1,3 +1,5 @@
+export const revalidate = 3600;
+
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,7 +8,7 @@ import { CompanyMark, hasCompanyMark } from "@/components/CompanyMark";
 import { SubpageShell } from "@/components/SubpageShell";
 import { TiltImage } from "@/components/TiltImage";
 import { siteConfig } from "@/data/content";
-import { getMarketingMetrics } from "@/lib/marketing-metrics";
+import { getMarketingMetrics, metricsCaption } from "@/lib/marketing-metrics";
 import type { MarketingMetricsSnapshot } from "@/lib/marketing-metrics";
 import { cardSurfaceHover, cardSurfaceFeaturedEmerald } from "@/lib/surfaces";
 import { projectDetails } from "./_projectDetails";
@@ -43,14 +45,14 @@ function cardHighlights(
 ): Record<string, string[]> {
   return {
     myfutureself: [
-      `${metrics.metrics.appDownloads.display} downloads · 52% avg monthly growth`,
-      "Solo-built iOS, backend, and voice-AI stack",
+      `${metrics.metrics.appDownloads.display} downloads · Backed by Cintrifuse Capital`,
+      "Built the original product end to end; now leading mobile, web, backend, and AI",
     ],
     "viral-loop": [
       "Done-for-you AI UGC content pipeline",
       "Organic influencer distribution",
     ],
-    "dog-ai": ["Custom multimodal LLM", "Trained on Harvard dataset"],
+    "dog-ai": ["Custom multimodal LLM", "Model training through iOS launch"],
     appointra: [
       "$2M+ in client pipeline generated",
       "Cold-email infra for 8/9-figure founders",
@@ -63,7 +65,7 @@ function cardHighlights(
 }
 
 const projectKind: Record<string, { label: string; icon: LucideIcon }> = {
-  myfutureself: { label: "iOS App", icon: Smartphone },
+  myfutureself: { label: "Consumer AI", icon: Smartphone },
   "viral-loop": { label: "Web Service", icon: Globe },
   "dog-ai": { label: "iOS App", icon: Smartphone },
   appointra: { label: "Agency", icon: Briefcase },
@@ -163,6 +165,7 @@ export default async function WorkPage() {
           </Link>
         ) : null}
 
+        <Link href="/proof#metrics" className="w-fit text-xs text-neutral-600 underline underline-offset-4 dark:text-neutral-400">MyFutureSelf: {metricsCaption(metrics)} · metric definitions</Link>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {rest.map((detail) => {
             const { project } = detail;

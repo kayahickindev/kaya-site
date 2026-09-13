@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
+import { profile } from "@/data/profile";
 import { StackGrid } from "@/components/StackGrid";
 import { SubpageShell } from "@/components/SubpageShell";
 import { siteConfig } from "@/data/content";
@@ -14,7 +16,7 @@ export const metadata: Metadata = {
   },
 };
 
-const CATEGORY_ORDER = ["iOS", "Web", "Backend", "AI", "Workflow"] as const;
+const CATEGORY_ORDER = ["iOS", "Android", "Web", "Backend", "AI", "Workflow"] as const;
 
 type UsageTile = {
   product: string;
@@ -30,25 +32,25 @@ const usage: UsageTile[] = [
     product: "Wispr Flow",
     logo: "/logos/wispr-flow.png",
     alt: "Wispr Flow logo",
-    primary: "200K+",
-    primaryLabel: "words dictated",
-    secondary: "75-day streak · 119 WPM",
+    primary: "Voice",
+    primaryLabel: "first",
+    secondary: "Dictation for planning and development",
   },
   {
     product: "Claude Code",
     logo: "/logos/claude-code.svg",
     alt: "Claude Code logo",
-    primary: "53M+",
-    primaryLabel: "tokens consumed",
-    secondary: "391 sessions · Opus 4.7 favorite",
+    primary: "Claude",
+    primaryLabel: "Code",
+    secondary: "Implementation, debugging, and review",
   },
   {
     product: "Codex",
     logo: "/logos/codex.svg",
     alt: "OpenAI Codex logo",
-    primary: "9B+",
-    primaryLabel: "tokens, all-time",
-    secondary: "953 threads · since Oct 2025",
+    primary: "Codex",
+    primaryLabel: "",
+    secondary: "Full-stack builds and agent workflows",
   },
 ];
 
@@ -68,7 +70,13 @@ export default function StackPage() {
           </h1>
         </header>
 
+        <p className="max-w-3xl text-base leading-relaxed text-neutral-700 dark:text-neutral-300">Swift and SwiftUI for iOS. React Native for Android. TypeScript and Next.js for web. Firebase and Node.js behind the product. Real-time voice and multimodal AI throughout.</p>
         <StackGrid grouped={grouped} />
+        <section className={`${cardSurface} space-y-2 p-5`}>
+          <h2 className="text-2xl font-semibold">{profile.tokens.display} tokens across Codex and Claude</h2>
+          <p className="max-w-3xl text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">{profile.tokens.description}</p>
+          <Link href="/proof#engineering" className="inline-block text-sm text-cyan-800 underline underline-offset-4 dark:text-cyan-200">Engineering work and dated activity</Link>
+        </section>
 
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2">
@@ -104,7 +112,7 @@ export default function StackPage() {
                       {tile.primaryLabel}
                     </span>
                   </div>
-                  <p className="mt-1 truncate text-[11px] text-neutral-600 dark:text-neutral-300">
+                  <p className="mt-1 text-[11px] text-neutral-600 dark:text-neutral-300">
                     {tile.secondary}
                   </p>
                 </div>

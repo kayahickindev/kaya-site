@@ -1,3 +1,5 @@
+export const revalidate = 3600;
+
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,7 +15,7 @@ import {
 } from "lucide-react";
 import { SubpageShell } from "@/components/SubpageShell";
 import { siteConfig } from "@/data/content";
-import { getMarketingMetrics } from "@/lib/marketing-metrics";
+import { getMarketingMetrics, metricsCaption, tractionLines } from "@/lib/marketing-metrics";
 import type { MarketingMetricsSnapshot } from "@/lib/marketing-metrics";
 import { getProjectDetail, projectDetails } from "../_projectDetails";
 
@@ -112,11 +114,11 @@ function DogAiVisual() {
             Custom multimodal LLM
           </p>
           <p className="mt-2 text-3xl font-semibold leading-tight">
-            Trained on the Harvard dataset.
+            From model training to iOS.
           </p>
           <p className="mt-2 text-sm leading-relaxed text-neutral-300">
-            Built and trained the underlying model myself on Harvard&apos;s
-            behavioral dataset, then wrapped it in a narrow consumer flow.
+            Built and trained the underlying multimodal model, then shipped
+            a focused consumer experience for interpreting dog behavior.
           </p>
         </div>
         <div className="grid grid-cols-3 gap-2">
@@ -127,9 +129,9 @@ function DogAiVisual() {
             </p>
           </div>
           <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
-            <p className="text-xl font-semibold">Harvard</p>
+            <p className="text-xl font-semibold">iOS</p>
             <p className="mt-0.5 text-[11px] leading-snug text-neutral-400">
-              behavioral dataset
+              camera experience
             </p>
           </div>
           <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
@@ -148,17 +150,17 @@ function AppointraVisual() {
   const columns = [
     {
       label: "Prospects",
-      value: "2,400",
+      value: "Find",
       items: ["Seed startups", "Hiring signals", "New funding"],
     },
     {
       label: "Warm",
-      value: "318",
+      value: "Qualify",
       items: ["Replies", "Qualified", "Calendar fit"],
     },
     {
       label: "Booked",
-      value: "100s",
+      value: "Meet",
       items: ["Meetings", "Pipeline", "Revenue"],
     },
   ];
@@ -269,9 +271,9 @@ function LeadBoostVisual() {
 
 function ViralLoopVisual() {
   const posts = [
-    { tag: "Hook", views: "412K", color: "from-rose-400 to-pink-500" },
-    { tag: "Trend", views: "287K", color: "from-violet-400 to-fuchsia-500" },
-    { tag: "Story", views: "194K", color: "from-cyan-400 to-blue-500" },
+    { tag: "Hook", views: "Create", color: "from-rose-400 to-pink-500" },
+    { tag: "Trend", views: "Publish", color: "from-violet-400 to-fuchsia-500" },
+    { tag: "Story", views: "Learn", color: "from-cyan-400 to-blue-500" },
   ];
 
   return (
@@ -309,7 +311,7 @@ function ViralLoopVisual() {
                 <p className="text-sm font-semibold leading-none">
                   {post.views}
                 </p>
-                <p className="text-[11px] leading-snug text-white/70">views</p>
+                <p className="text-[11px] leading-snug text-white/70">workflow</p>
               </div>
             </div>
           ))}
@@ -350,12 +352,8 @@ function outcomesForDetail(
 ) {
   if (detail.slug !== "myfutureself") return detail.outcomes;
 
-  return [
-    `${metrics.metrics.paidSubscribersEver.display} active paid subscribers and a ${metrics.metrics.arr.display} annual run rate`,
-    `${metrics.metrics.appDownloads.display} downloads on the App Store`,
-    "52% average monthly revenue growth",
-    `${metrics.metrics.appStoreRating.display}-star App Store rating from ${metrics.metrics.appStoreReviews.display} verified reviews`,
-  ];
+  return [...tractionLines(metrics), "Backed by Cintrifuse Capital"];
+
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
@@ -424,6 +422,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               <p className="mt-3 text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
                 {project.tagline}
               </p>
+              <div className="mt-3 space-y-2 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">{detail.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
+              {detail.slug === "myfutureself" && <Link href="/proof#metrics" className="mt-3 block text-xs text-neutral-600 underline underline-offset-4 dark:text-neutral-400">{metricsCaption(metrics)} · metric definitions</Link>}
               {actions.length > 0 ? (
                 <div className="mt-4 flex flex-wrap gap-2">
                   {actions.map((action) => (

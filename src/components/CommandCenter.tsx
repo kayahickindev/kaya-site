@@ -5,8 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { profile } from "@/data/profile";
 import { siteConfig } from "@/data/content";
-import type { MarketingMetricsSnapshot } from "@/lib/marketing-metrics";
+import { metricsCaption, type PublicMarketingMetricsSnapshot } from "@/lib/marketing-metrics";
 import { Footer } from "./Footer";
 import { MetricTiles } from "./MetricTiles";
 import { RevealHeadline } from "./RevealHeadline";
@@ -136,57 +137,20 @@ function SocialPill({
   );
 }
 
-function metricTiles(metrics: MarketingMetricsSnapshot) {
-  const paidSubscribers = Math.max(
-    0,
-    Math.round(metrics.metrics.paidSubscribersEver.raw),
-  );
-  const downloadsThousands = Math.max(
-    0,
-    Math.round(metrics.metrics.appDownloads.raw / 1000),
-  );
-  const arrThousands = Math.max(0, Math.round(metrics.metrics.arr.raw / 1000));
-  const appStoreRating = metrics.metrics.appStoreRating.raw;
-
+function metricTiles(snapshot: PublicMarketingMetricsSnapshot) {
+  const m = snapshot.metrics;
   return [
-    {
-      value: paidSubscribers,
-      label: "active paid subscribers",
-      format: true,
-      suffix: "+",
-      sparkline: [14, 27, 55, 109, 219, 438, 875, paidSubscribers],
-      accent: "rgb(34,197,94)",
-    },
-    {
-      value: arrThousands,
-      label: "Annual Run Rate",
-      prefix: "$",
-      suffix: "K+",
-      sparkline: [0.5, 1, 2, 4, 8, 16, 33, arrThousands],
-      accent: "rgb(212,155,90)",
-    },
-    {
-      value: downloadsThousands,
-      label: "downloads",
-      suffix: "K+",
-      sparkline: [0.2, 0.4, 0.8, 1.6, 3.3, 6.5, 13, downloadsThousands],
-      accent: "rgb(34,211,238)",
-    },
-    {
-      value: appStoreRating,
-      label: "App Store rating",
-      suffix: "★",
-      decimals: 1,
-      sparkline: [4.4, 4.44, 4.49, 4.53, 4.57, 4.61, 4.66, appStoreRating],
-      accent: "rgb(251,191,36)",
-    },
+    { display: m.paidSubscribersEver.display, label: "Active paid subscribers" },
+    { display: m.arr.display, label: "Annual run rate" },
+    { display: m.appDownloads.display, label: "Downloads" },
+    { display: `${m.appStoreRating.display}★`, label: "App rating" },
   ];
 }
 
 export function CommandCenter({
   metrics,
 }: {
-  metrics: MarketingMetricsSnapshot;
+  metrics: PublicMarketingMetricsSnapshot;
 }) {
   const featured = siteConfig.projects.find((project) => project.featured);
   const liveMetricTiles = metricTiles(metrics);
@@ -220,7 +184,7 @@ export function CommandCenter({
                   Kaya Hickin
                 </span>
                 <span className="block text-[11px] text-neutral-500 dark:text-neutral-300">
-                  Founder &amp; CTO · Cleveland, OH
+                  Co-founder &amp; CTO · {profile.location}
                 </span>
               </span>
             </div>
@@ -243,11 +207,21 @@ export function CommandCenter({
               </div>
             </div>
 
+            <p className="max-w-xl text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
+              {profile.introduction}
+            </p>
+            <Link href="/proof" className="w-fit text-sm font-medium text-amber-800 underline decoration-amber-500/40 underline-offset-4 dark:text-amber-200">
+              Backed by Cintrifuse Capital · Full-stack developer
+            </Link>
+
             <div>
               <p className="mb-1.5 text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-300">
-                Live traction · MyFutureSelf
+                MyFutureSelf traction
               </p>
               <MetricTiles metrics={liveMetricTiles} accent="amber" />
+              <Link href="/proof#metrics" className="mt-2 block text-xs text-neutral-600 underline decoration-neutral-400/40 underline-offset-4 dark:text-neutral-400">
+                {metricsCaption(metrics)} · definitions
+              </Link>
             </div>
 
             <div className="flex flex-wrap items-center gap-2">

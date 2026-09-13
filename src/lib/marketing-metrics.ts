@@ -30,30 +30,40 @@ export type PublicMarketingMetricsSnapshot = Omit<
   };
 };
 
+// Last recorded public snapshot. The API still returns 503 on fallback.
+// Private raw financial values are deliberately absent from this snapshot.
+export const RECORDED_METRICS_DATE = "2026-09-13T04:15:58Z";
 export const FALLBACK_MARKETING_METRICS: MarketingMetricsSnapshot = {
   generatedAt: "fallback",
   metrics: {
-    appDownloads: { raw: 30000, display: "30K+", label: "Downloads" },
-    appStoreRating: { raw: 4.73, display: "4.7", label: "App Store Rating" },
-    appStoreReviews: { raw: 1032, display: "1,032", label: "App Store Reviews" },
-    futureSelfActions: {
-      raw: 171070,
-      display: "171K+",
-      label: "Future Self Actions",
-    },
-    coachingValueDelivered: {
-      raw: 11119550,
-      display: "$11.1M+",
-      label: "Coaching Value Delivered",
-    },
-    paidSubscribersEver: {
-      raw: 2948,
-      display: "3K+",
-      label: "Active Paid Subscribers",
-    },
-    arr: { raw: 115409, display: "$115K+", label: "Annual Run Rate" },
+    appDownloads: { raw: 66074, display: "66K+", label: "Downloads" },
+    appStoreRating: { raw: 4.68659565487275, display: "4.7", label: "App rating" },
+    appStoreReviews: { raw: 1611, display: "1,611", label: "Ratings" },
+    futureSelfActions: { raw: 239109, display: "239K+", label: "Future Self Actions" },
+    coachingValueDelivered: { raw: 22468229, display: "$22.5M+", label: "Modeled Coaching Value" },
+    paidSubscribersEver: { raw: 0, display: "3.8K+", label: "Active Paid Subscribers" },
+    arr: { raw: 0, display: "$245K+", label: "Annual Run Rate" },
   },
 };
+
+export function metricsDate(snapshot: { generatedAt: string }): string {
+  const date = snapshot.generatedAt === "fallback" ? RECORDED_METRICS_DATE : snapshot.generatedAt;
+  return new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" }).format(new Date(date));
+}
+
+export function metricsCaption(snapshot: { generatedAt: string }): string {
+  return `${snapshot.generatedAt === "fallback" ? "Recorded" : "Updated"} ${metricsDate(snapshot)} · company-reported`;
+}
+
+export function tractionLines(snapshot: MarketingMetricsSnapshot): string[] {
+  const m = snapshot.metrics;
+  return [
+    `${m.appDownloads.display} downloads`,
+    `${m.paidSubscribersEver.display} active paid subscribers`,
+    `${m.arr.display} annual run rate`,
+    `${m.appStoreRating.display}-star app rating from ${m.appStoreReviews.display} ratings`,
+  ];
+}
 
 const DEFAULT_METRICS_URL =
   "https://us-central1-success-ai-dbdf7.cloudfunctions.net/getMarketingMetrics";
@@ -92,7 +102,7 @@ export function normalizeMarketingMetricsSnapshot(
   };
   if (
     typeof snapshot.generatedAt !== "string" ||
-    !snapshot.generatedAt ||
+    !Number.isFinite(Date.parse(snapshot.generatedAt)) ||
     !snapshot.metrics ||
     typeof snapshot.metrics !== "object" ||
     !REQUIRED_METRIC_NAMES.every((name) => isMetric(snapshot.metrics?.[name]))
@@ -131,6 +141,7 @@ export async function getMarketingMetrics(): Promise<MarketingMetricsSnapshot> {
     const response = await fetch(url, {
       headers: { Authorization: `Bearer ${accessToken}` },
       next: { revalidate: 3600 },
+      signal: AbortSignal.timeout(8000),
     });
     if (!response.ok) return FALLBACK_MARKETING_METRICS;
     const data: unknown = await response.json();
@@ -141,8 +152,4 @@ export async function getMarketingMetrics(): Promise<MarketingMetricsSnapshot> {
   } catch {
     return FALLBACK_MARKETING_METRICS;
   }
-}
-
-export function metricNumberInThousands(raw: number): number {
-  return Math.max(0, Math.round(raw / 1000));
 }

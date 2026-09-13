@@ -138,7 +138,7 @@ export function ContactPanel() {
           </p>
           <p className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-300">
             <MapPin size={12} />
-            Cleveland, Ohio
+            Cincinnati, Ohio
           </p>
         </div>
       </div>

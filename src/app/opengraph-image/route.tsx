@@ -1,16 +1,12 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "fs/promises";
 import { join } from "path";
-import { getMarketingMetrics } from "@/lib/marketing-metrics";
+
 
 export const runtime = "nodejs";
 
 export async function GET() {
-  const metrics = await getMarketingMetrics();
-  const summary =
-    `Building MyFutureSelf. ${metrics.metrics.appDownloads.display} downloads. ` +
-    `${metrics.metrics.paidSubscribersEver.display} active paid subscribers. ` +
-    `a ${metrics.metrics.arr.display} annual run rate.`;
+  const summary = "Co-founder & CTO of MyFutureSelf. Full-stack developer building consumer AI, real-time voice, and custom multimodal models. Backed by Cintrifuse Capital.";
   const headshotPath = join(process.cwd(), "public", "headshot.jpg");
   const headshotBuffer = await readFile(headshotPath);
   const headshotBase64 = `data:image/jpeg;base64,${headshotBuffer.toString("base64")}`;
@@ -48,7 +44,7 @@ export async function GET() {
               marginBottom: "20px",
             }}
           >
-            FOUNDER, BUILDER, OPERATOR
+            FULL-STACK DEVELOPER · FOUNDER & CTO
           </div>
           <div
             style={{
