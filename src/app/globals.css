@@ -349,54 +349,26 @@ p {
   min-height: 640px;
   max-height: 1100px;
   overflow: hidden;
-  background: #46595c;
+  background:
+    radial-gradient(60% 50% at 70% 40%, rgba(116, 208, 216, 0.16), transparent 70%),
+    repeating-linear-gradient(0deg, rgba(116, 208, 216, 0.05) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(90deg, rgba(116, 208, 216, 0.05) 0 1px, transparent 1px 64px),
+    #0b0f14;
   color: #fff;
 }
-.hero-slide {
+.hero-system {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: calc(-1 * var(--shift, 0%));
-  width: calc(100% * var(--zoom, 1));
-  margin: 0;
-  opacity: 0;
-  transform-origin: 50% 45%;
-  animation: hero-cycle calc(var(--n) * 7s) ease-in-out infinite;
-  animation-delay: calc(var(--i) * 7s - 1.4s);
-}
-.hero-slide:first-child {
-  opacity: 1;
-}
-.hero-slide img {
-  object-fit: cover;
-  object-position: var(--pos, 50% 40%);
-}
-@keyframes hero-cycle {
-  0% {
-    opacity: 0;
-    transform: scale(1.06);
-  }
-  4% {
-    opacity: 1;
-  }
-  20% {
-    opacity: 1;
-  }
-  24% {
-    opacity: 0;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.06);
-  }
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 .hero-scrim {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to top, rgba(8, 12, 14, 0.82) 0%, rgba(8, 12, 14, 0.42) 38%, rgba(8, 12, 14, 0) 64%),
-    linear-gradient(to bottom, rgba(8, 12, 14, 0.5), rgba(8, 12, 14, 0) 24%);
+    linear-gradient(to top, rgba(11, 15, 20, 0.9) 0%, rgba(11, 15, 20, 0.45) 34%, rgba(11, 15, 20, 0) 58%),
+    linear-gradient(to right, rgba(11, 15, 20, 0.7), rgba(11, 15, 20, 0) 55%);
 }
 .hero-top {
   position: absolute;
@@ -1947,9 +1919,6 @@ body {
   }
   .hero-name {
     font-size: clamp(52px, 15.5vw, 72px);
-  }
-  .hero-slide img {
-    object-position: var(--pos-m, var(--pos, 50% 40%));
   }
   .hero-line {
     font-size: 17px;

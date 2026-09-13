@@ -8,53 +8,13 @@ export type Screen = {
   height: number;
 };
 
-// Hero slideshow: Kaya's own travel photos, exported as originals from his
-// library. Tekapo (2025-12-15) and the sailboat (2026-01-31) arrived over
-// iMessage at 1153x2048; the rest are camera originals encoded at 1600px.
-// `position` is the object-position focal point and `zoom` widens the frame so
-// the subject sits centred when it stands off to one side of the original.
-export type HeroSlide = {
-  src: string;
-  alt: string;
-  position: string;
-  positionMobile?: string;
-  zoom?: number;
+// The lake portrait stays as the social-preview and structured-data image.
+// Kaya's own library, Lake Tekapo, New Zealand, 2025-12-15; 1153x2048 is the
+// best copy anywhere (it arrived over iMessage).
+export const heroPortrait = {
+  src: "/hero/tekapo-lake.jpg",
+  alt: "Kaya Hickin in a black jacket beside a turquoise glacial lake with mountains behind",
 };
-export const heroSlides: HeroSlide[] = [
-  {
-    src: "/hero/tekapo-lake.jpg",
-    alt: "Kaya Hickin in a black jacket beside a turquoise glacial lake with mountains behind",
-    position: "50% 42%",
-    positionMobile: "50% 40%",
-    zoom: 1.56,
-  },
-  {
-    src: "/hero/pololu.webp",
-    alt: "Kaya with arms out on a green cliff above the surf at Pololū Valley",
-    position: "50% 56%",
-    positionMobile: "50% 50%",
-    zoom: 1.4,
-  },
-  {
-    src: "/hero/merzouga.webp",
-    alt: "Kaya riding a camel across orange sand dunes near Merzouga",
-    position: "50% 38%",
-    positionMobile: "72% 40%",
-  },
-  {
-    src: "/hero/sailboat.jpg",
-    alt: "Kaya standing on the bow of a sailboat at sunset holding a rope",
-    position: "50% 36%",
-    positionMobile: "50% 45%",
-  },
-  {
-    src: "/hero/kilauea.webp",
-    alt: "Two silhouettes watching the red glow of Kīlauea erupting at night",
-    position: "50% 66%",
-    positionMobile: "50% 55%",
-  },
-];
-export const heroPortrait = heroSlides[0];
 
 export const studioPortrait = {
   src: "/portraits/kaya.jpg",

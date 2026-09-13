@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Accessibility, ArrowDown, ArrowUpRight, Cloud, ShieldCheck } from "lucide-react";
 import { TopNav } from "./TopNav";
 import { Footer } from "./Footer";
-import { HeroSlides } from "./HeroSlides";
+import { HeroSystem } from "./HeroSystem";
 import { VoiceCall } from "./VoiceCall";
 import { StackLayers } from "./StackLayers";
 import { ModelSchematic } from "./ModelSchematic";
@@ -50,7 +50,7 @@ export function HomePage({
       </a>
       <main id="main-content">
         <section className="hero" aria-labelledby="hero-name">
-          <HeroSlides />
+          <HeroSystem />
           <div className="hero-scrim" aria-hidden />
           <div className="wrap hero-top">
             <TopNav overlay />
@@ -75,8 +75,8 @@ export function HomePage({
                 <span>GitHub contributions, last year</span>
               </li>
               <li>
-                <strong>{profile.travel.countries.length}</strong>
-                <span>countries</span>
+                <strong>{profile.tokens.display}</strong>
+                <span>tokens across Codex and Claude</span>
               </li>
             </ul>
             <a className="btn btn-light" href="#product">

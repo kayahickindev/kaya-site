@@ -3,8 +3,10 @@
 ## Direction
 
 One scrolling story, six chapters, one purpose-built visual per point. The hero
-is a full-bleed slideshow of Kaya's own travel photos with his name, one line, and
-three proof numbers over it. Then: MyFutureSelf as the real incoming-call screen
+is a live-rendered animation of Kaya's real architecture (iOS, Android, web,
+backend, voice AI and the Dog AI model exchanging traffic over a drifting grid,
+with a build-and-deploy stream) under his name, one line, and three technical
+proof numbers. Travel is a chapter, not the opening. Then: MyFutureSelf as the real incoming-call screen
 with a live voice pulse and counting metrics; "One person, every layer" as an
 isometric stack of plates carrying the real stack logos; Dog AI as a schematic of
 the model (sample photo in, six real scores out); a generated world map with the
@@ -35,12 +37,13 @@ fact reachable and share the same header and pill nav.
 
 - `.wrap` is the 1480px container with a fluid gutter. `.band` sections span the
   viewport; product bands are full-bleed.
-- Hero: full-bleed, 100svh, a crossfade through five travel photos (Lake Tekapo,
-  Pololū, Merzouga, a sailboat at sunset, Kīlauea), seven seconds each with a gentle
-  settle, pure CSS and off under `prefers-reduced-motion` (only the first photo
-  shows). Each slide carries desktop and phone focal points and an optional zoom so
-  the subject sits clear of the two-line name in the lower left. A bottom scrim keeps
-  the white type readable on every frame.
+- Hero: full-bleed, 100svh, dark. `HeroSystem` draws the system on a Canvas 2D
+  surface: six labelled service nodes, packets moving along the edges, a voice pulse,
+  a perspective floor grid drifting toward the viewer, and a scrolling log of real
+  workflow commands (desktop only). DPR-aware, paused when the tab is hidden, one
+  still frame under `prefers-reduced-motion`, and a CSS grid-and-glow background when
+  JavaScript is off. The name sits lower left over a scrim; the graph fills the right
+  and upper area so nothing collides.
 - Chapter visuals reveal on scroll with a tiny IntersectionObserver; the pre-reveal
   state only exists when scripting is enabled and a 2.4s CSS fallback shows the block
   regardless, so nothing depends on hydration.
@@ -75,9 +78,9 @@ fact reachable and share the same header and pill nav.
 
 ## Assets and provenance
 
-- Hero slides in `public/hero/`: Kaya's own library. Tekapo (2025-12-15) and the
-  sailboat (2026-01-31) arrived over iMessage at 1153x2048; Pololū, Merzouga, and
-  Kīlauea are camera originals exported from Photos and encoded at 1600px.
+- `public/hero/tekapo-lake.jpg` (Kaya's library, Lake Tekapo, 2025-12-15, 1153x2048
+  because it arrived over iMessage) is the social-preview and structured-data
+  portrait. World-map pin thumbnails in `public/pins/` come from the same library.
 - Studio portrait `public/portraits/kaya.jpg` stays on About.
 - MyFutureSelf screens in `public/products/myfutureself/` are simulator captures from
   the iOS main branch tip on 2026-09-13 (commit 4adb2f594, the 2.30 release line;
