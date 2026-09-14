@@ -4,7 +4,7 @@ import { Accessibility, ArrowDown, ArrowUpRight, Cloud, ShieldCheck } from "luci
 import { TopNav } from "./TopNav";
 import { Footer } from "./Footer";
 import { HeroVideo } from "./HeroVideo";
-import { VoiceCall } from "./VoiceCall";
+import { StoreGallery } from "./StoreGallery";
 import { StackLayers } from "./StackLayers";
 import { ModelSchematic } from "./ModelSchematic";
 import { WorldMap } from "./WorldMap";
@@ -100,9 +100,11 @@ export function HomePage({
                 I built it end to end.
               </p>
             </div>
-            <Reveal className="scene-visual">
-              <VoiceCall />
-            </Reveal>
+          </div>
+          <Reveal className="scene-visual">
+            <StoreGallery screens={myFutureSelf.store} label="MyFutureSelf on the App Store" />
+          </Reveal>
+          <div className="wrap">
             <dl className="metrics">
               <div>
                 <dd>

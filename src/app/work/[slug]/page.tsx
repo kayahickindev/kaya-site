@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { SubpageShell } from "@/components/SubpageShell";
 import { Screens } from "@/components/ProductBand";
+import { StoreGallery } from "@/components/StoreGallery";
 import { ModelSchematic } from "@/components/ModelSchematic";
 import { siteConfig } from "@/data/content";
 import { myFutureSelf, dogAi } from "@/data/assets";
@@ -37,12 +38,7 @@ export default async function ProjectPage({ params }: Props) {
   const metrics =
     slug === "myfutureself" ? (await getMarketingMetrics()).metrics : null;
   const links: { website?: string; appStore?: string } = d.project.links;
-  const screens =
-    slug === "myfutureself"
-      ? myFutureSelf.detail
-      : slug === "dog-ai"
-        ? dogAi.detail
-        : [];
+  const screens = slug === "dog-ai" ? dogAi.store : [];
   const icon =
     slug === "myfutureself"
       ? myFutureSelf.icon
@@ -55,7 +51,7 @@ export default async function ProjectPage({ params }: Props) {
         <ArrowLeft size={16} aria-hidden />
         All work
       </Link>
-      <section className="detail-hero">
+      <section className={slug === "myfutureself" ? "detail-hero solo" : "detail-hero"}>
         <div>
           <p className="label">
             {d.role} · {d.timeframe}
@@ -89,18 +85,18 @@ export default async function ProjectPage({ params }: Props) {
           <div className="band-dog detail-screens">
             <ModelSchematic />
           </div>
-        ) : screens.length > 0 ? (
-          <div className="band-mfs detail-screens">
-            <Screens screens={screens} eager sizes="(max-width: 760px) 64vw, 16vw" />
-            <p className="snap-hint">Swipe to see more screens.</p>
-          </div>
-        ) : (
+        ) : slug === "myfutureself" ? null : (
           <div className="brand-tile">
             {icon && <Image src={icon} alt="" width={96} height={96} style={{ height: "auto" }} />}
             <span>{d.project.name}</span>
           </div>
         )}
       </section>
+      {slug === "myfutureself" && (
+        <div className="band-mfs detail-gallery">
+          <StoreGallery screens={myFutureSelf.store} label="MyFutureSelf on the App Store" eager />
+        </div>
+      )}
       {metrics && (
         <dl className="metrics band-paper" aria-label="MyFutureSelf traction" style={{ marginTop: 0 }}>
           {[

@@ -32,7 +32,7 @@ export default function WorkPage() {
           label="Co-founder & CTO · 2025 to now"
           title={mfs.tagline}
           lead="A Future You who calls, and a 90-day plan of daily actions. Built end to end."
-          screens={myFutureSelf.home}
+          screens={[myFutureSelf.store[0], myFutureSelf.store[3], myFutureSelf.store[1]]}
           links={[
             { label: "App Store", href: mfs.links.appStore! },
             { label: "myfutureselfapp.com", href: mfs.links.website! },

@@ -16,10 +16,11 @@ export const heroPortrait = {
   alt: "Kaya Hickin in a black jacket beside a turquoise glacial lake with mountains behind",
 };
 
-// Hero clip: generated with OpenAI sora-2-pro at 1792x1024 (2026-09-14) from a
-// prompt describing the architecture as glass nodes and light, then looped as
-// a forward-and-reverse palindrome and encoded with libx264 at CRF 17. The
-// poster is a frame of the same clip.
+// Hero clip: a still generated with OpenAI gpt-image-1 (a river-valley city at
+// golden hour, terraced green towers, drones raising a new one), then animated
+// with sora-2-pro at 1792x1024 using that still as the input reference
+// (2026-09-14), looped as a forward-and-reverse palindrome and encoded with
+// libx264. The poster is a frame of the same clip.
 export const heroVideo = {
   mp4: "/hero/system.mp4",
   poster: "/hero/system-poster.jpg",
@@ -32,69 +33,64 @@ export const studioPortrait = {
   height: 2048,
 };
 
-// MyFutureSelf iOS, captured 2026-09-13 from the app's main branch tip
-// (commit 4adb2f594, the 2.30 release line, iPhone 17 Pro simulator, iOS 26.5;
-// the chat capture is from commit 92566ef9d, 2026-09-12). Encoded from the
-// 1206x2622 originals at 900px wide.
-const mfsScreen = (name: string, alt: string): Screen => ({
-  src: `/products/myfutureself/${name}.webp`,
+// MyFutureSelf on the App Store: the six iPhone composites from the listing
+// for 2.30 (Success AI LLC, app id 6745573360, released 2026-09-11), pulled
+// 2026-09-14 from the listing's screenshot URLs at 1242x2688 and encoded at
+// 900px wide. They carry the listing's own headlines and fixtures (Future
+// Giancarlo, Day 61). The icon is the listing's 1024px artwork.
+const mfsStore = (n: number, alt: string): Screen => ({
+  src: `/products/myfutureself/store/${n}.webp`,
   alt,
   width: 900,
-  height: 1957,
+  height: 1948,
 });
 
 export const myFutureSelf = {
   icon: "/products/myfutureself/icon.png",
-  home: [
-    mfsScreen(
-      "call",
-      "MyFutureSelf incoming call screen: Future You is calling, with a slide to answer control",
+  store: [
+    mfsStore(
+      1,
+      "Become Your Best Self: the MyFutureSelf welcome screen, a clear system to become a better version of yourself in as little as 90 days, rated 4.7 on the App Store",
     ),
-    mfsScreen(
-      "home",
-      "MyFutureSelf Home screen with a Work with your future self button, three actions to take today, and a Today's pick video",
+    mfsStore(
+      2,
+      "Design Who You'll Become: your Future Self as an avatar, with an alignment score and your story",
     ),
-    mfsScreen(
-      "streak",
-      "MyFutureSelf 63 day streak celebration with the week's completed days checked off",
+    mfsStore(
+      3,
+      "Goals That Fit You: Day 61 with today's actions, from making your bed to deep work and eight hours of sleep",
     ),
-  ],
-  detail: [
-    mfsScreen(
-      "chat",
-      "MyFutureSelf chat with Future User answering a question about starting a portfolio with concrete first steps",
+    mfsStore(
+      4,
+      "Talk to Your Future Self: a chat with Future Giancarlo, ask me anything about today",
     ),
-    mfsScreen(
-      "picks",
-      "MyFutureSelf Today's picks feed for Sunday, September 13 with videos, an article, and a meditation",
+    mfsStore(
+      5,
+      "Track Progress & Grow: how was today, a mood check, the prompt of the day and one thing you're grateful for",
     ),
-    mfsScreen(
-      "milestones",
-      "MyFutureSelf Milestones grid showing 8 of 34 unlocked",
-    ),
-    mfsScreen(
-      "day-done",
-      "MyFutureSelf Home after a completed day: Day 1 done, 4 actions, all yours",
+    mfsStore(
+      6,
+      "Neuroscience & Psychology: the For You screen with a message from your Future Self and a meditation, a video and an article",
     ),
   ],
 };
 
 // Dog AI 1.9.3 (Generation Aaya LLC, App Store id 6746574124), released
-// 2026-09-12. There is no local source checkout; these are the four App Store
-// screenshots pulled 2026-09-13 at their native 1284x2778, with the real app
-// screen cropped out of Apple's device composite (in-app dates read August 2026,
-// matching the release). The icon is the listing's 1024px artwork.
-const dogScreen = (name: string, alt: string): Screen => ({
-  src: `/products/dog-ai/${name}.webp`,
+// 2026-09-12. There is no local source checkout; these are the listing's four
+// iPhone composites, pulled 2026-09-13 at their native 1284x2778 and encoded at
+// 900px wide. The sample scan photo is cropped from the first of them and the
+// six scores are the ones the app shows on the second. The icon is the
+// listing's 1024px artwork.
+const dogStore = (n: number, alt: string): Screen => ({
+  src: `/products/dog-ai/store/${n}.webp`,
   alt,
-  width: 1000,
-  height: 2084,
+  width: 900,
+  height: 1948,
 });
 
 export const dogAi = {
   icon: "/products/dog-ai/icon.png",
-  // The sample scan from the listing's first screenshot and the six scores the
-  // app returned for it on the second, shown as the model's input and output.
+  // The sample scan and the six scores, shown as the model's input and output.
   sample: {
     src: "/products/dog-ai/sample-dog.webp",
     alt: "A golden retriever puppy standing on grass, the photo Dog AI scored",
@@ -109,32 +105,22 @@ export const dogAi = {
       { mood: "anxious", score: 0 },
     ],
   },
-  home: [
-    dogScreen(
-      "scan",
-      "Dog AI new scan screen with a photo of a golden retriever puppy on grass and a continue button",
+  store: [
+    dogStore(
+      1,
+      "See their mood instantly: a new scan of a golden retriever puppy on grass",
     ),
-    dogScreen(
-      "mood",
-      "Dog AI result for Snowy's mood: happy 70, playful 20, tired 10, curious 70, relaxed 80, anxious 0, with a tip for Snowy",
+    dogStore(
+      2,
+      "Happy? Curious? Anxious?: Snowy's mood scored happy 70, playful 20, tired 10, curious 70, relaxed 80, anxious 0, with a tip",
     ),
-  ],
-  detail: [
-    dogScreen(
-      "scan",
-      "Dog AI new scan screen with a photo of a golden retriever puppy on grass and a continue button",
+    dogStore(
+      3,
+      "Feel closer in seconds: a three day streak of scans, each with its mood chips",
     ),
-    dogScreen(
-      "mood",
-      "Dog AI result for Snowy's mood with six scored moods and a tip",
-    ),
-    dogScreen(
-      "history",
-      "Dog AI history of scans over a three day streak with mood chips per day",
-    ),
-    dogScreen(
-      "coach",
-      "Dog AI coach tab with a three day streak and how Snowy has been feeling across the last three scans",
+    dogStore(
+      4,
+      "Understand them better: the coach tab with how Snowy has been feeling across the last three scans",
     ),
   ],
 };
