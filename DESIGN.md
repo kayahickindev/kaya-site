@@ -3,9 +3,9 @@
 ## Direction
 
 One scrolling story, six chapters, one purpose-built visual per point. The hero
-is a live-rendered animation of Kaya's real architecture (the backend at the hub,
-iOS, Android, web, the voice AI and the app's AI model (OpenAI and Claude) on a slowly turning orbit,
-exchanging traffic) beside his name, one line, and three technical proof numbers. Travel is a chapter, not the opening. Then: MyFutureSelf as the real incoming-call screen
+is a generated cinematic clip, the system as frosted glass nodes and threads of
+light in a dark studio, looping under his name, one line, and three technical
+proof numbers. Travel is a chapter, not the opening. Then: MyFutureSelf as the real incoming-call screen
 with a live voice pulse and counting metrics; "One person, every layer" as an
 exploded isometric stack of plates, the real stack logos lying on each plate and a
 flat tag at its front corner naming the layer; Dog AI as a schematic of
@@ -37,16 +37,13 @@ fact reachable and share the same header and pill nav.
 
 - `.wrap` is the 1480px container with a fluid gutter. `.band` sections span the
   viewport; product bands are full-bleed.
-- Hero: full-bleed, 100svh, dark. `HeroSystem` draws the system on a Canvas 2D
-  surface: the backend at the hub, iOS, the voice AI, Android, the app's AI model (OpenAI and Claude) and
-  the web app on one tilted orbit that turns once a minute, packets travelling the
-  links as soft comets, a breathing voice node, a thin drift of dust. Labels sit on
-  the orbit's outward normal so they never collide, and the layout measures the top
-  bar, the name and the proof row so the system never runs into the copy: beside the
-  name on landscape screens, in the band above it on phones and portrait tablets.
-  DPR-aware, paced by the clock rather than the frame rate, paused when the tab is
-  hidden, one still frame under `prefers-reduced-motion`, and a CSS glow when
-  JavaScript is off. The name sits lower left over a scrim.
+- Hero: full-bleed, 100svh, dark. `HeroVideo` plays a generated clip (OpenAI
+  sora-2-pro, 1792x1024, prompted as the architecture rendered in glass and light;
+  the chosen take is an etched lattice with threads of teal light) looped as a
+  forward-and-reverse palindrome so it never cuts, encoded with libx264 at CRF 20
+  (about 7 MB for 16 s), muted, inline and autoplaying. Reduced motion and no-JS
+  visitors get the poster frame. The type stays HTML over a scrim so only the
+  atmosphere is video.
 - Chapter visuals reveal on scroll with a tiny IntersectionObserver; the pre-reveal
   state only exists when scripting is enabled and a 2.4s CSS fallback shows the block
   regardless, so nothing depends on hydration.

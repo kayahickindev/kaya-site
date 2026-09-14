@@ -363,12 +363,25 @@ p {
       #0a0e13;
   }
 }
-.hero-system {
+.hero-video {
   position: absolute;
   inset: 0;
+  overflow: hidden;
+}
+.hero-video-el {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
   display: block;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-video-el {
+    display: none;
+  }
+  .hero-video {
+    background: url("/hero/system-poster.jpg") center / cover no-repeat;
+  }
 }
 .hero-scrim {
   position: absolute;

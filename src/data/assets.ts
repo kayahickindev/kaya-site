@@ -16,6 +16,15 @@ export const heroPortrait = {
   alt: "Kaya Hickin in a black jacket beside a turquoise glacial lake with mountains behind",
 };
 
+// Hero clip: generated with OpenAI sora-2-pro at 1792x1024 (2026-09-14) from a
+// prompt describing the architecture as glass nodes and light, then looped as
+// a forward-and-reverse palindrome and encoded with libx264 at CRF 17. The
+// poster is a frame of the same clip.
+export const heroVideo = {
+  mp4: "/hero/system.mp4",
+  poster: "/hero/system-poster.jpg",
+};
+
 export const studioPortrait = {
   src: "/portraits/kaya.jpg",
   alt: "Studio portrait of Kaya Hickin",
