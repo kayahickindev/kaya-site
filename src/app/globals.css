@@ -426,7 +426,9 @@ p {
     animation: none;
   }
 }
-@media (prefers-reduced-motion: reduce) {
+/* Without scripting the clip never gets a source, and a bare video element would
+   paint a black box with native controls over the poster. */
+@media (prefers-reduced-motion: reduce), (scripting: none) {
   .hero-video-el {
     display: none;
   }
