@@ -4,7 +4,7 @@
 
 One scrolling story, six chapters, one purpose-built visual per point. The hero
 is a live-rendered animation of Kaya's real architecture (the backend at the hub,
-iOS, Android, web, the voice AI and the Dog AI model on a slowly turning orbit,
+iOS, Android, web, the voice AI and the app's AI model (OpenAI and Claude) on a slowly turning orbit,
 exchanging traffic) beside his name, one line, and three technical proof numbers. Travel is a chapter, not the opening. Then: MyFutureSelf as the real incoming-call screen
 with a live voice pulse and counting metrics; "One person, every layer" as an
 exploded isometric stack of plates, the real stack logos lying on each plate and a
@@ -38,7 +38,7 @@ fact reachable and share the same header and pill nav.
 - `.wrap` is the 1480px container with a fluid gutter. `.band` sections span the
   viewport; product bands are full-bleed.
 - Hero: full-bleed, 100svh, dark. `HeroSystem` draws the system on a Canvas 2D
-  surface: the backend at the hub, iOS, the voice AI, Android, the Dog AI model and
+  surface: the backend at the hub, iOS, the voice AI, Android, the app's AI model (OpenAI and Claude) and
   the web app on one tilted orbit that turns once a minute, packets travelling the
   links as soft comets, a breathing voice node, a thin drift of dust. Labels sit on
   the orbit's outward normal so they never collide, and the layout measures the top

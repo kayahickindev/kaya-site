@@ -2,8 +2,8 @@
 import { useEffect, useRef } from "react";
 
 // The opening visual: Kaya's product architecture as one slowly turning system.
-// The backend sits at the hub; iOS, the voice AI, Android, the Dog AI model and
-// the web app ride a tilted orbit around it. Packets travel the links as soft
+// The backend sits at the hub; iOS, the voice AI, Android, the app's AI model
+// (OpenAI and Claude) and the web app ride a tilted orbit around it. Packets travel the links as soft
 // comets and flare the node they reach; the voice node breathes; a faint drift
 // of dust gives depth. Canvas 2D, DPR-aware, paced by the clock rather than the
 // frame rate so it keeps time on a slow machine, paused when the tab is hidden,
@@ -16,7 +16,7 @@ const RING: Node[] = [
   { id: "ios", label: "iOS", sub: "Swift · SwiftUI", a: 0 },
   { id: "voice", label: "Voice AI", sub: "WebRTC · OpenAI", a: 72 },
   { id: "android", label: "Android", sub: "React Native", a: 144 },
-  { id: "model", label: "Model", sub: "Dog AI", a: 216 },
+  { id: "model", label: "Model", sub: "OpenAI · Claude", a: 216 },
   { id: "web", label: "Web", sub: "Next.js", a: 288 },
 ];
 const EDGES: [string, string][] = [
