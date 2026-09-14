@@ -368,9 +368,12 @@ p {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background: url("/hero/system-poster.jpg") center / cover no-repeat;
+  background: #0a0e13;
 }
+.hero-poster,
 .hero-video-el {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -643,7 +646,7 @@ p {
     opacity: 0;
     transform: translateY(24px);
     transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
-    animation: reveal-fallback 0.75s var(--ease) 2.4s forwards;
+    animation: reveal-fallback 0.6s var(--ease) 2.1s forwards;
   }
   .reveal.in {
     opacity: 1;
@@ -656,28 +659,26 @@ p {
       transform: none;
     }
   }
+  /* Plates rise into place; they never fade, so their tags are always full ink. */
   .layers .layer {
-    opacity: 0;
     transform: rotateX(58deg) rotateZ(-40deg) translate3d(0, 0, calc(var(--i) * var(--step) + 140px));
-    transition: opacity 0.75s var(--ease), transform 0.9s var(--ease);
+    transition: transform 0.9s var(--ease);
     transition-delay: calc(var(--i) * 0.15s + 0.15s);
-    animation: plate-fallback 0.75s var(--ease) calc(2.55s + var(--i) * 0.15s) forwards;
+    animation: plate-fallback 0.75s var(--ease) calc(2.25s + var(--i) * 0.15s) forwards;
   }
   @keyframes plate-fallback {
     to {
-      opacity: 1;
       transform: rotateX(58deg) rotateZ(-40deg) translate3d(0, 0, calc(var(--i) * var(--step)));
     }
   }
   .reveal.in .layer {
-    opacity: 1;
     transform: rotateX(58deg) rotateZ(-40deg) translate3d(0, 0, calc(var(--i) * var(--step)));
   }
   .model-out i {
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.9s var(--ease);
-    animation: bar-fallback 0.9s var(--ease) 2.55s forwards;
+    animation: bar-fallback 0.9s var(--ease) 2.25s forwards;
   }
   @keyframes bar-fallback {
     to {
@@ -1588,6 +1589,9 @@ body {
 }
 .site-footer a {
   color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
 }
 .site-footer nav {
   display: flex;
