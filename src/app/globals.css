@@ -2,7 +2,6 @@
 @custom-variant dark (&:where(.dark, .dark *));
 @theme inline {
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 /* Palette. Neutrals carry the site; the accent is the glacial teal of the hero lake.
@@ -828,24 +827,17 @@ p {
   max-width: 1100px;
   margin-inline: auto;
 }
-.world-svg svg {
+.world-map {
   width: 100%;
   height: auto;
   display: block;
 }
-.world .land {
-  fill: var(--panel);
-  stroke: var(--paper);
-  stroke-width: 0.6;
+.world-map-dark,
+.dark .world-map-light {
+  display: none;
 }
-.world .land.visited {
-  fill: var(--accent);
-}
-.world .land.home {
-  fill: var(--ink-2);
-}
-.world .visited-dot {
-  fill: var(--accent);
+.dark .world-map-dark {
+  display: block;
 }
 .pin {
   position: absolute;

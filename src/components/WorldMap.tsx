@@ -17,21 +17,19 @@ const dotPins: Record<string, string> = {
   Cleveland: "Cleveland, home",
 };
 
-async function load(): Promise<{ svg: string; data: MapData } | null> {
+async function load(): Promise<{ data: MapData } | null> {
   try {
-    const dir = join(process.cwd(), "src", "generated");
-    const [svg, json] = await Promise.all([
-      readFile(join(dir, "world-map.svg"), "utf8"),
-      readFile(join(dir, "world-map.json"), "utf8"),
-    ]);
-    return { svg, data: JSON.parse(json) as MapData };
+    const json = await readFile(join(process.cwd(), "src", "generated", "world-map.json"), "utf8");
+    return { data: JSON.parse(json) as MapData };
   } catch {
     return null;
   }
 }
 
 // A generated world map with the visited countries lit and a few photo pins,
-// placed with the same projection the map was drawn with.
+// placed with the same projection the map was drawn with. The map itself is
+// two lazy themed SVG files (tools/bake-world-map.py) so its paths never sit
+// in the page HTML; the countries list beneath carries the same facts as text.
 export async function WorldMap() {
   const map = await load();
   if (!map) return null;
@@ -42,7 +40,16 @@ export async function WorldMap() {
   });
   return (
     <div className="world" style={{ aspectRatio: `${w} / ${h}` }}>
-      <div className="world-svg" dangerouslySetInnerHTML={{ __html: map.svg }} />
+      <Image
+        className="world-map world-map-light"
+        src="/world/map-light.svg"
+        alt="World map with the visited countries highlighted"
+        width={w}
+        height={h}
+        unoptimized
+        loading="lazy"
+      />
+      <Image className="world-map world-map-dark" src="/world/map-dark.svg" alt="" width={w} height={h} unoptimized loading="lazy" />
       {map.data.pins.map((p) => {
         const photo = photoPins[p.name];
         const dot = dotPins[p.name];
