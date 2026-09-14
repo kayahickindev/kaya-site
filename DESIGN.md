@@ -3,12 +3,12 @@
 ## Direction
 
 One scrolling story, six chapters, one purpose-built visual per point. The hero
-is a live-rendered animation of Kaya's real architecture (iOS, Android, web,
-backend, voice AI and the Dog AI model exchanging traffic over a drifting grid,
-with a build-and-deploy stream) under his name, one line, and three technical
-proof numbers. Travel is a chapter, not the opening. Then: MyFutureSelf as the real incoming-call screen
+is a live-rendered animation of Kaya's real architecture (the backend at the hub,
+iOS, Android, web, the voice AI and the Dog AI model on a slowly turning orbit,
+exchanging traffic) beside his name, one line, and three technical proof numbers. Travel is a chapter, not the opening. Then: MyFutureSelf as the real incoming-call screen
 with a live voice pulse and counting metrics; "One person, every layer" as an
-isometric stack of plates carrying the real stack logos; Dog AI as a schematic of
+exploded isometric stack of plates, the real stack logos lying on each plate and a
+flat tag at its front corner naming the layer; Dog AI as a schematic of
 the model (sample photo in, six real scores out); a generated world map with the
 fifteen visited countries lit and photo pins; a wall of official logos for backing
 and recognition; and contact as a big email with brand-logo tiles. A floating pill
@@ -38,12 +38,15 @@ fact reachable and share the same header and pill nav.
 - `.wrap` is the 1480px container with a fluid gutter. `.band` sections span the
   viewport; product bands are full-bleed.
 - Hero: full-bleed, 100svh, dark. `HeroSystem` draws the system on a Canvas 2D
-  surface: six labelled service nodes, packets moving along the edges, a voice pulse,
-  a perspective floor grid drifting toward the viewer, and a scrolling log of real
-  workflow commands (desktop only). DPR-aware, paused when the tab is hidden, one
-  still frame under `prefers-reduced-motion`, and a CSS grid-and-glow background when
-  JavaScript is off. The name sits lower left over a scrim; the graph fills the right
-  and upper area so nothing collides.
+  surface: the backend at the hub, iOS, the voice AI, Android, the Dog AI model and
+  the web app on one tilted orbit that turns once a minute, packets travelling the
+  links as soft comets, a breathing voice node, a thin drift of dust. Labels sit on
+  the orbit's outward normal so they never collide, and the layout measures the top
+  bar, the name and the proof row so the system never runs into the copy: beside the
+  name on landscape screens, in the band above it on phones and portrait tablets.
+  DPR-aware, paced by the clock rather than the frame rate, paused when the tab is
+  hidden, one still frame under `prefers-reduced-motion`, and a CSS glow when
+  JavaScript is off. The name sits lower left over a scrim.
 - Chapter visuals reveal on scroll with a tiny IntersectionObserver; the pre-reveal
   state only exists when scripting is enabled and a 2.4s CSS fallback shows the block
   regardless, so nothing depends on hydration.
