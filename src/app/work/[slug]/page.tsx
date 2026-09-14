@@ -96,7 +96,7 @@ export default async function ProjectPage({ params }: Props) {
           </div>
         ) : (
           <div className="brand-tile">
-            {icon && <Image src={icon} alt="" width={96} height={96} />}
+            {icon && <Image src={icon} alt="" width={96} height={96} style={{ height: "auto" }} />}
             <span>{d.project.name}</span>
           </div>
         )}

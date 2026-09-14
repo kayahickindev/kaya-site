@@ -342,7 +342,7 @@ p {
   border-color: var(--ink);
 }
 
-/* Hero: full-bleed photo slideshow with the name over the lower-left. */
+/* Hero: full-bleed, dark, the live system canvas with the name over the lower-left. */
 .hero {
   position: relative;
   height: 100svh;
@@ -350,11 +350,18 @@ p {
   max-height: 1100px;
   overflow: hidden;
   background:
-    radial-gradient(60% 50% at 70% 40%, rgba(116, 208, 216, 0.16), transparent 70%),
-    repeating-linear-gradient(0deg, rgba(116, 208, 216, 0.05) 0 1px, transparent 1px 64px),
-    repeating-linear-gradient(90deg, rgba(116, 208, 216, 0.05) 0 1px, transparent 1px 64px),
-    #0b0f14;
+    radial-gradient(55% 55% at 62% 42%, rgba(127, 215, 223, 0.13), transparent 70%),
+    radial-gradient(80% 60% at 50% 100%, rgba(0, 0, 0, 0.5), transparent 70%),
+    #0a0e13;
   color: #fff;
+}
+@media (max-width: 760px) {
+  .hero {
+    background:
+      radial-gradient(70% 34% at 50% 24%, rgba(127, 215, 223, 0.13), transparent 70%),
+      radial-gradient(80% 60% at 50% 100%, rgba(0, 0, 0, 0.5), transparent 70%),
+      #0a0e13;
+  }
 }
 .hero-system {
   position: absolute;
@@ -367,8 +374,8 @@ p {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to top, rgba(11, 15, 20, 0.9) 0%, rgba(11, 15, 20, 0.45) 34%, rgba(11, 15, 20, 0) 58%),
-    linear-gradient(to right, rgba(11, 15, 20, 0.7), rgba(11, 15, 20, 0) 55%);
+    linear-gradient(to top, rgba(10, 14, 19, 0.88) 0%, rgba(10, 14, 19, 0.4) 34%, rgba(10, 14, 19, 0) 58%),
+    linear-gradient(to right, rgba(10, 14, 19, 0.6), rgba(10, 14, 19, 0) 50%);
 }
 .hero-top {
   position: absolute;
@@ -429,6 +436,30 @@ p {
 .hero .btn-light {
   margin-top: 26px;
 }
+@media (max-width: 760px) {
+  .proof {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+  .proof li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .proof strong {
+    font-size: 24px;
+    min-width: 4.2ch;
+  }
+  .proof span {
+    margin-top: 0;
+    font-size: 13px;
+  }
+  .hero .btn-light {
+    margin-top: 20px;
+  }
+}
 .btn-light {
   background: #fff;
   color: #121412;
@@ -460,6 +491,7 @@ p {
   line-height: 1.45;
   color: var(--ink-2);
   max-width: 46ch;
+  text-wrap: balance;
 }
 .scene-visual {
   margin-top: clamp(36px, 5vw, 64px);
@@ -472,6 +504,9 @@ p {
 }
 .scene-split .scene-visual {
   margin-top: 0;
+}
+.scene-split.flip {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
 }
 .scene-split.flip > .scene-head {
   order: 2;
@@ -535,6 +570,9 @@ p {
 .scene-contact .contact-page {
   padding-block: 0;
 }
+.wrap.contact-page {
+  padding-inline: var(--gutter);
+}
 
 /* Reveal: only hides when scripting is available. */
 @media (scripting: enabled) {
@@ -557,7 +595,7 @@ p {
   }
   .layers .layer {
     opacity: 0;
-    transform: rotateX(58deg) rotateZ(-40deg) translate3d(0, 0, calc(var(--i) * 46px + 140px));
+    transform: rotateX(58deg) rotateZ(-40deg) translate3d(0, 0, calc(var(--i) * var(--step) + 140px));
     transition: opacity 0.7s ease, transform 1s cubic-bezier(0.2, 0.6, 0.2, 1);
     transition-delay: calc(var(--i) * 0.12s + 0.15s);
     animation: plate-fallback 0.8s ease calc(2.6s + var(--i) * 0.12s) forwards;
@@ -565,12 +603,12 @@ p {
   @keyframes plate-fallback {
     to {
       opacity: 1;
-      transform: rotateX(58deg) rotateZ(-40deg) translate3d(0, 0, calc(var(--i) * 46px));
+      transform: rotateX(58deg) rotateZ(-40deg) translate3d(0, 0, calc(var(--i) * var(--step)));
     }
   }
   .reveal.in .layer {
     opacity: 1;
-    transform: rotateX(58deg) rotateZ(-40deg) translate3d(0, 0, calc(var(--i) * 46px));
+    transform: rotateX(58deg) rotateZ(-40deg) translate3d(0, 0, calc(var(--i) * var(--step)));
   }
   .model-out i {
     transform: scaleX(0);
@@ -616,6 +654,7 @@ p {
   gap: 0;
   min-height: 560px;
   padding-bottom: 54px;
+  overflow: clip;
 }
 .voice-phone {
   width: clamp(220px, 22vw, 300px);
@@ -704,87 +743,113 @@ p {
   }
 }
 
-/* Stack layers visual */
+/* Stack layers visual: an exploded isometric stack. Each plate is rotated into
+   the isometric plane; its tag carries the inverse rotation so it reads flat,
+   pinned to the plate's front corner. */
 .layers-wrap {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 24px;
-  align-items: center;
+  justify-items: center;
 }
 .layers {
+  --pw: 300px;
+  --ph: 190px;
+  --step: 50px;
   position: relative;
-  height: 460px;
-  perspective: 1400px;
-  perspective-origin: 50% 30%;
+  width: 100%;
+  max-width: 680px;
+  height: 440px;
+  perspective: 1600px;
+  perspective-origin: 50% 40%;
+  overflow: clip;
+  overflow-clip-margin: 24px;
 }
 .layer {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 300px;
-  height: 190px;
-  margin: -95px 0 0 -150px;
-  border-radius: 18px;
-  background: var(--paper);
+  left: calc(50% - 86px);
+  top: calc(50% + 84px);
+  width: var(--pw);
+  height: var(--ph);
+  margin: calc(var(--ph) / -2) 0 0 calc(var(--pw) / -2);
+  border-radius: 16px;
+  background: var(--panel);
   border: 1px solid var(--line);
-  box-shadow: 0 24px 40px -28px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 30px 40px -30px rgba(0, 0, 0, 0.5);
   transform-style: preserve-3d;
-  transform: translate3d(0, 0, calc(var(--i) * 46px));
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 12px;
-  padding: 14px 16px;
-}
-.layer {
-  transform: rotateX(58deg) rotateZ(-40deg) translate3d(0, 0, calc(var(--i) * 46px));
+  transform: rotateX(58deg) rotateZ(-40deg) translate3d(0, 0, calc(var(--i) * var(--step)));
 }
 .layer-logos {
+  position: absolute;
+  left: 20px;
+  bottom: 16px;
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
-.layer-name {
+.layer-tag {
+  position: absolute;
+  left: 100%;
+  top: 100%;
+  width: max-content;
+  transform-origin: 0 0;
+  transform: rotateZ(40deg) rotateX(-58deg) translate(16px, -50%);
+  display: grid;
+  gap: 2px;
+  white-space: nowrap;
+  line-height: 1.25;
+}
+.layer-tag::before {
+  content: "";
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  width: 10px;
+  height: 1px;
+  background: var(--line);
+}
+.layer-tag strong {
   font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.01em;
 }
-.layers-legend {
-  display: grid;
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: layer;
-}
-.layers-legend li {
-  display: grid;
-  gap: 2px;
-  padding-left: 30px;
-  position: relative;
-  counter-increment: layer;
-}
-.layers-legend li::before {
-  content: counter(layer);
-  position: absolute;
-  left: 0;
-  top: 2px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  font-size: 11px;
-  font-weight: 600;
-  display: grid;
-  place-items: center;
-}
-.layers-legend strong {
-  font-size: 16px;
-  letter-spacing: -0.01em;
-}
-.layers-legend span {
-  font-size: 14px;
+.layer-tag span {
+  font-size: 13px;
   color: var(--ink-2);
+}
+@media (max-width: 760px) {
+  .layers {
+    --pw: 136px;
+    --ph: 86px;
+    --step: 38px;
+    height: 250px;
+    perspective: 900px;
+  }
+  .layer {
+    left: calc(50% - 78px);
+    top: calc(50% + 62px);
+    border-radius: 10px;
+  }
+  .layer-logos {
+    left: 10px;
+    bottom: 8px;
+    gap: 6px;
+  }
+  .layer-logos svg,
+  .layer-logos span {
+    width: 16px;
+    height: 16px;
+  }
+  .layer-tag {
+    transform: rotateZ(40deg) rotateX(-58deg) translate(14px, -50%);
+  }
+  .layer-tag::before {
+    left: -14px;
+    width: 8px;
+  }
+  .layer-tag strong {
+    font-size: 13px;
+  }
+  .layer-tag span {
+    font-size: 11px;
+  }
 }
 
 /* World map */
@@ -833,6 +898,9 @@ p {
   padding: 3px 8px;
   border-radius: 999px;
 }
+.pin-up {
+  transform: translate(-50%, -100%);
+}
 .pin-up em {
   top: auto;
   bottom: 100%;
@@ -857,7 +925,8 @@ p {
 }
 .countries.centered {
   justify-content: center;
-  margin-top: 32px;
+  max-width: 780px;
+  margin: 32px auto 0;
 }
 
 /* Logo wall + badges */
@@ -876,6 +945,7 @@ p {
 .logo-wall li > a,
 .logo-wall li > span {
   display: grid;
+  gap: 10px;
 }
 .logo-wall li {
   display: grid;
@@ -1091,7 +1161,7 @@ body {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   max-width: 560px;
 }
-.screens > figure:nth-child(2) {
+.screens > figure:nth-child(even) {
   transform: translateY(-28px);
 }
 .screen {
@@ -1133,7 +1203,7 @@ body {
   line-height: 1.05;
   font-variant-numeric: tabular-nums;
 }
-.metrics span {
+.metrics dt span {
   display: block;
   margin-top: 8px;
   font-size: 15px;
@@ -1142,7 +1212,7 @@ body {
 .band-paper .metrics {
   border-top-color: var(--line);
 }
-.band-paper .metrics span {
+.band-paper .metrics dt span {
   color: var(--ink-2);
 }
 
@@ -1237,9 +1307,9 @@ body {
 }
 .model {
   display: grid;
-  grid-template-columns: minmax(0, 3fr) auto minmax(0, 4fr) auto minmax(0, 5fr);
+  grid-template-columns: minmax(0, 3fr) auto minmax(0, 5fr) auto minmax(0, 5fr);
   align-items: center;
-  gap: clamp(12px, 1.6vw, 24px);
+  gap: clamp(12px, 1.2vw, 18px);
   margin: 0;
   padding: clamp(20px, 2.6vw, 36px);
   border: 1px solid rgba(42, 31, 22, 0.16);
@@ -1294,7 +1364,7 @@ body {
   position: relative;
   display: grid;
   gap: 8px;
-  padding: 22px 18px 20px;
+  padding: 22px 14px 20px;
   border: 1.5px solid var(--dog-ink);
   border-radius: 16px;
   background: var(--dog-ground);
@@ -1459,7 +1529,7 @@ body {
   font-size: 17px;
   line-height: 1.7;
 }
-.countries li + li::before {
+.countries li:not(:last-child)::after {
   content: "·";
   margin: 0 10px;
   color: var(--accent);
@@ -1679,6 +1749,7 @@ body {
 }
 .detail-screens .screens {
   max-width: none;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 .detail-hero .lead {
   margin-top: 22px;
@@ -1763,7 +1834,8 @@ body {
   .stack-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .scene-split {
+  .scene-split,
+  .scene-split.flip {
     grid-template-columns: minmax(0, 1fr);
     gap: 40px;
   }
@@ -1857,7 +1929,7 @@ body {
   .metrics strong {
     font-size: 36px;
   }
-  .metrics span {
+  .metrics dt span {
     font-size: 14px;
   }
   .figures {
@@ -1923,20 +1995,6 @@ body {
   .hero-line {
     font-size: 17px;
   }
-  .proof {
-    gap: 8px 22px;
-    margin-top: 18px;
-    padding-top: 14px;
-  }
-  .proof strong {
-    font-size: 24px;
-  }
-  .proof span {
-    font-size: 12px;
-  }
-  .hero .btn-light {
-    margin-top: 18px;
-  }
   .scene {
     padding-block: 64px;
   }
@@ -1970,21 +2028,12 @@ body {
     height: 240px;
     margin: -120px 0 0 -120px;
   }
-  .layers-wrap {
-    grid-template-columns: 1fr;
-  }
-  .layers {
-    height: 380px;
-  }
-  .layer {
-    width: 220px;
-    height: 140px;
-    margin: -70px 0 0 -110px;
-    padding: 12px 14px;
-  }
   .logo-wall {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
+  }
+  .logo-wall li:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
   .logo-box {
     height: 96px;
@@ -2003,18 +2052,24 @@ body {
     height: 10px;
     border-width: 2px;
   }
-  .layers {
-    height: 340px;
-    width: 100%;
-    max-width: 420px;
-    margin-inline: auto;
+  .chapters {
+    left: 10px;
+    right: 10px;
+    bottom: 12px;
+    max-width: none;
+    transform: none;
   }
-  .layers-wrap {
-    gap: 8px;
+  .chapters ul {
+    justify-content: space-between;
+    padding: 4px;
   }
   .chapters a {
-    padding: 8px 11px;
-    font-size: 13px;
+    padding: 8px 5px;
+    font-size: 12px;
+    letter-spacing: -0.01em;
+  }
+  .chapters:not(.is-shown) {
+    transform: translateY(12px);
   }
   .site-header.on-photo {
     flex-wrap: nowrap;
@@ -2029,11 +2084,28 @@ body {
   .countries {
     font-size: 15px;
   }
-  .countries li + li::before {
+  .countries li:not(:last-child)::after {
     margin: 0 8px;
   }
   .contact-email {
-    font-size: clamp(28px, 9vw, 44px);
+    font-size: clamp(22px, 6.4vw, 44px);
+  }
+  .badges {
+    gap: 8px;
+  }
+  .badges li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 12px;
+    align-items: center;
+    width: 100%;
+    max-width: 420px;
+    padding: 10px 16px;
+    border-radius: 16px;
+    text-align: left;
+  }
+  .badges svg {
+    grid-row: 1 / span 2;
   }
   .site-footer {
     flex-direction: column;
@@ -2049,6 +2121,13 @@ body {
     padding: 8px 0 0;
     margin: 0 calc(-1 * var(--gutter));
     border-radius: 0;
+  }
+  .detail-screens .screens {
+    margin-inline: 0;
+    grid-template-columns: none;
+  }
+  .detail-screens .snap-hint {
+    padding-inline: var(--gutter);
   }
   .about-portrait {
     max-width: none;

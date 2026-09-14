@@ -300,7 +300,9 @@ export function HomePage({
               Let’s talk.
             </h2>
             <a className="contact-email" href={`mailto:${email}`}>
-              {email}
+              {siteConfig.emailParts.user}@
+              <wbr />
+              {siteConfig.emailParts.domain}
             </a>
             <SocialTiles />
           </div>
