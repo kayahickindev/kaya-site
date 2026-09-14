@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import { Analytics } from "@vercel/analytics/next";
 import { Providers } from "./providers";
 import "./globals.css";
@@ -67,6 +68,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-dvh font-sans antialiased">
+        <SmoothScroll />
         <script
           id="identity-json-ld"
           type="application/ld+json"
