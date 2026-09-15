@@ -12,9 +12,24 @@ import { heroPoster } from "@/data/assets";
 // motion, no WebGL and no JavaScript all stay on the still.
 const HeroScene = dynamic(() => import("./hero/HeroScene"), { ssr: false });
 
-/** The moment the CSS fallback has already shown the type. It has to match the
+/** How long the CSS fallback holds the type transparent. It has to match the
  *  animation delay on the `.hero-name` rule in globals.css. */
-const INTRO_DEADLINE_MS = 1200;
+const INTRO_HOLD_MS = 600;
+
+/** Whether the type is already on screen and must not be taken back. Phones
+ *  never hold it, so the answer there is always yes. Elsewhere the hold runs
+ *  from the element's first style resolution rather than from navigation, so
+ *  the deadline is measured against first paint too: comparing a raw
+ *  performance.now() against the hold is wrong by however long the document
+ *  took to render, which on a slow connection is most of a second. */
+function typeAlreadyShown() {
+  if (window.matchMedia("(max-width: 760px)").matches) return true;
+  const paint = performance
+    .getEntriesByType("paint")
+    .find((e) => e.name === "first-contentful-paint");
+  const since = paint ? performance.now() - paint.startTime : performance.now();
+  return since >= INTRO_HOLD_MS;
+}
 
 function readMode(): HeroMode {
   const q = new URLSearchParams(window.location.search);
@@ -96,7 +111,7 @@ export function HeroStage() {
     // candidate on top of that: on a throttled phone the pair cost a whole
     // second and thirty Lighthouse points. So late hydration leaves the
     // server-rendered type exactly where it is and takes the parallax only.
-    const late = performance.now() > INTRO_DEADLINE_MS;
+    const late = typeAlreadyShown();
     const ctx = gsap.context(() => {
       section.dataset.intro = late ? "off" : "on";
       if (!late) {

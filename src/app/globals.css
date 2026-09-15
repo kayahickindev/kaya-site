@@ -505,18 +505,23 @@ p {
   background: #fff;
   color: #121412;
 }
-@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
-  /* The hold is 1.2 s, not 2.1 s. The h1 is the largest paint on this page, so
-     every millisecond it stays transparent is charged to LCP: on a throttled
-     phone hydration lands around 4 s and the old fallback handed the metric a
-     4.3 s candidate. HeroStage skips its intro entirely past this deadline, so
-     the two numbers have to agree. */
+/* The character intro is a desktop treatment, and the width query is the whole
+   reason this metric is fixed. The h1 is the page's largest contentful paint,
+   so holding it transparent is charged straight to LCP: the old 2.1 s fallback
+   handed the metric a 4.3 s candidate on a throttled phone and cost thirty
+   Lighthouse points. On a phone the hold bought nothing anyway, because
+   hydration there never lands inside it and the intro never ran; it only ever
+   delayed the name. So phones paint the type at first paint and desktops, where
+   hydration arrives in a couple of hundred milliseconds, keep the intro behind
+   a 0.6 s hold. HeroStage skips the intro once that hold has elapsed, measured
+   from first paint, so the two numbers have to agree. */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) and (min-width: 761px) {
   .hero-name,
   .hero-line,
   .proof li,
   .hero .btn-light {
     opacity: 0;
-    animation: hero-type-in 0.01s linear 1.2s forwards;
+    animation: hero-type-in 0.01s linear 0.6s forwards;
   }
   /* Touching opacity only: the scroll parallax owns the transform. */
   @keyframes hero-type-in {
