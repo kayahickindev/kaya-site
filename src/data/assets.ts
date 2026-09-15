@@ -17,9 +17,10 @@ export const heroPortrait = {
 };
 
 // Hero still: one frame rendered from the site's own WebGL scene in capture
-// mode (?poster=1), 2026-09-14, at 1920x1080. It is what no-JS,
-// reduced-motion and still-loading visitors see, so it has to be the settled
-// state of the valley.
+// mode (?poster=1), 2026-09-14, at 1920x1080, re-rendered the same day from the
+// regraded scene so the still and the live valley share a grade. It is what
+// no-JS, reduced-motion and still-loading visitors see, so it has to be the
+// settled state of the valley.
 export const heroPoster = {
   src: "/hero/scene-poster.webp",
 };
