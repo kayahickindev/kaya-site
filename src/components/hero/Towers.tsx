@@ -538,6 +538,10 @@ export function Towers({
         }
       }),
     );
+    // Tallest on screen first, by apparent rather than real height, and the
+    // picker only ever reaches into the front of this list. A completion on a
+    // twenty pixel tower behind three others is an event nobody can see.
+    map.sort((a, b) => b.tower.h / (240 - b.tower.z) - a.tower.h / (240 - a.tower.z));
     return map;
   }, [groups]);
 
@@ -560,7 +564,7 @@ export function Towers({
   handleRef.current = {
     towers,
     complete(i: number, at: number) {
-      const slot = slots[i % slots.length];
+      const slot = slots[i % Math.max(1, Math.ceil(slots.length * 0.4))];
       if (!slot) return null;
       const g = groups[slot.group];
       // The event's own timestamp, not the wall clock: a frozen capture has to

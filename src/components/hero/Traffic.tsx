@@ -301,8 +301,13 @@ void main() {
   );
   const p = useMemo(() => new Vector3(), []);
   const carRef = useRef<Points>(null);
+  const rootRef = useRef<Group>(null);
 
   useFrame(() => {
+    // The viaduct arrives with the city, not before it. Its deck is a fixed
+    // tube that cannot rise out of the ground the way the towers do, so held
+    // from the first frame it reads as a dark worm hanging over a flat plain.
+    if (rootRef.current) rootRef.current.visible = hero.grow > 0.45;
     const cycle = 11.0;
     const pos = car.getAttribute("position") as BufferAttribute;
     const scale = car.getAttribute("aScale") as BufferAttribute;
@@ -330,11 +335,11 @@ void main() {
   });
 
   return (
-    <>
+    <group ref={rootRef}>
       <mesh geometry={deck} material={deckMat} frustumCulled={false} />
       <lineSegments geometry={piers} material={pierMat} frustumCulled={false} />
       <points ref={carRef} geometry={car} material={carMat} frustumCulled={false} />
-    </>
+    </group>
   );
 }
 

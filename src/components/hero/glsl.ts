@@ -64,9 +64,11 @@ vec3 skyColor(vec3 dir) {
   col += uSunColor * pow(sd, 170.0) * 0.70 * uIgnition;
 
   // Thin warm cloud streaks sit in the band just above the horizon.
-  float band = smoothstep(0.012, 0.09, n.y) * (1.0 - smoothstep(0.10, 0.44, n.y));
+  // Kept low and kept near the sun. Carried up to a quarter of the sky, the
+  // same noise reads as a smudge on the lens rather than as cloud.
+  float band = smoothstep(0.012, 0.07, n.y) * (1.0 - smoothstep(0.08, 0.28, n.y));
   float streak = fbm2(vec2(atan(n.x, -n.z) * 2.6, n.y * 22.0));
-  col += uSunColor * band * smoothstep(0.58, 0.96, streak) * (0.05 + 0.22 * toward) * uIgnition;
+  col += uSunColor * band * smoothstep(0.58, 0.96, streak) * (0.02 + 0.26 * toward) * uIgnition;
 
   // Below the horizon the dome is haze, and the handover is quick: a view ray
   // that dips even a degree under the skyline is looking through air, not at
