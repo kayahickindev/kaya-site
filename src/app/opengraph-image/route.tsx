@@ -1,57 +1,111 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "fs/promises";
 import { join } from "path";
+import { siteConfig } from "@/data/content";
 export const runtime = "nodejs";
+export const revalidate = 86400;
+async function tryRead(path: string) {
+  try {
+    return await readFile(path);
+  } catch {
+    return null;
+  }
+}
 export async function GET() {
-  const buffer = await readFile(
-    join(process.cwd(), "public", "portraits", "kaya.jpg"),
-  );
+  const root = process.cwd();
+  const fonts = join(root, "src", "app", "opengraph-image", "fonts");
+  const [regular, semibold, portrait] = await Promise.all([
+    readFile(join(fonts, "Geist-Regular.ttf")),
+    readFile(join(fonts, "Geist-SemiBold.ttf")),
+    tryRead(join(root, "public", "hero", "tekapo-og.jpg")).then(
+      (buffer) =>
+        buffer ?? readFile(join(root, "public", "portraits", "kaya.jpg")),
+    ),
+  ]);
   return new ImageResponse(
-    <div
-      style={{
-        width: 1200,
-        height: 630,
-        display: "flex",
-        background: "#f5f4ef",
-        color: "#20241f",
-      }}
-    >
+    (
       <div
         style={{
+          width: 1200,
+          height: 630,
           display: "flex",
-          flexDirection: "column",
-          width: 610,
-          padding: "60px 48px",
-          justifyContent: "space-between",
+          background: "#f6f5f1",
+          color: "#121412",
+          fontFamily: "Geist",
         }}
       >
-        <div style={{ fontSize: 16, letterSpacing: 2, color: "#446347" }}>
-          FOUNDER. FULL-STACK DEVELOPER.
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            width: 620,
+            padding: "56px 52px 52px",
+          }}
+        >
+          <div
+            style={{
+              fontSize: 22,
+              fontWeight: 600,
+              letterSpacing: -0.5,
+              color: "#0b7580",
+            }}
+          >
+            kayahickin.com
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div
+              style={{
+                fontSize: 108,
+                fontWeight: 600,
+                letterSpacing: -6,
+                lineHeight: 0.92,
+              }}
+            >
+              Kaya Hickin
+            </div>
+            <div
+              style={{
+                fontSize: 30,
+                fontWeight: 600,
+                letterSpacing: -0.8,
+                marginTop: 30,
+              }}
+            >
+              Full-stack developer. AI builder. Founder.
+            </div>
+            <div
+              style={{
+                fontSize: 23,
+                color: "#4d514c",
+                marginTop: 16,
+                lineHeight: 1.35,
+              }}
+            >
+              Co-founder &amp; CTO of MyFutureSelf, a consumer AI company
+              backed by Cintrifuse Capital.
+            </div>
+          </div>
+          <div style={{ fontSize: 20, color: "#4d514c" }}>
+            {siteConfig.availability}
+          </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 92, letterSpacing: -6, lineHeight: 1 }}>
-            Kaya Hickin.
-          </div>
-          <div style={{ fontSize: 30, marginTop: 28 }}>
-            I build AI for real life.
-          </div>
-          <div style={{ fontSize: 20, color: "#656a60", marginTop: 20 }}>
-            Co-founder & CTO of MyFutureSelf.
-          </div>
-          <div style={{ fontSize: 20, color: "#656a60", marginTop: 8 }}>
-            Backed by Cintrifuse Capital.
-          </div>
-        </div>
-        <div style={{ fontSize: 16 }}>kayahickin.com ↗</div>
+        <img
+          src={`data:image/jpeg;base64,${portrait.toString("base64")}`}
+          alt=""
+          width={580}
+          height={630}
+          style={{ objectFit: "cover", objectPosition: "50% 30%" }}
+        />
       </div>
-      <img
-        src={`data:image/jpeg;base64,${buffer.toString("base64")}`}
-        alt="Kaya Hickin"
-        width={590}
-        height={630}
-        style={{ objectFit: "cover" }}
-      />
-    </div>,
-    { width: 1200, height: 630 },
+    ),
+    {
+      width: 1200,
+      height: 630,
+      fonts: [
+        { name: "Geist", data: regular, weight: 400, style: "normal" },
+        { name: "Geist", data: semibold, weight: 600, style: "normal" },
+      ],
+    },
   );
 }

@@ -19,27 +19,22 @@ export default function StackPage() {
     }),
   );
   return (
-    <SubpageShell>
-      <header className="page-heading">
-        <p className="eyebrow">The toolkit</p>
-        <h1 className="page-title">
-          Full stack.
-          <br />
-          <em>All in.</em>
-        </h1>
-        <p className="lead">
-          Native apps, web experiences, backend systems, and AI. The tools I use
-          to take a product all the way.
-        </p>
+    <SubpageShell current="/stack">
+      <header className="page-head">
+        <p className="label">Stack</p>
+        <h1 className="h-page">Full stack. All in.</h1>
+        <p className="lead">The tools I use to take a product all the way.</p>
       </header>
       <StackGrid grouped={grouped} />
-      <section className="token-feature">
-        <strong>{profile.tokens.display}</strong>
+      <section className="token-feature" aria-label="Coding-tool usage">
+        <strong className="big-number">{profile.tokens.display}</strong>
         <div>
           <p>Tokens across Codex and Claude coding workflows.</p>
-          <Link className="text-link" href="/work">
-            See what I’ve built <ArrowUpRight size={18} aria-hidden />
-          </Link>
+          <div className="action-row" style={{ marginTop: 16 }}>
+            <Link className="arrow-link" href="/work">
+              See what I’ve built <ArrowUpRight size={18} aria-hidden />
+            </Link>
+          </div>
         </div>
       </section>
     </SubpageShell>

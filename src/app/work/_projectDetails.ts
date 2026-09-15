@@ -30,8 +30,7 @@ export const projectDetails: ProjectDetail[] = [
     role: "Co-founder · CTO",
     timeframe: "Jan 2025 to Present",
     overview: [
-      "MyFutureSelf is the main company and product: a consumer AI product built around a 90-day roadmap, daily action, and a voice AI mentor that speaks as the user's future self.",
-      "As CTO, Kaya led the technical build end to end across mobile, web, backend systems, and AI interaction design. The product is active and scaling with paying users.",
+      "A 90-day roadmap, daily actions, and a voice AI mentor that speaks as the user's future self. I built the original product end to end and lead engineering across mobile, web, backend, and AI.",
     ],
     outcomes: ["Backed by Cintrifuse Capital"],
     ownership: [
@@ -48,8 +47,7 @@ export const projectDetails: ProjectDetail[] = [
     role: "Internal tool",
     timeframe: "2026",
     overview: [
-      "Viral Loop is a done-for-you service that generates AI UGC content and runs the organic influencer pipeline end-to-end for clients.",
-      "Built the MVP on Lovable to validate the offer and start onboarding paying clients.",
+      "A done-for-you service that generates AI UGC content and runs the organic influencer pipeline for clients. The MVP was built on Lovable to validate the offer.",
     ],
     outcomes: [
       "MVP live and accepting clients",
@@ -68,8 +66,7 @@ export const projectDetails: ProjectDetail[] = [
     role: "Developer · Model training",
     timeframe: "2025",
     overview: [
-      "Dog AI is an iOS app that interprets dog behavior from a photo or video. I built and trained the underlying multimodal model, assembled the dataset, and implemented the iOS experience.",
-      "Took the product from model development through the camera experience, monetization, and App Store launch.",
+      "Dog AI reads a dog's mood from a photo or video. I assembled the dataset, trained the custom multimodal model, and built the iOS app through to a paid App Store launch.",
     ],
     outcomes: [
       "Custom multimodal model built and trained for Dog AI",
@@ -89,8 +86,7 @@ export const projectDetails: ProjectDetail[] = [
     role: "Co-founder",
     timeframe: "Jun 2024 to Feb 2025",
     overview: [
-      "Appointra was a B2B lead generation agency serving startups in San Francisco, New York City, and Chicago.",
-      "The company scaled through AI-powered outbound systems, then was wound down so Kaya could focus full-time on MyFutureSelf.",
+      "A B2B lead generation agency for startups in San Francisco, New York City, and Chicago, built on AI-powered outbound. Wound down to go full-time on MyFutureSelf.",
     ],
     outcomes: [
       "$20k MRR in three months",
@@ -110,8 +106,7 @@ export const projectDetails: ProjectDetail[] = [
     role: "Co-founder",
     timeframe: "Jan 2023 to Jun 2024",
     overview: [
-      "LeadBoost Pro was the first company Kaya ran: a web development, marketing, and consulting business for small and underrepresented businesses.",
-      "It started in a dorm room, became profitable from month one, and established the pattern of building practical systems for real customers.",
+      "The first company I ran: web development, marketing, and consulting for small and underrepresented businesses. Started in a dorm room, profitable from month one.",
     ],
     outcomes: [
       "Profitable from month one",

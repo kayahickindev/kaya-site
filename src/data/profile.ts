@@ -3,7 +3,7 @@ export const profile = {
   updatedAt: "2026-09-13",
   updatedLabel: "September 13, 2026",
   role: "Co-founder & CTO, MyFutureSelf",
-  location: "Cincinnati, OH",
+  location: "Cleveland, Ohio",
   introduction: "I'm Kaya Hickin, co-founder and CTO of MyFutureSelf. I build across mobile, web, backend, and AI, from real-time voice experiences to custom multimodal models.",
   biography: "Kaya Hickin is the co-founder and CTO of MyFutureSelf, a consumer AI company backed by Cintrifuse Capital. A full-stack developer, he built the original product end to end and leads engineering across mobile, web, backend, and AI. He also trained a custom multimodal model for Dog AI. Kaya graduated cum laude from Miami University and received its 2026 Startup Catalyst Award.",
   about: [
