@@ -5,16 +5,16 @@ import { TopNav } from "./TopNav";
 import { Footer } from "./Footer";
 import { HeroVideo } from "./HeroVideo";
 import { StoreGallery } from "./StoreGallery";
-import { StackLayers } from "./StackLayers";
+import { ArchitectureBeams } from "./ArchitectureBeams";
 import { ModelSchematic } from "./ModelSchematic";
-import { WorldMap } from "./WorldMap";
+import { Globe } from "./Globe";
 import { SocialTiles } from "./SocialIcons";
 import { ChapterNav } from "./ChapterNav";
 import { Reveal } from "./Reveal";
-import { CountUp } from "./CountUp";
+import { NumberTicker } from "./NumberTicker";
+import { LogoMarquee } from "./LogoMarquee";
 import { profile } from "@/data/profile";
 import { siteConfig } from "@/data/content";
-import { recognition } from "@/data/recognition";
 import { myFutureSelf, dogAi } from "@/data/assets";
 import type { PublicMarketingMetricsSnapshot } from "@/lib/marketing-metrics";
 
@@ -109,7 +109,7 @@ export function HomePage({
               <div>
                 <dd>
                   <strong>
-                    <CountUp display={m.appDownloads.display} />
+                    <NumberTicker display={m.appDownloads.display} />
                   </strong>
                 </dd>
                 <dt>
@@ -118,7 +118,9 @@ export function HomePage({
               </div>
               <div>
                 <dd>
-                  <strong>{m.paidSubscribersEver.display}</strong>
+                  <strong>
+                    <NumberTicker display={m.paidSubscribersEver.display} />
+                  </strong>
                 </dd>
                 <dt>
                   <span>Active paid subscribers</span>
@@ -127,7 +129,7 @@ export function HomePage({
               <div>
                 <dd>
                   <strong>
-                    <CountUp display={m.appStoreRating.display} /> / 5
+                    <NumberTicker display={m.appStoreRating.display} /> / 5
                   </strong>
                 </dd>
                 <dt>
@@ -137,7 +139,7 @@ export function HomePage({
               <div>
                 <dd>
                   <strong>
-                    <CountUp display={m.futureSelfActions.display} />
+                    <NumberTicker display={m.futureSelfActions.display} />
                   </strong>
                 </dd>
                 <dt>
@@ -160,7 +162,7 @@ export function HomePage({
         </section>
 
         <section className="scene scene-builder" id="builder" aria-labelledby="builder-title">
-          <div className="wrap scene-split">
+          <div className="wrap">
             <div className="scene-head">
               <p className="label">How I build</p>
               <h2 className="h-scene" id="builder-title">
@@ -170,28 +172,32 @@ export function HomePage({
                 Native iOS, Android, web, backend, and the voice AI. Shipped by
                 me, with Codex and Claude Code every day.
               </p>
-              <div className="figures">
-                <div>
-                  <strong className="big-number">{profile.github.display}</strong>
-                  <span>GitHub contributions in the last year</span>
-                </div>
-                <div>
-                  <strong className="big-number">{profile.tokens.display}</strong>
-                  <span>Tokens across Codex and Claude coding workflows</span>
-                </div>
-              </div>
-              <div className="action-row">
-                <Link className="btn btn-ghost" href="/stack">
-                  Full stack <ArrowUpRight size={17} aria-hidden />
-                </Link>
-                <Link className="arrow-link" href="/work">
-                  All work <ArrowUpRight size={18} aria-hidden />
-                </Link>
-              </div>
             </div>
             <Reveal className="scene-visual">
-              <StackLayers />
+              <ArchitectureBeams />
             </Reveal>
+            <div className="figures">
+              <div>
+                <strong className="big-number">
+                  <NumberTicker display={profile.github.display} />
+                </strong>
+                <span>GitHub contributions in the last year</span>
+              </div>
+              <div>
+                <strong className="big-number">
+                  <NumberTicker display={profile.tokens.display} />
+                </strong>
+                <span>Tokens across Codex and Claude coding workflows</span>
+              </div>
+            </div>
+            <div className="action-row">
+              <Link className="btn btn-ghost" href="/stack">
+                Full stack <ArrowUpRight size={17} aria-hidden />
+              </Link>
+              <Link className="arrow-link" href="/work">
+                All work <ArrowUpRight size={18} aria-hidden />
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -233,7 +239,7 @@ export function HomePage({
               </h2>
             </div>
             <Reveal className="scene-visual">
-              <WorldMap />
+              <Globe />
             </Reveal>
             <ul className="countries centered" aria-label="Countries visited">
               {profile.travel.countries.map((c) => (
@@ -251,33 +257,7 @@ export function HomePage({
                 Backed, awarded, invited.
               </h2>
             </div>
-            <ul className="logo-wall" aria-label="Backers, awards and programs">
-              {recognition.map((r) => {
-                const inner = (
-                  <>
-                    <span className="logo-box">
-                      {r.logo ? (
-                        <Image src={r.logo} alt={`${r.name} logo`} width={200} height={72} sizes="200px" />
-                      ) : (
-                        <strong>{r.name}</strong>
-                      )}
-                    </span>
-                    <span className="logo-line">{r.line}</span>
-                  </>
-                );
-                return (
-                  <li key={r.name}>
-                    {r.href ? (
-                      <a href={r.href} target="_blank" rel="noopener noreferrer">
-                        {inner}
-                      </a>
-                    ) : (
-                      inner
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
+            <LogoMarquee />
             <ul className="badges" aria-label="Certifications">
               {credentials.map(({ Icon, name, line }) => (
                 <li key={name}>

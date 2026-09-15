@@ -644,7 +644,7 @@ p {
 .scene-backing {
   background: var(--panel);
 }
-/* The stack's flat tags may reach past the plates by their clip margin; never past the viewport. */
+/* Insurance: nothing in the beams diagram may reach past the viewport. */
 .scene-builder {
   overflow-x: clip;
 }
@@ -674,21 +674,6 @@ p {
       transform: none;
     }
   }
-  /* Plates rise into place; they never fade, so their tags are always full ink. */
-  .layers .layer {
-    transform: rotateX(58deg) rotateZ(-40deg) translate3d(0, 0, calc(var(--i) * var(--step) + 140px));
-    transition: transform 0.9s var(--ease);
-    transition-delay: calc(var(--i) * 0.15s + 0.15s);
-    animation: plate-fallback 0.75s var(--ease) calc(2.25s + var(--i) * 0.15s) forwards;
-  }
-  @keyframes plate-fallback {
-    to {
-      transform: rotateX(58deg) rotateZ(-40deg) translate3d(0, 0, calc(var(--i) * var(--step)));
-    }
-  }
-  .reveal.in .layer {
-    transform: rotateX(58deg) rotateZ(-40deg) translate3d(0, 0, calc(var(--i) * var(--step)));
-  }
   .model-out i {
     transform: scaleX(0);
     transform-origin: left;
@@ -700,7 +685,6 @@ p {
       transform: scaleX(1);
     }
   }
-  .reveal.in .layer,
   .reveal.in .model-out i {
     animation: none;
   }
@@ -725,121 +709,181 @@ p {
 }
 
 
-/* Stack layers visual: an exploded isometric stack. Each plate is rotated into
-   the isometric plane; its tag carries the inverse rotation so it reads flat,
-   pinned to the plate's front corner. */
-.layers-wrap {
+/* Builder: the architecture as beams. Four platform nodes sit around a backend
+   hub on one grid; the SVG behind them is measured from the node elements
+   themselves (ArchitectureBeams) and remeasured on resize, so every path stays
+   attached at every width. The rail is always drawn; the travelling gradient
+   rides it, and stands still under reduced motion. */
+.beams-wrap {
   display: grid;
-  justify-items: center;
 }
-.layers {
-  --pw: 300px;
-  --ph: 190px;
-  --step: 50px;
+.beams {
   position: relative;
-  width: 100%;
-  max-width: 680px;
-  height: 440px;
-  perspective: 1600px;
-  perspective-origin: 50% 40%;
-  overflow: clip;
-  overflow-clip-margin: 24px;
-}
-.layer {
-  position: absolute;
-  left: calc(50% - 86px);
-  top: calc(50% + 84px);
-  width: var(--pw);
-  height: var(--ph);
-  margin: calc(var(--ph) / -2) 0 0 calc(var(--pw) / -2);
-  border-radius: 16px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  box-shadow: 0 30px 40px -30px rgba(0, 0, 0, 0.5);
-  transform-style: preserve-3d;
-  transform: rotateX(58deg) rotateZ(-40deg) translate3d(0, 0, calc(var(--i) * var(--step)));
-}
-.layer-logos {
-  position: absolute;
-  left: 20px;
-  bottom: 16px;
-  display: flex;
-  gap: 10px;
-}
-.layer-tag {
-  position: absolute;
-  left: 100%;
-  top: 100%;
-  width: max-content;
-  transform-origin: 0 0;
-  transform: rotateZ(40deg) rotateX(-58deg) translate(16px, -50%);
   display: grid;
-  gap: 2px;
-  white-space: nowrap;
-  line-height: 1.25;
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr) minmax(0, 300px);
+  grid-template-areas:
+    "ios hub android"
+    "voice hub web";
+  column-gap: clamp(28px, 4vw, 64px);
+  row-gap: clamp(28px, 4vw, 56px);
+  align-items: center;
 }
-.layer-tag::before {
-  content: "";
+.beams-svg {
   position: absolute;
-  left: -16px;
-  top: 50%;
-  width: 10px;
-  height: 1px;
-  background: var(--line);
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
 }
-.layer-tag strong {
-  font-size: 15px;
+.beam-rail {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  opacity: 0.26;
+}
+.beam-flow {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.beam-gradient stop {
+  stop-color: var(--accent);
+}
+.beam-node {
+  position: relative;
+  display: grid;
+  gap: 7px;
+  width: 100%;
+  padding: 16px 18px 18px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: 0 26px 44px -36px rgba(0, 0, 0, 0.55);
+}
+.beam-node[data-node="ios"] {
+  grid-area: ios;
+}
+.beam-node[data-node="voice"] {
+  grid-area: voice;
+}
+.beam-node[data-node="android"] {
+  grid-area: android;
+}
+.beam-node[data-node="web"] {
+  grid-area: web;
+}
+.beam-hub {
+  grid-area: hub;
+  justify-self: center;
+  align-self: center;
+  width: clamp(240px, 100%, 320px);
+  padding: 18px 20px 20px;
+  border-color: var(--accent);
+  background: var(--panel);
+  box-shadow: 0 0 0 5px var(--accent-soft), 0 32px 52px -34px rgba(0, 0, 0, 0.6);
+}
+.beam-logos {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 26px;
+}
+.beam-node strong {
+  font-size: 17px;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
 }
-.layer-tag span {
+.beam-hub strong {
+  font-size: 19px;
+}
+.beam-tech {
   font-size: 13px;
+  line-height: 1.35;
   color: var(--ink-2);
 }
-@media (max-width: 760px) {
-  .layers {
-    --pw: 136px;
-    --ph: 86px;
-    --step: 38px;
-    height: 250px;
-    perspective: 900px;
+@media (max-width: 960px) {
+  .beams {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "ios android"
+      "hub hub"
+      "voice web";
+    column-gap: clamp(12px, 3vw, 24px);
+    row-gap: clamp(48px, 11vw, 76px);
   }
-  .layer {
-    left: calc(50% - 78px);
-    top: calc(50% + 62px);
-    border-radius: 10px;
+  .beam-node {
+    width: 100%;
+    padding: 14px 15px 16px;
+    gap: 5px;
   }
-  .layer-logos {
-    left: 10px;
-    bottom: 8px;
-    gap: 6px;
+  .beam-node strong {
+    font-size: 16px;
   }
-  .layer-logos svg,
-  .layer-logos span {
-    width: 16px;
-    height: 16px;
-  }
-  .layer-tag {
-    transform: rotateZ(40deg) rotateX(-58deg) translate(14px, -50%);
-  }
-  .layer-tag::before {
-    left: -14px;
-    width: 8px;
-  }
-  .layer-tag strong {
-    font-size: 13px;
-  }
-  .layer-tag span {
-    font-size: 11px;
+  .beam-tech {
+    font-size: 12px;
   }
 }
 
-/* World map */
-.world {
+/* World: the globe. cobe draws it into a square canvas that CSS sizes, with the
+   photographs from the road beside it. Without scripting, and if WebGL refuses,
+   the generated map images stand in; .world-map keeps the two themed files. */
+.globe-figure {
+  display: grid;
+  justify-items: center;
+  gap: clamp(30px, 4vw, 52px);
+}
+.globe-stage {
   position: relative;
   width: 100%;
-  max-width: 1100px;
-  margin-inline: auto;
+  max-width: 620px;
+  aspect-ratio: 1;
+}
+.globe-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: pan-y;
+  contain: layout paint;
+}
+/* The globe appears once the map has been read, never as a blank square. */
+@media (scripting: enabled) {
+  .globe-canvas {
+    opacity: 0;
+    transition: opacity 0.3s var(--ease);
+  }
+  .globe-figure[data-ready="true"] .globe-canvas {
+    opacity: 1;
+  }
+}
+.globe-photos {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(12px, 1.4vw, 18px);
+  width: 100%;
+  max-width: 700px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.globe-photos li {
+  display: grid;
+  gap: 10px;
+}
+.globe-photos img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+}
+.globe-photos span {
+  font-size: 13px;
+  color: var(--ink-2);
 }
 .world-map {
   width: 100%;
@@ -853,50 +897,31 @@ p {
 .dark .world-map-dark {
   display: block;
 }
-.pin {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  display: grid;
-  place-items: center;
+@media (scripting: enabled) {
+  .globe-fallback {
+    display: none;
+  }
 }
-.pin em {
-  position: absolute;
-  top: 100%;
-  margin-top: 6px;
-  font-style: normal;
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-  color: var(--ink);
-  background: var(--paper);
-  border: 1px solid var(--line);
-  padding: 3px 8px;
-  border-radius: 999px;
+@media (scripting: none) {
+  .globe-stage {
+    display: none;
+  }
 }
-.pin-up {
-  transform: translate(-50%, -100%);
+/* WebGL can still refuse after the page has loaded; then the map comes back. */
+.globe-figure[data-globe="failed"] .globe-stage {
+  display: none;
 }
-.pin-up em {
-  top: auto;
-  bottom: 100%;
-  margin: 0 0 6px;
+.globe-figure[data-globe="failed"] .globe-fallback {
+  display: block;
 }
-.pin-photo img {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--paper);
-  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.5);
+.globe-fallback {
+  width: 100%;
 }
-.pin-dot::before {
-  content: "";
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--ink);
-  border: 3px solid var(--paper);
-  box-shadow: 0 0 0 1px var(--line);
+@media (max-width: 640px) {
+  .globe-photos {
+    grid-template-columns: 1fr 1fr;
+    max-width: 420px;
+  }
 }
 .countries.centered {
   justify-content: center;
@@ -950,6 +975,49 @@ p {
 .logo-line {
   font-size: 14px;
   color: var(--ink-2);
+}
+
+/* Backing: the logo marquee. The wall above is the static state, which is what
+   touch and reduced motion keep; with a hover pointer the same list becomes one
+   endless track that pauses under the cursor and fades at both edges. The second
+   set exists only to close the loop, so it is hidden until the track runs. */
+.logo-marquee .logo-wall {
+  margin-top: 44px;
+}
+.logo-marquee .marquee-dup {
+  display: none;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .logo-marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+  .logo-marquee .logo-wall {
+    --card: clamp(158px, 42vw, 250px);
+    --gap: 14px;
+    display: flex;
+    grid-template-columns: none;
+    gap: var(--gap);
+    width: max-content;
+    animation: logo-drift 45s linear infinite;
+  }
+  .logo-marquee .logo-wall > li {
+    flex: 0 0 var(--card);
+    width: var(--card);
+  }
+  .logo-marquee:hover .logo-wall,
+  .logo-marquee:focus-within .logo-wall {
+    animation-play-state: paused;
+  }
+  .logo-marquee .marquee-dup {
+    display: grid;
+  }
+  @keyframes logo-drift {
+    to {
+      transform: translateX(calc(-1 * (var(--card) + var(--gap)) * var(--n, 5)));
+    }
+  }
 }
 .badges {
   display: flex;
@@ -1258,13 +1326,21 @@ body {
 .split.even {
   grid-template-columns: 1fr 1fr;
 }
+/* The two builder figures sit under the diagram as one row. */
 .figures {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  margin: 40px 0 36px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(32px, 6vw, 100px);
+  margin: clamp(40px, 5vw, 64px) 0 36px;
 }
-.figures span {
+.figures > div {
+  max-width: 30ch;
+}
+/* Counted numbers never reflow: the digits are tabular (NumberTicker). */
+.ticker {
+  font-variant-numeric: tabular-nums;
+}
+.figures > div > span {
   display: block;
   margin-top: 10px;
   font-size: 16px;
@@ -1985,7 +2061,6 @@ body {
     font-size: 14px;
   }
   .figures {
-    grid-template-columns: 1fr;
     gap: 28px;
     margin: 28px 0 24px;
   }
@@ -2066,19 +2141,6 @@ body {
   .logo-box {
     height: 96px;
     padding: 16px;
-  }
-  .pin-photo img {
-    width: 34px;
-    height: 34px;
-    border-width: 2px;
-  }
-  .pin em {
-    display: none;
-  }
-  .pin-dot::before {
-    width: 10px;
-    height: 10px;
-    border-width: 2px;
   }
   .chapters {
     left: 10px;
