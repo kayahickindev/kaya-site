@@ -20,9 +20,9 @@ export default function Effects() {
     >
       <Bloom
         mipmapBlur
-        luminanceThreshold={0.6}
-        luminanceSmoothing={0.28}
-        intensity={0.95}
+        luminanceThreshold={0.72}
+        luminanceSmoothing={0.24}
+        intensity={0.70}
         kernelSize={KernelSize.LARGE}
       />
       <Vignette offset={0.22} darkness={0.72} blendFunction={BlendFunction.NORMAL} />

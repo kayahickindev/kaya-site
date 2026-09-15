@@ -11,23 +11,29 @@ import {
   Vector3,
 } from "three";
 
-export const SUN_DIR = new Vector3(0.4, 0.105, -0.91).normalize();
+export const SUN_DIR = new Vector3(0.3, 0.105, -0.91).normalize();
 export const FILL_DIR = new Vector3(-0.78, 0.44, 0.44).normalize();
 
+/* Golden hour, not night. The three sky colours are a ladder, not a mood: a
+   deep navy overhead, a cool slate where the sky turns away from the sun, and
+   a warm amber that only ever appears in the band just above the horizon. The
+   haze is that amber carried down into the air, so the far city fades into
+   warm light rather than into the background colour. Every value is the colour
+   before ACES tone mapping, which pulls the top of the range back a stop. */
 export const PALETTE = {
-  zenith: new Color("#06090f"),
-  horizon: new Color("#2a1c10"),
-  horizonCool: new Color("#0c1b26"),
-  haze: new Color("#120e0c"),
-  sun: new Color("#ffd08a"),
-  ground: new Color("#0f1520"),
+  zenith: new Color("#152a52"),
+  horizon: new Color("#d98b41"),
+  horizonCool: new Color("#2b4a66"),
+  haze: new Color("#3a2a1a"),
+  sun: new Color("#ffd8a2"),
+  ground: new Color("#151c2a"),
   teal: new Color("#74d0d8"),
-  body: new Color("#151d2b"),
-  window: new Color("#f2b76b"),
+  body: new Color("#1a2434"),
+  window: new Color("#ffc178"),
   fill: new Color("#2f7f8c"),
 };
 
-export const FOG_DENSITY = 0.00075;
+export const FOG_DENSITY = 0.0008;
 
 // Camera framing: the valley opens from the bottom centre and runs to the
 // horizon right of centre, the sun sits low on the right, and the lower left
@@ -95,10 +101,13 @@ function ridged(x: number, y: number, octaves: number) {
 }
 
 /** Centreline of the valley: bottom centre in the near field, bending right as
- *  it runs to the horizon. */
+ *  it runs to the horizon. The bend is quadratic so the foreground under the
+ *  name barely moves while the far reach swings round to within about twelve
+ *  degrees of the sun's bearing, which is what lets the water catch a streak
+ *  of it and lead the eye out of the frame toward the light. */
 export function valleyX(z: number) {
   const t = clamp01((NEAR_Z - z) / 700);
-  return 12 * t + 78 * t * t + 26 * Math.sin(t * 3.4) * t;
+  return 12 * t + 124 * t * t + 26 * Math.sin(t * 3.4) * t;
 }
 
 function clamp01(v: number) {
@@ -123,48 +132,78 @@ export function terrainHeight(x: number, z: number) {
   return relief - bed + terrace;
 }
 
-function terrainNormal(x: number, z: number, out: Vector3) {
-  const e = 3;
-  const hx = terrainHeight(x + e, z) - terrainHeight(x - e, z);
-  const hz = terrainHeight(x, z + e) - terrainHeight(x, z - e);
-  return out.set(-hx, 2 * e, -hz).normalize();
-}
-
 /** Half width of the visible ground at a given depth, plus margin for the
  *  pointer and the scroll crane, so no vertex is spent outside the frame. */
 function spanAt(z: number) {
   return (78 + 0.62 * (CAM_POS.z - z)) * 1.18;
 }
 
-const TERRAIN_COLS = 196;
-const TERRAIN_ROWS = 168;
+/** Hand the main thread back. Generation is a few hundred thousand noise
+ *  samples, and one 300 ms task counts against total blocking time whether or
+ *  not anything is waiting on it. The timeout is short so a busy phone still
+ *  finishes the world in a few hundred milliseconds. */
+export function breathe(): Promise<void> {
+  return new Promise<void>((resolve) => {
+    if (typeof requestIdleCallback === "function") {
+      requestIdleCallback(() => resolve(), { timeout: 48 });
+    } else {
+      setTimeout(resolve, 0);
+    }
+  });
+}
 
-export function buildTerrainGeometry() {
-  const cols = TERRAIN_COLS;
-  const rows = TERRAIN_ROWS;
+export async function buildTerrainGeometry(cols: number, rows: number) {
   const count = (cols + 1) * (rows + 1);
   const position = new Float32Array(count * 3);
   const normal = new Float32Array(count * 3);
-  const n = new Vector3();
-  let p = 0;
+  const zs = new Float32Array(rows + 1);
+  const stride = cols + 1;
+
+  // Heights first, in slices. terrainHeight is nine octaves of noise, so this
+  // loop is the single most expensive thing the hero does on the main thread.
   for (let j = 0; j <= rows; j++) {
     const v = j / rows;
     const z = NEAR_Z + (FAR_Z - NEAR_Z) * Math.pow(v, 2.15);
+    zs[j] = z;
     const half = spanAt(z);
+    let p = j * stride * 3;
     for (let i = 0; i <= cols; i++) {
-      const u = i / cols;
-      const x = (u * 2 - 1) * half;
-      const y = terrainHeight(x, z);
-      terrainNormal(x, z, n);
+      const x = ((i / cols) * 2 - 1) * half;
       position[p] = x;
-      position[p + 1] = y;
+      position[p + 1] = terrainHeight(x, z);
       position[p + 2] = z;
+      p += 3;
+    }
+    if ((j & 15) === 15) await breathe();
+  }
+
+  // Normals from the grid the renderer actually draws, by central difference
+  // against the neighbours. The old code asked terrainHeight four more times
+  // per vertex for an analytic normal: five times the cost for a normal that
+  // then disagreed with the facet it was shading.
+  const n = new Vector3();
+  for (let j = 0; j <= rows; j++) {
+    const jm = Math.max(j - 1, 0);
+    const jp = Math.min(j + 1, rows);
+    const dz = zs[jp] - zs[jm] || 1;
+    for (let i = 0; i <= cols; i++) {
+      const im = Math.max(i - 1, 0);
+      const ip = Math.min(i + 1, cols);
+      const a = (j * stride + im) * 3;
+      const b = (j * stride + ip) * 3;
+      const c = (jm * stride + i) * 3;
+      const d = (jp * stride + i) * 3;
+      const dx = position[b] - position[a] || 1;
+      n.set(-(position[b + 1] - position[a + 1]) / dx, 1, -(position[d + 1] - position[c + 1]) / dz);
+      n.normalize();
+      const p = (j * stride + i) * 3;
       normal[p] = n.x;
       normal[p + 1] = n.y;
       normal[p + 2] = n.z;
-      p += 3;
     }
+    if ((j & 31) === 31) await breathe();
   }
+
   const index = new Uint32Array(cols * rows * 6);
   let k = 0;
   for (let j = 0; j < rows; j++) {
@@ -383,14 +422,38 @@ export function buildTowers(count: number): Tower[] {
       }
     }
     if (!ok) continue;
-    const variant = Math.floor(rnd() * 4);
-    const wide = variant === 3;
     const tall = Math.pow(rnd(), 2.6);
+    // Silhouette follows height rather than a die roll: spires are tall,
+    // shelves are mid-rise, blocks stay low. A skyline whose shapes are drawn
+    // at random is the tell that it was generated.
+    const roll = rnd();
+    const variant =
+      tall > 0.62
+        ? roll < 0.42
+          ? 1
+          : roll < 0.74
+            ? 4
+            : 2
+        : tall > 0.3
+          ? roll < 0.4
+            ? 5
+            : roll < 0.75
+              ? 2
+              : 0
+          : roll < 0.45
+            ? 3
+            : roll < 0.8
+              ? 6
+              : 0;
+    const wide = variant === 3 || variant === 6;
     // Height buys slenderness: a 140 unit tower on a 30 unit footprint is a
     // block, on a 14 unit footprint it is a tower.
     const slim = 0.62 + 0.38 * (1 - tall);
-    const w = ((wide ? 28 : 16) + rnd() * (wide ? 14 : 12)) * slim;
-    const h = (16 + tall * 150) * (0.4 + 0.9 * core) + (variant === 1 ? 20 : 0);
+    const w = ((wide ? 30 : 15) + rnd() * (wide ? 16 : 11)) * slim;
+    // The mast and crown profiles spend their top fifth on a needle, so they
+    // are given the height back or they read as truncated.
+    const boost = variant === 1 ? 26 : variant === 4 ? 42 : variant === 5 ? 12 : 0;
+    const h = (16 + tall * 150) * (0.4 + 0.9 * core) * (wide ? 0.55 : 1) + boost;
     towers.push({
       x,
       z,
@@ -407,24 +470,31 @@ export function buildTowers(count: number): Tower[] {
   }
 
   // Three towers are still going up, the tallest of them carries the crane.
+  // They are drawn as open frames rather than as short finished buildings, so
+  // they have to be tall enough and near enough for the line work to read.
   const candidates = towers
     .map((t, i) => ({ t, i }))
-    .filter(({ t, i }) => i > 0 && t.h > 55 && t.z < -180 && t.z > -430)
+    .filter(
+      ({ t, i }) =>
+        // Kept inside the middle of the frame: the crane on top of the tallest
+        // one is the story, and a story told at the edge of the picture where
+        // the jib runs off the top is not told.
+        i > 0 && t.h > 70 && t.z < -200 && t.z > -560 && t.x > -130 && t.x < 210,
+    )
     .sort((a, b) => b.t.h - a.t.h)
-    .slice(0, 8);
-  const picks = [candidates[0], candidates[3], candidates[6]].filter(Boolean);
+    .slice(0, 9);
+  const picks = [candidates[0], candidates[3], candidates[7]].filter(Boolean);
   picks.forEach(({ t }, i) => {
-    t.build = [0.62, 0.44, 0.78][i];
+    t.build = [0.66, 0.42, 0.81][i];
   });
   return towers;
 }
 
+/** The tallest tower still going up. The crane belongs on that one and only
+ *  that one, so a fallback to a finished tower would be a lie in the picture. */
 export function craneAnchor(towers: Tower[]) {
-  const t = towers.reduce(
-    (best, cur) => (cur.build < 1 && cur.h > best.h ? cur : best),
-    towers[0],
-  );
-  return t;
+  const rising = towers.filter((t) => t.build < 1);
+  return rising.reduce((best, cur) => (cur.h > best.h ? cur : best), rising[0] ?? towers[0]);
 }
 
 /** Drone loops: closed Catmull-Rom circuits threaded between the towers. */
@@ -432,7 +502,31 @@ export function buildDroneCurves(towers: Tower[], count: number) {
   const rnd = mulberry32(0xd4017e);
   const tall = towers.filter((t) => t.h > 40 && t.z < -120);
   const curves: CatmullRomCurve3[] = [];
-  for (let i = 0; i < count; i++) {
+
+  // Three circuits are pinned to the near field and swung wide across the
+  // frame. A drone four hundred units out is two pixels and registers as dust;
+  // what makes the city feel flown is one crossing close enough to read.
+  const FOREGROUND: { c: Vector3; r: number; tilt: number }[] = [
+    { c: new Vector3(40, 108, -110), r: 210, tilt: 0.32 },
+    { c: new Vector3(150, 74, -180), r: 168, tilt: -0.24 },
+    { c: new Vector3(-40, 132, -150), r: 186, tilt: 0.18 },
+  ];
+  for (const f of FOREGROUND) {
+    const pts: Vector3[] = [];
+    for (let j = 0; j < 6; j++) {
+      const a = (j / 6) * Math.PI * 2;
+      pts.push(
+        new Vector3(
+          f.c.x + Math.cos(a) * f.r,
+          f.c.y + Math.sin(a * 2 + f.tilt) * 26,
+          f.c.z + Math.sin(a) * f.r * 0.42,
+        ),
+      );
+    }
+    curves.push(new CatmullRomCurve3(pts, true, "catmullrom", 0.6));
+  }
+
+  for (let i = curves.length; i < count; i++) {
     const pts: Vector3[] = [];
     const n = 4 + Math.floor(rnd() * 2);
     const anchor = tall[Math.floor(rnd() * tall.length)] ?? towers[0];
@@ -455,7 +549,7 @@ export function buildDroneCurves(towers: Tower[], count: number) {
 /** The monorail: one long curve that sweeps through the city on piers. */
 export function buildRailCurve() {
   const pts: Vector3[] = [];
-  const zs = [-20, -120, -230, -340, -450, -560, -680];
+  const zs = [-155, -240, -330, -430, -540, -660, -790];
   for (const z of zs) {
     const cx = valleyX(z);
     const side = z > -300 ? 1 : 1;
@@ -468,4 +562,32 @@ export function buildRailCurve() {
     );
   }
   return new CatmullRomCurve3(pts, false, "catmullrom", 0.5);
+}
+
+export type World = {
+  terrain: BufferGeometry;
+  points: BufferGeometry;
+  river: BufferGeometry;
+  towers: Tower[];
+  droneCurves: CatmullRomCurve3[];
+  rail: CatmullRomCurve3;
+  anchor: Tower;
+};
+
+/** Everything the scene needs, generated across idle slices so no single task
+ *  blocks the main thread. Building it all in one go cost about 300 ms and put
+ *  the whole of it into total blocking time even though the hero is mounted
+ *  after the load event: TBT counts long tasks, not late ones. The phone grid
+ *  is coarser on purpose, because the same relief over a 390 point viewport
+ *  needs a third of the vertices to look identical. */
+export async function buildWorld(phone: boolean): Promise<World> {
+  const towers = buildTowers(phone ? 110 : 178);
+  await breathe();
+  const terrain = await buildTerrainGeometry(phone ? 124 : 196, phone ? 104 : 168);
+  const points = buildPointCloud(phone ? 5200 : 9000);
+  await breathe();
+  const river = buildRiverGeometry();
+  const droneCurves = buildDroneCurves(towers, phone ? 7 : 11);
+  const rail = buildRailCurve();
+  return { terrain, points, river, towers, droneCurves, rail, anchor: craneAnchor(towers) };
 }

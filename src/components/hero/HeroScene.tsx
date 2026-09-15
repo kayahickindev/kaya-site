@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { ACESFilmicToneMapping, MathUtils, Vector3 } from "three";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
@@ -11,15 +11,7 @@ import { Towers, type TowerHandle } from "./Towers";
 import { Crane, Drones, Monorail } from "./Traffic";
 import { hero, resetHero } from "./state";
 import { createCommonUniforms } from "./uniforms";
-import {
-  CAM_POS,
-  CAM_TARGET,
-  FOG_DENSITY,
-  buildDroneCurves,
-  buildRailCurve,
-  buildTowers,
-  craneAnchor,
-} from "./world";
+import { CAM_POS, CAM_TARGET, FOG_DENSITY, type World, buildWorld } from "./world";
 
 const Effects = dynamic(() => import("./Effects"), { ssr: false });
 
@@ -37,6 +29,18 @@ export type HeroMode = {
 };
 
 const DEG = Math.PI / 180;
+
+/* A tower finishes every two and a bit seconds, on a schedule derived from the
+   clock rather than from a random timer. Two consequences the picture needs:
+   the sweep (2.6 s) and the ground ripple (3.8 s) both outlast the gap, so one
+   is always running, and a frozen `?t=` capture can replay the recent events
+   at their true ages instead of showing a city where nothing is happening. */
+const COMPLETE_T0 = 3.6;
+const COMPLETE_PERIOD = 2.3;
+function completionPick(i: number) {
+  const h = Math.sin(i * 12.9898 + 4.1414) * 43758.5453;
+  return Math.floor((h - Math.floor(h)) * 100000);
+}
 
 function Rig({ mode }: { mode: HeroMode }) {
   const { camera, size } = useThree();
@@ -84,25 +88,70 @@ function Rig({ mode }: { mode: HeroMode }) {
 }
 
 /** The whole scene: one clock, one intro timeline, one scroll trigger. */
-function Scene({ mode, onSettled }: { mode: HeroMode; onSettled: () => void }) {
+function Scene({
+  mode,
+  world,
+  onSettled,
+  onWarm,
+}: {
+  mode: HeroMode;
+  world: World;
+  onSettled: () => void;
+  onWarm: () => void;
+}) {
   const common = useMemo(() => createCommonUniforms(), []);
-  const towers = useMemo(() => buildTowers(mode.phone ? 110 : 178), [mode.phone]);
-  const droneCurves = useMemo(
-    () => buildDroneCurves(towers, mode.phone ? 7 : 11),
-    [towers, mode.phone],
-  );
-  const rail = useMemo(() => buildRailCurve(), []);
-  const anchor = useMemo(() => craneAnchor(towers), [towers]);
   const handleRef = useRef<TowerHandle | null>(null);
-  const nextComplete = useRef(6.4);
+  // Completions run off the clock rather than off a timer, so `?t=` can replay
+  // the last three and a still taken at any moment has a tower finishing in it.
+  // The period is shorter than the sweep and the ripple, which is what
+  // guarantees at least one of each is always on screen.
+  const firedTo = useRef(-1e9);
   const rippleSlot = useRef(0);
-  const { gl, size } = useThree();
+  const { gl, scene, camera, size } = useThree();
   const pixelRatio = Math.min(gl.getPixelRatio(), 2);
 
   useEffect(() => {
     gl.toneMapping = ACESFilmicToneMapping;
     gl.toneMappingExposure = 1.0;
   }, [gl]);
+
+  // Shader warm-up. The frame loop is held off until every program is linked,
+  // and the link runs from an idle slot through compileAsync, which hands the
+  // work to the driver's parallel compiler where the extension exists. Left to
+  // the first visible frame the same compile is a single blocking task.
+  // The deadline is not optional: a driver that never settles the promise must
+  // not be able to leave the hero on the poster forever.
+  useEffect(() => {
+    let live = true;
+    const warm = () => {
+      const done = () => {
+        if (live) onWarm();
+      };
+      const timer = window.setTimeout(done, 1500);
+      const finish = () => {
+        window.clearTimeout(timer);
+        done();
+      };
+      const r = gl as unknown as {
+        compileAsync?: (s: typeof scene, c: typeof camera) => Promise<unknown>;
+      };
+      if (typeof r.compileAsync === "function") r.compileAsync(scene, camera).then(finish, finish);
+      else {
+        gl.compile(scene, camera);
+        finish();
+      }
+    };
+    const id =
+      typeof requestIdleCallback === "function"
+        ? requestIdleCallback(warm, { timeout: 200 })
+        : window.setTimeout(warm, 0);
+    return () => {
+      live = false;
+      if (typeof cancelIdleCallback === "function" && typeof id === "number") {
+        cancelIdleCallback(id);
+      }
+    };
+  }, [gl, scene, camera, onWarm]);
 
   // Frame times, read back by the verification tooling.
   const perf = useRef({ n: 0, total: 0, worst: 0, last: 0 });
@@ -125,15 +174,22 @@ function Scene({ mode, onSettled }: { mode: HeroMode; onSettled: () => void }) {
     // slides away.
     common.uFogDensity.value = FOG_DENSITY * (1 + hero.scroll * 1.7);
 
-    if (!hero.frozen && hero.grow > 0.9 && hero.time > nextComplete.current) {
-      nextComplete.current = hero.time + 4.2 + Math.random() * 3.4;
-      const spot = handleRef.current?.complete(Math.floor(Math.random() * 400));
-      if (spot) {
-        const s = rippleSlot.current % 3;
-        hero.ripples[s * 3] = spot.x;
-        hero.ripples[s * 3 + 1] = spot.z;
-        hero.ripples[s * 3 + 2] = hero.time;
-        rippleSlot.current++;
+    if (hero.grow > 0.9) {
+      const k = Math.floor((hero.time - COMPLETE_T0) / COMPLETE_PERIOD);
+      if (k >= 0 && k > firedTo.current) {
+        // Catch up at most the three events the shaders can still be showing:
+        // on a frozen capture this runs once and lands them at the right ages.
+        for (let i = Math.max(k - 2, firedTo.current + 1); i <= k; i++) {
+          const at = COMPLETE_T0 + i * COMPLETE_PERIOD;
+          const spot = handleRef.current?.complete(completionPick(i), at);
+          if (!spot) continue;
+          const s = rippleSlot.current % 3;
+          hero.ripples[s * 3] = spot.x;
+          hero.ripples[s * 3 + 1] = spot.z;
+          hero.ripples[s * 3 + 2] = at;
+          rippleSlot.current++;
+        }
+        firedTo.current = k;
       }
     }
 
@@ -163,14 +219,15 @@ function Scene({ mode, onSettled }: { mode: HeroMode; onSettled: () => void }) {
       <Sky common={common} />
       <Terrain
         common={common}
-        pointCount={mode.phone ? 5200 : 9000}
+        geometry={world.terrain}
+        points={world.points}
         pixelRatio={pixelRatio}
       />
-      <River common={common} />
-      <Towers common={common} towers={towers} handleRef={handleRef} />
-      <Monorail common={common} curve={rail} pixelRatio={pixelRatio} />
-      <Drones common={common} curves={droneCurves} pixelRatio={pixelRatio} />
-      <Crane common={common} tower={anchor} />
+      <River common={common} geometry={world.river} />
+      <Towers common={common} towers={world.towers} handleRef={handleRef} />
+      <Monorail common={common} curve={world.rail} pixelRatio={pixelRatio} />
+      <Drones common={common} curves={world.droneCurves} pixelRatio={pixelRatio} />
+      <Crane common={common} tower={world.anchor} />
       {!mode.phone && <Effects />}
     </>
   );
@@ -179,8 +236,26 @@ function Scene({ mode, onSettled }: { mode: HeroMode; onSettled: () => void }) {
 export default function HeroScene({ mode }: { mode: HeroMode }) {
   const wrap = useRef<HTMLDivElement>(null);
   const [running, setRunning] = useState(true);
+  const [world, setWorld] = useState<World | null>(null);
+  const [warm, setWarm] = useState(false);
+  const onWarm = useCallback(() => setWarm(true), []);
+
+  // The valley, the skyline and the flight paths are generated before the
+  // canvas exists, across idle slices, so the work never lands as one long
+  // task. Nothing renders until it is ready, which also means the intro
+  // timeline starts on the frame the scene can actually draw.
+  useEffect(() => {
+    let live = true;
+    buildWorld(mode.phone).then((w) => {
+      if (live) setWorld(w);
+    });
+    return () => {
+      live = false;
+    };
+  }, [mode.phone]);
 
   useEffect(() => {
+    if (!world) return;
     resetHero();
     // The sky is already up at the first frame, so the still and the live
     // scene share a horizon and the handover is only the ground rebuilding.
@@ -211,7 +286,7 @@ export default function HeroScene({ mode }: { mode: HeroMode }) {
     return () => {
       tl.kill();
     };
-  }, [mode]);
+  }, [mode, world]);
 
   // Pointer parallax, pointer devices only.
   useEffect(() => {
@@ -277,10 +352,12 @@ export default function HeroScene({ mode }: { mode: HeroMode }) {
     return () => document.removeEventListener("visibilitychange", onVis);
   }, []);
 
+  if (!world) return <div className="hero-canvas" ref={wrap} />;
+
   return (
     <div className="hero-canvas" ref={wrap}>
       <Canvas
-        frameloop={running ? "always" : "never"}
+        frameloop={warm && running ? "always" : "never"}
         dpr={mode.phone ? [1, 1.5] : [1, 2]}
         gl={{
           antialias: !mode.phone,
@@ -289,7 +366,12 @@ export default function HeroScene({ mode }: { mode: HeroMode }) {
         }}
         camera={{ position: [CAM_POS.x, CAM_POS.y, CAM_POS.z], fov: 38, near: 2, far: 3400 }}
       >
-        <Scene mode={mode} onSettled={() => setRunning(false)} />
+        <Scene
+          mode={mode}
+          world={world}
+          onSettled={() => setRunning(false)}
+          onWarm={onWarm}
+        />
       </Canvas>
     </div>
   );

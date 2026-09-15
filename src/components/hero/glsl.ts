@@ -40,20 +40,49 @@ float fbm2(vec2 p) {
 export const SKY = /* glsl */ `
 vec3 skyColor(vec3 dir) {
   vec3 n = normalize(dir);
-  float t = smoothstep(-0.015, 0.52, n.y);
   float sd = max(dot(n, uSunDir), 0.0);
-  // The horizon is only warm where the sun is: opposite it, the band stays the
-  // cool blue that makes golden hour read as golden hour.
-  float toward = pow(dot(n, uSunDir) * 0.5 + 0.5, 5.5);
-  vec3 col = mix(mix(uHorizonCool, uHorizon, toward), uZenith, pow(t, 0.62));
-  col += uSunColor * pow(sd, 16.0) * 0.17 * uIgnition;
-  col += uSunColor * pow(sd, 160.0) * 0.75 * uIgnition;
+  // How far round the sky bowl the warmth reaches. A low exponent on purpose:
+  // at golden hour a good third of the sky is warm, and a tight falloff is
+  // what makes a scene read as a halo pasted onto night.
+  float toward = pow(dot(n, uSunDir) * 0.5 + 0.5, 2.1);
+
+  // Two curves rather than one. The vertical ramp carries navy overhead into
+  // cool slate at eye level; the amber lives in a separate wedge that decays
+  // over about eight degrees of elevation, so it sits in the lower fifth of
+  // the sky whatever the framing does to the horizon line.
+  float up = smoothstep(-0.02, 0.34, n.y);
+  vec3 col = mix(uHorizonCool, uZenith, up);
+  float wedge = exp(-max(n.y, 0.0) / 0.075);
+  col = mix(col, uHorizon, wedge * (0.12 + 0.88 * toward));
+
+  // Three lobes for the sun. The widest is the air between here and the sun
+  // lighting up, which is what a tight disc halo cannot fake, but it is kept
+  // off the far half of the sky: carry it any wider and the navy overhead goes
+  // grey and the whole frame reads as smog.
+  col += uSunColor * pow(sd, 5.0) * 0.13 * uIgnition;
+  col += uSunColor * pow(sd, 22.0) * 0.22 * uIgnition;
+  col += uSunColor * pow(sd, 170.0) * 0.70 * uIgnition;
+
   // Thin warm cloud streaks sit in the band just above the horizon.
-  float band = smoothstep(0.015, 0.11, n.y) * (1.0 - smoothstep(0.12, 0.40, n.y));
+  float band = smoothstep(0.012, 0.09, n.y) * (1.0 - smoothstep(0.10, 0.44, n.y));
   float streak = fbm2(vec2(atan(n.x, -n.z) * 2.6, n.y * 22.0));
-  col += uSunColor * band * smoothstep(0.66, 0.98, streak) * 0.022 * uIgnition;
-  col = mix(uHaze, col, smoothstep(-0.14, 0.012, n.y));
+  col += uSunColor * band * smoothstep(0.58, 0.96, streak) * (0.05 + 0.22 * toward) * uIgnition;
+
+  // Below the horizon the dome is haze, and the handover is quick: a view ray
+  // that dips even a degree under the skyline is looking through air, not at
+  // the amber band, and letting the band leak downward is what washes every
+  // fogged surface in the scene to the same pale brown.
+  col = mix(uHaze, col, smoothstep(-0.055, 0.018, n.y));
   return col;
+}
+/* A sun this low lights far more than the faces that strictly point at it:
+   most of the light arriving at golden hour is the warm half of the sky rather
+   than the disc. One wrapped term buys that without a second light or a shadow
+   map, and it is what puts warm light on the terrain and on the sun-facing
+   tower faces while the faces turned away keep their navy. */
+vec3 warmWrap(vec3 n) {
+  float w = max(dot(n, uSunDir) * 0.5 + 0.5, 0.0);
+  return uHorizon * pow(w, 2.2);
 }
 vec3 applyFog(vec3 col, float dist, vec3 viewDir) {
   float f = 1.0 - exp(-pow(max(dist, 0.0) * uFogDensity, 2.0));

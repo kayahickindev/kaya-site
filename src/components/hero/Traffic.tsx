@@ -26,10 +26,19 @@ attribute float aScale;
 uniform float uSize;
 varying float vFade;
 void main() {
+  vFade = 0.0;
+  // A zero scale means "not on the track right now". The size clamp has a
+  // floor, so shrinking such a point still leaves a dot on screen: it has to
+  // be sent outside the clip volume instead.
+  if (aScale <= 0.0) {
+    gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
+    gl_PointSize = 0.0;
+    return;
+  }
   vec4 mv = modelViewMatrix * vec4(position, 1.0);
   float dist = -mv.z;
   gl_Position = projectionMatrix * mv;
-  gl_PointSize = clamp(uSize * aScale * 5200.0 / dist, 4.0, 46.0);
+  gl_PointSize = clamp(uSize * aScale * 6600.0 / dist, 5.0, 52.0);
   vFade = 1.0 - clamp(1.0 - exp(-pow(dist * 0.0016, 2.0)), 0.0, 1.0);
 }
 `;
@@ -98,7 +107,7 @@ function lineMaterial(common: CommonUniforms, color: Color, opacity: number) {
   });
 }
 
-const TRAIL = 14;
+const TRAIL = 20;
 
 /** Drones on closed circuits between the towers, each dragging a short trail
  *  of its own recent path. */
@@ -149,7 +158,12 @@ export function Drones({
     () => glowMaterial(PALETTE.window.clone().lerp(new Color(1, 1, 1), 0.35), 1, pixelRatio),
     [pixelRatio],
   );
-  const trailMat = useMemo(() => lineMaterial(common, PALETTE.teal.clone(), 1.15), [common]);
+  // Warm, not teal: the teal belongs to the survey linework, and a warm trail
+  // is what reads as a light moving through air at golden hour.
+  const trailMat = useMemo(
+    () => lineMaterial(common, PALETTE.window.clone().lerp(new Color(1, 1, 1), 0.2), 1.5),
+    [common],
+  );
 
   const p = useMemo(() => new Vector3(), []);
   const pointsRef = useRef<Points>(null);
@@ -166,8 +180,8 @@ export function Drones({
       bp.setXYZ(d, p.x, p.y, p.z);
       scale.setX(d, 0.8 + 0.25 * Math.sin(t * 3 + d));
       for (let i = 0; i < TRAIL; i++) {
-        const t0 = (head - i * 0.0042 + 1) % 1;
-        const t1 = (head - (i + 1) * 0.0042 + 1) % 1;
+        const t0 = (head - i * 0.0055 + 1) % 1;
+        const t1 = (head - (i + 1) * 0.0055 + 1) % 1;
         curve.getPoint(t0, p);
         tp.setXYZ((d * TRAIL + i) * 2, p.x, p.y, p.z);
         curve.getPoint(t1, p);
@@ -200,7 +214,7 @@ export function Monorail({
   curve: CatmullRomCurve3;
   pixelRatio: number;
 }) {
-  const deck = useMemo(() => new TubeGeometry(curve, 190, 1.5, 4, false), [curve]);
+  const deck = useMemo(() => new TubeGeometry(curve, 200, 1.9, 5, false), [curve]);
 
   const deckMat = useMemo(
     () =>
@@ -234,7 +248,7 @@ void main() {
   vec3 col = uBody * (0.45 + uSunColor * 2.2 * key * uIgnition + mix(uHaze, uZenith, 0.4) * 0.7);
   // The running line sits on the top of the tube.
   float top = smoothstep(0.55, 0.98, n.y);
-  col += uTeal * top * 0.09;
+  col += uTeal * top * 0.05;
   col = applyFog(col, dist, -toCam / dist);
   gl_FragColor = vec4(dither(col, gl_FragCoord.xy), 1.0);
 }
@@ -247,11 +261,16 @@ void main() {
     const pts: number[] = [];
     const alpha: number[] = [];
     const p = new Vector3();
-    for (let i = 1; i < 26; i++) {
-      curve.getPoint(i / 26, p);
+    // A pier every forty units or so. Two dozen over a kilometre of deck read
+    // as a stray wire; it is the rhythm of the legs that says viaduct.
+    for (let i = 1; i < 52; i++) {
+      curve.getPoint(i / 52, p);
       const ground = terrainHeight(p.x, p.z);
       pts.push(p.x, p.y, p.z, p.x, ground, p.z);
-      alpha.push(0.5, 0.12);
+      alpha.push(0.8, 0.16);
+      // A short cross head on each pier, so the leg has a top.
+      pts.push(p.x - 3.2, p.y - 1.4, p.z, p.x + 3.2, p.y - 1.4, p.z);
+      alpha.push(0.35, 0.35);
     }
     const geo = new BufferGeometry();
     geo.setAttribute("position", new BufferAttribute(new Float32Array(pts), 3));
@@ -260,12 +279,18 @@ void main() {
   }, [curve]);
   const pierMat = useMemo(() => lineMaterial(common, PALETTE.teal.clone(), 0.6), [common]);
 
-  // The train: a bright head with a long tail of light, once every few seconds.
+  // Two trains, half a cycle apart, so the dash is on the track in nearly
+  // every still. One car on a ten second loop is absent more often than not,
+  // and a viaduct with nothing running on it is scenery.
+  const CARS = 2;
+  const BEADS = 9;
   const car = useMemo(() => {
     const geo = new BufferGeometry();
-    geo.setAttribute("position", new BufferAttribute(new Float32Array(8 * 3), 3));
-    const scale = new Float32Array(8);
-    for (let i = 0; i < 8; i++) scale[i] = 1 - i * 0.1;
+    geo.setAttribute("position", new BufferAttribute(new Float32Array(CARS * BEADS * 3), 3));
+    const scale = new Float32Array(CARS * BEADS);
+    for (let c = 0; c < CARS; c++) {
+      for (let i = 0; i < BEADS; i++) scale[c * BEADS + i] = 1 - i * 0.095;
+    }
     geo.setAttribute("aScale", new BufferAttribute(scale, 1));
     geo.boundingSphere = null;
     return geo;
@@ -278,21 +303,29 @@ void main() {
   const carRef = useRef<Points>(null);
 
   useFrame(() => {
-    const cycle = 9.5;
-    const phase = ((hero.time * 0.85) % cycle) / cycle;
-    const run = phase < 0.62 ? phase / 0.62 : -1;
+    const cycle = 11.0;
     const pos = car.getAttribute("position") as BufferAttribute;
-    if (run < 0) {
-      if (carRef.current) carRef.current.visible = false;
-    } else {
-      if (carRef.current) carRef.current.visible = hero.ignition > 0.05;
-      for (let i = 0; i < 8; i++) {
+    const scale = car.getAttribute("aScale") as BufferAttribute;
+    for (let c = 0; c < CARS; c++) {
+      const phase = (((hero.time * 0.85) / cycle + c / CARS) % 1 + 1) % 1;
+      // A car runs three quarters of the cycle and then the track is empty
+      // behind it; with two cars offset, one is always mid run.
+      const run = phase < 0.78 ? phase / 0.78 : -1;
+      for (let i = 0; i < BEADS; i++) {
+        const j = c * BEADS + i;
+        if (run < 0) {
+          scale.setX(j, 0);
+          continue;
+        }
+        scale.setX(j, 1 - i * 0.095);
         const t = Math.max(0.001, Math.min(0.999, run - i * 0.006));
         curve.getPoint(t, p);
-        pos.setXYZ(i, p.x, p.y + 1.6, p.z);
+        pos.setXYZ(j, p.x, p.y + 2.6, p.z);
       }
-      pos.needsUpdate = true;
     }
+    pos.needsUpdate = true;
+    scale.needsUpdate = true;
+    if (carRef.current) carRef.current.visible = hero.ignition > 0.05;
     carMat.uniforms.uOpacity.value = hero.ignition;
   });
 
@@ -308,7 +341,7 @@ void main() {
 /** The crane on the tallest unfinished tower: a lattice mast, a jib that comes
  *  round slowly, a hook on a cable, and a warm light blinking at the top. */
 export function Crane({ common, tower }: { common: CommonUniforms; tower: Tower }) {
-  const mastH = 26;
+  const mastH = 36;
   const mast = useMemo(() => {
     const pts: number[] = [];
     const a: number[] = [];
@@ -351,9 +384,9 @@ export function Crane({ common, tower }: { common: CommonUniforms; tower: Tower 
   const jib = useMemo(() => {
     const pts: number[] = [];
     const a: number[] = [];
-    const len = 44;
-    const back = -15;
-    const top = 8;
+    const len = 62;
+    const back = -21;
+    const top = 11;
     // Bottom chord, counter jib, and the apex ties that hold them.
     pts.push(back, 0, 0, len, 0, 0);
     a.push(0.8, 0.5);
@@ -384,11 +417,11 @@ export function Crane({ common, tower }: { common: CommonUniforms; tower: Tower 
     return geo;
   }, []);
 
-  const mat = useMemo(() => lineMaterial(common, PALETTE.teal.clone(), 0.85), [common]);
+  const mat = useMemo(() => lineMaterial(common, PALETTE.teal.clone(), 1.15), [common]);
   const beacon = useMemo(() => {
     const geo = new BufferGeometry();
     geo.setAttribute("position", new BufferAttribute(new Float32Array([0, mastH + 1, 0]), 3));
-    geo.setAttribute("aScale", new BufferAttribute(new Float32Array([0.55]), 1));
+    geo.setAttribute("aScale", new BufferAttribute(new Float32Array([0.8]), 1));
     return geo;
   }, []);
   const beaconMat = useMemo(() => glowMaterial(new Color("#ff9a5a"), 1, 1), []);
@@ -401,8 +434,8 @@ export function Crane({ common, tower }: { common: CommonUniforms; tower: Tower 
     if (jibRef.current) jibRef.current.rotation.y = t * 0.07 + 1.2;
     if (rootRef.current) rootRef.current.visible = hero.grow > 0.55;
     const cp = cable.getAttribute("position") as BufferAttribute;
-    const reach = 26 + 8 * Math.sin(t * 0.21);
-    const drop = -10 - 6 * Math.sin(t * 0.33 + 1);
+    const reach = 36 + 12 * Math.sin(t * 0.21);
+    const drop = -14 - 9 * Math.sin(t * 0.33 + 1);
     cp.setXYZ(0, reach, 0, 0);
     cp.setXYZ(1, reach, drop, 0);
     cp.needsUpdate = true;

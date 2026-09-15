@@ -3,13 +3,14 @@ import { useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import {
   AdditiveBlending,
+  type BufferGeometry,
   ShaderMaterial,
   Vector3,
 } from "three";
 import { PREFIX } from "./glsl";
 import { hero } from "./state";
 import type { CommonUniforms } from "./uniforms";
-import { FILL_DIR, PALETTE, buildPointCloud, buildTerrainGeometry } from "./world";
+import { FILL_DIR, PALETTE } from "./world";
 
 const terrainVert = /* glsl */ `
 attribute vec3 aNormal;
@@ -55,8 +56,9 @@ void main() {
 
   vec3 irradiance =
     uSunColor * (2.7 * key + 0.7 * pow(key, 5.0)) * uIgnition +
-    uFill * (1.5 * fill + 0.5) +
-    mix(uHaze, uZenith, 0.4) * (0.45 + 0.5 * n.y);
+    warmWrap(n) * 0.75 * uIgnition +
+    uFill * (1.0 * fill + 0.34) +
+    mix(uHaze, uZenith, 0.4) * (0.5 + 0.6 * n.y);
   vec3 col = uGround * irradiance;
 
   // Grazing light picks out the ridges that face the sun.
@@ -65,16 +67,16 @@ void main() {
 
   // Survey overlay: a plan grid that is there from the first frame, and
   // elevation contours that appear as the relief rises out of it.
-  float far = 1.0 - smoothstep(500.0, 1500.0, dist);
+  float far = 1.0 - smoothstep(820.0, 2000.0, dist);
   float grid = max(lineMask(vWorld.x / 64.0, 2.4), lineMask(vWorld.z / 64.0, 2.4));
   float contour = lineMask(vWorld.y / 9.0, 2.6) * uAmp;
-  col += uTeal * (grid * 0.22 + contour * 0.30) * far;
+  col += uTeal * (grid * 0.30 + contour * 0.42) * far;
   // Street grid: the plan the city was drawn on, only where the city is.
   float dx = (vWorld.x - 96.0) / 430.0;
   float dz = (vWorld.z + 300.0) / 540.0;
   float city = exp(-(dx * dx + dz * dz));
   float streets = max(lineMask(vWorld.x / 17.0, 1.6), lineMask(vWorld.z / 17.0, 1.6));
-  col += uTeal * streets * city * far * 0.26;
+  col += uTeal * streets * city * far * 0.34;
 
   // The waterline reads as the drawn edge of the valley.
   float shore = exp(-vWorld.y * vWorld.y * 0.22) * uAmp * far;
@@ -84,10 +86,10 @@ void main() {
   for (int i = 0; i < 3; i++) {
     vec3 rp = uRipples[i];
     float age = uTime - rp.z;
-    if (age > 0.0 && age < 3.4) {
+    if (age > 0.0 && age < 3.8) {
       float r = length(vWorld.xz - rp.xy);
-      float ring = exp(-pow((r - age * 118.0) / 30.0, 2.0)) * (1.0 - age / 3.4);
-      col += mix(uTeal, uSunColor, 0.4) * ring * 0.30;
+      float ring = exp(-pow((r - age * 122.0) / 26.0, 2.0)) * (1.0 - age / 3.8);
+      col += mix(uTeal, uSunColor, 0.35) * ring * 1.15;
     }
   }
 
@@ -132,16 +134,15 @@ void main() {
 
 export function Terrain({
   common,
-  pointCount,
+  geometry,
+  points,
   pixelRatio,
 }: {
   common: CommonUniforms;
-  pointCount: number;
+  geometry: BufferGeometry;
+  points: BufferGeometry;
   pixelRatio: number;
 }) {
-  const geometry = useMemo(() => buildTerrainGeometry(), []);
-  const points = useMemo(() => buildPointCloud(pointCount), [pointCount]);
-
   const uAmp = useMemo(() => ({ value: 0 }), []);
   const uScatter = useMemo(() => ({ value: 1 }), []);
   const uRipples = useMemo(

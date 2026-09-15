@@ -20,10 +20,13 @@ varying vec3 vDir;
 void main() {
   vec3 dir = normalize(vDir);
   vec3 col = skyColor(dir);
-  // The disc itself, sized in radians so it stays stable at any precision.
+  // The disc itself, sized in radians so it stays stable at any precision. It
+  // is deliberately small and only a little over the glow it sits in: the
+  // bloom pass spreads whatever is bright here, so a hotter disc comes back as
+  // a white hole rather than as a sun.
   float ang = acos(clamp(dot(dir, uSunDir), -1.0, 1.0));
-  float disc = 1.0 - smoothstep(0.0125, 0.0175, ang);
-  col += uSunColor * disc * 5.2 * uIgnition;
+  float disc = 1.0 - smoothstep(0.0105, 0.0165, ang);
+  col += uSunColor * disc * 2.2 * uIgnition;
   gl_FragColor = vec4(dither(col, gl_FragCoord.xy), 1.0);
 }
 `;
