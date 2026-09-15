@@ -8,7 +8,7 @@ const [url, out, w = "1440", h = "900", scheme = "light", full = "0", scrollSel 
 const port = 9333 + Math.floor(Math.random() * 400);
 const chrome = spawn("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", [
   "--headless=new", `--remote-debugging-port=${port}`, "--no-first-run", "--no-default-browser-check",
-  "--hide-scrollbars", "--disable-gpu", `--user-data-dir=/tmp/kh-shot-${port}`, `--window-size=${w},${h}`, "about:blank",
+  "--hide-scrollbars", `--user-data-dir=/tmp/kh-shot-${port}`, `--window-size=${w},${h}`, "about:blank",
 ], { stdio: "ignore" });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 let ws, id = 0; const pending = new Map();
