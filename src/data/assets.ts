@@ -16,14 +16,12 @@ export const heroPortrait = {
   alt: "Kaya Hickin in a black jacket beside a turquoise glacial lake with mountains behind",
 };
 
-// Hero clip: a still generated with OpenAI gpt-image-1 (a river-valley city at
-// golden hour, terraced green towers, drones raising a new one), then animated
-// with sora-2-pro at 1792x1024 using that still as the input reference
-// (2026-09-14), looped as a forward-and-reverse palindrome and encoded with
-// libx264. The poster is a frame of the same clip.
-export const heroVideo = {
-  mp4: "/hero/system.mp4",
-  poster: "/hero/system-poster.jpg",
+// Hero still: one frame rendered from the site's own WebGL scene in capture
+// mode (?poster=1), 2026-09-14, at 1920x1080. It is what no-JS,
+// reduced-motion and still-loading visitors see, so it has to be the settled
+// state of the valley.
+export const heroPoster = {
+  src: "/hero/scene-poster.webp",
 };
 
 export const studioPortrait = {
