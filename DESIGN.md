@@ -7,11 +7,11 @@ is a generated cinematic clip of a technology and AI utopia on Earth, a river-va
 city at golden hour with cranes and drones raising a new tower, looping under his
 name, one line, and three technical proof numbers. Travel is a chapter, not the
 opening. Then: MyFutureSelf as its six App Store composites drifting edge to edge
-above counting metrics; "One person, every layer" as an
-exploded isometric stack of plates, the real stack logos lying on each plate and a
-flat tag at its front corner naming the layer; Dog AI as a schematic of
-the model (sample photo in, six real scores out); a generated world map with the
-fifteen visited countries lit and photo pins; a wall of official logos for backing
+above metrics that count up; "One person, every layer" as the architecture in
+beams, four platform nodes wired to one backend hub with light travelling the
+wires; Dog AI as a schematic of
+the model (sample photo in, six real scores out); a globe carrying the fifteen
+visited countries and the photo pins; a marquee of official logos for backing
 and recognition; and contact as a big email with brand-logo tiles. A floating pill
 nav tracks the chapter. Copy is one or two lines per chapter; the visuals do the
 explaining. Subpages (Work, About, Stack, Credentials, Contact) keep every accepted
@@ -52,8 +52,9 @@ fact reachable and share the same header and pill nav.
   frame or drift in colour are rejected; `tools/hero-video/` reruns the pipeline.
 - Chapter visuals reveal on scroll with a tiny IntersectionObserver; the pre-reveal
   state only exists when scripting is enabled and a 2.1s CSS fallback shows the block
-  regardless, so nothing depends on hydration. Text never fades: the stack plates
-  rise into place at full ink, so an accessibility audit mid-reveal still reads AA.
+  regardless, so nothing depends on hydration. Text never fades: the beam nodes and
+  the counted numbers are at full ink from the first frame, so an accessibility audit
+  mid-reveal still reads AA.
 - Lighthouse on the production build (2026-09-14): desktop 100 / 100 / 100 for
   performance, accessibility and SEO; mobile 100 for accessibility and SEO with
   performance 95 under the default simulation and 99 under request-level
@@ -67,6 +68,32 @@ fact reachable and share the same header and pill nav.
   SVG files in `public/world/` that load lazily as images, so its paths never sit in
   the page HTML (inline SVG costs twice: markup plus the hydration payload). Pins
   use the same projection.
+- The World chapter is that map on a sphere. `Globe` reads `public/world/map-light.svg`
+  once into an offscreen canvas and asks a Fibonacci lattice of 14,000 points what is
+  under each of them, projecting with the same Natural Earth formula, so land, the
+  fifteen visited countries and the home country keep the map's own colours. It draws
+  on a 2D canvas at device pixel ratio 2, turns once every 40 seconds, follows a drag
+  with damping, and stops when it is off screen or the tab is hidden; reduced motion
+  keeps it still, and without scripting the map images stand in. cobe drew it first
+  and was dropped: its sphere shader samples no land in current Chrome, on the GPU and
+  in software, in 2.0.1 and in 0.6.5, while the same texture upload in a hand-written
+  shader is fine. The four photographs sit under the globe as a captioned row and the
+  countries stay listed as text.
+- The Builder chapter is the architecture as beams (`ArchitectureBeams`): iOS, Android,
+  Web and Voice AI around a Backend hub, each node a real logo with its label and tech
+  line. The paths are measured from the node elements with a ResizeObserver, so they
+  stay attached at every width and re-aim when the phone layout puts the hub in the
+  middle row. A gradient slides along each beam, the voice lane in both directions,
+  started once by ScrollTrigger and looping; reduced motion shows the beams lit and
+  still. The diagram is decorative markup with an `sr-only` list carrying the facts.
+- Backing is a marquee (`LogoMarquee`) of the official marks: one endless track that
+  pauses under the cursor and fades at both edges, its second set hidden from
+  assistive technology and carrying no links. Touch and reduced motion keep the static
+  logo wall, which is also the no-CSS state.
+- Numbers count inside their own unit (`NumberTicker`): "66K+" counts 0 to 66 and
+  keeps the suffix, "4.7" keeps its decimal, 0.9s on the site easing, started once by
+  ScrollTrigger. The server renders the finished value, so no-JS and reduced-motion
+  visitors read the real number immediately and the digits stay tabular.
 - Product imagery is the App Store listing's own composites, never simulator
   captures. `StoreGallery` shows them as one wide strip: it drifts slowly under a
   pointer that can hover and pauses under the cursor, is a native snap scroller on
