@@ -20,7 +20,9 @@ npm run build
 - `src/data/assets.ts`: every photo and product screen the site shows, with its source and capture provenance.
 - `src/app/work/_projectDetails.ts`: project ownership, implementation, and outcomes.
 - `src/lib/profile-content.ts`: structured identity data and both LLM-readable routes, generated from the same public biography facts.
-- `tools/hero-video/`: the hero clip pipeline (a gpt-image-1 still, a sora-2-pro take anchored to it, the palindrome loop encoder). The OpenAI key is read in-process and never printed.
+- `src/components/hero/`: the live hero scene (React Three Fiber). `?t=<s>`, `?poster=1` and `?perf=1` on the home URL freeze a moment, render the poster state, and publish frame times.
+- `tools/verify/`: GPU-enabled headless Chrome over the DevTools protocol for screenshots at any width, theme, reduced motion or no-JS, used when the browser extension is unavailable.
+- `tools/bake-world-map.py`: writes the themed map images the World chapter falls back to; `tools/hero-video/`: the retired clip pipeline (a gpt-image-1 still, a sora-2-pro take anchored to it, the palindrome loop encoder). The OpenAI key is read in-process and never printed.
 
 The Proof page holds every credential, award, and scholarship. GitHub contributions are broader than commits. Coding-tool token usage is self-reported and separate from model-training volume. Program participation, invitations, certifications, and completed courses retain their exact labels.
 
