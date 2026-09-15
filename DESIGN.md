@@ -3,9 +3,10 @@
 ## Direction
 
 One scrolling story, six chapters, one purpose-built visual per point. The hero
-is a generated cinematic clip of a technology and AI utopia on Earth, a river-valley
-city at golden hour with cranes and drones raising a new tower, looping under his
-name, one line, and three technical proof numbers. Travel is a chapter, not the
+is a live WebGL scene of a technology and AI utopia on Earth, a river-valley city
+at golden hour that builds itself out of a survey grid while cranes and drones
+raise the towers, running under his name, one line, and three technical proof
+numbers. Travel is a chapter, not the
 opening. Then: MyFutureSelf as its six App Store composites drifting edge to edge
 above metrics that count up; "One person, every layer" as the architecture in
 beams, four platform nodes wired to one backend hub with light travelling the
@@ -39,17 +40,39 @@ fact reachable and share the same header and pill nav.
 
 - `.wrap` is the 1480px container with a fluid gutter. `.band` sections span the
   viewport; product bands are full-bleed.
-- Hero: full-bleed, 100svh, dark. `HeroVideo` plays a generated clip made still
-  first: a gpt-image-1 frame of the utopia city, then an 8 s sora-2-pro take at
-  1792x1024 anchored to that frame as its input reference (a slow aerial dolly
-  forward, grade held), looped as a forward-and-reverse palindrome so it never
-  cuts, encoded with libx264 at CRF 20 (7.9 MB for 16 s), muted, inline and
-  autoplaying. The poster frame is a responsive, preloaded image painted first;
-  the clip only starts loading after the page has loaded, so the fonts and the
-  name never queue behind it, and it fades in once it is really playing. A faint
-  stepping grain and a vignette sit on top so it reads as film. Reduced motion and no-JS visitors keep the poster. The type stays
-  HTML over a scrim so only the atmosphere is video. Takes that hold a frozen
-  frame or drift in colour are rejected; `tools/hero-video/` reruns the pipeline.
+- Hero: full-bleed, 100svh, dark, and rendered live. `HeroStage` paints the still
+  first and then hands over to a React Three Fiber scene in `src/components/hero/`:
+  a river valley at golden hour, built as light and data rather than as a model.
+  A procedural terrain carries a teal survey grid, elevation contours and a street
+  plan under the city; the river fills the carved valley floor exactly to its two
+  banks and reflects the same sky the dome paints; about 180 instanced towers on
+  four silhouettes stand in dark glass with procedural window strips, teal corner
+  lines and a low sun caught as a hard highlight; three towers are still going up
+  under a crane, drones fly circuits with trails, a monorail runs the bank, and
+  every few seconds a tower completes and sends a ring of light across the ground.
+  Every surface asks one shader function for the sky, so the haze is the sky seen
+  through the air in front of it and the distance melts into the horizon.
+- Hero motion: one GSAP timeline, about 3.6 s. The terrain rises out of a flat
+  blueprint grid, the survey points gather in from a shell, the towers grow from
+  the ground staggered by rank of distance from the centre, and the sun brightens.
+  The type has its own timeline so it never waits for the renderer: SplitText
+  brings the name up 0.6 s in, then the line, the proof row and the button, and a
+  CSS fallback shows all of it at 2.1 s if hydration never happens. Idle is a slow
+  orbit with a breathing dolly; the pointer adds a damped few degrees of yaw and
+  pitch on pointer devices only. On scroll the camera cranes up and back, the haze
+  thickens, the canvas fades over the last 40 percent and the type leaves at
+  different depths, spread so no line ever runs into the one beneath it.
+- Hero engineering: the scene is one `next/dynamic` chunk with `ssr: false`, only
+  requested after the load event and an idle slot, so nothing about it is on the
+  critical path (about 246 KB gzipped, plus 23 KB for the desktop composer).
+  Instanced geometry throughout, DPR capped at 2 on desktop and 1.5 on phones,
+  60 percent of the instances and no postprocessing on phones, and the render loop
+  stops when the tab is hidden or the hero has scrolled away. Bloom, a vignette and
+  the film grain are postprocessing passes on desktop, so there is no CSS grain
+  layer. Reduced motion, no WebGL and no JavaScript all keep the still, which is a
+  frame of the same scene. `?poster=1` renders that frame, `?t=<seconds>` holds any
+  moment for a deterministic capture and `?perf=1` publishes frame times on
+  `window.__heroPerf`. `tools/hero-video/` is the retired clip pipeline.
 - Chapter visuals reveal on scroll with a tiny IntersectionObserver; the pre-reveal
   state only exists when scripting is enabled and a 2.1s CSS fallback shows the block
   regardless, so nothing depends on hydration. Text never fades: the beam nodes and
@@ -126,6 +149,9 @@ fact reachable and share the same header and pill nav.
 
 ## Assets and provenance
 
+- `public/hero/scene-poster.webp` is rendered from the site's own hero scene in
+  capture mode at 1920x1080 (2026-09-14). It is not a photograph and not a
+  generated frame: re-render it from `/?poster=1` whenever the scene changes.
 - `public/hero/tekapo-lake.jpg` (Kaya's library, Lake Tekapo, 2025-12-15, 1153x2048
   because it arrived over iMessage) is the social-preview and structured-data
   portrait. World-map pin thumbnails in `public/pins/` come from the same library.

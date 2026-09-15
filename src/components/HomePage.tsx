@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Accessibility, ArrowDown, ArrowUpRight, Cloud, ShieldCheck } from "lucide-react";
 import { TopNav } from "./TopNav";
 import { Footer } from "./Footer";
-import { HeroVideo } from "./HeroVideo";
+import { HeroStage } from "./HeroStage";
 import { StoreGallery } from "./StoreGallery";
 import { ArchitectureBeams } from "./ArchitectureBeams";
 import { ModelSchematic } from "./ModelSchematic";
@@ -50,7 +50,7 @@ export function HomePage({
       </a>
       <main id="main-content">
         <section className="hero" aria-labelledby="hero-name">
-          <HeroVideo />
+          <HeroStage />
           <div className="hero-scrim" aria-hidden />
           <div className="wrap hero-top">
             <TopNav overlay />

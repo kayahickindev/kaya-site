@@ -377,74 +377,38 @@ p {
       #0a0e13;
   }
 }
-.hero-video {
+.hero-stage {
   position: absolute;
   inset: 0;
   overflow: hidden;
   background: #0a0e13;
 }
-.hero-poster,
-.hero-video-el {
+/* The still is painted first and stays underneath: it is a frame of the same
+   scene, so the live canvas fading in over it is a dissolve, not a swap. */
+.hero-poster {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 50%;
+  object-position: 62% 50%;
   display: block;
 }
-@media (scripting: enabled) {
-  .hero-video-el {
-    opacity: 0;
-    transition: opacity 0.6s var(--ease);
-  }
-  .hero-video-el.playing {
-    opacity: 1;
-  }
-}
-/* Film grain: a tiled noise texture, blended faintly, stepping between five
-   positions so it flickers like stock. Static on phones. */
-.hero-grain {
+.hero-canvas {
   position: absolute;
-  inset: -50%;
-  pointer-events: none;
-  opacity: 0.055;
-  mix-blend-mode: overlay;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 256px 256px;
-  animation: grain 0.9s steps(1) infinite;
+  inset: 0;
+  opacity: 0;
 }
-@keyframes grain {
-  0% {
-    transform: translate(0, 0);
-  }
-  20% {
-    transform: translate(-6%, 4%);
-  }
-  40% {
-    transform: translate(4%, -8%);
-  }
-  60% {
-    transform: translate(-8%, -2%);
-  }
-  80% {
-    transform: translate(6%, 6%);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
+.hero-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
 }
-@media (max-width: 760px) {
-  .hero-grain {
-    animation: none;
-  }
-}
-/* Without scripting the clip never gets a source, and a bare video element would
-   paint a black box with native controls over the poster. */
-@media (prefers-reduced-motion: reduce), (scripting: none) {
-  .hero-video-el {
-    display: none;
-  }
+/* Capture mode: the scene alone, for rendering the still. */
+.hero[data-intro="capture"] .hero-top,
+.hero[data-intro="capture"] .hero-content,
+.hero[data-intro="capture"] .hero-scrim {
+  display: none;
 }
 .hero-scrim {
   position: absolute;
@@ -541,6 +505,34 @@ p {
   background: #fff;
   color: #121412;
 }
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .hero-name,
+  .hero-line,
+  .proof li,
+  .hero .btn-light {
+    opacity: 0;
+    animation: hero-type-in 0.01s linear 2.1s forwards;
+  }
+  /* Touching opacity only: the scroll parallax owns the transform. */
+  @keyframes hero-type-in {
+    to {
+      opacity: 1;
+    }
+  }
+  .hero[data-intro] .hero-name,
+  .hero[data-intro] .hero-line,
+  .hero[data-intro] .proof li,
+  .hero[data-intro] .btn-light {
+    animation: none;
+  }
+  .hero[data-intro="off"] .hero-name,
+  .hero[data-intro="off"] .hero-line,
+  .hero[data-intro="off"] .proof li,
+  .hero[data-intro="off"] .btn-light {
+    opacity: 1;
+  }
+}
+
 
 /* Scenes: one visual per point. */
 .scene {
