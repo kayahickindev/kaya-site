@@ -12,6 +12,10 @@ import { heroPoster } from "@/data/assets";
 // motion, no WebGL and no JavaScript all stay on the still.
 const HeroScene = dynamic(() => import("./hero/HeroScene"), { ssr: false });
 
+/** The moment the CSS fallback has already shown the type. It has to match the
+ *  animation delay on the `.hero-name` rule in globals.css. */
+const INTRO_DEADLINE_MS = 1200;
+
 function readMode(): HeroMode {
   const q = new URLSearchParams(window.location.search);
   const t = q.get("t");
@@ -86,18 +90,27 @@ export function HeroStage() {
 
     let split: InstanceType<typeof SplitText> | null = null;
     const rest = [line, ...proof, button].filter(Boolean) as HTMLElement[];
+    // Past the CSS deadline the type is already painted and is already the
+    // page's largest contentful paint. Running the intro now would hide it
+    // again, and wrapping the h1 in SplitText's spans re-emits a later LCP
+    // candidate on top of that: on a throttled phone the pair cost a whole
+    // second and thirty Lighthouse points. So late hydration leaves the
+    // server-rendered type exactly where it is and takes the parallax only.
+    const late = performance.now() > INTRO_DEADLINE_MS;
     const ctx = gsap.context(() => {
-      section.dataset.intro = "on";
-      split = new SplitText(name, { type: "chars,lines", mask: "lines" });
-      // The intro moves the type in percentages and the parallax moves it in
-      // pixels, so the two never write the same transform channel.
-      gsap.set(name, { opacity: 1 });
-      gsap.set(rest, { opacity: 0, yPercent: 45 });
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.from(split.chars, { yPercent: 118, duration: 0.9, stagger: 0.022 }, 0.6)
-        .to(line, { opacity: 1, yPercent: 0, duration: 0.75 }, 1.2)
-        .to(proof, { opacity: 1, yPercent: 0, duration: 0.75, stagger: 0.09 }, 1.35)
-        .to(button, { opacity: 1, yPercent: 0, duration: 0.6 }, 1.65);
+      section.dataset.intro = late ? "off" : "on";
+      if (!late) {
+        split = new SplitText(name, { type: "chars,lines", mask: "lines" });
+        // The intro moves the type in percentages and the parallax moves it in
+        // pixels, so the two never write the same transform channel.
+        gsap.set(name, { opacity: 1 });
+        gsap.set(rest, { opacity: 0, yPercent: 45 });
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+        tl.from(split.chars, { yPercent: 118, duration: 0.9, stagger: 0.022 }, 0.6)
+          .to(line, { opacity: 1, yPercent: 0, duration: 0.75 }, 1.2)
+          .to(proof, { opacity: 1, yPercent: 0, duration: 0.75, stagger: 0.09 }, 1.35)
+          .to(button, { opacity: 1, yPercent: 0, duration: 0.6 }, 1.65);
+      }
 
       // Depth: the name hangs back furthest and the button leaves soonest. The
       // spread between neighbours stays under the leading, so nothing in the

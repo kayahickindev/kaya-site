@@ -506,12 +506,17 @@ p {
   color: #121412;
 }
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  /* The hold is 1.2 s, not 2.1 s. The h1 is the largest paint on this page, so
+     every millisecond it stays transparent is charged to LCP: on a throttled
+     phone hydration lands around 4 s and the old fallback handed the metric a
+     4.3 s candidate. HeroStage skips its intro entirely past this deadline, so
+     the two numbers have to agree. */
   .hero-name,
   .hero-line,
   .proof li,
   .hero .btn-light {
     opacity: 0;
-    animation: hero-type-in 0.01s linear 2.1s forwards;
+    animation: hero-type-in 0.01s linear 1.2s forwards;
   }
   /* Touching opacity only: the scroll parallax owns the transform. */
   @keyframes hero-type-in {
