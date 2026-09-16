@@ -16,11 +16,11 @@ export const heroPortrait = {
   alt: "Kaya Hickin in a black jacket beside a turquoise glacial lake with mountains behind",
 };
 
-// Hero still: one frame rendered from the site's own WebGL scene in capture
-// mode (?poster=1), 2026-09-14, at 1920x1080, re-rendered the same day from the
-// regraded scene so the still and the live valley share a grade. It is what
-// no-JS, reduced-motion and still-loading visitors see, so it has to be the
-// settled state of the valley.
+// Hero still: one frame of the site's own field shader in capture mode
+// (?poster=1), 2026-09-15, rendered at 1920x1080 off the production build at
+// the twenty fourth second, which is the settled field rather than its intro.
+// It is what no-JS, reduced-motion and still-loading visitors see, so it has to
+// be a state the live canvas actually passes through.
 export const heroPoster = {
   src: "/hero/scene-poster.webp",
 };
