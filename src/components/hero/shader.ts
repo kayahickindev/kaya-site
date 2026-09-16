@@ -141,12 +141,50 @@ void main() {
   // Above the horizon the line index is constant in y, so its level sets are
   // vertical. Without this gate the frame grows a picket fence.
   float below = smoothstep(0.0, 0.012, q);
-  float haze = mix(1.0, 0.62, smoothstep(0.40, HORIZON, p.y));
-  // Asymmetric on purpose: the name owns the left, so the field gives up far
-  // more there than it does on the right, where it is free to be the subject.
+  float haze = mix(1.0, 0.78, smoothstep(0.40, HORIZON, p.y));
+  // Symmetric now. This used to give up most of the left because the name sat
+  // there, which is a job the quiet zone below does properly and by measurement;
+  // doing both took the same pixels down twice and left the top left corner as
+  // empty ground.
   float fx = p.x * 2.0 - 1.0;
-  float sides = 1.0 - mix(0.86, 0.44, smoothstep(-0.30, 0.30, fx)) * pow(abs(fx), 1.5);
+  float sides = 1.0 - 0.46 * pow(abs(fx), 1.6);
   float floorFade = mix(0.34, 1.0, smoothstep(0.0, 0.55, p.y));
+  // The field used to stop at the horizon inside about fifteen pixels, and on
+  // the warm side that step was the one edge anybody could find in the frame:
+  // the air above read as a different picture from the air below it. It now
+  // gives out over a fifth of the height, so the glow runs off the top of the
+  // frame with nothing to mark where its texture ended.
+  float skyline = 1.0 - smoothstep(HORIZON - 0.21, HORIZON, p.y);
+  // And the bottom, which was cutting the lines mid flow. The last eighth of
+  // the height resolves them instead of the viewport edge doing it.
+  float floorEdge = smoothstep(0.0, 0.125, p.y);
+
+  // The name, the line, the numbers and the button own the lower left, and the
+  // field is not allowed to run behind any of them. Only the line contrast
+  // gives way here: the ground and both glows keep their colour, so the quiet
+  // is a thinning of the texture rather than a patch laid over the picture.
+  // The block it protects is type, so its size is a count of CSS pixels and not
+  // a share of the frame: the name is a clamped size, the numbers are one row of
+  // set text, and the same column is two thirds of a phone and a third of a
+  // desktop. Measuring the region in pixels and reading it back as a fraction is
+  // what makes one set of numbers hold from 360 to 1440.
+  vec2 css = uRes / max(uDpr, 1.0);
+  // Nor is it a rectangle. The numbers and their captions are the widest thing
+  // in the block and they sit low; the name above them is half as wide. A box
+  // around the whole column would have taken the middle of the frame out at the
+  // name's height, where there is nothing to protect.
+  float lowR = clamp(920.0 / css.x, 0.30, 0.97);
+  float highR = clamp(520.0 / css.x, 0.26, 0.92);
+  float quietR = mix(lowR, highR, smoothstep(0.26, 0.46, p.y));
+  float quietT = clamp((450.0 + 0.115 * css.x) / css.y, 0.34, 0.80);
+  // A third of the frame of falloff going out, which is the direction that has
+  // to hide: it runs into open picture. Going up it releases faster, because
+  // there the quiet zone lets go inside the field's own fade toward the horizon
+  // rather than against anything, and on a phone the whole distance from the
+  // name to the horizon is only a third of the frame to begin with.
+  float quiet = (1.0 - smoothstep(quietR, quietR + 0.35, p.x))
+              * (1.0 - smoothstep(quietT, quietT + 0.22, p.y));
+  float column = 1.0 - 0.96 * quiet;
 
   // Ridges catch the light and troughs fall away, so a line is a run of
   // brightness rather than a wire of constant weight.
@@ -167,7 +205,7 @@ void main() {
   float lum = crest * (0.28 + 0.72 * pool) * mix(0.16, 1.04, sun);
   float lit = mix(0.04, 1.0, lum * open + (1.0 - open));
 
-  float mask = resolved * below * haze * sides * floorFade * open * open;
+  float mask = resolved * below * haze * sides * floorFade * skyline * floorEdge * column * open * open;
   float ink = (core + skirt) * lit * mask;
 
   // The line the field grows out of. It burns exactly where the wavefront has
