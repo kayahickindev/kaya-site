@@ -59,6 +59,41 @@ fact reachable and share the same header and pill nav.
   spacing approaches the sampling limit instead of breaking into moire. Above the
   horizon the count stops varying in y, so its level sets turn vertical; the gate
   on that is the difference between a haze and a picket fence.
+- Hero quiet zone: nothing crosses the name, the line, the numbers or the button.
+  Only the line contrast gives way over that column, never the ground and never
+  the glows, so the quiet reads as thinner texture rather than as a patch laid on
+  the picture. The region is measured in CSS pixels and read back as a fraction
+  of the frame, because the block it protects is type: the same column is two
+  thirds of a phone and a third of a desktop, and the numbers row is a width in
+  pixels rather than a share of anything. Nor is it a rectangle, since the row of
+  figures is the widest thing in the block and sits lowest while the name above
+  it is half as wide; a box around the whole column took the middle of the frame
+  out at the name's height, where there is nothing to protect. A third of the
+  frame of falloff going out, which is the direction that runs into open picture
+  and has to hide; less going up, where it lets go inside the field's own fade to
+  the horizon and where a phone has only a third of a frame between the name and
+  the horizon to begin with. Behind the numbers at 1440 the line contrast is at
+  the grain floor, 8.5 against a peak of 92; behind the name it is a fifth of
+  what it was. The old asymmetric side falloff went with it: that existed only
+  because the name owned the left, which this does properly, and running both
+  took the same pixels down twice and left the top left corner as empty ground.
+- Hero edges: the field resolves rather than stopping. It used to end at the
+  horizon inside about fifteen pixels, and on the warm side that step was the one
+  edge anybody could find in the frame, the air above reading as a different
+  picture from the air below; it now gives out over a fifth of the height and the
+  steepest jump in row brightness across the top of the field is halved. At the
+  bottom the last eighth of the height takes it out, so the lines are not cut mid
+  flow by the viewport: in the final rows the ripple now sits at the grain floor
+  where it used to carry most of a stroke.
+- Hero contrast: the frame used to sit inside a narrow dark band and read dim
+  rather than lit. The separation is taken in linear light and before the
+  shoulder, so the shoulder still owns the ceiling and no crest is ever clipped
+  flat. A soft black point, c squared over c plus the point, drops the troughs and
+  the corners while rolling into nothing rather than clipping a corner to black
+  along a line with a kink in it, which is the one thing the frame may not grow.
+  Against the graded pass: darkest tenth of a percent 0.038 to 0.025, median
+  0.146 to 0.161, top 0.643 to 0.749, and the brightest pixel with the pointer
+  swell on it 0.820, under the 0.85 ceiling. The gradient stays dithered.
 - Hero light: a second, slower field decides where the light pools, and the two
   are multiplied. Lighting a field by its own height is what makes procedural work
   look procedural, because then every ridge lights identically. On top of that the
@@ -84,9 +119,12 @@ fact reachable and share the same header and pill nav.
   accumulates in linear light under a soft exponential shoulder, and the result is
   dithered by a sub-step of interleaved gradient noise, because eight bits cannot
   hold this gradient without banding. Grain steps twelve times a second; at sixty
-  it reads as a haze rather than as film. The CSS scrim was cut back to protecting
-  the type, since the vignette and the side falloff now follow the field instead
-  of sitting flat on top of it, and doing both was grading the frame twice.
+  it reads as a haze rather than as film, and its amplitude arrives as a uniform
+  so a phone can pass zero: at 390 across there are too few pixels per stroke for
+  it to be film, and it lands as noise sitting on the lines. The CSS scrim was
+  cut back to protecting the type, since the vignette and the side falloff now
+  follow the field instead of sitting flat on top of it, and doing both was
+  grading the frame twice.
 - Hero motion: a drift built from 23, 29 and 19 second periods, which share no
   common multiple inside a sitting, so it never lands back on a frame already
   seen. The intro runs once over 1.6 s on the site easing: a single flat line of
@@ -109,7 +147,7 @@ fact reachable and share the same header and pill nav.
   0.6 s and `HeroStage` skips the intro once that has elapsed, measured against
   the first-contentful-paint entry rather than a raw `performance.now()`.
 - Hero engineering: one `next/dynamic` chunk with `ssr: false`, requested only
-  after the load event and an idle slot, 6.6 KB gzipped against about 250 KB for
+  after the load event and an idle slot, 8.0 KB gzipped against about 250 KB for
   the React Three Fiber city it replaces. `three`, `@react-three/fiber`,
   `@react-three/drei` and `@react-three/postprocessing` went with it, and so did
   the `react-hooks/immutability` exemption they needed. One draw call of three
@@ -125,14 +163,38 @@ fact reachable and share the same header and pill nav.
   any moment for a deterministic capture, which is exact here because every input
   is a function of the clock, and `?perf=1` publishes frame times on
   `window.__heroPerf`. `tools/hero-video/` is the retired clip pipeline.
+- Hero content: one column on one step. The name, the line, the numbers and the
+  button used to sit 18, 26 and 26 apart with another 18 of padding in the
+  middle, which read as four stacked objects; every gap is now `--hero-step`,
+  24 on a desktop and 20 below it. No rule above the numbers: a hairline there
+  read as a divider borrowed from another design system and the contour lines
+  ran straight through it, so the step alone holds them off the line. One figure
+  leads at up to 46px and the other two step down to 30, so the row has an order
+  to read in rather than three claims at identical weight; all three keep their
+  values, their captions and tabular figures. The captions are the site's one
+  label treatment, 13px micro caps at weight 600: fourteen pixels of sentence
+  case at an arbitrary grey read as fine print in a second voice, and micro caps
+  carry more cap height than the old size did while belonging to the number above
+  them. At phone widths the row is a two column subgrid, because a minimum width
+  in characters cannot line the captions up once the first figure is a different
+  size from the other two.
+- Chapter pill: it is navigation, so it is on screen from the first chapter
+  rather than after it. It fades in over 0.9s once the hero's own intro has
+  settled at 2.2s, which is after the name, the line, the numbers and the button
+  have all landed; a deep link past the hero shows it at once. It still spies the
+  visible chapter, it is still simply visible without JavaScript, and the hero
+  content lifts to 76px off the bottom at phone widths so the button clears it,
+  which is a constant because the pill's own height and offset are. Capture mode
+  hides it, or every re-render of the still bakes a nav bar into it.
 - Chapter visuals reveal on scroll with a tiny IntersectionObserver; the pre-reveal
   state only exists when scripting is enabled and a 2.1s CSS fallback shows the block
   regardless, so nothing depends on hydration. Text never fades: the beam nodes and
   the counted numbers are at full ink from the first frame, so an accessibility audit
   mid-reveal still reads AA.
 - Lighthouse on the production build (2026-09-15, request-level throttling):
-  mobile performance 99, desktop 97, both with no layout shift and 10 ms and 0 ms
-  of total blocking time. The home document is 19 KB gzipped and the name is the
+  mobile performance 98 over two runs, no layout shift, 10 ms of total blocking
+  time and a 1.5 s largest paint; desktop 97.
+  The home document is 19 KB gzipped and the name is the
   mobile largest paint (Chrome excludes a full-viewport image as a background).
   Desktop's largest paint is the hero line at 1.3 s and all of it is render delay,
   which is the desktop intro holding the type transparent on purpose. What remains
@@ -205,10 +267,14 @@ fact reachable and share the same header and pill nav.
 
 - `public/hero/scene-poster.webp` is one frame of the site's own hero shader in
   capture mode, rendered at 1920x1080 off the production build (2026-09-15) at the
-  twenty fourth second, which is the settled field rather than its intro. It is
-  not a photograph and not a generated frame: re-render it from `/?poster=1`
-  whenever the shader changes, and take it from `next start`, because `next dev`
-  bakes its own overlay into the capture. Next 16 caches the optimised copies
+  twenty fourth second, which is the settled field rather than its intro, encoded
+  at webp quality 85. It is not a photograph and not a generated frame:
+  re-render it from `/?poster=1` whenever the shader changes, and take it from
+  `next start`, because `next dev` bakes its own overlay into the capture. The
+  capture also needs `prefers-reduced-motion` stated as `no-preference`, because
+  headless Chrome answers `reduce` by default, `HeroStage` then never mounts the
+  scene, and the shot comes back as a screenshot of the previous still with
+  nothing to say so. Next 16 caches the optimised copies
   under `.next/dev/cache/images` in development and `.next/cache/images` in
   production, so clear whichever one is being served or the no-JS path shows the
   retired still. That cache is keyed partly on the request's `Accept` header,
