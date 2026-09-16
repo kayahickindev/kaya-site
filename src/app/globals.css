@@ -398,10 +398,13 @@ p {
   width: 100%;
   height: 100%;
 }
-/* Capture mode: the scene alone, for rendering the still. */
+/* Capture mode: the scene alone, for rendering the still. The pill is not
+   inside the hero and now arrives over it, so it has to be named here too or
+   every re-render of the still bakes a navigation bar into it. */
 .hero[data-intro="capture"] .hero-top,
 .hero[data-intro="capture"] .hero-content,
-.hero[data-intro="capture"] .hero-scrim {
+.hero[data-intro="capture"] .hero-scrim,
+body:has(.hero[data-intro="capture"]) .chapters {
   display: none;
 }
 /* The scrim only protects the type now. The vignette and the side falloff it
@@ -493,6 +496,12 @@ p {
   margin-top: var(--hero-step);
 }
 @media (max-width: 760px) {
+  /* The pill runs the full width at this size and it is in the hero now, so the
+     button has to clear it. Its own height and offset are fixed, so the room it
+     needs is a constant rather than a share of the viewport. */
+  .hero-content {
+    bottom: 76px;
+  }
   .proof {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
@@ -1080,7 +1089,9 @@ p {
   background: rgba(18, 20, 18, 0.82);
   backdrop-filter: blur(14px);
   box-shadow: 0 12px 40px -16px rgba(0, 0, 0, 0.6);
-  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+  /* Slow, because this now arrives over the hero rather than after it: at 0.3s
+     it read as a panel snapping in over the name. */
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
 }
 .dark .chapters {
   background: rgba(242, 241, 235, 0.9);
