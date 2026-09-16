@@ -356,7 +356,9 @@ p {
   border-color: var(--ink);
 }
 
-/* Hero: full-bleed, dark, the live system canvas with the name over the lower-left. */
+/* Hero: full-bleed, dark, the live field of light with the name over the
+   lower-left. The two glows here are the shader's own, so the frame is already
+   graded before a single pixel of WebGL exists. */
 .hero {
   position: relative;
   height: 100svh;
@@ -364,24 +366,16 @@ p {
   max-height: 1100px;
   overflow: hidden;
   background:
-    radial-gradient(55% 55% at 62% 42%, rgba(127, 215, 223, 0.13), transparent 70%),
-    radial-gradient(80% 60% at 50% 100%, rgba(0, 0, 0, 0.5), transparent 70%),
-    #0a0e13;
+    radial-gradient(62% 48% at 69% 55%, rgba(240, 168, 96, 0.17), transparent 72%),
+    radial-gradient(54% 44% at 18% 42%, rgba(47, 143, 153, 0.1), transparent 72%),
+    linear-gradient(to bottom, #06080c, #0b1016);
   color: #fff;
-}
-@media (max-width: 760px) {
-  .hero {
-    background:
-      radial-gradient(70% 34% at 50% 24%, rgba(127, 215, 223, 0.13), transparent 70%),
-      radial-gradient(80% 60% at 50% 100%, rgba(0, 0, 0, 0.5), transparent 70%),
-      #0a0e13;
-  }
 }
 .hero-stage {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background: #0a0e13;
+  background: linear-gradient(to bottom, #06080c, #0b1016);
 }
 /* The still is painted first and stays underneath: it is a frame of the same
    scene, so the live canvas fading in over it is a dissolve, not a swap. */
@@ -401,8 +395,8 @@ p {
 }
 .hero-canvas canvas {
   display: block;
-  width: 100% !important;
-  height: 100% !important;
+  width: 100%;
+  height: 100%;
 }
 /* Capture mode: the scene alone, for rendering the still. */
 .hero[data-intro="capture"] .hero-top,
@@ -410,13 +404,15 @@ p {
 .hero[data-intro="capture"] .hero-scrim {
   display: none;
 }
+/* The scrim only protects the type now. The vignette and the side falloff it
+   used to carry are in the shader, where they can follow the field instead of
+   sitting flat on top of it, and doing both was grading the frame twice. */
 .hero-scrim {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to top, rgba(10, 14, 19, 0.88) 0%, rgba(10, 14, 19, 0.4) 34%, rgba(10, 14, 19, 0) 58%),
-    linear-gradient(to right, rgba(10, 14, 19, 0.6), rgba(10, 14, 19, 0) 50%),
-    radial-gradient(130% 100% at 50% 45%, transparent 58%, rgba(10, 14, 19, 0.5) 100%);
+    linear-gradient(to top, rgba(6, 9, 13, 0.82) 0%, rgba(6, 9, 13, 0.34) 30%, rgba(6, 9, 13, 0) 52%),
+    linear-gradient(to right, rgba(6, 9, 13, 0.42), rgba(6, 9, 13, 0) 42%);
 }
 .hero-top {
   position: absolute;

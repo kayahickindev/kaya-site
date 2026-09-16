@@ -3,14 +3,14 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { gsap, ScrollTrigger, SplitText } from "@/lib/gsap";
-import type { HeroMode } from "./hero/HeroScene";
+import type { HeroMode } from "./hero/FieldScene";
 import { heroPoster } from "@/data/assets";
 
-// The opening screen: a still of the scene is painted first and a live WebGL
-// valley takes over once the page has finished loading and the main thread is
+// The opening screen: a still of the field is painted first and the live
+// shader takes over once the page has finished loading and the main thread is
 // idle, so the name and the fonts never queue behind a renderer. Reduced
-// motion, no WebGL and no JavaScript all stay on the still.
-const HeroScene = dynamic(() => import("./hero/HeroScene"), { ssr: false });
+// motion, no WebGL2 and no JavaScript all stay on the still.
+const FieldScene = dynamic(() => import("./hero/FieldScene"), { ssr: false });
 
 /** How long the CSS fallback holds the type transparent. It has to match the
  *  animation delay on the `.hero-name` rule in globals.css. */
@@ -39,17 +39,12 @@ function readMode(): HeroMode {
     at: t === null ? null : Number.parseFloat(t),
     perf: q.get("perf") === "1",
     phone: window.matchMedia("(max-width: 760px)").matches,
-    portrait: window.innerHeight > window.innerWidth,
   };
 }
 
-function hasWebGL() {
+function hasWebGL2() {
   try {
-    const canvas = document.createElement("canvas");
-    return Boolean(
-      window.WebGLRenderingContext &&
-        (canvas.getContext("webgl2") || canvas.getContext("webgl")),
-    );
+    return Boolean(document.createElement("canvas").getContext("webgl2"));
   } catch {
     return false;
   }
@@ -61,7 +56,7 @@ export function HeroStage() {
   // The scene only starts downloading after load and an idle slot.
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (!hasWebGL()) return;
+    if (!hasWebGL2()) return;
     let cancelled = false;
     let idle = 0;
     const mount = () => {
@@ -173,10 +168,15 @@ export function HeroStage() {
         alt=""
         fill
         preload
-        sizes="100vw"
+        // The still is cover cropped, so on anything taller than its own 16:9
+        // it is scaled to the frame's height and ends up far wider than the
+        // viewport. Asking for 100vw there picks a variant a third of the width
+        // the browser then has to stretch, which is why the field came back as
+        // a moire of bands on a phone.
+        sizes="(min-aspect-ratio: 16/9) 100vw, 178vh"
         quality={85}
       />
-      {mode && <HeroScene mode={mode} />}
+      {mode && <FieldScene mode={mode} />}
     </div>
   );
 }
