@@ -30,30 +30,76 @@ export type PublicMarketingMetricsSnapshot = Omit<
   };
 };
 
+// Last recorded public snapshot, checked against primary sources on 2026-09-13.
+// Sources: App Store Connect (downloads, rating, ratings count), Superwall
+// (active paid subscribers, annual run rate), and the MyFutureSelf metrics
+// function (Future Self Actions, modeled coaching value).
+//
+// Production reads live figures through FOUNDER_METRICS_ACCESS_TOKEN. Without
+// the token every page renders this snapshot, so it has to be correct on its own.
+//
+// `raw` is deliberately 0 for the two private financial metrics: the exact
+// subscriber count and the exact annual run rate are not published, and this
+// object is serialized into the client payload. Everything the interface shows
+// for those two comes from `display`.
 export const FALLBACK_MARKETING_METRICS: MarketingMetricsSnapshot = {
   generatedAt: "fallback",
   metrics: {
-    appDownloads: { raw: 30000, display: "30K+", label: "Downloads" },
-    appStoreRating: { raw: 4.73, display: "4.7", label: "App Store Rating" },
-    appStoreReviews: { raw: 1032, display: "1,032", label: "App Store Reviews" },
+    appDownloads: { raw: 66074, display: "66K+", label: "Downloads" },
+    appStoreRating: {
+      raw: 4.68659565487275,
+      display: "4.7",
+      label: "App Store rating",
+    },
+    appStoreReviews: { raw: 1611, display: "1,611", label: "Ratings" },
     futureSelfActions: {
-      raw: 171070,
-      display: "171K+",
+      raw: 239109,
+      display: "239K+",
       label: "Future Self Actions",
     },
     coachingValueDelivered: {
-      raw: 11119550,
-      display: "$11.1M+",
-      label: "Coaching Value Delivered",
+      raw: 22468229,
+      display: "$22.5M+",
+      label: "Modeled Coaching Value",
     },
     paidSubscribersEver: {
-      raw: 2948,
-      display: "3K+",
+      raw: 0,
+      display: "3.8K+",
       label: "Active Paid Subscribers",
     },
-    arr: { raw: 115409, display: "$115K+", label: "Annual Run Rate" },
+    arr: { raw: 0, display: "$245K+", label: "Annual Run Rate" },
   },
 };
+
+export type MetricDisplayParts = {
+  value: number;
+  prefix: string;
+  suffix: string;
+  decimals: number;
+};
+
+// Splits a published figure ("3.8K+", "$245K+", "66K+", "1,611") into the parts
+// the animated tiles need. The tiles count up to the number inside the published
+// string rather than to `raw`, so the animation can never land on a figure the
+// site does not publish, and the private financial raws stay out of the payload.
+export function parseMetricDisplay(display: string): MetricDisplayParts {
+  const match = /^([^0-9]*)([0-9][0-9,]*(?:\.[0-9]+)?)(.*)$/.exec(display);
+
+  if (!match) {
+    return { value: 0, prefix: "", suffix: display, decimals: 0 };
+  }
+
+  const [, prefix, digits, suffix] = match;
+  const cleaned = digits.replace(/,/g, "");
+  const decimalPoint = cleaned.indexOf(".");
+
+  return {
+    value: Number(cleaned),
+    prefix,
+    suffix,
+    decimals: decimalPoint === -1 ? 0 : cleaned.length - decimalPoint - 1,
+  };
+}
 
 const DEFAULT_METRICS_URL =
   "https://us-central1-success-ai-dbdf7.cloudfunctions.net/getMarketingMetrics";
@@ -141,8 +187,4 @@ export async function getMarketingMetrics(): Promise<MarketingMetricsSnapshot> {
   } catch {
     return FALLBACK_MARKETING_METRICS;
   }
-}
-
-export function metricNumberInThousands(raw: number): number {
-  return Math.max(0, Math.round(raw / 1000));
 }

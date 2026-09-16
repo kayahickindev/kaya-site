@@ -43,14 +43,15 @@ function cardHighlights(
 ): Record<string, string[]> {
   return {
     myfutureself: [
-      `${metrics.metrics.appDownloads.display} downloads · 52% avg monthly growth`,
-      "Solo-built iOS, backend, and voice-AI stack",
+      `${metrics.metrics.appDownloads.display} downloads · ${metrics.metrics.appStoreReviews.display} ratings`,
+      "Backed by Cintrifuse Capital",
     ],
     "viral-loop": [
       "Done-for-you AI UGC content pipeline",
       "Organic influencer distribution",
     ],
     "dog-ai": ["Custom multimodal LLM", "Trained on Harvard dataset"],
+    // Dog AI 1.9.3 and MyFutureSelf 2.30 are the current App Store listings.
     appointra: [
       "$2M+ in client pipeline generated",
       "Cold-email infra for 8/9-figure founders",

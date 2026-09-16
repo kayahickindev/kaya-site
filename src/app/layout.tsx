@@ -32,12 +32,11 @@ function tractionDescription(metrics: MarketingMetricsSnapshot) {
     metrics.metrics;
   return (
     "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, " +
-    `an AI iOS app with ${paidSubscribersEver.display} active paid ` +
+    `a Cintrifuse-backed consumer AI app with ${paidSubscribersEver.display} active paid ` +
     `subscribers, a ${arr.display} annual run rate, ${appDownloads.display} downloads, ` +
-    "52% average monthly growth, and a " +
-    `${appStoreRating.display}★ App Store rating from ` +
-    `${appStoreReviews.display} verified reviews. Solo-built the iOS, ` +
-    "backend, and voice-AI stack end-to-end. Building consumer AI for " +
+    `and a ${appStoreRating.display}★ App Store rating from ` +
+    `${appStoreReviews.display} ratings. Built the original iOS, ` +
+    "backend, and voice-AI stack end to end. Building consumer AI for " +
     "behavior change."
   );
 }
@@ -67,8 +66,10 @@ export async function generateMetadata(): Promise<Metadata> {
       "Codex",
       "AI-native developer",
       "behavior change",
-      "a16z Speedrun",
-      "Y Combinator",
+      "Cintrifuse Capital",
+      "Dog AI",
+      "full-stack developer",
+      "Cleveland Ohio",
       "consumer AI startup",
       "three-time founder",
     ],
@@ -111,10 +112,11 @@ function personJsonLd(metrics: MarketingMetricsSnapshot) {
       tractionDescription(metrics) +
       " Previously co-founded Appointra (B2B AI outbound, scaled to $20K MRR " +
       "in 3 months and $2M+ in client pipeline) and LeadBoost Pro (profitable " +
-      "from month one freshman year). 6,000+ GitHub contributions " +
-      "in the last year across product and infra, 1.9M+ tracked LOC across " +
-      "active repos, and 9B+ lifetime Codex tokens used.",
-    email: "kaya@successai.app",
+      "from month one freshman year). 13,621 GitHub contributions in the year " +
+      "to September 2026 across product and infra, a figure that counts " +
+      "commits, pull requests, issues and reviews, and 100B+ tokens across " +
+      "the Codex and Claude coding tools.",
+    email: "kaya@myfutureselfapp.com",
     gender: "Male",
     nationality: "American",
     homeLocation: { "@type": "Place", name: "Cleveland, Ohio, USA" },
@@ -127,10 +129,12 @@ function personJsonLd(metrics: MarketingMetricsSnapshot) {
       },
     ],
     award: [
-      "Winner, RedHawk Venture Pitch Competition, Miami University ($10,000 prize)",
-      "4th of 250 teams, TCU Values & Ventures Pitch Competition ($2,500 prize)",
-      "Valedictorian, Crestwood High School",
-      "Dean's List, Miami University (8 consecutive semesters)",
+      "Startup Catalyst Award, Miami University, 2026 (John W. Altman Institute for Entrepreneurship)",
+      "RedHawk Venture Pitch Prize, Miami University, 2025 ($10,000 team prize)",
+      "Values and Ventures Honorable Mention, TCU, 2026 ($2,500 team award)",
+      "Cum laude, Miami University, 2026",
+      "Valedictorian, Crestwood High School, 2022",
+      "Dean's List honors, Miami University",
     ],
     knowsAbout: [
       "Consumer AI",
@@ -159,7 +163,8 @@ function personJsonLd(metrics: MarketingMetricsSnapshot) {
       name: "MyFutureSelf",
       url: "https://myfutureselfapp.com",
       description:
-        "AI iOS app delivering personalized future-self mentorship through a 90-day roadmap and a voice AI mentor.",
+        "Consumer AI app delivering personalized future-self mentorship through a 90-day roadmap and a voice AI mentor.",
+      funder: { "@type": "Organization", name: "Cintrifuse Capital" },
     },
     sameAs: [
       "https://github.com/kayahickindev",
@@ -189,13 +194,14 @@ function orgJsonLd(metrics: MarketingMetricsSnapshot) {
     url: "https://myfutureselfapp.com",
     founder: { "@type": "Person", name: "Kaya Hickin", url: siteConfig.url },
     description:
-      "AI iOS app that creates a personalized future-self mentor for each " +
-      "user—delivering a 90-day roadmap and voice-based AI coaching. " +
+      "Consumer AI app that creates a personalized future-self mentor for each " +
+      "user, delivering a 90-day roadmap and voice-based AI coaching. " +
       `Current traction: ${metrics.metrics.appDownloads.display} downloads, ` +
       `${metrics.metrics.paidSubscribersEver.display} active paid subscribers, ` +
-      `a ${metrics.metrics.arr.display} annual run rate, 52% average monthly revenue growth, ` +
+      `a ${metrics.metrics.arr.display} annual run rate, ` +
       `and a ${metrics.metrics.appStoreRating.display}★ App Store rating from ` +
-      `${metrics.metrics.appStoreReviews.display} verified reviews.`,
+      `${metrics.metrics.appStoreReviews.display} ratings.`,
+    funder: { "@type": "Organization", name: "Cintrifuse Capital" },
     sameAs: [
       "https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360",
     ],

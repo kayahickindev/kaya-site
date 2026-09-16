@@ -149,8 +149,11 @@ export function ContributionGraph({
     return result;
   }, [weeks, remote]);
 
+  // Fallback only: shown when the live contribution API cannot be reached.
+  // 13,621 contributions from 2025-09-13 to 2026-09-13, read off the GitHub
+  // contribution graph on 2026-09-13. Contributions, never commits.
   const displayCount = contributionCount ?? (
-    remoteTotal !== null ? `${remoteTotal.toLocaleString()}` : "6,000+"
+    remoteTotal !== null ? `${remoteTotal.toLocaleString()}` : "13.6K+"
   );
 
   const cellSize = 11;

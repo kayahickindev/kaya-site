@@ -6,7 +6,10 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/data/content";
-import type { MarketingMetricsSnapshot } from "@/lib/marketing-metrics";
+import {
+  parseMetricDisplay,
+  type MarketingMetricsSnapshot,
+} from "@/lib/marketing-metrics";
 import { Footer } from "./Footer";
 import { MetricTiles } from "./MetricTiles";
 import { RevealHeadline } from "./RevealHeadline";
@@ -136,48 +139,48 @@ function SocialPill({
   );
 }
 
+// The tile sparklines are a decorative ramp that lands on the current figure.
+// They are not recorded history and carry no axis, scale or dates; the tile's
+// number is the claim, the line only carries the shape of the number growing.
+function ramp(value: number, steps = 8) {
+  return Array.from({ length: steps }, (_, i) => value / 2 ** (steps - 1 - i));
+}
+
 function metricTiles(metrics: MarketingMetricsSnapshot) {
-  const paidSubscribers = Math.max(
-    0,
-    Math.round(metrics.metrics.paidSubscribersEver.raw),
+  // Every tile counts up to the number inside the published display string, so a
+  // tile can never animate to a figure the site does not publish. The exact paid
+  // subscriber count and annual run rate are private and are not in the payload.
+  const subscribers = parseMetricDisplay(
+    metrics.metrics.paidSubscribersEver.display,
   );
-  const downloadsThousands = Math.max(
-    0,
-    Math.round(metrics.metrics.appDownloads.raw / 1000),
-  );
-  const arrThousands = Math.max(0, Math.round(metrics.metrics.arr.raw / 1000));
-  const appStoreRating = metrics.metrics.appStoreRating.raw;
+  const arr = parseMetricDisplay(metrics.metrics.arr.display);
+  const downloads = parseMetricDisplay(metrics.metrics.appDownloads.display);
+  const rating = parseMetricDisplay(metrics.metrics.appStoreRating.display);
 
   return [
     {
-      value: paidSubscribers,
+      ...subscribers,
       label: "active paid subscribers",
-      format: true,
-      suffix: "+",
-      sparkline: [14, 27, 55, 109, 219, 438, 875, paidSubscribers],
+      sparkline: ramp(subscribers.value),
       accent: "rgb(34,197,94)",
     },
     {
-      value: arrThousands,
+      ...arr,
       label: "Annual Run Rate",
-      prefix: "$",
-      suffix: "K+",
-      sparkline: [0.5, 1, 2, 4, 8, 16, 33, arrThousands],
+      sparkline: ramp(arr.value),
       accent: "rgb(212,155,90)",
     },
     {
-      value: downloadsThousands,
+      ...downloads,
       label: "downloads",
-      suffix: "K+",
-      sparkline: [0.2, 0.4, 0.8, 1.6, 3.3, 6.5, 13, downloadsThousands],
+      sparkline: ramp(downloads.value),
       accent: "rgb(34,211,238)",
     },
     {
-      value: appStoreRating,
+      ...rating,
       label: "App Store rating",
-      suffix: "★",
-      decimals: 1,
-      sparkline: [4.4, 4.44, 4.49, 4.53, 4.57, 4.61, 4.66, appStoreRating],
+      suffix: `${rating.suffix}★`,
+      sparkline: [4.4, 4.44, 4.49, 4.53, 4.57, 4.61, 4.66, rating.value],
       accent: "rgb(251,191,36)",
     },
   ];
@@ -220,7 +223,7 @@ export function CommandCenter({
                   Kaya Hickin
                 </span>
                 <span className="block text-[11px] text-neutral-500 dark:text-neutral-300">
-                  Founder &amp; CTO · Cleveland, OH
+                  Co-founder &amp; CTO · Cleveland, OH
                 </span>
               </span>
             </div>

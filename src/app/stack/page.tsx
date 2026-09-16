@@ -14,43 +14,56 @@ export const metadata: Metadata = {
   },
 };
 
-const CATEGORY_ORDER = ["iOS", "Web", "Backend", "AI", "Workflow"] as const;
+const CATEGORY_ORDER = ["iOS", "Android", "Web", "Backend", "AI", "Workflow"] as const;
 
 type UsageTile = {
   product: string;
-  logo: string;
-  alt: string;
+  logos: { src: string; alt: string }[];
   primary: string;
   primaryLabel: string;
   secondary: string;
 };
 
+// Only two figures here are checked against a primary source, so only two are
+// published. The token figure is reported cumulative usage across the Codex and
+// Claude coding tools as of 2026-09-13, and it measures coding-tool usage: it
+// has nothing to do with training the Dog AI model. The GitHub figure is 13,621
+// contributions from 2025-09-13 to 2026-09-13, read off the contribution graph
+// on 2026-09-13, and contributions are broader than commits.
 const usage: UsageTile[] = [
   {
-    product: "Wispr Flow",
-    logo: "/logos/wispr-flow.png",
-    alt: "Wispr Flow logo",
-    primary: "200K+",
-    primaryLabel: "words dictated",
-    secondary: "75-day streak · 119 WPM",
+    product: "Codex + Claude",
+    logos: [
+      { src: "/logos/codex.svg", alt: "OpenAI Codex logo" },
+      { src: "/logos/claude-code.svg", alt: "Claude Code logo" },
+    ],
+    primary: "100B+",
+    primaryLabel: "coding tokens",
+    secondary: "Across both coding tools, to Sep 2026",
   },
   {
-    product: "Claude Code",
-    logo: "/logos/claude-code.svg",
-    alt: "Claude Code logo",
-    primary: "53M+",
-    primaryLabel: "tokens consumed",
-    secondary: "391 sessions · Opus 4.7 favorite",
-  },
-  {
-    product: "Codex",
-    logo: "/logos/codex.svg",
-    alt: "OpenAI Codex logo",
-    primary: "9B+",
-    primaryLabel: "tokens, all-time",
-    secondary: "953 threads · since Oct 2025",
+    product: "GitHub",
+    logos: [],
+    primary: "13.6K+",
+    primaryLabel: "contributions",
+    secondary: "Sep 2025 to Sep 2026 · not just commits",
   },
 ];
+
+function GitHubGlyph({ size = 28 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="#181717"
+      aria-hidden
+      className="h-7 w-7"
+    >
+      <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+    </svg>
+  );
+}
 
 export default function StackPage() {
   const grouped = CATEGORY_ORDER.map((cat) => ({
@@ -79,18 +92,31 @@ export default function StackPage() {
               Daily drivers
             </h2>
           </div>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {usage.map((tile) => (
               <div key={tile.product} className={`${cardSurface} flex items-center gap-3 p-4`}>
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-white p-2 ring-1 ring-black/10">
-                  <Image
-                    src={tile.logo}
-                    alt={tile.alt}
-                    width={28}
-                    height={28}
-                    unoptimized
-                    className="h-7 w-7 object-contain"
-                  />
+                <span className="flex shrink-0 items-center -space-x-2">
+                  {tile.logos.length > 0 ? (
+                    tile.logos.map((logo) => (
+                      <span
+                        key={logo.src}
+                        className="grid h-11 w-11 place-items-center rounded-md bg-white p-2 ring-1 ring-black/10"
+                      >
+                        <Image
+                          src={logo.src}
+                          alt={logo.alt}
+                          width={28}
+                          height={28}
+                          unoptimized
+                          className="h-7 w-7 object-contain"
+                        />
+                      </span>
+                    ))
+                  ) : (
+                    <span className="grid h-11 w-11 place-items-center rounded-md bg-white p-2 ring-1 ring-black/10">
+                      <GitHubGlyph />
+                    </span>
+                  )}
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">

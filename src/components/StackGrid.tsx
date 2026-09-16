@@ -6,13 +6,14 @@ import {
   BrainCircuit,
   Braces,
   Globe,
+  Smartphone,
   Workflow,
   type LucideIcon,
 } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 import { cardSurface } from "@/lib/surfaces";
 
-type Category = "iOS" | "Web" | "Backend" | "AI" | "Workflow";
+type Category = "iOS" | "Android" | "Web" | "Backend" | "AI" | "Workflow";
 
 type GroupedItem = {
   category: Category;
@@ -27,6 +28,7 @@ const categoryMeta: Record<
   { icon: LucideIcon; accent: string; bar: string }
 > = {
   iOS: { icon: Apple, accent: cyanAccent, bar: cyanBar },
+  Android: { icon: Smartphone, accent: cyanAccent, bar: cyanBar },
   Web: { icon: Globe, accent: cyanAccent, bar: cyanBar },
   Backend: { icon: Braces, accent: cyanAccent, bar: cyanBar },
   AI: { icon: BrainCircuit, accent: cyanAccent, bar: cyanBar },
@@ -57,7 +59,7 @@ export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
   const reducedMotion = useReducedMotion();
 
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
       {grouped.map((group, columnIndex) => {
         const meta = categoryMeta[group.category];
         const Icon = meta.icon;

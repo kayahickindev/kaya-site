@@ -30,14 +30,16 @@ export const projectDetails: ProjectDetail[] = [
     role: "Co-founder · CTO",
     timeframe: "Jan 2025 to Present",
     overview: [
-      "MyFutureSelf is the main company and product: an AI iOS app built around a 90-day roadmap, daily action, and a voice AI mentor that speaks as the user's future self.",
-      "As CTO, Kaya led the technical build end to end across native iOS, backend systems, and AI interaction design. The product is active and scaling with paying users.",
+      "MyFutureSelf is the main company and product: an AI app built around a 90-day roadmap, daily action, and a voice AI mentor that speaks as the user's future self. It is backed by Cintrifuse Capital.",
+      "Kaya built the original product end to end and leads engineering across mobile, web, backend, and AI. The product is active and scaling with paying users.",
     ],
+    // These outcomes are replaced at render time by the live metrics snapshot;
+    // they are the same figures, kept here so the list reads on its own.
     outcomes: [
-      "2,900+ active paid subscribers and a $115K+ annual run rate",
-      "30,000+ downloads on the App Store",
-      "52% average monthly revenue growth",
-      "4.7-star App Store rating from 1,032 verified reviews",
+      "3.8K+ active paid subscribers and a $245K+ annual run rate",
+      "66K+ downloads on the App Store",
+      "Backed by Cintrifuse Capital",
+      "4.7-star App Store rating from 1,611 ratings",
     ],
     ownership: [
       "Native iOS product architecture",

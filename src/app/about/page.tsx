@@ -16,7 +16,7 @@ import { cardSurfaceFeatured } from "@/lib/surfaces";
 export const metadata: Metadata = {
   title: `About | ${siteConfig.name}`,
   description:
-    "About Kaya Hickin, co-founder and CTO of MyFutureSelf, AI-native builder, and three-for-three profitable founder.",
+    "About Kaya Hickin, co-founder and CTO of Cintrifuse-backed MyFutureSelf, AI-native builder, and three-for-three profitable founder.",
   alternates: {
     canonical: `${siteConfig.url}/about`,
   },
@@ -30,14 +30,19 @@ const SIDEBAR_ICONS: Record<string, LucideIcon> = {
 
 const paragraphs = [
   "Working full-time in my family's business at 14, valedictorian out of high school, shipping companies ever since. I build consumer AI for behavior change.",
-  "Shipped two iOS apps to the App Store. Two crypto projects at $500K+ combined market cap. Self-funded my Miami University tuition. Graduated with honors.",
+  "Shipped two iOS apps to the App Store and trained the custom multimodal model behind one of them. Self-funded my Miami University tuition. Graduated cum laude.",
 ];
 
+// GitHub contributions are contributions, never commits: the figure counts
+// commits, pull requests, issues and reviews. 13,621 over the year from
+// 2025-09-13 to 2026-09-13, read off the contribution graph on 2026-09-13.
+// The token figure is coding-tool usage across Codex and Claude, and is
+// separate from the training of the Dog AI model.
 const highlightStats = [
   { value: "8 yrs", label: "professional experience" },
   { value: "3-for-3", label: "profitable companies" },
-  { value: "1.9M+", label: "tracked LOC" },
-  { value: "6,000+", label: "GitHub contributions" },
+  { value: "100B+", label: "Codex and Claude tokens" },
+  { value: "13.6K+", label: "GitHub contributions" },
 ];
 
 export default function AboutPage() {
@@ -62,7 +67,7 @@ export default function AboutPage() {
                   Kaya Hickin
                 </span>
                 <span className="block text-xs text-neutral-500 dark:text-neutral-300">
-                  Founder &amp; CTO · Cleveland, OH
+                  Co-founder &amp; CTO · Cleveland, OH
                 </span>
               </span>
             </div>

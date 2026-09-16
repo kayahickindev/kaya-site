@@ -148,17 +148,14 @@ function AppointraVisual() {
   const columns = [
     {
       label: "Prospects",
-      value: "2,400",
       items: ["Seed startups", "Hiring signals", "New funding"],
     },
     {
       label: "Warm",
-      value: "318",
       items: ["Replies", "Qualified", "Calendar fit"],
     },
     {
       label: "Booked",
-      value: "100s",
       items: ["Meetings", "Pipeline", "Revenue"],
     },
   ];
@@ -182,8 +179,7 @@ function AppointraVisual() {
               key={column.label}
               className="rounded-md border border-white/10 bg-white/[0.06] p-3"
             >
-              <p className="text-[11px] text-neutral-400">{column.label}</p>
-              <p className="mt-1 text-2xl font-semibold">{column.value}</p>
+              <p className="text-sm font-semibold">{column.label}</p>
               <div className="mt-3 space-y-1.5">
                 {column.items.map((item) => (
                   <div
@@ -269,9 +265,9 @@ function LeadBoostVisual() {
 
 function ViralLoopVisual() {
   const posts = [
-    { tag: "Hook", views: "412K", color: "from-rose-400 to-pink-500" },
-    { tag: "Trend", views: "287K", color: "from-violet-400 to-fuchsia-500" },
-    { tag: "Story", views: "194K", color: "from-cyan-400 to-blue-500" },
+    { tag: "Hook", color: "from-rose-400 to-pink-500" },
+    { tag: "Trend", color: "from-violet-400 to-fuchsia-500" },
+    { tag: "Story", color: "from-cyan-400 to-blue-500" },
   ];
 
   return (
@@ -306,10 +302,9 @@ function ViralLoopVisual() {
                 {post.tag}
               </span>
               <div className="relative">
-                <p className="text-sm font-semibold leading-none">
-                  {post.views}
+                <p className="text-[11px] leading-snug text-white/70">
+                  AI UGC
                 </p>
-                <p className="text-[11px] leading-snug text-white/70">views</p>
               </div>
             </div>
           ))}
@@ -353,8 +348,8 @@ function outcomesForDetail(
   return [
     `${metrics.metrics.paidSubscribersEver.display} active paid subscribers and a ${metrics.metrics.arr.display} annual run rate`,
     `${metrics.metrics.appDownloads.display} downloads on the App Store`,
-    "52% average monthly revenue growth",
-    `${metrics.metrics.appStoreRating.display}-star App Store rating from ${metrics.metrics.appStoreReviews.display} verified reviews`,
+    "Backed by Cintrifuse Capital",
+    `${metrics.metrics.appStoreRating.display}-star App Store rating from ${metrics.metrics.appStoreReviews.display} ratings`,
   ];
 }
 

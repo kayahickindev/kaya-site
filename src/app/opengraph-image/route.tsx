@@ -8,9 +8,9 @@ export const runtime = "nodejs";
 export async function GET() {
   const metrics = await getMarketingMetrics();
   const summary =
-    `Building MyFutureSelf. ${metrics.metrics.appDownloads.display} downloads. ` +
-    `${metrics.metrics.paidSubscribersEver.display} active paid subscribers. ` +
-    `a ${metrics.metrics.arr.display} annual run rate.`;
+    `Building MyFutureSelf. ${metrics.metrics.appDownloads.display} downloads, ` +
+    `${metrics.metrics.paidSubscribersEver.display} active paid subscribers, ` +
+    `and a ${metrics.metrics.arr.display} annual run rate.`;
   const headshotPath = join(process.cwd(), "public", "headshot.jpg");
   const headshotBuffer = await readFile(headshotPath);
   const headshotBase64 = `data:image/jpeg;base64,${headshotBuffer.toString("base64")}`;

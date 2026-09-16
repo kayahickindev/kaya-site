@@ -104,7 +104,7 @@ export function ContactPanel() {
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(168,85,247,0.18),transparent_55%)] dark:bg-[radial-gradient(circle_at_50%_0%,rgba(196,181,253,0.16),transparent_55%)]"
         />
         <p className="relative text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
-          kaya<span className="text-neutral-400 dark:text-neutral-600">@</span>successai.app
+          kaya<span className="text-neutral-400 dark:text-neutral-600">@</span>myfutureselfapp.com
         </p>
         <div className="relative mt-6 flex flex-wrap items-center justify-center gap-2">
           <button
