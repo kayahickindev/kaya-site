@@ -44,8 +44,10 @@ fact reachable and share the same header and pill nav.
   first and then hands over to one hand-written WebGL2 fragment shader in
   `src/components/hero/`: about ninety fine lines spanning the frame, displaced by
   three slow sine octaves into a single breathing topography, over a graded ground
-  carrying a warm glow on the right and a weaker teal one at the left. No library,
-  no geometry and no buffers: a fullscreen triangle is issued straight out of
+  carrying a temperature: the site's accent across the left third and the warm
+  glow on the right, two ramps that each cross the middle at nothing so the
+  centre stays neutral instead of going muddy where they meet. No library, no
+  geometry and no buffers: a fullscreen triangle is issued straight out of
   `gl_VertexID` and one function decides every pixel of the frame.
 - Hero field: the lines are the level sets of a single value, not a loop over
   ninety strokes. That value counts lines down from the horizon on a power curve,
@@ -59,10 +61,26 @@ fact reachable and share the same header and pill nav.
   on that is the difference between a haze and a picket fence.
 - Hero light: a second, slower field decides where the light pools, and the two
   are multiplied. Lighting a field by its own height is what makes procedural work
-  look procedural, because then every ridge lights identically. Lines take the
-  colour of the air they cross, warm on the right, teal at the left, and only the
-  crests come near white: the brightest pixel in the frame sits at about 0.81 of
-  full luminance, so the picture stays graded rather than blown. Everything
+  look procedural, because then every ridge lights identically. On top of that the
+  frame has a source: a low sun off the right, raking. The three octaves are
+  differentiated analytically, which gives the surface's slope, and a face falling
+  toward the sun is lit while a face climbing away from it is not. The screen
+  gradient of the line count cannot do this job: it is dominated by the
+  perspective ramp, which points the same way at every pixel and carries no tilt
+  at all. The slope is scaled by the amplitude, so the intro opens on a flat,
+  evenly lit field and the scroll flattens the light with the water. The lit end
+  of the range sits where the unlit field already was and the direction is bought
+  out of the shadows, because with the pointer swell on it the brightest pixel is
+  already at 0.84 of full luminance and there is no headroom above it to spend;
+  the field alone is 0.71. The frame then falls away on its own terms: a second
+  fall in both bottom corners, and one more at the far left edge, which is the
+  point furthest from the light. Lines take the colour of the air they cross,
+  warm on the right, the accent at the left, and only the crests come near white,
+  never on the cool side: a highlight that goes white takes the hue out of exactly
+  the pixels carrying it, which is why the left third read grey however much teal
+  sat behind it. A travelling highlight along the contours was built and cut: at
+  an amplitude you could see it was the skeleton-shimmer wipe, and at one that
+  suited the frame it moved column luminance by two percent. Everything
   accumulates in linear light under a soft exponential shoulder, and the result is
   dithered by a sub-step of interleaved gradient noise, because eight bits cannot
   hold this gradient without banding. Grain steps twelve times a second; at sixty
@@ -91,7 +109,7 @@ fact reachable and share the same header and pill nav.
   0.6 s and `HeroStage` skips the intro once that has elapsed, measured against
   the first-contentful-paint entry rather than a raw `performance.now()`.
 - Hero engineering: one `next/dynamic` chunk with `ssr: false`, requested only
-  after the load event and an idle slot, 5.0 KB gzipped against about 250 KB for
+  after the load event and an idle slot, 6.6 KB gzipped against about 250 KB for
   the React Three Fiber city it replaces. `three`, `@react-three/fiber`,
   `@react-three/drei` and `@react-three/postprocessing` went with it, and so did
   the `react-hooks/immutability` exemption they needed. One draw call of three
