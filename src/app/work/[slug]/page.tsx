@@ -292,11 +292,7 @@ function ViralLoopVisual() {
               <span className="relative inline-flex w-fit rounded bg-black/40 px-1.5 py-0.5 text-[11px] font-mono uppercase tracking-wide text-white/90">
                 {post.tag}
               </span>
-              <div className="relative">
-                <p className="text-[11px] leading-snug text-white/70">
-                  AI UGC
-                </p>
-              </div>
+              <span aria-hidden />
             </div>
           ))}
         </div>
