@@ -3,9 +3,9 @@
 ## Direction
 
 One scrolling story, six chapters, one purpose-built visual per point. The hero
-is a live WebGL scene of a technology and AI utopia on Earth, a river-valley city
-at golden hour that builds itself out of a survey grid while cranes and drones
-raise the towers, running under his name, one line, and three technical proof
+is a field of light: one hand-written WebGL2 shader drawing about ninety fine
+lines into a slowly breathing topography, dark, calm and razor sharp, running
+under his name, one line, and three technical proof
 numbers. Travel is a chapter, not the
 opening. Then: MyFutureSelf as its six App Store composites drifting edge to edge
 above metrics that count up; "One person, every layer" as the architecture in
@@ -41,84 +41,87 @@ fact reachable and share the same header and pill nav.
 - `.wrap` is the 1480px container with a fluid gutter. `.band` sections span the
   viewport; product bands are full-bleed.
 - Hero: full-bleed, 100svh, dark, and rendered live. `HeroStage` paints the still
-  first and then hands over to a React Three Fiber scene in `src/components/hero/`:
-  a river valley at golden hour, built as light and data rather than as a model.
-  A procedural terrain carries a teal survey grid, elevation contours and a street
-  plan under the city; the river fills the carved valley floor exactly to its two
-  banks; about 180 instanced towers on seven silhouettes stand in dark glass with
-  procedural windows, teal corner lines and a low sun caught as a hard highlight;
-  three more are still going up as open frames with the crane on the tallest,
-  drones fly circuits with warm trails, a monorail runs the bank, and every couple
-  of seconds a tower completes, a sweep of light runs up it and a ring leaves its
-  base. Every surface asks one shader function for the sky, so the haze is the sky
-  seen through the air in front of it and the distance melts into the horizon.
-- Hero grade: the sky is two curves, not one. A navy-to-slate vertical ramp, and a
-  separate amber wedge that decays over about eight degrees of elevation so the
-  warmth stays in the lower fifth where golden hour puts it. Three sun lobes, the
-  widest carrying the air between here and the disc; the disc itself is small
-  because bloom spreads whatever is bright and a hotter one comes back as a white
-  hole. Below the horizon the dome hands over to warm haze quickly, since letting
-  the amber band leak downward washes every fogged surface to one flat brown. One
-  shared `warmWrap` term puts the warm half of the sky on the surfaces facing it,
-  so the terrain and the sun-facing tower faces catch light while the faces turned
-  away keep their navy. Windows are a storey apart, not a room, with per-tower
-  occupancy and colour temperature, whole floors dark, a plant room lit right up
-  every twentieth, one flickering tube per tower, and warmer panes on the sun side.
-- Hero water: a camera this high sees the river at too steep an angle to mirror a
-  sun this low, so no specular finds it. What reads is the honest Fresnel gradient,
-  dark under the name and lit toward the horizon, a middle lobe broad enough to
-  survive the twelve degrees between the valley's bearing and the sun's, and the
-  city's lights smeared down the current against the banks. Ripple slopes stay
-  under about six degrees: three coherent wave trains interfere into a weave that
-  reads as corrugated iron, so most of the slope comes from noise instead.
-- Hero motion: one GSAP timeline, about 3.6 s. The terrain rises out of a flat
-  blueprint grid, the survey points gather in from a shell, the towers grow from
-  the ground staggered by rank of distance from the centre, and the sun brightens.
-  The type has its own timeline so it never waits for the renderer: SplitText
-  brings the name up 0.6 s in, then the line, the proof row and the button. That
-  intro is a desktop treatment and the width query is deliberate. The h1 is the
-  page's largest contentful paint, so holding it transparent is charged straight
-  to LCP, and on a phone the hold bought nothing because hydration there never
-  lands inside a workable one: phones paint the type at first paint, desktops hold
-  it 0.6 s and `HeroStage` skips the intro once that has elapsed, measured against
-  the first-contentful-paint entry rather than a raw `performance.now()`. Idle is a
-  slow orbit with a breathing dolly; the pointer adds a damped few degrees of yaw
-  and pitch on pointer devices only. On scroll the camera cranes up and back, the
-  haze thickens, the canvas fades over the last 40 percent and the type leaves at
-  different depths, spread so no line ever runs into the one beneath it.
-- Hero engineering: the scene is one `next/dynamic` chunk with `ssr: false`, only
-  requested after the load event and an idle slot, so nothing about it is on the
-  critical path (about 250 KB gzipped, plus 23 KB for the desktop composer).
-  `buildWorld` generates the valley, the skyline and the flight paths across idle
-  slices before the canvas exists, and the terrain takes its normals from the grid
-  the renderer actually draws rather than asking the height function four more
-  times per vertex; phones get a coarser grid. The frame loop waits on
-  `compileAsync` from an idle slot, with a deadline, so the shader link is not one
-  blocking task on the first visible frame. Instanced geometry throughout, DPR
-  capped at 2 on desktop and 1.5 on phones, 60 percent of the instances and no
-  postprocessing on phones, and the render loop stops when the tab is hidden or the
-  hero has scrolled away. Bloom, a vignette and the film grain are postprocessing
-  passes on desktop, so there is no CSS grain layer. Completions run off the scene
-  clock rather than a random timer, at a period shorter than both the sweep and the
-  ground ripple, so one is always on screen and a frozen capture replays the recent
-  ones at their true ages. Reduced motion, no WebGL and no JavaScript all keep the
-  still, which is a frame of the same scene. `?poster=1` renders that frame,
-  `?t=<seconds>` holds any moment for a deterministic capture and `?perf=1`
-  publishes frame times on `window.__heroPerf`. `tools/hero-video/` is the retired
-  clip pipeline.
+  first and then hands over to one hand-written WebGL2 fragment shader in
+  `src/components/hero/`: about ninety fine lines spanning the frame, displaced by
+  three slow sine octaves into a single breathing topography, over a graded ground
+  carrying a warm glow on the right and a weaker teal one at the left. No library,
+  no geometry and no buffers: a fullscreen triangle is issued straight out of
+  `gl_VertexID` and one function decides every pixel of the frame.
+- Hero field: the lines are the level sets of a single value, not a loop over
+  ninety strokes. That value counts lines down from the horizon on a power curve,
+  so the spacing compresses toward it, and the displacement is added to the count
+  rather than to the pixel, which shrinks the amplitude with distance for free.
+  The screen-space gradient of the count then carries both the stroke width and
+  the spacing, so a stroke is about 1.1 device pixels at every device pixel ratio
+  and everywhere in the perspective, and the field dissolves by itself once the
+  spacing approaches the sampling limit instead of breaking into moire. Above the
+  horizon the count stops varying in y, so its level sets turn vertical; the gate
+  on that is the difference between a haze and a picket fence.
+- Hero light: a second, slower field decides where the light pools, and the two
+  are multiplied. Lighting a field by its own height is what makes procedural work
+  look procedural, because then every ridge lights identically. Lines take the
+  colour of the air they cross, warm on the right, teal at the left, and only the
+  crests come near white: the brightest pixel in the frame sits at about 0.81 of
+  full luminance, so the picture stays graded rather than blown. Everything
+  accumulates in linear light under a soft exponential shoulder, and the result is
+  dithered by a sub-step of interleaved gradient noise, because eight bits cannot
+  hold this gradient without banding. Grain steps twelve times a second; at sixty
+  it reads as a haze rather than as film. The CSS scrim was cut back to protecting
+  the type, since the vignette and the side falloff now follow the field instead
+  of sitting flat on top of it, and doing both was grading the frame twice.
+- Hero motion: a drift built from 23, 29 and 19 second periods, which share no
+  common multiple inside a sitting, so it never lands back on a frame already
+  seen. The intro runs once over 1.6 s on the site easing: a single flat line of
+  light that the field grows out of, opening from the middle of the frame outward.
+  The seed line burns exactly where the wavefront has not arrived yet, so it is
+  gone the moment the field is there rather than cross fading with it, and the
+  lines fade in on the square of the wavefront while the amplitude follows it
+  directly, so a line already carries its share of the topography by the time it
+  is visible. Equal ramps arrive instead as a rectangle of flat, packed lines.
+  Pointer devices get a Gaussian swell that lifts and brightens the field, chased
+  at 0.05 a frame so it glides and never snaps. On scroll the field flattens and
+  dims, the canvas fades over the last 40 percent, and the type leaves at
+  different depths, spread so no line ever runs into the one beneath it. The type
+  keeps its own timeline so it never waits for the renderer: SplitText brings the
+  name up 0.6 s in, then the line, the proof row and the button. That intro is a
+  desktop treatment and the width query is deliberate. The h1 is the page's
+  largest contentful paint, so holding it transparent is charged straight to LCP,
+  and on a phone the hold bought nothing because hydration there never lands
+  inside a workable one: phones paint the type at first paint, desktops hold it
+  0.6 s and `HeroStage` skips the intro once that has elapsed, measured against
+  the first-contentful-paint entry rather than a raw `performance.now()`.
+- Hero engineering: one `next/dynamic` chunk with `ssr: false`, requested only
+  after the load event and an idle slot, 5.0 KB gzipped against about 250 KB for
+  the React Three Fiber city it replaces. `three`, `@react-three/fiber`,
+  `@react-three/drei` and `@react-three/postprocessing` went with it, and so did
+  the `react-hooks/immutability` exemption they needed. One draw call of three
+  vertices a frame, device pixel ratio capped at 2 and at 1.75 on phones, 60 fps
+  with a worst frame of 16.8 ms across 800 frames at both 1440 and 390. The loop
+  stops when the tab is hidden or the hero has scrolled away and restarts with its
+  clock reference cleared, so the scene never advances by the whole gap. Cleanup
+  returns the program but never calls `loseContext`: `getContext` on a canvas
+  whose context was deliberately lost hands back the same dead context, so forcing
+  the loss blanks the canvas on every remount, which in development is every
+  mount. Reduced motion, no WebGL2 and no JavaScript all keep the still, which is
+  a frame of the same shader. `?poster=1` renders that frame, `?t=<seconds>` holds
+  any moment for a deterministic capture, which is exact here because every input
+  is a function of the clock, and `?perf=1` publishes frame times on
+  `window.__heroPerf`. `tools/hero-video/` is the retired clip pipeline.
 - Chapter visuals reveal on scroll with a tiny IntersectionObserver; the pre-reveal
   state only exists when scripting is enabled and a 2.1s CSS fallback shows the block
   regardless, so nothing depends on hydration. Text never fades: the beam nodes and
   the counted numbers are at full ink from the first frame, so an accessibility audit
   mid-reveal still reads AA.
-- Lighthouse on the production build (2026-09-14): desktop 100 / 100 / 100 for
-  performance, accessibility and SEO; mobile 100 for accessibility and SEO with
-  performance 95 under the default simulation and 99 under request-level
-  throttling. The home document is 21 KB gzipped and the name is the largest paint
-  (Chrome excludes a full-viewport image as a background). What remains is the
-  framework's own JavaScript sharing the throttled connection with the stylesheet
-  and font on a local HTTP/1.1 server, which HTTP/2 on Vercel prioritises away, so
-  PageSpeed Insights on the deployed URL is the number to trust.
+- Lighthouse on the production build (2026-09-15, request-level throttling):
+  mobile performance 99, desktop 97, both with no layout shift and 10 ms and 0 ms
+  of total blocking time. The home document is 19 KB gzipped and the name is the
+  mobile largest paint (Chrome excludes a full-viewport image as a background).
+  Desktop's largest paint is the hero line at 1.3 s and all of it is render delay,
+  which is the desktop intro holding the type transparent on purpose. What remains
+  is the framework's own JavaScript sharing the throttled connection with the
+  stylesheet and font on a local HTTP/1.1 server, which HTTP/2 on Vercel
+  prioritises away, so PageSpeed Insights on the deployed URL is the number to
+  trust.
 - The world map is generated by `tools/build-world-map.py` from Natural Earth 110m
   data into `src/generated/`, then `tools/bake-world-map.py` writes it as two themed
   SVG files in `public/world/` that load lazily as images, so its paths never sit in
@@ -182,12 +185,22 @@ fact reachable and share the same header and pill nav.
 
 ## Assets and provenance
 
-- `public/hero/scene-poster.webp` is rendered from the site's own hero scene in
-  capture mode at 1920x1080 (2026-09-14, re-rendered the same day after the
-  golden-hour regrade). It is not a photograph and not a generated frame:
-  re-render it from `/?poster=1` whenever the scene changes. `next start` caches
-  the optimised copy under `.next/cache/images`, so clear that before checking a
-  new one or the no-JS path shows the retired still.
+- `public/hero/scene-poster.webp` is one frame of the site's own hero shader in
+  capture mode, rendered at 1920x1080 off the production build (2026-09-15) at the
+  twenty fourth second, which is the settled field rather than its intro. It is
+  not a photograph and not a generated frame: re-render it from `/?poster=1`
+  whenever the shader changes, and take it from `next start`, because `next dev`
+  bakes its own overlay into the capture. Next 16 caches the optimised copies
+  under `.next/dev/cache/images` in development and `.next/cache/images` in
+  production, so clear whichever one is being served or the no-JS path shows the
+  retired still. That cache is keyed partly on the request's `Accept` header,
+  which means a `curl` without one can come back correct while the browser is
+  still handed the old image.
+- The still is cover cropped, so on a frame taller than its own 16:9 it is scaled
+  to the height and ends up far wider than the viewport, and its `sizes` has to
+  say so (`(min-aspect-ratio: 16/9) 100vw, 178vh`). Plain `100vw` picks a variant
+  a third of the width the browser then stretches, and the field came back as a
+  moire of bands on a phone.
 - `public/hero/tekapo-lake.jpg` (Kaya's library, Lake Tekapo, 2025-12-15, 1153x2048
   because it arrived over iMessage) is the social-preview and structured-data
   portrait. World-map pin thumbnails in `public/pins/` come from the same library.
