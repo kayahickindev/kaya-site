@@ -1,57 +1,102 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "fs/promises";
 import { join } from "path";
+import { getMarketingMetrics } from "@/lib/marketing-metrics";
+
 export const runtime = "nodejs";
+
 export async function GET() {
-  const buffer = await readFile(
-    join(process.cwd(), "public", "portraits", "kaya.jpg"),
-  );
+  const metrics = await getMarketingMetrics();
+  const summary =
+    `Building MyFutureSelf. ${metrics.metrics.appDownloads.display} downloads. ` +
+    `${metrics.metrics.paidSubscribersEver.display} active paid subscribers. ` +
+    `a ${metrics.metrics.arr.display} annual run rate.`;
+  const headshotPath = join(process.cwd(), "public", "headshot.jpg");
+  const headshotBuffer = await readFile(headshotPath);
+  const headshotBase64 = `data:image/jpeg;base64,${headshotBuffer.toString("base64")}`;
+
   return new ImageResponse(
-    <div
-      style={{
-        width: 1200,
-        height: 630,
-        display: "flex",
-        background: "#f5f4ef",
-        color: "#20241f",
-      }}
-    >
+    (
       <div
         style={{
+          width: "1200px",
+          height: "630px",
           display: "flex",
-          flexDirection: "column",
-          width: 610,
-          padding: "60px 48px",
+          alignItems: "center",
           justifyContent: "space-between",
+          backgroundColor: "#050505",
+          padding: "80px",
         }}
       >
-        <div style={{ fontSize: 16, letterSpacing: 2, color: "#446347" }}>
-          FOUNDER. FULL-STACK DEVELOPER.
+        {/* Text side */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            flex: 1,
+            paddingRight: "60px",
+          }}
+        >
+          <div
+            style={{
+              fontSize: "18px",
+              fontWeight: 500,
+              color: "#737373",
+              letterSpacing: "3px",
+              textTransform: "uppercase" as const,
+              marginBottom: "20px",
+            }}
+          >
+            FOUNDER, BUILDER, OPERATOR
+          </div>
+          <div
+            style={{
+              fontSize: "56px",
+              fontWeight: 700,
+              color: "#FFFFFF",
+              lineHeight: 1.1,
+              marginBottom: "24px",
+            }}
+          >
+            Kaya Hickin
+          </div>
+          <div
+            style={{
+              fontSize: "22px",
+              color: "#a3a3a3",
+              lineHeight: 1.5,
+            }}
+          >
+            {summary}
+          </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 92, letterSpacing: -6, lineHeight: 1 }}>
-            Kaya Hickin.
-          </div>
-          <div style={{ fontSize: 30, marginTop: 28 }}>
-            I build AI for real life.
-          </div>
-          <div style={{ fontSize: 20, color: "#656a60", marginTop: 20 }}>
-            Co-founder & CTO of MyFutureSelf.
-          </div>
-          <div style={{ fontSize: 20, color: "#656a60", marginTop: 8 }}>
-            Backed by Cintrifuse Capital.
-          </div>
+
+        {/* Headshot */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <img
+            alt="Kaya Hickin"
+            src={headshotBase64}
+            width={280}
+            height={280}
+            style={{
+              borderRadius: "20px",
+              objectFit: "cover",
+              border: "2px solid #262626",
+            }}
+          />
         </div>
-        <div style={{ fontSize: 16 }}>kayahickin.com ↗</div>
       </div>
-      <img
-        src={`data:image/jpeg;base64,${buffer.toString("base64")}`}
-        alt="Kaya Hickin"
-        width={590}
-        height={630}
-        style={{ objectFit: "cover" }}
-      />
-    </div>,
-    { width: 1200, height: 630 },
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
   );
 }

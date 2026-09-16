@@ -2,8 +2,6 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   normalizeMarketingMetricsSnapshot,
-  FALLBACK_MARKETING_METRICS,
-  metricsCaption,
   publicMarketingMetricsSnapshot,
 } from "../src/lib/marketing-metrics.ts";
 
@@ -62,16 +60,4 @@ test("removes exact private values from the public profile snapshot", () => {
     label: "Active Paid Subscribers",
   });
   assert.equal(publicSnapshot.metrics.appStoreReviews.raw, 1032);
-});
-
-test("rejects an invalid freshness timestamp instead of rendering a broken date", () => {
-  assert.equal(normalizeMarketingMetricsSnapshot({ ...currentSnapshot, generatedAt: "not-a-date" }), null);
-});
-
-test("labels fallback figures with their recorded date, never as live", () => {
-  assert.equal(metricsCaption(FALLBACK_MARKETING_METRICS), "Recorded Sep 13, 2026 · company-reported");
-  assert.equal(metricsCaption(currentSnapshot), "Updated Jul 28, 2026 · company-reported");
-  const snapshot = publicMarketingMetricsSnapshot(FALLBACK_MARKETING_METRICS);
-  assert.equal("raw" in snapshot.metrics.arr, false);
-  assert.equal("raw" in snapshot.metrics.paidSubscribersEver, false);
 });

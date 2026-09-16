@@ -1,0 +1,75 @@
+# Kaya Hickin
+
+> Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, an AI iOS app with 2,900+ active paid subscribers, 30,000+ downloads, a $115K+ annual run rate, 52% average monthly revenue growth, and a 4.7★ App Store rating from 1,032 verified reviews. Solo-engineered the iOS app, backend, and voice-AI stack end-to-end. AI-native shipper — 1.9M+ tracked lines of code across active repos, 6,000+ GitHub contributions in the last year, and 9B+ lifetime Codex tokens used. 20+ websites and 2 App Store apps shipped to date. Daily stack: Claude Code, Codex, Granola, Wispr Flow, 5 Ghostty tabs, and OpenClaw running while I sleep. Domain expertise in consumer AI, iOS, voice agents, and behavior-change products.
+
+## Who I am
+
+- **Role**: Co-founder & CTO at MyFutureSelf (50% equity). Technical founder.
+- **Location**: Cleveland, OH.
+- **Education**: Miami University, BA Marketing & Entrepreneurship (graduated May 2026). Valedictorian, Crestwood HS.
+- **Contact**: kaya@successai.app
+- **Born**: 2004 (age 22).
+- **Looking for**: Backing for consumer AI work, technical co-founders, founder-friendly investors. Strong fit for **a16z Speedrun**, **Y Combinator**, and consumer-AI accelerators.
+
+## Track record (3-for-3 profitable companies)
+
+1. **MyFutureSelf** (Jan 2025–present, active) — AI iOS app delivering personalized future-self mentorship via a 90-day roadmap and a voice AI mentor. As CTO I solo-built iOS (Swift/SwiftUI), backend (Node.js, Firebase, Cloud Functions), and voice-AI stack (WebRTC, OpenAI Realtime). **Current traction: 30,000+ downloads, 2,900+ active paid subscribers, a $115K+ annual run rate, 52% average monthly revenue growth, 4.7★ App Store rating (1,032 reviews).** https://myfutureselfapp.com — https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360
+
+2. **Appointra** (Jun 2024–May 2025, wound down to focus on MyFutureSelf) — AI-powered B2B outbound agency. I personally built the cold-email infrastructure: hundreds of domains, thousands of inboxes, full DNS/SPF/DKIM/automated warmup. **Scaled to $20K MRR in 3 months. Generated $2M+ in client pipeline. Closed a unicorn-exit founder, a 9-figure CEO, and an NYC AI startup serving Amazon, Google, and Apple.** https://appointra.net
+
+3. **LeadBoost Pro** (Mar 2023–Jun 2024) — Started in my dorm room freshman year. Web development and growth marketing for small/underrepresented businesses. **Profitable from month one. $20K+ revenue. Website retainers still throw off ~$250 MRR in passive income today.** https://leadboost-pro.com
+
+## Other shipped products
+
+- **Dog AI** — iOS computer-vision app interpreting dog behavior. Weekend build, paying users. https://apps.apple.com/us/app/dog-ai-dog-mood-detector/id6746574124
+
+## Canonical site structure
+
+- Homepage: https://www.kayahickin.com/ — one-screen founder overview.
+- About: https://www.kayahickin.com/about — background, education, and founder context.
+- Work: https://www.kayahickin.com/work — index of shipped products and companies.
+- Proof: https://www.kayahickin.com/proof — traction, awards, velocity, and credibility signals.
+- Stack: https://www.kayahickin.com/stack — iOS, AI, backend, web, and AI-native workflow.
+- Contact: https://www.kayahickin.com/contact — direct email and social links.
+- MyFutureSelf case study: https://www.kayahickin.com/work/myfutureself
+- Dog AI case study: https://www.kayahickin.com/work/dog-ai
+- Appointra case study: https://www.kayahickin.com/work/appointra
+- LeadBoost Pro case study: https://www.kayahickin.com/work/leadboost-pro
+
+## Velocity & engineering signal
+
+- **1.9M+ tracked lines of code** across active repos.
+- **6,000+ GitHub contributions** in the last 12 months: https://github.com/kayahickindev
+- **9B+ lifetime Codex tokens** used locally since October 2025.
+- **20+ websites and 2 App Store apps shipped** across all ventures to date.
+- AI-native development workflow built around **Claude Code** and **Codex** running daily.
+- **Daily stack**: Claude Code + Codex (coding agents), Granola (meeting notes), Wispr Flow (voice-to-text), 5 tabs of Ghostty (terminal), and OpenClaw running autonomously while I sleep.
+- Engineering stack:
+  - iOS: Swift, SwiftUI, Core Data, StoreKit, WebRTC, RevenueCat, Superwall, TestFlight.
+  - Web: TypeScript, Next.js 16, React 19, Tailwind CSS v4, Framer Motion, Vercel.
+  - Backend: Node.js, Firebase, Firestore, Cloud Functions, Supabase, Stripe, PostHog.
+  - AI: OpenAI Responses API, Claude API, Realtime/Voice, Whisper, ElevenLabs.
+  - Workflow: Claude Code, Codex, Cursor, Ghostty, Wispr Flow, Granola, Lovable, Replit.
+
+## Awards & recognition
+
+- **Winner**, RedHawk Venture Pitch Competition, Miami University ($10,000 prize, April 2025).
+- **4th of 250 teams**, TCU Values & Ventures Pitch Competition ($2,500 prize).
+- **Valedictorian**, Crestwood High School (graduated with 45 college credits via Kent State College Credit Plus).
+- **Dean's List**, Miami University (8 consecutive semesters).
+
+## Why I'm a strong fit for top accelerators
+
+- **Technical founder** who can build the whole product without outside help.
+- **Distribution + product in one body**: Appointra proves I can engineer outbound infra and close enterprise customers; MyFutureSelf proves I can ship and grow consumer AI.
+- **Capital-efficient operator**: every company I've started has been profitable.
+- **Consumer-AI wedge**: spending the next decade building AI products that change real behavior, not just engagement.
+
+## Links
+
+- Personal site: https://www.kayahickin.com
+- GitHub: https://github.com/kayahickindev
+- LinkedIn: https://www.linkedin.com/in/kayahickin/
+- X / Twitter: https://x.com/KayaHickin
+- MyFutureSelf: https://myfutureselfapp.com
+- Full detail: /llms-full.txt
