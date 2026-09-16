@@ -100,6 +100,7 @@ export default function FieldScene({ mode }: { mode: HeroMode }) {
       intro: gl.getUniformLocation(prog, "uIntro"),
       scroll: gl.getUniformLocation(prog, "uScroll"),
       ptr: gl.getUniformLocation(prog, "uPtr"),
+      grain: gl.getUniformLocation(prog, "uGrain"),
     };
     gl.useProgram(prog);
 
@@ -128,6 +129,9 @@ export default function FieldScene({ mode }: { mode: HeroMode }) {
       gl.uniform1f(u.intro, siteEase(clock / INTRO_S));
       gl.uniform1f(u.scroll, scroll);
       gl.uniform3f(u.ptr, ptrX, 1 - ptrY, power);
+      // The grain is a desktop treatment. A phone gets a third of the pixels
+      // across the same strokes, so the film reads as noise sitting on them.
+      gl.uniform1f(u.grain, mode.phone ? 0 : 1);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     };
 

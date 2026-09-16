@@ -20,6 +20,9 @@ uniform float uTime;    // scene clock in seconds
 uniform float uIntro;   // 0 to 1, already eased on the site curve in JS
 uniform float uScroll;  // 0 to 1 across the hero's exit
 uniform vec3 uPtr;      // pointer x, y in uv, z = strength
+// Grain amplitude. Phones pass zero: at 390 across there are too few pixels per
+// stroke for it to read as film, and it lands as noise on the lines instead.
+uniform float uGrain;
 
 // Where the lines run out. The frame above this is haze and glow only.
 const float HORIZON = 0.855;
@@ -234,7 +237,7 @@ void main() {
 
   // Grain steps at twelve a second: at sixty it reads as a haze, not as film.
   float grain = hash(floor(gl_FragCoord.xy / max(uDpr, 1.0)) + floor(uTime * 12.0) * 17.31);
-  col += (grain - 0.5) * 0.030;
+  col += (grain - 0.5) * 0.030 * uGrain;
 
   // Eight bits cannot hold this gradient. A sub step of noise turns the
   // contour bands into dust.
