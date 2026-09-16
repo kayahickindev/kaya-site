@@ -2,7 +2,7 @@ import { profile, awards } from "./profile";
 
 // Centralized email parts for contact links and display.
 const EMAIL_USER = "kaya";
-const EMAIL_DOMAIN = "successai.app";
+const EMAIL_DOMAIN = "myfutureselfapp.com";
 
 export const siteConfig = {
   name: "Kaya Hickin",
@@ -64,9 +64,9 @@ export const siteConfig = {
     {
       slug: "myfutureself",
       name: "MyFutureSelf",
-      tagline: "AI mentorship for the person you're becoming.",
+      tagline: "A voice AI mentor that speaks as your future self.",
       description:
-        "A 90-day roadmap and a voice AI mentor that speaks as your future self.",
+        "A 90-day roadmap, daily actions, and a voice AI mentor that speaks as your future self. Built end to end by Kaya Hickin across iOS, Android, web, backend, and real-time voice.",
       highlights: [
         "Backed by Cintrifuse Capital",
         "Mobile, web, backend, and real-time voice AI",
@@ -76,7 +76,6 @@ export const siteConfig = {
         appStore:
           "https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360",
       },
-      image: "/mfs-hero.webp",
       featured: true,
       tags: ["AI", "Consumer", "iOS", "Android", "Voice"],
       status: "Current focus",
@@ -84,7 +83,7 @@ export const siteConfig = {
     {
       slug: "viral-loop",
       name: "Viral Loop",
-      tagline: "Done-for-you AI UGC influencer service.",
+      tagline: "A done-for-you AI UGC influencer service, built on Lovable.",
       description:
         "Service that generates AI UGC content and runs an organic influencer pipeline end-to-end. Built on Lovable.",
       links: {
@@ -97,9 +96,9 @@ export const siteConfig = {
     {
       slug: "dog-ai",
       name: "Dog AI",
-      tagline: "Custom multimodal model, from training to iOS.",
+      tagline: "A custom multimodal model, shipped as an iPhone app.",
       description:
-        "I built and trained a custom multimodal model for interpreting dog behavior, then shipped the iOS experience to the App Store.",
+        "Dog AI reads a dog's mood from a photo or video. Kaya assembled the dataset, trained the custom multimodal model behind it, and shipped the iOS app to the App Store.",
       links: {
         appStore:
           "https://apps.apple.com/us/app/dog-ai-dog-mood-detector/id6746574124",
@@ -111,7 +110,7 @@ export const siteConfig = {
     {
       slug: "appointra",
       name: "Appointra",
-      tagline: "B2B outbound, on autopilot.",
+      tagline: "B2B outbound agency. $20k MRR in three months.",
       description:
         "Lead generation agency for SF, NYC, and Chicago startups. Scaled to $20k MRR in three months using AI-powered outbound, generating millions in pipeline and hundreds of qualified meetings.",
       links: {
@@ -124,7 +123,7 @@ export const siteConfig = {
     {
       slug: "leadboost-pro",
       name: "LeadBoost Pro",
-      tagline: "Marketing for businesses that don't have a marketing team.",
+      tagline: "Web and marketing for local businesses. Profitable from month one.",
       description:
         "Web development, marketing, and consulting for small and underrepresented businesses in the local community. The first company I ran. Profitable from month one.",
       links: {
