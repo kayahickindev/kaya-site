@@ -89,15 +89,18 @@ function StoreShots({ shots }: { shots: StoreShot[] }) {
   return (
     <div className="relative z-10 flex w-full items-center justify-center gap-2 sm:gap-3">
       {shots.map((shot) => (
-        <Image
-          key={shot.src}
-          src={shot.src}
-          alt={shot.alt}
-          width={shot.width}
-          height={shot.height}
-          unoptimized
-          className="h-auto max-h-[240px] w-auto min-w-0 shrink rounded-lg object-contain ring-1 ring-white/10 drop-shadow-2xl sm:max-h-[340px] lg:max-h-[420px]"
-        />
+        // Each shot takes an equal share of the row and is sized by width, so
+        // three of them fit any panel without being cropped or distorted.
+        <div key={shot.src} className="min-w-0 flex-1 sm:max-w-[200px]">
+          <Image
+            src={shot.src}
+            alt={shot.alt}
+            width={shot.width}
+            height={shot.height}
+            unoptimized
+            className="h-auto w-full rounded-lg ring-1 ring-white/10 drop-shadow-2xl"
+          />
+        </div>
       ))}
     </div>
   );
