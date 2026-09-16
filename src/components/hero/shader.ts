@@ -253,7 +253,7 @@ void main() {
   tint = mix(tint, WARM, clamp(warmG * 1.15 + warmSide * 0.26 * sun, 0.0, 0.90));
   tint = mix(tint, COOL, clamp(coolG * 0.82 + coolSide * 0.74, 0.0, 0.90));
   tint = mix(tint, mix(vec3(1.0), vec3(0.80, 0.97, 1.0), coolSide * 0.85), crest * 0.72);
-  col += toLinear(tint) * ink * 1.85 * dim * (1.0 + swell * 0.55);
+  col += toLinear(tint) * ink * 4.60 * dim * (1.0 + swell * 0.55);
 
   // ---- grade -----------------------------------------------------------
   float r = length((p - vec2(0.5, 0.52)) * vec2(aspect, 1.0)) / (0.52 * aspect);
@@ -270,8 +270,19 @@ void main() {
   // brighter than its middle and the light stops having a direction at all.
   col *= 1.0 - 0.26 * (1.0 - smoothstep(0.0, 0.16, p.x));
 
+  // The whole frame used to live inside a narrow band of near black and read
+  // dim rather than lit. Separation is taken here, in linear light and before
+  // the shoulder, so the shoulder still owns the ceiling and no crest is ever
+  // clipped flat: the crests were lifted at the source, a black point drops the
+  // troughs and the corners, and the exponential holds the brightest pixel
+  // under 0.85 however hard the field is driven. The black point is a soft one,
+  // c squared over c plus the point, which is the straight subtraction for
+  // anything bright and rolls into nothing for anything dark. Subtracting flat
+  // would clip a whole corner to black along a line with a kink in it, and that
+  // is the one thing the frame is not allowed to grow.
+  col = col * col / (col + 0.0030) * 1.55;
   col = 1.0 - exp(-col * 1.18);
-  col = toSrgb(col) * 0.86;
+  col = toSrgb(col) * 0.845;
 
   // Grain steps at twelve a second: at sixty it reads as a haze, not as film.
   float grain = hash(floor(gl_FragCoord.xy / max(uDpr, 1.0)) + floor(uTime * 12.0) * 17.31);
