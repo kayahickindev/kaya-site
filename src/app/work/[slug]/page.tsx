@@ -12,6 +12,7 @@ import {
   Target,
 } from "lucide-react";
 import { SubpageShell } from "@/components/SubpageShell";
+import { dogAi, myFutureSelf, type StoreShot } from "@/data/assets";
 import { siteConfig } from "@/data/content";
 import { getMarketingMetrics } from "@/lib/marketing-metrics";
 import type { MarketingMetricsSnapshot } from "@/lib/marketing-metrics";
@@ -84,20 +85,29 @@ function ActionLink({ action }: { action: ProjectAction }) {
   );
 }
 
-function MyFutureSelfVisual({ image, name }: { image?: string; name: string }) {
+function StoreShots({ shots }: { shots: StoreShot[] }) {
+  return (
+    <div className="relative z-10 flex w-full items-center justify-center gap-2 sm:gap-3">
+      {shots.map((shot) => (
+        <Image
+          key={shot.src}
+          src={shot.src}
+          alt={shot.alt}
+          width={shot.width}
+          height={shot.height}
+          unoptimized
+          className="h-auto max-h-[240px] w-auto min-w-0 shrink rounded-lg object-contain ring-1 ring-white/10 drop-shadow-2xl sm:max-h-[340px] lg:max-h-[420px]"
+        />
+      ))}
+    </div>
+  );
+}
+
+function MyFutureSelfVisual() {
   return (
     <div className="relative flex h-full min-h-0 items-center justify-center overflow-hidden rounded-md border border-white/10 bg-neutral-950 p-4 text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_18%,rgba(34,211,238,0.18),transparent_31%),linear-gradient(150deg,rgba(34,211,238,0.09),transparent_38%,rgba(244,114,182,0.13)_76%,rgba(251,191,36,0.08))]" />
-      {image ? (
-        <Image
-          src={image}
-          alt={`${name} app screenshots`}
-          width={781}
-          height={1250}
-          className="relative z-10 h-full max-h-[460px] w-auto drop-shadow-2xl"
-          priority
-        />
-      ) : null}
+      <StoreShots shots={myFutureSelf.store.slice(0, 3)} />
     </div>
   );
 }
@@ -119,26 +129,7 @@ function DogAiVisual() {
             behavioral dataset, then wrapped it in a narrow consumer flow.
           </p>
         </div>
-        <div className="grid grid-cols-3 gap-2">
-          <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
-            <p className="text-xl font-semibold">Custom</p>
-            <p className="mt-0.5 text-[11px] leading-snug text-neutral-400">
-              multimodal LLM
-            </p>
-          </div>
-          <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
-            <p className="text-xl font-semibold">Harvard</p>
-            <p className="mt-0.5 text-[11px] leading-snug text-neutral-400">
-              behavioral dataset
-            </p>
-          </div>
-          <div className="rounded-md border border-white/10 bg-white/[0.06] p-3">
-            <p className="text-xl font-semibold">Live</p>
-            <p className="mt-0.5 text-[11px] leading-snug text-neutral-400">
-              App Store, paid
-            </p>
-          </div>
-        </div>
+        <StoreShots shots={dogAi.store.slice(0, 3)} />
       </div>
     </div>
   );
@@ -316,12 +307,7 @@ function ViralLoopVisual() {
 
 function ProjectVisual({ detail }: { detail: ProjectDetailItem }) {
   if (detail.slug === "myfutureself") {
-    return (
-      <MyFutureSelfVisual
-        image={detail.project.image}
-        name={detail.project.name}
-      />
-    );
+    return <MyFutureSelfVisual />;
   }
 
   if (detail.slug === "viral-loop") {

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Briefcase, Globe, Smartphone, type LucideIcon } from "lucide-react";
 import { CompanyMark, hasCompanyMark } from "@/components/CompanyMark";
+import { myFutureSelf } from "@/data/assets";
 import { SubpageShell } from "@/components/SubpageShell";
 import { TiltImage } from "@/components/TiltImage";
 import { siteConfig } from "@/data/content";
@@ -148,17 +149,20 @@ export default async function WorkPage() {
                 </ul>
               </div>
 
-              <TiltImage className="relative min-h-[260px] overflow-hidden md:min-h-0">
-                {hero.project.image ? (
-                  <Image
-                    src={hero.project.image}
-                    alt={`${hero.project.name} app screenshots`}
-                    width={781}
-                    height={1250}
-                    unoptimized
-                    className="absolute inset-0 m-auto h-full max-h-[320px] w-auto scale-[1.0] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] transition-transform duration-500 group-hover:scale-[1.05] sm:max-h-[420px] sm:scale-[1.2] sm:group-hover:scale-[1.25]"
-                  />
-                ) : null}
+              <TiltImage className="relative min-h-[300px] overflow-hidden md:min-h-0">
+                <div className="absolute inset-0 flex items-center justify-center gap-2 p-4">
+                  {myFutureSelf.store.slice(0, 2).map((shot) => (
+                    <Image
+                      key={shot.src}
+                      src={shot.src}
+                      alt={shot.alt}
+                      width={shot.width}
+                      height={shot.height}
+                      unoptimized
+                      className="h-full max-h-[260px] w-auto rounded-lg object-contain ring-1 ring-black/10 drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] transition-transform duration-500 group-hover:scale-[1.04] sm:max-h-[360px] dark:ring-white/10"
+                    />
+                  ))}
+                </div>
               </TiltImage>
             </div>
           </Link>

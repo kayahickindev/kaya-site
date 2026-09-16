@@ -85,9 +85,8 @@ export const siteConfig = {
         appStore:
           "https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360",
       },
-      image: "/mfs-hero.webp",
       featured: true,
-      tags: ["AI", "Consumer", "iOS", "Voice"],
+      tags: ["AI", "Consumer", "iOS", "Android", "Voice"],
       status: "Current focus",
     },
     {

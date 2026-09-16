@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { myFutureSelf } from "@/data/assets";
 import { siteConfig } from "@/data/content";
 import {
   parseMetricDisplay,
@@ -321,23 +322,24 @@ export function CommandCenter({
               <Link
                 href={`/work/${featured.slug}`}
                 aria-label={`Open ${featured.name} case study`}
-                className="relative -mt-16 flex w-full items-center justify-center xl:-mt-24"
+                className="relative mt-3 flex w-full items-end justify-center gap-2 sm:gap-3"
               >
                 <div
                   aria-hidden
                   className="pointer-events-none absolute inset-[-8%] bg-[radial-gradient(ellipse_60%_55%_at_50%_55%,rgba(251,191,36,0.26),transparent_65%)] dark:bg-[radial-gradient(ellipse_60%_55%_at_50%_55%,rgba(251,191,36,0.20),transparent_65%)]"
                 />
-                {featured.image ? (
+                {myFutureSelf.store.slice(0, 2).map((shot) => (
                   <Image
-                    src={featured.image}
-                    alt={`${featured.name} app screenshots`}
-                    width={781}
-                    height={1250}
+                    key={shot.src}
+                    src={shot.src}
+                    alt={shot.alt}
+                    width={shot.width}
+                    height={shot.height}
                     unoptimized
                     loading="eager"
-                    className="relative h-auto max-h-[520px] w-auto scale-[1.05] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] sm:scale-[1.18] xl:scale-[1.22]"
+                    className="relative h-auto max-h-[300px] w-auto rounded-xl object-contain ring-1 ring-black/10 drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] sm:max-h-[380px] xl:max-h-[440px] dark:ring-white/10"
                   />
-                ) : null}
+                ))}
               </Link>
             </motion.div>
           )}
