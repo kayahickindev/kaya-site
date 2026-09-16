@@ -1,26 +1,34 @@
-import { profile, awards } from "./profile";
-
-// Centralized email parts for contact links and display.
+// Email is split to prevent plain-text scraping. Reassembled on click only.
 const EMAIL_USER = "kaya";
-const EMAIL_DOMAIN = "successai.app";
+const EMAIL_DOMAIN = "myfutureselfapp.com";
 
 export const siteConfig = {
   name: "Kaya Hickin",
-  url: "https://kayahickin.com",
+  url: "https://www.kayahickin.com",
 
   seo: {
-    title: "Kaya Hickin | Full-Stack Developer & MyFutureSelf CTO",
-    description: "Kaya Hickin, co-founder and CTO of Cintrifuse-backed MyFutureSelf. Full-stack developer building consumer AI, real-time voice, and custom multimodal models.",
+    title: "Kaya Hickin — Technical Co-founder & CTO, MyFutureSelf",
+    description:
+      "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, a Cintrifuse-backed consumer AI app with 3.8K+ active paid subscribers, a $245K+ annual run rate, 66K+ downloads, and a 4.7★ App Store rating. Built the original iOS, backend, and voice-AI stack end to end. Building consumer AI for behavior change.",
   },
 
-  availability: profile.location,
-  recognitions: awards.map((award) => `${award.name}, ${award.issuer}`),
+  availability: "Cleveland, OH",
+
+  recognitions: [
+    "Startup Catalyst Award, Miami University 2026",
+    "RedHawk Venture Pitch Prize, Miami University 2025",
+    "Values and Ventures Honorable Mention, TCU 2026",
+  ],
 
   about: {
-    paragraphs: profile.about,
+    paragraphs: [
+      "I started my first company freshman year because I wanted to see if I could build something people would pay for. Turns out I could, so I kept going. Three companies later, I'm three for three on profitability.",
+      "My main focus right now is MyFutureSelf, an AI app that helps people define who they want to become and then become that person through a 90-day personalized roadmap, an AI mentor that speaks as their future self, and daily action. It is backed by Cintrifuse Capital. As CTO, I built the original product end to end and lead engineering across mobile, web, backend, and AI.",
+      "I'm AI-native in how I build. In the year to September 2026 I logged 13,621 GitHub contributions, most of them written alongside Claude Code and Codex, and 100B+ tokens across those two coding tools.",
+      "I graduated cum laude from Miami University with a B.S. in Business, a Marketing major and an Entrepreneurship minor, and I'm based in Cleveland, OH. Most of my time goes toward thinking about how AI can build consumer products that change real behavior, not just engagement metrics.",
+    ],
     sidebar: [
-      { label: "Education", value: "Miami University · Cum laude", detail: "B.S. in Business, Marketing major, Entrepreneurship minor. May 2026 · 3.74 GPA.", icon: "GraduationCap" },
-      { label: "Background", value: "Valedictorian · Class of 2022", detail: "Crestwood High School. Dean's List honors across engineering and business at Miami.", icon: "GraduationCap" },
+      { label: "Education", value: "Miami University · Cum laude", detail: "B.S. in Business, Marketing major, Entrepreneurship minor. Farmer School of Business, May 2026.", icon: "GraduationCap" },
     ],
   },
 
@@ -36,7 +44,7 @@ export const siteConfig = {
       { name: "Expo", category: "Android" },
       { name: "Google Play", category: "Android" },
       { name: "TypeScript", category: "Web" },
-      { name: "Next.js / React", category: "Web" },
+      { name: "Next.js 16 / React 19", category: "Web" },
       { name: "Tailwind CSS v4", category: "Web" },
       { name: "Framer Motion", category: "Web" },
       { name: "Vercel", category: "Web" },
@@ -68,15 +76,15 @@ export const siteConfig = {
       description:
         "A 90-day roadmap and a voice AI mentor that speaks as your future self.",
       highlights: [
+        "3.8K+ active paid subscribers · $245K+ annual run rate",
+        "66K+ downloads · 4.7★ from 1,611 ratings",
         "Backed by Cintrifuse Capital",
-        "Mobile, web, backend, and real-time voice AI",
       ],
       links: {
         website: "https://myfutureselfapp.com/",
         appStore:
           "https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360",
       },
-      image: "/mfs-hero.webp",
       featured: true,
       tags: ["AI", "Consumer", "iOS", "Android", "Voice"],
       status: "Current focus",
@@ -97,9 +105,9 @@ export const siteConfig = {
     {
       slug: "dog-ai",
       name: "Dog AI",
-      tagline: "Custom multimodal model, from training to iOS.",
+      tagline: "Custom multimodal LLM, trained on Harvard behavioral data.",
       description:
-        "I built and trained a custom multimodal model for interpreting dog behavior, then shipped the iOS experience to the App Store.",
+        "iOS app that interprets dog behavior with a custom multimodal LLM I built and trained on a Harvard behavioral dataset. A weekend build that turned into a paying App Store product.",
       links: {
         appStore:
           "https://apps.apple.com/us/app/dog-ai-dog-mood-detector/id6746574124",
@@ -171,7 +179,7 @@ export const siteConfig = {
     url: "https://github.com/kayahickindev",
   },
 
-  // Contact address used by the contact page.
+  // Email parts kept separate so the literal address never appears in source HTML.
   emailParts: {
     user: EMAIL_USER,
     domain: EMAIL_DOMAIN,

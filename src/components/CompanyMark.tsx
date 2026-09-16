@@ -1,7 +1,11 @@
 import Image from "next/image";
+import { dogAi, myFutureSelf } from "@/data/assets";
 
+// MyFutureSelf and Dog AI use their current App Store artwork; see
+// src/data/assets.ts for where each one came from.
 const logos: Record<string, { src: string; alt: string }> = {
-  MyFutureSelf: { src: "/logos/myfutureself.png", alt: "MyFutureSelf logo" },
+  MyFutureSelf: { src: myFutureSelf.icon, alt: myFutureSelf.iconAlt },
+  "Dog AI": { src: dogAi.icon, alt: dogAi.iconAlt },
   Appointra: { src: "/logos/appointra.png", alt: "Appointra logo" },
   "LeadBoost Pro": { src: "/logos/leadboost-pro.png", alt: "LeadBoost Pro logo" },
 };
