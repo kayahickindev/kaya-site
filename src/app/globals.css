@@ -502,6 +502,13 @@ body:has(.hero[data-intro="capture"]) .chapters {
   .hero-content {
     bottom: 76px;
   }
+  /* The still is one 16:9 frame and a phone crops a quarter of it, so which
+     quarter decides whether the quiet zone baked into it lands under the type.
+     At 62 percent it did not, and the reduced-motion and no-JS visitors, who
+     never leave the still, had the field running through the name. */
+  .hero-poster {
+    object-position: 26% 50%;
+  }
   .proof {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);

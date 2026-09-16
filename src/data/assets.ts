@@ -18,12 +18,15 @@ export const heroPortrait = {
 
 // Hero still: one frame of the site's own field shader in capture mode
 // (?poster=1), 2026-09-15, rendered at 1920x1080 off the production build at
-// the twenty fourth second, which is the settled field rather than its intro.
-// Re-rendered the same day for the graded pass: the accent temperature across
-// the left third, the raking sun, and the fall into the bottom corners and the
-// far left. It is what no-JS, reduced-motion and still-loading visitors see, so
-// it has to be a state the live canvas actually passes through, and it has to be
-// re-rendered with the shader or the fallback is a picture of the retired one.
+// the twenty fourth second, which is the settled field rather than its intro,
+// and encoded at webp quality 85. Re-rendered the same day for the cleanup
+// pass: the quiet zone over the text column, the fade off the bottom edge, the
+// field resolving into the air instead of stopping at the horizon, and the
+// lifted contrast. It is what no-JS, reduced-motion and still-loading visitors
+// see, so it has to be a state the live canvas actually passes through, and it
+// has to be re-rendered with the shader or the fallback is a picture of the
+// retired one. Capture mode has to hide the chapter pill as well now that the
+// pill arrives inside the hero, or the still comes back with a nav bar in it.
 export const heroPoster = {
   src: "/hero/scene-poster.webp",
 };
