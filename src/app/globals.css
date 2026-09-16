@@ -460,6 +460,9 @@ body:has(.hero[data-intro="capture"]) .chapters {
 .proof {
   display: flex;
   flex-wrap: wrap;
+  /* The lead figure is taller than the other two, so the items align on their
+     bottoms and the three captions share one baseline instead of stepping. */
+  align-items: flex-end;
   gap: 10px 40px;
   margin: var(--hero-step) 0 0;
   padding: 0;
