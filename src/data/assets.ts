@@ -19,8 +19,11 @@ export const heroPortrait = {
 // Hero still: one frame of the site's own field shader in capture mode
 // (?poster=1), 2026-09-15, rendered at 1920x1080 off the production build at
 // the twenty fourth second, which is the settled field rather than its intro.
-// It is what no-JS, reduced-motion and still-loading visitors see, so it has to
-// be a state the live canvas actually passes through.
+// Re-rendered the same day for the graded pass: the accent temperature across
+// the left third, the raking sun, and the fall into the bottom corners and the
+// far left. It is what no-JS, reduced-motion and still-loading visitors see, so
+// it has to be a state the live canvas actually passes through, and it has to be
+// re-rendered with the shader or the fallback is a picture of the retired one.
 export const heroPoster = {
   src: "/hero/scene-poster.webp",
 };
