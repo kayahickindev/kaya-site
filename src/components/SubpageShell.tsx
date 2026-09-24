@@ -1,11 +1,8 @@
 "use client";
 
-import { type ReactNode } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { type CSSProperties, type ReactNode } from "react";
 import { Footer } from "./Footer";
 import { TopNav } from "./TopNav";
-
-const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];
 
 export type Accent = "amber" | "cyan" | "emerald" | "violet" | "rose";
 
@@ -49,8 +46,9 @@ const accents: Record<Accent, AccentSpec> = {
   },
 };
 
+// The dots pulse in CSS (.signal-dot), so the markup is the same with and
+// without reduced motion and hydration never mismatches.
 function SignalField({ accent }: { accent: Accent }) {
-  const reducedMotion = useReducedMotion();
   const spec = accents[accent];
 
   return (
@@ -62,21 +60,17 @@ function SignalField({ accent }: { accent: Accent }) {
         const top = (i * 53) % 100;
         const delay = (i % 9) * 0.28;
         return (
-          <motion.span
+          <span
             key={i}
-            className={`absolute h-1 w-1 rounded-full ${spec.dot} ${spec.dotDark}`}
-            style={{ left: `${left}%`, top: `${top}%` }}
-            animate={
-              reducedMotion
-                ? undefined
-                : { opacity: [0.18, 0.6, 0.18], scale: [0.8, 1.05, 0.8] }
+            className={`signal-dot absolute h-1 w-1 rounded-full ${spec.dot} ${spec.dotDark}`}
+            style={
+              {
+                left: `${left}%`,
+                top: `${top}%`,
+                "--pulse-duration": `${6.8 + (i % 5)}s`,
+                "--pulse-delay": `${delay}s`,
+              } as CSSProperties
             }
-            transition={{
-              duration: 6.8 + (i % 5),
-              delay,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
           />
         );
       })}
@@ -96,14 +90,12 @@ export function SubpageShell({ children, accent = "amber" }: Props) {
       <div className="relative z-10 flex min-h-dvh flex-col gap-6 px-4 py-3 sm:px-5 sm:py-4 lg:px-7">
         <TopNav />
 
-        <motion.section
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.42, ease }}
-          className="flex-1 pb-6"
+        <section
+          className="intro-rise flex-1 pb-6"
+          style={{ "--intro-y": "10px" } as CSSProperties}
         >
           {children}
-        </motion.section>
+        </section>
 
         <Footer />
       </div>

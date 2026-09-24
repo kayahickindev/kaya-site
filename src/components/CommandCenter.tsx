@@ -1,11 +1,11 @@
 "use client";
 
-import { type ComponentType } from "react";
+import { type ComponentType, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MotionConfig, motion, useReducedMotion } from "framer-motion";
+import { MotionConfig, motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { myFutureSelf, type StoreShot } from "@/data/assets";
+import { myFutureSelf } from "@/data/assets";
 import { siteConfig } from "@/data/content";
 import {
   formatCount,
@@ -18,6 +18,7 @@ import {
 import { ContributionGraph } from "./ContributionGraph";
 import { Footer } from "./Footer";
 import { MetricTiles } from "./MetricTiles";
+import { PhoneFan } from "./PhoneFan";
 import { RevealHeadline } from "./RevealHeadline";
 import { TopNav } from "./TopNav";
 
@@ -80,8 +81,6 @@ function InstagramIcon({ size = 18 }: { size?: number }) {
 }
 
 function SignalField() {
-  const reducedMotion = useReducedMotion();
-
   return (
     <div
       aria-hidden
@@ -98,21 +97,17 @@ function SignalField() {
             ? "bg-cyan-700/35 shadow-[0_0_12px_rgba(8,145,178,0.30)] dark:bg-cyan-300/45 dark:shadow-[0_0_14px_rgba(34,211,238,0.30)]"
             : "bg-amber-700/35 shadow-[0_0_12px_rgba(217,119,6,0.30)] dark:bg-amber-300/45 dark:shadow-[0_0_14px_rgba(251,191,36,0.30)]";
         return (
-          <motion.span
+          <span
             key={i}
-            className={`absolute h-1 w-1 rounded-full ${tint}`}
-            style={{ left: `${left}%`, top: `${top}%` }}
-            animate={
-              reducedMotion
-                ? undefined
-                : { opacity: [0.18, 0.6, 0.18], scale: [0.8, 1.05, 0.8] }
+            className={`signal-dot absolute h-1 w-1 rounded-full ${tint}`}
+            style={
+              {
+                left: `${left}%`,
+                top: `${top}%`,
+                "--pulse-duration": `${6.8 + (i % 5)}s`,
+                "--pulse-delay": `${delay}s`,
+              } as CSSProperties
             }
-            transition={{
-              duration: 6.8 + (i % 5),
-              delay,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
           />
         );
       })}
@@ -232,80 +227,6 @@ function GitHubStrip({ calendar }: { calendar: ContributionCalendar }) {
   );
 }
 
-// The product story in three real App Store composites: the avatar in front,
-// goals and the Future Self chat tucked behind it. Sizes come from --fan-h so
-// the whole fan fits the first fold at every desktop height.
-const fanShots = {
-  left: myFutureSelf.store[2],
-  center: myFutureSelf.store[1],
-  right: myFutureSelf.store[3],
-};
-
-function FanPhone({ shot, className }: { shot: StoreShot; className: string }) {
-  return (
-    <Image
-      src={shot.src}
-      alt={shot.alt}
-      width={shot.width}
-      height={shot.height}
-      unoptimized
-      loading="eager"
-      className={`block h-full w-auto rounded-xl ring-1 ring-black/10 dark:ring-white/10 ${className}`}
-    />
-  );
-}
-
-// With reduced motion the side phones appear in place (MotionConfig skips the
-// transform and keeps the fade), with no server/client markup difference.
-function PhoneFan() {
-  const side = (direction: -1 | 1) => ({
-    initial: { x: "-50%", rotate: 0, opacity: 0 },
-    animate: {
-      x: direction === -1 ? "-131%" : "31%",
-      rotate: direction * 6,
-      opacity: 1,
-    },
-    transition: { duration: 0.7, delay: 0.25, ease },
-  });
-
-  return (
-    <MotionConfig reducedMotion="user">
-      <div className="relative mx-auto h-[var(--fan-h)] w-full [--fan-h:max(240px,min(calc(100dvh-340px),82cqw,680px))]">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-[-8%] bg-[radial-gradient(ellipse_55%_55%_at_50%_55%,rgba(251,191,36,0.26),transparent_65%)] dark:bg-[radial-gradient(ellipse_55%_55%_at_50%_55%,rgba(251,191,36,0.20),transparent_65%)]"
-        />
-        <motion.div
-          {...side(-1)}
-          style={{ originX: 0.5, originY: 1 }}
-          className="absolute bottom-[5%] left-1/2 h-[84%]"
-        >
-          <FanPhone
-            shot={fanShots.left}
-            className="brightness-[0.82] drop-shadow-[0_20px_40px_rgba(0,0,0,0.35)]"
-          />
-        </motion.div>
-        <motion.div
-          {...side(1)}
-          style={{ originX: 0.5, originY: 1 }}
-          className="absolute bottom-[5%] left-1/2 h-[84%]"
-        >
-          <FanPhone
-            shot={fanShots.right}
-            className="brightness-[0.82] drop-shadow-[0_20px_40px_rgba(0,0,0,0.35)]"
-          />
-        </motion.div>
-        <div className="absolute bottom-0 left-1/2 z-10 h-full -translate-x-1/2">
-          <FanPhone
-            shot={fanShots.center}
-            className="drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)]"
-          />
-        </div>
-      </div>
-    </MotionConfig>
-  );
-}
-
 export function CommandCenter({
   metrics,
   contributions,
@@ -323,11 +244,14 @@ export function CommandCenter({
         <TopNav />
 
         <section className="grid grid-cols-1 content-center gap-10 pb-4 lg:grid-cols-[minmax(0,45rem)_minmax(22rem,1fr)] lg:items-center lg:gap-6 lg:pb-6 2xl:grid-cols-[minmax(0,52rem)_minmax(0,1fr)]">
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.48, ease }}
-            className="flex flex-col gap-4 lg:gap-5 2xl:gap-6"
+          <div
+            style={
+              {
+                "--intro-y": "14px",
+                "--intro-duration": "0.48s",
+              } as CSSProperties
+            }
+            className="intro-rise flex flex-col gap-4 lg:gap-5 2xl:gap-6"
           >
             <div className="group flex w-fit items-center gap-3">
               <span className="relative block h-14 w-14 shrink-0 overflow-hidden rounded-2xl border border-black/10 shadow-[0_4px_16px_-6px_rgba(0,0,0,0.4)] ring-1 ring-amber-400/25 dark:border-white/15">
@@ -412,14 +336,18 @@ export function CommandCenter({
                 brandClass="hover:bg-gradient-to-tr hover:from-amber-500 hover:via-pink-600 hover:to-purple-700 hover:text-white hover:border-transparent"
               />
             </div>
-          </motion.div>
+          </div>
 
           {featured && (
-            <motion.div
-              initial={{ opacity: 0, x: 16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.08, ease }}
-              className="@container relative flex flex-col items-center gap-4"
+            <div
+              style={
+                {
+                  "--intro-x": "16px",
+                  "--intro-duration": "0.5s",
+                  "--intro-delay": "0.08s",
+                } as CSSProperties
+              }
+              className="intro-rise @container relative flex flex-col items-center gap-4"
             >
               <Link
                 href={`/work/${featured.slug}`}
@@ -442,9 +370,16 @@ export function CommandCenter({
                 aria-label={`Open ${featured.name} case study`}
                 className="relative block w-full rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60"
               >
-                <PhoneFan />
+                <PhoneFan
+                  shots={{
+                    left: myFutureSelf.store[2],
+                    center: myFutureSelf.store[1],
+                    right: myFutureSelf.store[3],
+                  }}
+                  sizeClassName="[--fan-h:max(240px,min(calc(100dvh-340px),82cqw,680px))]"
+                />
               </Link>
-            </motion.div>
+            </div>
           )}
         </section>
 

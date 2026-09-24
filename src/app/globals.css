@@ -180,9 +180,61 @@ body {
     radial-gradient(45% 55% at 50% 80%, rgba(244, 114, 182, 0.14), transparent 65%);
 }
 
+/* Entry animations that are safe to server-render. The markup is identical
+   with or without reduced motion and the media query below switches them off,
+   so reduced-motion visitors see the content at first paint and hydration
+   never mismatches. `backwards` leaves no transform behind once they finish,
+   so fixed-position descendants keep the viewport as their containing block. */
+@keyframes intro-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--intro-x, 0px), var(--intro-y, 0px), 0);
+  }
+}
+
+.intro-rise {
+  animation: intro-rise var(--intro-duration, 0.42s)
+    cubic-bezier(0.21, 0.47, 0.32, 0.98) var(--intro-delay, 0s) backwards;
+}
+
+@keyframes reveal-word {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+.reveal-word {
+  display: inline-block;
+  animation: reveal-word 0.7s cubic-bezier(0.21, 0.47, 0.32, 0.98)
+    calc(0.1s + var(--word-index, 0) * 0.08s) backwards;
+}
+
+@keyframes signal-pulse {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+.signal-dot {
+  animation: signal-pulse var(--pulse-duration, 6.8s) ease-in-out
+    var(--pulse-delay, 0s) infinite backwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .intro-rise,
+  .reveal-word,
+  .signal-dot {
+    animation: none;
   }
 
   .accent-pulse,

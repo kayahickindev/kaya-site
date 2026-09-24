@@ -1,19 +1,20 @@
-"use client";
+import type { CSSProperties, ReactNode } from "react";
 
-import { motion, useReducedMotion } from "framer-motion";
-
-const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];
-
-export default function Template({ children }: { children: React.ReactNode }) {
-  const reducedMotion = useReducedMotion();
-
+// The page intro runs in CSS so the server and client render the same markup
+// whether or not the visitor prefers reduced motion; globals.css turns it off
+// for them, and the page is visible at first paint.
+export default function Template({ children }: { children: ReactNode }) {
   return (
-    <motion.div
-      initial={reducedMotion ? false : { opacity: 0, y: 6 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.28, ease }}
+    <div
+      className="intro-rise"
+      style={
+        {
+          "--intro-y": "6px",
+          "--intro-duration": "0.28s",
+        } as CSSProperties
+      }
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
