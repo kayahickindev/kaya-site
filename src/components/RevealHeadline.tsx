@@ -1,39 +1,31 @@
-"use client";
+import { Fragment, type CSSProperties } from "react";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
-
-const ease = [0.21, 0.47, 0.32, 0.98] as [number, number, number, number];
-
-const wordVariants: Variants = {
-  hidden: { y: "100%" },
-  show: (i: number) => ({
-    y: 0,
-    transition: { duration: 0.7, ease, delay: 0.1 + i * 0.08 },
-  }),
-};
-
-export function RevealHeadline({ words, className }: { words: string[]; className?: string }) {
-  const reducedMotion = useReducedMotion();
-
-  if (reducedMotion) {
-    return <h1 className={className}>{words.join(" ")}</h1>;
-  }
-
+// Word-by-word rise, driven by CSS (.reveal-word in globals.css). The markup is
+// the same with and without reduced motion, so hydration never mismatches, and
+// reduced-motion visitors get the finished headline at first paint.
+export function RevealHeadline({
+  words,
+  className,
+}: {
+  words: string[];
+  className?: string;
+}) {
   return (
     <h1 className={className}>
       {words.map((word, index) => (
-        <span key={`${word}-${index}`} className="reveal-mask">
-          <motion.span
-            custom={index}
-            initial="hidden"
-            animate="show"
-            variants={wordVariants}
-            className="inline-block"
-          >
-            {word}
-            {index < words.length - 1 ? " " : ""}
-          </motion.span>
-        </span>
+        <Fragment key={`${word}-${index}`}>
+          <span className="reveal-mask">
+            <span
+              className="reveal-word"
+              style={{ "--word-index": index } as CSSProperties}
+            >
+              {word}
+            </span>
+          </span>
+          {/* The space sits between the masks: a trailing space inside an
+              inline-block collapses. */}
+          {index < words.length - 1 ? " " : null}
+        </Fragment>
       ))}
     </h1>
   );

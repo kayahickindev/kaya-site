@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { useCountUp } from "@/lib/hooks";
 import { Sparkline } from "./Sparkline";
 
@@ -88,14 +88,14 @@ export function MetricTiles({
   metrics: Metric[];
   accent?: TileAccent;
 }) {
-  const reducedMotion = useReducedMotion();
-
+  // useCountUp lands on the final figure at once for reduced motion. Branching
+  // here instead would render different text on the server and the client.
   return (
     <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
       {metrics.map((metric, index) => (
         <MetricTile
           key={metric.label}
-          metric={reducedMotion ? { ...metric, display: metric.display ?? `${metric.prefix ?? ""}${metric.value}${metric.suffix ?? ""}` } : metric}
+          metric={metric}
           index={index}
           accent={accent}
         />

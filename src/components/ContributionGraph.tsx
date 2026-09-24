@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { MotionConfig, motion, useReducedMotion } from "framer-motion";
 import {
   formatCount,
   type ContributionCalendar,
@@ -211,39 +211,43 @@ export function ContributionGraph({
           {formatCount(calendar.total)} contributions
         </p>
       </div>
-      <div className="overflow-x-auto">
-        <svg
-          width={width}
-          height={height}
-          viewBox={`0 0 ${width} ${height}`}
-          className="mx-auto block max-w-full"
-          preserveAspectRatio="xMidYMid meet"
-          role="img"
-          aria-label="GitHub contribution calendar for the last year"
-        >
-          {cells.map((cell) => (
-            <motion.rect
-              key={cell.date}
-              x={cell.x * PITCH}
-              y={cell.y * PITCH}
-              width={CELL}
-              height={CELL}
-              rx={2}
-              fill={cellFills[cell.level]}
-              className="cursor-pointer transition-opacity hover:opacity-80"
-              initial={reducedMotion ? false : { opacity: 0, scale: 0.6 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                duration: 0.25,
-                delay: reducedMotion ? 0 : cell.x * 0.006 + cell.y * 0.01,
-                ease: [0.21, 0.47, 0.32, 0.98],
-              }}
-            >
-              <title>{cellTitle(cell)}</title>
-            </motion.rect>
-          ))}
-        </svg>
-      </div>
+      {/* MotionConfig skips the scale-in for reduced motion and keeps the
+          fade, with the same markup on the server and the client. */}
+      <MotionConfig reducedMotion="user">
+        <div className="overflow-x-auto">
+          <svg
+            width={width}
+            height={height}
+            viewBox={`0 0 ${width} ${height}`}
+            className="mx-auto block max-w-full"
+            preserveAspectRatio="xMidYMid meet"
+            role="img"
+            aria-label="GitHub contribution calendar for the last year"
+          >
+            {cells.map((cell) => (
+              <motion.rect
+                key={cell.date}
+                x={cell.x * PITCH}
+                y={cell.y * PITCH}
+                width={CELL}
+                height={CELL}
+                rx={2}
+                fill={cellFills[cell.level]}
+                className="cursor-pointer transition-opacity hover:opacity-80"
+                initial={{ opacity: 0, scale: 0.6 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.25,
+                  delay: reducedMotion ? 0 : cell.x * 0.006 + cell.y * 0.01,
+                  ease: [0.21, 0.47, 0.32, 0.98],
+                }}
+              >
+                <title>{cellTitle(cell)}</title>
+              </motion.rect>
+            ))}
+          </svg>
+        </div>
+      </MotionConfig>
       <div className="flex items-center justify-end gap-1.5 text-[11px] text-neutral-500 dark:text-neutral-400">
         <span>Less</span>
         {[0, 1, 2, 3, 4].map((lvl) => (

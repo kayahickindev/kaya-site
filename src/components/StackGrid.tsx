@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, MotionConfig, type Variants } from "framer-motion";
 import {
   Apple,
   BrainCircuit,
@@ -56,53 +56,55 @@ const itemVariants: Variants = {
 };
 
 export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
-  const reducedMotion = useReducedMotion();
-
+  // MotionConfig skips the rises for reduced motion and keeps the fades, with
+  // the same markup on the server and the client.
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-      {grouped.map((group, columnIndex) => {
-        const meta = categoryMeta[group.category];
-        const Icon = meta.icon;
+    <MotionConfig reducedMotion="user">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+        {grouped.map((group, columnIndex) => {
+          const meta = categoryMeta[group.category];
+          const Icon = meta.icon;
 
-        return (
-          <motion.div
-            key={group.category}
-            custom={columnIndex}
-            initial={reducedMotion ? false : "hidden"}
-            animate="show"
-            variants={columnVariants}
-            className={`${cardSurface} p-3`}
-          >
-            <div
-              aria-hidden
-              className={`pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r ${meta.bar}`}
-            />
-            <div className="flex items-center gap-2 border-b border-black/10 pb-2 dark:border-white/10">
-              <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-cyan-500/10 ring-1 ring-cyan-500/20 dark:bg-cyan-300/10 dark:ring-cyan-300/20">
-                <Icon size={13} strokeWidth={2} className={meta.accent} />
-              </span>
-              <h2 className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
-                {group.category}
-              </h2>
-            </div>
-            <ul className="mt-3 grid gap-2.5">
-              {group.items.map((item, itemIndex) => (
-                <motion.li
-                  key={item.name}
-                  custom={itemIndex}
-                  initial={reducedMotion ? false : "hidden"}
-                  animate="show"
-                  variants={itemVariants}
-                  className="flex items-center gap-2.5 rounded-md bg-neutral-950/[0.04] px-2.5 py-3.5 text-sm text-neutral-800 transition hover:bg-neutral-950/[0.07] dark:bg-white/[0.04] dark:text-neutral-200 dark:hover:bg-white/[0.07]"
-                >
-                  <BrandLogo name={item.name} size={22} />
-                  <span className="truncate">{item.name}</span>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-        );
-      })}
-    </div>
+          return (
+            <motion.div
+              key={group.category}
+              custom={columnIndex}
+              initial="hidden"
+              animate="show"
+              variants={columnVariants}
+              className={`${cardSurface} p-3`}
+            >
+              <div
+                aria-hidden
+                className={`pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r ${meta.bar}`}
+              />
+              <div className="flex items-center gap-2 border-b border-black/10 pb-2 dark:border-white/10">
+                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-cyan-500/10 ring-1 ring-cyan-500/20 dark:bg-cyan-300/10 dark:ring-cyan-300/20">
+                  <Icon size={13} strokeWidth={2} className={meta.accent} />
+                </span>
+                <h2 className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300">
+                  {group.category}
+                </h2>
+              </div>
+              <ul className="mt-3 grid gap-2.5">
+                {group.items.map((item, itemIndex) => (
+                  <motion.li
+                    key={item.name}
+                    custom={itemIndex}
+                    initial="hidden"
+                    animate="show"
+                    variants={itemVariants}
+                    className="flex items-center gap-2.5 rounded-md bg-neutral-950/[0.04] px-2.5 py-3.5 text-sm text-neutral-800 transition hover:bg-neutral-950/[0.07] dark:bg-white/[0.04] dark:text-neutral-200 dark:hover:bg-white/[0.07]"
+                  >
+                    <BrandLogo name={item.name} size={22} />
+                    <span className="truncate">{item.name}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          );
+        })}
+      </div>
+    </MotionConfig>
   );
 }
