@@ -30,28 +30,30 @@ export type PublicMarketingMetricsSnapshot = Omit<
   };
 };
 
-// Last recorded public snapshot, checked against primary sources on 2026-09-13.
+// Last recorded public snapshot, checked against primary sources on 2026-09-23.
 // Sources: App Store Connect (downloads, rating, ratings count), Superwall
-// (active paid subscribers, annual run rate), and the MyFutureSelf metrics
-// function (Future Self Actions, modeled coaching value).
+// (active paid subscribers, ARR), and the MyFutureSelf metrics function
+// (Future Self Actions, modeled coaching value).
 //
 // Production reads live figures through FOUNDER_METRICS_ACCESS_TOKEN. Without
 // the token every page renders this snapshot, so it has to be correct on its own.
 //
 // `raw` is deliberately 0 for the two private financial metrics: the exact
-// subscriber count and the exact annual run rate are not published, and this
+// subscriber count and the exact ARR are not published, and this
 // object is serialized into the client payload. Everything the interface shows
 // for those two comes from `display`.
 export const FALLBACK_MARKETING_METRICS: MarketingMetricsSnapshot = {
   generatedAt: "fallback",
   metrics: {
-    appDownloads: { raw: 66074, display: "66K+", label: "Downloads" },
+    // The live feed carries the exact download count; this raw is the floor of
+    // the published 72K+ and only ever feeds the `raw > 0` shape check.
+    appDownloads: { raw: 72000, display: "72K+", label: "Downloads" },
     appStoreRating: {
       raw: 4.68659565487275,
       display: "4.7",
       label: "App Store rating",
     },
-    appStoreReviews: { raw: 1611, display: "1,611", label: "Ratings" },
+    appStoreReviews: { raw: 1762, display: "1,762", label: "Ratings" },
     futureSelfActions: {
       raw: 239109,
       display: "239K+",
@@ -64,10 +66,10 @@ export const FALLBACK_MARKETING_METRICS: MarketingMetricsSnapshot = {
     },
     paidSubscribersEver: {
       raw: 0,
-      display: "3.8K+",
+      display: "4K+",
       label: "Active Paid Subscribers",
     },
-    arr: { raw: 0, display: "$245K+", label: "Annual Run Rate" },
+    arr: { raw: 0, display: "$150K+", label: "ARR" },
   },
 };
 
@@ -78,7 +80,7 @@ export type MetricDisplayParts = {
   decimals: number;
 };
 
-// Splits a published figure ("3.8K+", "$245K+", "66K+", "1,611") into the parts
+// Splits a published figure ("4K+", "$150K+", "72K+", "1,762") into the parts
 // the animated tiles need. The tiles count up to the number inside the published
 // string rather than to `raw`, so the animation can never land on a figure the
 // site does not publish, and the private financial raws stay out of the payload.

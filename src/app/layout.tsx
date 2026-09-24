@@ -33,7 +33,7 @@ function tractionDescription(metrics: MarketingMetricsSnapshot) {
   return (
     "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, " +
     `a Cintrifuse-backed consumer AI app with ${paidSubscribersEver.display} active paid ` +
-    `subscribers, a ${arr.display} annual run rate, ${appDownloads.display} downloads, ` +
+    `subscribers, ${arr.display} ARR, ${appDownloads.display} downloads, ` +
     `and a ${appStoreRating.display}★ App Store rating from ` +
     `${appStoreReviews.display} ratings. Built the original iOS, ` +
     "backend, and voice-AI stack end to end. Building consumer AI for " +
@@ -112,8 +112,8 @@ function personJsonLd(metrics: MarketingMetricsSnapshot) {
       tractionDescription(metrics) +
       " Previously co-founded Appointra (B2B AI outbound, scaled to $20K MRR " +
       "in 3 months and $2M+ in client pipeline) and LeadBoost Pro (profitable " +
-      "from month one freshman year). 13,621 GitHub contributions in the year " +
-      "to September 2026 across product and infra, a figure that counts " +
+      "from month one freshman year). 16,846 GitHub contributions in the last " +
+      "year (to September 2026) across product and infra, a figure that counts " +
       "commits, pull requests, issues and reviews, and 100B+ tokens across " +
       "the Codex and Claude coding tools.",
     email: "kaya@myfutureselfapp.com",
@@ -198,7 +198,7 @@ function orgJsonLd(metrics: MarketingMetricsSnapshot) {
       "user, delivering a 90-day roadmap and voice-based AI coaching. " +
       `Current traction: ${metrics.metrics.appDownloads.display} downloads, ` +
       `${metrics.metrics.paidSubscribersEver.display} active paid subscribers, ` +
-      `a ${metrics.metrics.arr.display} annual run rate, ` +
+      `${metrics.metrics.arr.display} ARR, ` +
       `and a ${metrics.metrics.appStoreRating.display}★ App Store rating from ` +
       `${metrics.metrics.appStoreReviews.display} ratings.`,
     funder: { "@type": "Organization", name: "Cintrifuse Capital" },

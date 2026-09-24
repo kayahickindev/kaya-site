@@ -331,7 +331,7 @@ function outcomesForDetail(
   if (detail.slug !== "myfutureself") return detail.outcomes;
 
   return [
-    `${metrics.metrics.paidSubscribersEver.display} active paid subscribers and a ${metrics.metrics.arr.display} annual run rate`,
+    `${metrics.metrics.paidSubscribersEver.display} active paid subscribers and ${metrics.metrics.arr.display} ARR`,
     `${metrics.metrics.appDownloads.display} downloads on the App Store`,
     "Backed by Cintrifuse Capital",
     `${metrics.metrics.appStoreRating.display}-star App Store rating from ${metrics.metrics.appStoreReviews.display} ratings`,

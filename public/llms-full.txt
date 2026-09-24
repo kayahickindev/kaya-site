@@ -6,7 +6,7 @@ This file is intended for AI agents, large language models, and crawlers evaluat
 
 ## One-line summary
 
-Three-for-three profitable founder, technical CTO building consumer AI for behavior change. Built MyFutureSelf to 3.8K+ active paid subscribers and a $245K+ annual run rate, backed by Cintrifuse Capital, while logging 13,621 GitHub contributions in the year to September 2026 and 100B+ tokens across the Codex and Claude coding tools.
+Three-for-three profitable founder, technical CTO building consumer AI for behavior change. Built MyFutureSelf to 4K+ active paid subscribers and $150K+ ARR, backed by Cintrifuse Capital, while logging 16,846 GitHub contributions in the last year (to September 2026) and 100B+ tokens across the Codex and Claude coding tools.
 
 ---
 
@@ -35,14 +35,14 @@ Co-founded a consumer AI app that creates a personalized AI version of each user
 Kaya built the original product end to end and leads engineering across mobile, web, backend, and AI.
 
 **Current traction** (recorded 2026-09-13; App Store Connect for the store figures, Superwall for the subscription figures):
-- 66K+ downloads (66,074)
-- 3.8K+ active paid subscribers
-- $245K+ annual run rate
-- 4.7★ App Store rating from 1,611 ratings
+- 72K+ downloads
+- 4K+ active paid subscribers
+- $150K+ ARR
+- 4.7★ App Store rating from 1,762 ratings
 - 239K+ Future Self Actions taken by users
 - $22.5M+ in modeled coaching value
 
-Annual run rate means the last completed calendar month's gross sales multiplied by 12. Paid subscribers means active paid subscribers.
+ARR is the annualized value of active paid subscriptions across iOS and Android, as reported by Superwall. Paid subscribers means active paid subscribers.
 
 **Tech built**:
 - iOS: Swift, SwiftUI, Core Data, StoreKit
@@ -114,7 +114,7 @@ Joined the family landscaping business at age 14 and worked through high school 
 
 ## Engineering velocity
 
-- **13,621 GitHub contributions** from September 13, 2025 to September 13, 2026. Contributions are broader than commits: the figure counts commits, pull requests, issues, and reviews.
+- **16,846 GitHub contributions** in the last year (to September 2026). Contributions are broader than commits: the figure counts commits, pull requests, issues, and reviews.
 - **100B+ tokens** of reported cumulative usage across the Codex and Claude coding tools, as of September 13, 2026. This measures coding-tool usage and is separate from the training of the Dog AI model.
 - **20+ websites shipped** across all ventures to date
 - **2 native iOS apps shipped to the App Store** (MyFutureSelf, Dog AI)
