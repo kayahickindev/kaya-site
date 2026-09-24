@@ -30,39 +30,75 @@ export type PublicMarketingMetricsSnapshot = Omit<
   };
 };
 
-// Last recorded public snapshot. The API still returns 503 on fallback.
-// Private raw financial values are deliberately absent from this snapshot.
-export const RECORDED_METRICS_DATE = "2026-09-13T04:15:58Z";
+// Last recorded public snapshot, checked against primary sources on 2026-09-13.
+// Sources: App Store Connect (downloads, rating, ratings count), Superwall
+// (active paid subscribers, annual run rate), and the MyFutureSelf metrics
+// function (Future Self Actions, modeled coaching value).
+//
+// Production reads live figures through FOUNDER_METRICS_ACCESS_TOKEN. Without
+// the token every page renders this snapshot, so it has to be correct on its own.
+//
+// `raw` is deliberately 0 for the two private financial metrics: the exact
+// subscriber count and the exact annual run rate are not published, and this
+// object is serialized into the client payload. Everything the interface shows
+// for those two comes from `display`.
 export const FALLBACK_MARKETING_METRICS: MarketingMetricsSnapshot = {
   generatedAt: "fallback",
   metrics: {
     appDownloads: { raw: 66074, display: "66K+", label: "Downloads" },
-    appStoreRating: { raw: 4.68659565487275, display: "4.7", label: "App rating" },
+    appStoreRating: {
+      raw: 4.68659565487275,
+      display: "4.7",
+      label: "App Store rating",
+    },
     appStoreReviews: { raw: 1611, display: "1,611", label: "Ratings" },
-    futureSelfActions: { raw: 239109, display: "239K+", label: "Future Self Actions" },
-    coachingValueDelivered: { raw: 22468229, display: "$22.5M+", label: "Modeled Coaching Value" },
-    paidSubscribersEver: { raw: 0, display: "3.8K+", label: "Active Paid Subscribers" },
+    futureSelfActions: {
+      raw: 239109,
+      display: "239K+",
+      label: "Future Self Actions",
+    },
+    coachingValueDelivered: {
+      raw: 22468229,
+      display: "$22.5M+",
+      label: "Modeled Coaching Value",
+    },
+    paidSubscribersEver: {
+      raw: 0,
+      display: "3.8K+",
+      label: "Active Paid Subscribers",
+    },
     arr: { raw: 0, display: "$245K+", label: "Annual Run Rate" },
   },
 };
 
-export function metricsDate(snapshot: { generatedAt: string }): string {
-  const date = snapshot.generatedAt === "fallback" ? RECORDED_METRICS_DATE : snapshot.generatedAt;
-  return new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" }).format(new Date(date));
-}
+export type MetricDisplayParts = {
+  value: number;
+  prefix: string;
+  suffix: string;
+  decimals: number;
+};
 
-export function metricsCaption(snapshot: { generatedAt: string }): string {
-  return `${snapshot.generatedAt === "fallback" ? "Recorded" : "Updated"} ${metricsDate(snapshot)} · company-reported`;
-}
+// Splits a published figure ("3.8K+", "$245K+", "66K+", "1,611") into the parts
+// the animated tiles need. The tiles count up to the number inside the published
+// string rather than to `raw`, so the animation can never land on a figure the
+// site does not publish, and the private financial raws stay out of the payload.
+export function parseMetricDisplay(display: string): MetricDisplayParts {
+  const match = /^([^0-9]*)([0-9][0-9,]*(?:\.[0-9]+)?)(.*)$/.exec(display);
 
-export function tractionLines(snapshot: MarketingMetricsSnapshot): string[] {
-  const m = snapshot.metrics;
-  return [
-    `${m.appDownloads.display} downloads`,
-    `${m.paidSubscribersEver.display} active paid subscribers`,
-    `${m.arr.display} annual run rate`,
-    `${m.appStoreRating.display}-star app rating from ${m.appStoreReviews.display} ratings`,
-  ];
+  if (!match) {
+    return { value: 0, prefix: "", suffix: display, decimals: 0 };
+  }
+
+  const [, prefix, digits, suffix] = match;
+  const cleaned = digits.replace(/,/g, "");
+  const decimalPoint = cleaned.indexOf(".");
+
+  return {
+    value: Number(cleaned),
+    prefix,
+    suffix,
+    decimals: decimalPoint === -1 ? 0 : cleaned.length - decimalPoint - 1,
+  };
 }
 
 const DEFAULT_METRICS_URL =
@@ -102,7 +138,7 @@ export function normalizeMarketingMetricsSnapshot(
   };
   if (
     typeof snapshot.generatedAt !== "string" ||
-    !Number.isFinite(Date.parse(snapshot.generatedAt)) ||
+    !snapshot.generatedAt ||
     !snapshot.metrics ||
     typeof snapshot.metrics !== "object" ||
     !REQUIRED_METRIC_NAMES.every((name) => isMetric(snapshot.metrics?.[name]))
@@ -141,7 +177,6 @@ export async function getMarketingMetrics(): Promise<MarketingMetricsSnapshot> {
     const response = await fetch(url, {
       headers: { Authorization: `Bearer ${accessToken}` },
       next: { revalidate: 3600 },
-      signal: AbortSignal.timeout(8000),
     });
     if (!response.ok) return FALLBACK_MARKETING_METRICS;
     const data: unknown = await response.json();

@@ -48,4 +48,4 @@ Allow: /
 User-agent: DiffbotBot
 Allow: /
 
-Sitemap: https://kayahickin.com/sitemap.xml
+Sitemap: https://www.kayahickin.com/sitemap.xml

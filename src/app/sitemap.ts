@@ -3,8 +3,6 @@ import { siteConfig } from "@/data/content";
 
 const routes = [
   { path: "", changeFrequency: "weekly", priority: 1 },
-  { path: "/proof", changeFrequency: "monthly", priority: 0.9 },
-  { path: "/work/viral-loop", changeFrequency: "monthly", priority: 0.6 },
   { path: "/about", changeFrequency: "monthly", priority: 0.8 },
   { path: "/work", changeFrequency: "weekly", priority: 0.9 },
   { path: "/stack", changeFrequency: "monthly", priority: 0.8 },

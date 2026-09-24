@@ -1,88 +1,229 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { Briefcase, Globe, Smartphone, type LucideIcon } from "lucide-react";
+import { CompanyMark, hasCompanyMark } from "@/components/CompanyMark";
+import { myFutureSelf } from "@/data/assets";
 import { SubpageShell } from "@/components/SubpageShell";
-import { SelectedWork } from "@/components/SelectedWork";
-import { ProjectVisual } from "@/components/ProjectVisual";
+import { TiltImage } from "@/components/TiltImage";
 import { siteConfig } from "@/data/content";
-import { publicTools } from "@/data/profile";
+import { getMarketingMetrics } from "@/lib/marketing-metrics";
+import type { MarketingMetricsSnapshot } from "@/lib/marketing-metrics";
+import { cardSurfaceHover, cardSurfaceFeaturedEmerald } from "@/lib/surfaces";
+import { projectDetails } from "./_projectDetails";
+
 export const metadata: Metadata = {
   title: `Work | ${siteConfig.name}`,
   description:
-    "Products built by Kaya Hickin: MyFutureSelf, Dog AI, Viral Loop, Appointra, LeadBoost Pro, and open-source developer tools.",
-  alternates: { canonical: `${siteConfig.url}/work` },
+    "Selected work by Kaya Hickin, including MyFutureSelf, Dog AI, Appointra, and LeadBoost Pro.",
+  alternates: {
+    canonical: `${siteConfig.url}/work`,
+  },
 };
-export default function WorkPage() {
+
+function heroMetrics(
+  metrics: MarketingMetricsSnapshot,
+): Record<string, { value: string; label: string }> {
+  return {
+    myfutureself: {
+      value: metrics.metrics.arr.display,
+      label: `Annual Run Rate · ${metrics.metrics.paidSubscribersEver.display} active paid · ${metrics.metrics.appStoreRating.display}★`,
+    },
+    "viral-loop": { value: "Live", label: "MVP shipped" },
+    "dog-ai": { value: "Live", label: "App Store · paying product" },
+    appointra: { value: "$20K", label: "MRR in 3 months" },
+    "leadboost-pro": {
+      value: "20+",
+      label: "sites built · month-one profitable",
+    },
+  };
+}
+
+function cardHighlights(
+  metrics: MarketingMetricsSnapshot,
+): Record<string, string[]> {
+  return {
+    myfutureself: [
+      `${metrics.metrics.appDownloads.display} downloads · ${metrics.metrics.appStoreReviews.display} ratings`,
+      "Backed by Cintrifuse Capital",
+    ],
+    "viral-loop": [
+      "Done-for-you AI UGC content pipeline",
+      "Organic influencer distribution",
+    ],
+    "dog-ai": ["Custom multimodal LLM", "Trained on Harvard dataset"],
+    // Dog AI 1.9.3 and MyFutureSelf 2.30 are the current App Store listings.
+    appointra: [
+      "$2M+ in client pipeline generated",
+      "Cold-email infra for 8/9-figure founders",
+    ],
+    "leadboost-pro": [
+      "Web dev, marketing, and consulting",
+      "Blue collar businesses",
+    ],
+  };
+}
+
+const projectKind: Record<string, { label: string; icon: LucideIcon }> = {
+  myfutureself: { label: "iOS App", icon: Smartphone },
+  "viral-loop": { label: "Web Service", icon: Globe },
+  "dog-ai": { label: "iOS App", icon: Smartphone },
+  appointra: { label: "Agency", icon: Briefcase },
+  "leadboost-pro": { label: "Agency", icon: Briefcase },
+};
+
+function KindChip({ slug }: { slug: string }) {
+  const kind = projectKind[slug];
+  if (!kind) return null;
+  const Icon = kind.icon;
   return (
-    <SubpageShell>
-      <header className="page-heading">
-        <p className="eyebrow">Products &amp; companies</p>
-        <h1 className="page-title">
-          From idea
-          <br />
-          <em>to in your hands.</em>
-        </h1>
-        <p className="lead">
-          Consumer AI, custom models, and businesses built from the ground up.
-        </p>
-      </header>
-      <SelectedWork />
-      <section className="section">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">More from the journey</p>
-            <h2>Always making.</h2>
-          </div>
-        </div>
-        <div className="small-projects">
-          {siteConfig.projects
-            .filter((p) => !["myfutureself", "dog-ai"].includes(p.slug))
-            .map((p) => (
-              <Link
-                className="project-link"
-                href={`/work/${p.slug}`}
-                key={p.slug}
-              >
-                <ProjectVisual slug={p.slug} />
-                <div className="project-caption">
-                  <div>
-                    <h3>{p.name}</h3>
-                    <p>{p.tagline}</p>
-                  </div>
-                </div>
-              </Link>
-            ))}
-        </div>
-      </section>
-      <section className="split-section">
-        <div>
-          <p className="eyebrow">Open source</p>
-          <h2>
-            Tools for
-            <br />
-            <em>other builders.</em>
-          </h2>
-          <a className="text-link" href={siteConfig.github.url}>
-            Find me on GitHub <ArrowUpRight size={18} aria-hidden />
-          </a>
-        </div>
-        <div className="tools-list">
-          {publicTools.map((t) => (
-            <a
-              key={t.name}
-              href={t.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div>
-                <h3>{t.name}</h3>
-                <p>{t.description}</p>
+    <span className="inline-flex shrink-0 items-center gap-1 rounded-md border border-emerald-500/25 bg-emerald-500/10 px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide text-emerald-800 dark:border-emerald-300/25 dark:bg-emerald-300/10 dark:text-emerald-200">
+      <Icon size={11} strokeWidth={2.25} />
+      {kind.label}
+    </span>
+  );
+}
+
+export default async function WorkPage() {
+  const metrics = await getMarketingMetrics();
+  const liveHeroMetrics = heroMetrics(metrics);
+  const liveCardHighlights = cardHighlights(metrics);
+  const hero = projectDetails.find((d) => d.slug === "myfutureself");
+  const rest = projectDetails.filter((d) => d.slug !== "myfutureself");
+
+  return (
+    <SubpageShell accent="emerald">
+      <div className="flex flex-col gap-4">
+        <header className="relative">
+          <div aria-hidden className="aurora" style={{ opacity: 0.55 }} />
+          <h1 className="relative text-3xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-4xl xl:text-5xl dark:text-white">
+            Shipped products.
+          </h1>
+        </header>
+
+        {hero ? (
+          <Link
+            href={`/work/${hero.slug}`}
+            className={`${cardSurfaceFeaturedEmerald} group block p-0 transition hover:-translate-y-0.5 hover:border-emerald-400/50`}
+          >
+            <div className="relative grid grid-cols-1 gap-0 md:grid-cols-[1fr_1fr]">
+              <div className="pointer-events-none absolute right-4 top-4 z-10 md:right-5 md:top-5">
+                <KindChip slug={hero.slug} />
               </div>
-              <ArrowUpRight size={22} aria-hidden />
-            </a>
-          ))}
+              <div className="flex flex-col gap-3 p-5 md:p-6">
+                <p className="truncate text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
+                  {hero.role} · {hero.timeframe}
+                </p>
+
+                <div>
+                  <div className="flex items-center gap-2.5">
+                    {hasCompanyMark(hero.project.name) ? (
+                      <CompanyMark company={hero.project.name} size={32} />
+                    ) : null}
+                    <h2 className="text-3xl font-semibold leading-[0.95] tracking-tight text-neutral-950 sm:text-4xl dark:text-white">
+                      {hero.project.name}
+                    </h2>
+                  </div>
+                  <p className="mt-1.5 text-sm text-neutral-700 dark:text-neutral-300">
+                    {hero.project.tagline}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                  <span className="text-3xl font-semibold tracking-tight text-emerald-700 sm:text-4xl dark:text-emerald-200">
+                    {metrics.metrics.arr.display} annual run rate
+                  </span>
+                  <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                    {metrics.metrics.paidSubscribersEver.display} active paid ·{" "}
+                    {metrics.metrics.appStoreRating.display}★
+                  </span>
+                </div>
+
+                <ul className="grid gap-1 text-[13px] text-neutral-700 dark:text-neutral-300">
+                  {liveCardHighlights[hero.slug].map((h) => (
+                    <li key={h} className="flex items-start gap-2">
+                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-emerald-500 dark:bg-emerald-300" />
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <TiltImage className="relative min-h-[300px] overflow-hidden md:min-h-0">
+                <div className="absolute inset-0 flex items-center justify-center gap-2 p-4">
+                  {myFutureSelf.store.slice(0, 2).map((shot) => (
+                    <Image
+                      key={shot.src}
+                      src={shot.src}
+                      alt={shot.alt}
+                      width={shot.width}
+                      height={shot.height}
+                      unoptimized
+                      className="h-full max-h-[260px] w-auto rounded-lg object-contain ring-1 ring-black/10 drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] transition-transform duration-500 group-hover:scale-[1.04] sm:max-h-[360px] dark:ring-white/10"
+                    />
+                  ))}
+                </div>
+              </TiltImage>
+            </div>
+          </Link>
+        ) : null}
+
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {rest.map((detail) => {
+            const { project } = detail;
+            const highlights = liveCardHighlights[detail.slug] ?? [];
+            const hero = liveHeroMetrics[detail.slug];
+
+            return (
+              <Link
+                key={detail.slug}
+                href={`/work/${detail.slug}`}
+                className={`${cardSurfaceHover} group flex min-h-[200px] flex-col p-4`}
+              >
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute -inset-px bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,0%),rgba(16,185,129,0.14),transparent_55%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,0%),rgba(52,211,153,0.14),transparent_55%)]"
+                />
+
+                <div className="relative flex items-center justify-between gap-2">
+                  <p className="truncate text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
+                    {detail.role}
+                    {detail.timeframe ? ` · ${detail.timeframe}` : ""}
+                  </p>
+                  <KindChip slug={detail.slug} />
+                </div>
+
+                <div className="relative mt-2 flex items-center gap-2">
+                  {hasCompanyMark(project.name) ? (
+                    <CompanyMark company={project.name} size={22} />
+                  ) : null}
+                  <h2 className="text-xl font-semibold leading-tight tracking-tight text-neutral-950 sm:text-2xl dark:text-white">
+                    {project.name}
+                  </h2>
+                </div>
+
+                <div className="relative mt-3 flex items-baseline gap-2">
+                  <span className="text-2xl font-semibold tracking-tight text-neutral-950 dark:text-white">
+                    {hero.value}
+                  </span>
+                  <span className="text-[11px] uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                    {hero.label}
+                  </span>
+                </div>
+
+                <ul className="relative mt-2 grid gap-1 text-xs text-neutral-700 dark:text-neutral-300">
+                  {highlights.map((h) => (
+                    <li key={h} className="flex items-start gap-2">
+                      <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-emerald-500/60 dark:bg-emerald-300/60" />
+                      <span className="leading-snug">{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Link>
+            );
+          })}
         </div>
-      </section>
+      </div>
     </SubpageShell>
   );
 }
