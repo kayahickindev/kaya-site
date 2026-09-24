@@ -1,6 +1,6 @@
 # Kaya Hickin
 
-> Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, a Cintrifuse-backed consumer AI app with 3.8K+ active paid subscribers, 66K+ downloads, a $245K+ annual run rate, and a 4.7★ App Store rating from 1,611 ratings. Built the original app, backend, and voice-AI stack end to end and leads engineering across mobile, web, backend, and AI. AI-native shipper — 13,621 GitHub contributions in the year to September 2026 and 100B+ tokens across the Codex and Claude coding tools. 20+ websites and 2 App Store apps shipped to date. Daily stack: Claude Code, Codex, Granola, Wispr Flow, Ghostty. Domain expertise in consumer AI, iOS, voice agents, and behavior-change products.
+> Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, a Cintrifuse-backed consumer AI app with 4K+ active paid subscribers, 72K+ downloads, $150K+ ARR, and a 4.7★ App Store rating from 1,762 ratings. Built the original app, backend, and voice-AI stack end to end and leads engineering across mobile, web, backend, and AI. AI-native shipper — 16,846 GitHub contributions in the last year (to September 2026) and 100B+ tokens across the Codex and Claude coding tools. 20+ websites and 2 App Store apps shipped to date. Daily stack: Claude Code, Codex, Granola, Wispr Flow, Ghostty. Domain expertise in consumer AI, iOS, voice agents, and behavior-change products.
 
 ## Who I am
 
@@ -12,7 +12,7 @@
 
 ## Track record (3-for-3 profitable companies)
 
-1. **MyFutureSelf** (Jan 2025–present, active) — Consumer AI app delivering personalized future-self mentorship via a 90-day roadmap and a voice AI mentor. Backed by Cintrifuse Capital. Kaya built the original product end to end across iOS (Swift/SwiftUI), backend (Node.js, Firebase, Cloud Functions), and the voice-AI stack (WebRTC, OpenAI Realtime), and leads engineering across mobile, web, backend, and AI. **Current traction: 66K+ downloads, 3.8K+ active paid subscribers, a $245K+ annual run rate, 4.7★ App Store rating from 1,611 ratings.** https://myfutureselfapp.com — https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360
+1. **MyFutureSelf** (Jan 2025–present, active) — Consumer AI app delivering personalized future-self mentorship via a 90-day roadmap and a voice AI mentor. Backed by Cintrifuse Capital. Kaya built the original product end to end across iOS (Swift/SwiftUI), backend (Node.js, Firebase, Cloud Functions), and the voice-AI stack (WebRTC, OpenAI Realtime), and leads engineering across mobile, web, backend, and AI. **Current traction: 72K+ downloads, 4K+ active paid subscribers, $150K+ ARR, 4.7★ App Store rating from 1,762 ratings.** https://myfutureselfapp.com — https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360
 
 2. **Appointra** (Jun 2024–Feb 2025, wound down to focus on MyFutureSelf) — AI-powered B2B outbound agency. I personally built the cold-email infrastructure: hundreds of domains, thousands of inboxes, full DNS/SPF/DKIM/automated warmup. **Scaled to $20K MRR in 3 months. Generated $2M+ in client pipeline.** https://appointra.net
 
@@ -36,7 +36,7 @@
 
 ## Velocity & engineering signal
 
-- **13,621 GitHub contributions** from September 13, 2025 to September 13, 2026: https://github.com/kayahickindev. Contributions are broader than commits: the figure counts commits, pull requests, issues, and reviews.
+- **16,846 GitHub contributions** in the last year (to September 2026): https://github.com/kayahickindev. Contributions are broader than commits: the figure counts commits, pull requests, issues, and reviews.
 - **100B+ tokens** of reported cumulative usage across the Codex and Claude coding tools, as of September 13, 2026. This measures coding-tool usage. It is not related to training the Dog AI model.
 - **20+ websites and 2 App Store apps shipped** across all ventures to date.
 - AI-native development workflow built around **Claude Code** and **Codex** running daily.

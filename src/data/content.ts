@@ -9,7 +9,7 @@ export const siteConfig = {
   seo: {
     title: "Kaya Hickin — Technical Co-founder & CTO, MyFutureSelf",
     description:
-      "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, a Cintrifuse-backed consumer AI app with 3.8K+ active paid subscribers, a $245K+ annual run rate, 66K+ downloads, and a 4.7★ App Store rating. Built the original iOS, backend, and voice-AI stack end to end. Building consumer AI for behavior change.",
+      "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, a Cintrifuse-backed consumer AI app with 4K+ active paid subscribers, $150K+ ARR, 72K+ downloads, and a 4.7★ App Store rating. Built the original iOS, backend, and voice-AI stack end to end. Building consumer AI for behavior change.",
   },
 
   availability: "Cleveland, OH",
@@ -24,7 +24,7 @@ export const siteConfig = {
     paragraphs: [
       "I started my first company freshman year because I wanted to see if I could build something people would pay for. Turns out I could, so I kept going. Three companies later, I'm three for three on profitability.",
       "My main focus right now is MyFutureSelf, an AI app that helps people define who they want to become and then become that person through a 90-day personalized roadmap, an AI mentor that speaks as their future self, and daily action. It is backed by Cintrifuse Capital. As CTO, I built the original product end to end and lead engineering across mobile, web, backend, and AI.",
-      "I'm AI-native in how I build. In the year to September 2026 I logged 13,621 GitHub contributions, most of them written alongside Claude Code and Codex, and 100B+ tokens across those two coding tools.",
+      "I'm AI-native in how I build. In the last year (to September 2026) I logged 16,846 GitHub contributions, most of them written alongside Claude Code and Codex, and 100B+ tokens across those two coding tools.",
       "I graduated cum laude from Miami University with a B.S. in Business, a Marketing major and an Entrepreneurship minor, and I'm based in Cleveland, OH. Most of my time goes toward thinking about how AI can build consumer products that change real behavior, not just engagement metrics.",
     ],
     sidebar: [
@@ -76,8 +76,8 @@ export const siteConfig = {
       description:
         "A 90-day roadmap and a voice AI mentor that speaks as your future self.",
       highlights: [
-        "3.8K+ active paid subscribers · $245K+ annual run rate",
-        "66K+ downloads · 4.7★ from 1,611 ratings",
+        "4K+ active paid subscribers · $150K+ ARR",
+        "72K+ downloads · 4.7★ from 1,762 ratings",
         "Backed by Cintrifuse Capital",
       ],
       links: {

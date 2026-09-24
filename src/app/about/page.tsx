@@ -11,6 +11,7 @@ import { ContributionGraph } from "@/components/ContributionGraph";
 import { PathTimeline } from "@/components/PathTimeline";
 import { SubpageShell } from "@/components/SubpageShell";
 import { siteConfig } from "@/data/content";
+import { getContributionCalendar } from "@/lib/github-contributions";
 import { cardSurfaceFeatured } from "@/lib/surfaces";
 
 export const metadata: Metadata = {
@@ -34,18 +35,22 @@ const paragraphs = [
 ];
 
 // GitHub contributions are contributions, never commits: the figure counts
-// commits, pull requests, issues and reviews. 13,621 over the year from
-// 2025-09-13 to 2026-09-13, read off the contribution graph on 2026-09-13.
+// commits, pull requests, issues and reviews. 16,846 in the last year (to
+// September 2026), read from GitHub's contribution calendar on 2026-09-23.
 // The token figure is coding-tool usage across Codex and Claude, and is
 // separate from the training of the Dog AI model.
 const highlightStats = [
   { value: "8 yrs", label: "professional experience" },
   { value: "3-for-3", label: "profitable companies" },
   { value: "100B+", label: "Codex and Claude tokens" },
-  { value: "13.6K+", label: "GitHub contributions" },
+  { value: "16.8K+", label: "GitHub contributions" },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const contributions = await getContributionCalendar(
+    siteConfig.github.username,
+  );
+
   return (
     <SubpageShell accent="amber">
       <div className="flex flex-col gap-4">
@@ -104,7 +109,10 @@ export default function AboutPage() {
               return (
                 <div key={item.label} className={`${cardSurfaceFeatured} p-3`}>
                   <div className="flex items-center gap-1.5">
-                    <Icon size={12} className="text-amber-700 dark:text-amber-300" />
+                    <Icon
+                      size={12}
+                      className="text-amber-700 dark:text-amber-300"
+                    />
                     <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-amber-800/80 dark:text-amber-200/80">
                       {item.label}
                     </p>
@@ -127,22 +135,27 @@ export default function AboutPage() {
           <PathTimeline />
         </div>
 
-        <div className="relative overflow-hidden rounded-md border border-black/10 bg-gradient-to-b from-white/80 to-white/40 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur dark:border-white/10 dark:from-white/[0.05] dark:to-white/[0.015] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
-          <div className="flex flex-col gap-3">
-            <ContributionGraph palette="amber" />
-            <div className="flex items-center justify-end">
-              <a
-                href={siteConfig.github.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-1.5 font-mono text-xs text-neutral-500 dark:text-neutral-400 transition hover:text-amber-700 dark:hover:text-amber-300"
-              >
-                github.com/{siteConfig.github.username}
-                <ArrowUpRight size={12} className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </a>
+        {contributions ? (
+          <div className="relative overflow-hidden rounded-md border border-black/10 bg-gradient-to-b from-white/80 to-white/40 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur dark:border-white/10 dark:from-white/[0.05] dark:to-white/[0.015] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+            <div className="flex flex-col gap-3">
+              <ContributionGraph calendar={contributions} palette="amber" />
+              <div className="flex items-center justify-end">
+                <a
+                  href={siteConfig.github.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-1.5 font-mono text-xs text-neutral-500 dark:text-neutral-400 transition hover:text-amber-700 dark:hover:text-amber-300"
+                >
+                  github.com/{siteConfig.github.username}
+                  <ArrowUpRight
+                    size={12}
+                    className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </SubpageShell>
   );

@@ -8,14 +8,14 @@ import {
 } from "../src/lib/marketing-metrics.ts";
 
 // Stands in for a live upstream response. Upstream still sends the exact
-// subscriber count and annual run rate; the site never publishes them, so the
+// subscriber count and ARR; the site never publishes them, so the
 // two raw values here are deliberately made-up placeholders.
 const currentSnapshot = {
-  generatedAt: "2026-09-13T04:15:58.000Z",
+  generatedAt: "2026-09-23T04:15:58.000Z",
   metrics: {
-    appDownloads: { raw: 66074, display: "66K+", label: "Downloads" },
+    appDownloads: { raw: 72000, display: "72K+", label: "Downloads" },
     appStoreRating: { raw: 4.68659565487275, display: "4.7", label: "App Store rating" },
-    appStoreReviews: { raw: 1611, display: "1,611", label: "Ratings" },
+    appStoreReviews: { raw: 1762, display: "1,762", label: "Ratings" },
     futureSelfActions: { raw: 239109, display: "239K+", label: "Future Self Actions" },
     coachingValueDelivered: {
       raw: 22468229,
@@ -24,10 +24,10 @@ const currentSnapshot = {
     },
     paidSubscribersEver: {
       raw: 1,
-      display: "3.8K+",
+      display: "4K+",
       label: "Active Paid Subscribers",
     },
-    arr: { raw: 1, display: "$245K+", label: "Annual Run Rate" },
+    arr: { raw: 1, display: "$151K", label: "ARR" },
   },
 };
 
@@ -57,26 +57,28 @@ test("removes exact private values from the public profile snapshot", () => {
   const publicSnapshot = publicMarketingMetricsSnapshot(currentSnapshot);
 
   assert.deepEqual(publicSnapshot.metrics.arr, {
-    display: "$245K+",
-    label: "Annual Run Rate",
+    display: "$151K",
+    label: "ARR",
   });
   assert.deepEqual(publicSnapshot.metrics.paidSubscribersEver, {
-    display: "3.8K+",
+    display: "4K+",
     label: "Active Paid Subscribers",
   });
-  assert.equal(publicSnapshot.metrics.appStoreReviews.raw, 1611);
+  assert.equal(publicSnapshot.metrics.appStoreReviews.raw, 1762);
 });
+
 
 test("the recorded snapshot carries the figures the site publishes", () => {
   const recorded = FALLBACK_MARKETING_METRICS.metrics;
 
-  assert.equal(recorded.appDownloads.display, "66K+");
+  assert.equal(recorded.appDownloads.display, "72K+");
   assert.equal(recorded.appStoreRating.display, "4.7");
-  assert.equal(recorded.appStoreReviews.display, "1,611");
+  assert.equal(recorded.appStoreReviews.display, "1,762");
   assert.equal(recorded.futureSelfActions.display, "239K+");
   assert.equal(recorded.coachingValueDelivered.display, "$22.5M+");
-  assert.equal(recorded.paidSubscribersEver.display, "3.8K+");
-  assert.equal(recorded.arr.display, "$245K+");
+  assert.equal(recorded.paidSubscribersEver.display, "4K+");
+  assert.equal(recorded.arr.display, "$150K+");
+  assert.equal(recorded.arr.label, "ARR");
 });
 
 test("the recorded snapshot keeps the private financial raws out of the payload", () => {
@@ -91,14 +93,14 @@ test("parses a published figure into the parts the tiles animate", () => {
     suffix: "K+",
     decimals: 1,
   });
-  assert.deepEqual(parseMetricDisplay("$245K+"), {
-    value: 245,
+  assert.deepEqual(parseMetricDisplay("$150K+"), {
+    value: 150,
     prefix: "$",
     suffix: "K+",
     decimals: 0,
   });
-  assert.deepEqual(parseMetricDisplay("66K+"), {
-    value: 66,
+  assert.deepEqual(parseMetricDisplay("72K+"), {
+    value: 72,
     prefix: "",
     suffix: "K+",
     decimals: 0,
@@ -109,8 +111,8 @@ test("parses a published figure into the parts the tiles animate", () => {
     suffix: "",
     decimals: 1,
   });
-  assert.deepEqual(parseMetricDisplay("1,611"), {
-    value: 1611,
+  assert.deepEqual(parseMetricDisplay("1,762"), {
+    value: 1762,
     prefix: "",
     suffix: "",
     decimals: 0,

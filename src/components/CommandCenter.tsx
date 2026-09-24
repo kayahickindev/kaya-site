@@ -3,14 +3,19 @@
 import { type ComponentType } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { MotionConfig, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { myFutureSelf } from "@/data/assets";
+import { myFutureSelf, type StoreShot } from "@/data/assets";
 import { siteConfig } from "@/data/content";
+import {
+  formatCount,
+  type ContributionCalendar,
+} from "@/lib/github-contributions";
 import {
   parseMetricDisplay,
   type MarketingMetricsSnapshot,
 } from "@/lib/marketing-metrics";
+import { ContributionGraph } from "./ContributionGraph";
 import { Footer } from "./Footer";
 import { MetricTiles } from "./MetricTiles";
 import { RevealHeadline } from "./RevealHeadline";
@@ -150,7 +155,7 @@ function ramp(value: number, steps = 8) {
 function metricTiles(metrics: MarketingMetricsSnapshot) {
   // Every tile counts up to the number inside the published display string, so a
   // tile can never animate to a figure the site does not publish. The exact paid
-  // subscriber count and annual run rate are private and are not in the payload.
+  // subscriber count and ARR are private and are not in the payload.
   const subscribers = parseMetricDisplay(
     metrics.metrics.paidSubscribersEver.display,
   );
@@ -167,7 +172,7 @@ function metricTiles(metrics: MarketingMetricsSnapshot) {
     },
     {
       ...arr,
-      label: "Annual Run Rate",
+      label: "ARR",
       sparkline: ramp(arr.value),
       accent: "rgb(212,155,90)",
     },
@@ -187,10 +192,126 @@ function metricTiles(metrics: MarketingMetricsSnapshot) {
   ];
 }
 
+// Contributions for the last year, straight from GitHub's calendar. The whole
+// strip links to the profile; with no calendar it renders nothing.
+function GitHubStrip({ calendar }: { calendar: ContributionCalendar }) {
+  const profile = `github.com/${calendar.username}`;
+  const caption = `${formatCount(calendar.total)} contributions in the last year`;
+
+  // reducedMotion="user" drops the slide and keeps the fade, and renders the
+  // same markup on the server and client either way.
+  return (
+    <MotionConfig reducedMotion="user">
+      <motion.a
+        href={siteConfig.github.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${caption} on GitHub, ${profile}`}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.42, ease, delay: 0.6 }}
+        className="group block rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent"
+      >
+        <span className="mb-1.5 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+          <span className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-300">
+            {caption}
+          </span>
+          <span className="inline-flex items-center gap-1 font-mono text-xs text-neutral-500 transition group-hover:text-amber-700 dark:text-neutral-400 dark:group-hover:text-amber-300">
+            {profile}
+            <ArrowUpRight
+              size={12}
+              className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </span>
+        </span>
+        <span className="block transition group-hover:opacity-90">
+          <ContributionGraph calendar={calendar} variant="compact" />
+        </span>
+      </motion.a>
+    </MotionConfig>
+  );
+}
+
+// The product story in three real App Store composites: the avatar in front,
+// goals and the Future Self chat tucked behind it. Sizes come from --fan-h so
+// the whole fan fits the first fold at every desktop height.
+const fanShots = {
+  left: myFutureSelf.store[2],
+  center: myFutureSelf.store[1],
+  right: myFutureSelf.store[3],
+};
+
+function FanPhone({ shot, className }: { shot: StoreShot; className: string }) {
+  return (
+    <Image
+      src={shot.src}
+      alt={shot.alt}
+      width={shot.width}
+      height={shot.height}
+      unoptimized
+      loading="eager"
+      className={`block h-full w-auto rounded-xl ring-1 ring-black/10 dark:ring-white/10 ${className}`}
+    />
+  );
+}
+
+// With reduced motion the side phones appear in place (MotionConfig skips the
+// transform and keeps the fade), with no server/client markup difference.
+function PhoneFan() {
+  const side = (direction: -1 | 1) => ({
+    initial: { x: "-50%", rotate: 0, opacity: 0 },
+    animate: {
+      x: direction === -1 ? "-131%" : "31%",
+      rotate: direction * 6,
+      opacity: 1,
+    },
+    transition: { duration: 0.7, delay: 0.25, ease },
+  });
+
+  return (
+    <MotionConfig reducedMotion="user">
+      <div className="relative mx-auto h-[var(--fan-h)] w-full [--fan-h:max(240px,min(calc(100dvh-340px),82cqw,680px))]">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-[-8%] bg-[radial-gradient(ellipse_55%_55%_at_50%_55%,rgba(251,191,36,0.26),transparent_65%)] dark:bg-[radial-gradient(ellipse_55%_55%_at_50%_55%,rgba(251,191,36,0.20),transparent_65%)]"
+        />
+        <motion.div
+          {...side(-1)}
+          style={{ originX: 0.5, originY: 1 }}
+          className="absolute bottom-[5%] left-1/2 h-[84%]"
+        >
+          <FanPhone
+            shot={fanShots.left}
+            className="brightness-[0.82] drop-shadow-[0_20px_40px_rgba(0,0,0,0.35)]"
+          />
+        </motion.div>
+        <motion.div
+          {...side(1)}
+          style={{ originX: 0.5, originY: 1 }}
+          className="absolute bottom-[5%] left-1/2 h-[84%]"
+        >
+          <FanPhone
+            shot={fanShots.right}
+            className="brightness-[0.82] drop-shadow-[0_20px_40px_rgba(0,0,0,0.35)]"
+          />
+        </motion.div>
+        <div className="absolute bottom-0 left-1/2 z-10 h-full -translate-x-1/2">
+          <FanPhone
+            shot={fanShots.center}
+            className="drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)]"
+          />
+        </div>
+      </div>
+    </MotionConfig>
+  );
+}
+
 export function CommandCenter({
   metrics,
+  contributions,
 }: {
   metrics: MarketingMetricsSnapshot;
+  contributions: ContributionCalendar | null;
 }) {
   const featured = siteConfig.projects.find((project) => project.featured);
   const liveMetricTiles = metricTiles(metrics);
@@ -198,15 +319,15 @@ export function CommandCenter({
   return (
     <main className="relative min-h-dvh overflow-hidden bg-[#f4f1ea] text-neutral-950 dark:bg-[#050505] dark:text-white">
       <SignalField />
-      <div className="relative z-10 grid min-h-dvh grid-rows-[auto_1fr_auto] gap-4 px-4 py-3 sm:px-5 sm:py-4 lg:px-7">
+      <div className="relative z-10 grid min-h-dvh grid-cols-[minmax(0,1fr)] grid-rows-[auto_1fr_auto] gap-4 px-4 py-3 sm:px-5 sm:py-4 lg:px-7">
         <TopNav />
 
-        <section className="grid grid-cols-1 gap-6 pb-6 lg:grid-cols-12">
+        <section className="grid grid-cols-1 content-center gap-10 pb-4 lg:grid-cols-[minmax(0,45rem)_minmax(22rem,1fr)] lg:items-center lg:gap-6 lg:pb-6 2xl:grid-cols-[minmax(0,52rem)_minmax(0,1fr)]">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.48, ease }}
-            className="flex flex-col justify-center gap-2.5 py-1 lg:col-span-7 lg:pr-3"
+            className="flex flex-col gap-4 lg:gap-5 2xl:gap-6"
           >
             <div className="group flex w-fit items-center gap-3">
               <span className="relative block h-14 w-14 shrink-0 overflow-hidden rounded-2xl border border-black/10 shadow-[0_4px_16px_-6px_rgba(0,0,0,0.4)] ring-1 ring-amber-400/25 dark:border-white/15">
@@ -247,11 +368,15 @@ export function CommandCenter({
               </div>
             </div>
 
-            <div>
-              <p className="mb-1.5 text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-300">
-                Live traction · MyFutureSelf
-              </p>
-              <MetricTiles metrics={liveMetricTiles} accent="amber" />
+            <div className="flex flex-col gap-5 lg:gap-6 2xl:gap-7">
+              <div>
+                <p className="mb-1.5 text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-300">
+                  Live traction · MyFutureSelf
+                </p>
+                <MetricTiles metrics={liveMetricTiles} accent="amber" />
+              </div>
+
+              {contributions ? <GitHubStrip calendar={contributions} /> : null}
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
@@ -294,7 +419,7 @@ export function CommandCenter({
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.08, ease }}
-              className="relative flex flex-col items-center justify-end gap-0 pb-2 lg:col-span-5 lg:-translate-x-3 xl:-translate-x-5"
+              className="@container relative flex flex-col items-center gap-4"
             >
               <Link
                 href={`/work/${featured.slug}`}
@@ -310,36 +435,14 @@ export function CommandCenter({
                     className="text-neutral-500 dark:text-neutral-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-amber-600 dark:group-hover:text-amber-300"
                   />
                 </div>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/15 px-2.5 py-1 text-[11px] font-medium text-amber-800 backdrop-blur transition group-hover:-translate-y-0.5 group-hover:border-amber-400/60 group-hover:bg-amber-400/25 dark:text-amber-200">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 accent-pulse" />
-                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-500 dark:bg-amber-300" />
-                  </span>
-                  Current focus
-                </span>
               </Link>
 
               <Link
                 href={`/work/${featured.slug}`}
                 aria-label={`Open ${featured.name} case study`}
-                className="relative mt-3 flex w-full items-end justify-center gap-2 sm:gap-3"
+                className="relative block w-full rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60"
               >
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-[-8%] bg-[radial-gradient(ellipse_60%_55%_at_50%_55%,rgba(251,191,36,0.26),transparent_65%)] dark:bg-[radial-gradient(ellipse_60%_55%_at_50%_55%,rgba(251,191,36,0.20),transparent_65%)]"
-                />
-                {myFutureSelf.store.slice(0, 2).map((shot) => (
-                  <Image
-                    key={shot.src}
-                    src={shot.src}
-                    alt={shot.alt}
-                    width={shot.width}
-                    height={shot.height}
-                    unoptimized
-                    loading="eager"
-                    className="relative h-auto max-h-[300px] w-auto rounded-xl object-contain ring-1 ring-black/10 drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] sm:max-h-[380px] xl:max-h-[440px] dark:ring-white/10"
-                  />
-                ))}
+                <PhoneFan />
               </Link>
             </motion.div>
           )}

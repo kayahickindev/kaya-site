@@ -27,7 +27,7 @@ function heroMetrics(
   return {
     myfutureself: {
       value: metrics.metrics.arr.display,
-      label: `Annual Run Rate · ${metrics.metrics.paidSubscribersEver.display} active paid · ${metrics.metrics.appStoreRating.display}★`,
+      label: `ARR · ${metrics.metrics.paidSubscribersEver.display} active paid · ${metrics.metrics.appStoreRating.display}★`,
     },
     "viral-loop": { value: "Live", label: "MVP shipped" },
     "dog-ai": { value: "Live", label: "App Store · paying product" },
@@ -131,7 +131,7 @@ export default async function WorkPage() {
 
                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                   <span className="text-3xl font-semibold tracking-tight text-emerald-700 sm:text-4xl dark:text-emerald-200">
-                    {metrics.metrics.arr.display} annual run rate
+                    {metrics.metrics.arr.display} ARR
                   </span>
                   <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
                     {metrics.metrics.paidSubscribersEver.display} active paid ·{" "}

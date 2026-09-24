@@ -36,10 +36,10 @@ export const projectDetails: ProjectDetail[] = [
     // These outcomes are replaced at render time by the live metrics snapshot;
     // they are the same figures, kept here so the list reads on its own.
     outcomes: [
-      "3.8K+ active paid subscribers and a $245K+ annual run rate",
-      "66K+ downloads on the App Store",
+      "4K+ active paid subscribers and $150K+ ARR",
+      "72K+ downloads on the App Store",
       "Backed by Cintrifuse Capital",
-      "4.7-star App Store rating from 1,611 ratings",
+      "4.7-star App Store rating from 1,762 ratings",
     ],
     ownership: [
       "Native iOS product architecture",

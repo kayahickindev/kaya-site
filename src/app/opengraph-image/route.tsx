@@ -10,7 +10,7 @@ export async function GET() {
   const summary =
     `Building MyFutureSelf. ${metrics.metrics.appDownloads.display} downloads, ` +
     `${metrics.metrics.paidSubscribersEver.display} active paid subscribers, ` +
-    `and a ${metrics.metrics.arr.display} annual run rate.`;
+    `and ${metrics.metrics.arr.display} ARR.`;
   const headshotPath = join(process.cwd(), "public", "headshot.jpg");
   const headshotBuffer = await readFile(headshotPath);
   const headshotBase64 = `data:image/jpeg;base64,${headshotBuffer.toString("base64")}`;

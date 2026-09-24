@@ -74,7 +74,7 @@ export function TopNav() {
               key={item.href}
               href={item.href}
               aria-current={active ? "page" : undefined}
-              className={`relative rounded-full px-3 py-1.5 text-xs font-medium transition sm:text-sm ${
+              className={`relative rounded-full px-2 py-1.5 text-xs font-medium transition sm:px-3 sm:text-sm ${
                 active
                   ? "text-neutral-950 dark:text-white"
                   : "text-neutral-700 hover:bg-neutral-950/[0.055] hover:text-neutral-950 dark:text-neutral-300 dark:hover:bg-white/[0.07] dark:hover:text-white"

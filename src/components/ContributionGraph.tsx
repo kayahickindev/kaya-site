@@ -1,63 +1,107 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import {
+  formatCount,
+  type ContributionCalendar,
+  type ContributionDay,
+} from "@/lib/github-contributions";
 
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+const DAY_MS = 86_400_000;
 
-function formatCellDate(daysAgo: number) {
-  const d = new Date();
-  d.setHours(0, 0, 0, 0);
-  d.setDate(d.getDate() - daysAgo);
-  return `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+function formatDay(date: string) {
+  const [year, month, day] = date.split("-").map(Number);
+  return `${MONTHS[month - 1]} ${day}, ${year}`;
 }
 
-function levelFromCount(count: number) {
+// Shade by quartile of the active days, the way GitHub's calendar used to.
+// Fixed cut-offs would paint nearly every day at full strength at this volume,
+// and GitHub's current levels are set by a handful of outlier days.
+function quartileThresholds(days: ContributionDay[]) {
+  const active = days
+    .map((day) => day.count)
+    .filter((count) => count > 0)
+    .sort((a, b) => a - b);
+  if (active.length === 0) return [0, 0, 0];
+  const at = (q: number) =>
+    active[Math.min(active.length - 1, Math.floor(q * active.length))];
+  return [at(0.25), at(0.5), at(0.75)];
+}
+
+function levelFromCount(count: number, thresholds: number[]) {
   if (count === 0) return 0;
-  if (count < 4) return 1;
-  if (count < 9) return 2;
-  if (count < 15) return 3;
+  if (count <= thresholds[0]) return 1;
+  if (count <= thresholds[1]) return 2;
+  if (count <= thresholds[2]) return 3;
   return 4;
 }
 
-// Deterministic fallback heatmap so the graph renders before (or instead of) live data.
-function rndFor(week: number, day: number) {
-  const seed = (week * 7 + day) * 9301 + 49297;
-  return (seed % 233280) / 233280;
-}
+type Cell = {
+  x: number;
+  y: number;
+  level: number;
+  count: number;
+  date: string;
+};
 
-function fallbackCount(week: number, day: number) {
-  const rnd = rndFor(week, day);
-  const recency = week / 52;
-  const weekendDip = day === 0 || day === 6 ? 0.55 : 1;
-  const base = (rnd * 0.7 + recency * 0.35) * weekendDip;
-  if (base < 0.18) return 0;
-  if (base < 0.34) return 1 + Math.floor(rnd * 3);
-  if (base < 0.52) return 4 + Math.floor(rnd * 5);
-  if (base < 0.72) return 9 + Math.floor(rnd * 6);
-  return 15 + Math.floor(rnd * 11);
-}
+// Lays the calendar out the way GitHub does: one column per week, Sunday on
+// the top row, the most recent day in the last column. Only real days are
+// drawn; a slot with no day behind it stays empty.
+function layoutCells(days: ContributionDay[], weeks: number): Cell[] {
+  if (days.length === 0) return [];
+  const utc = (date: string) => Date.parse(`${date}T00:00:00Z`);
+  const thresholds = quartileThresholds(days);
+  const last = utc(days[days.length - 1].date);
+  const lastWeekday = new Date(last).getUTCDay();
+  const cells: Cell[] = [];
 
-type RemoteDay = { date: string; count: number };
-
-async function fetchContributions(username: string): Promise<RemoteDay[] | null> {
-  try {
-    const res = await fetch(
-      `https://github-contributions-api.jogruber.de/v4/${username}?y=last`,
-      { cache: "force-cache" },
-    );
-    if (!res.ok) return null;
-    const json = (await res.json()) as { contributions: RemoteDay[] };
-    return json.contributions ?? null;
-  } catch {
-    return null;
+  for (const day of days) {
+    const offset = Math.round((last - utc(day.date)) / DAY_MS);
+    const slot = 6 - lastWeekday + offset;
+    const weeksBack = Math.floor(slot / 7);
+    if (weeksBack >= weeks) continue;
+    cells.push({
+      x: weeks - 1 - weeksBack,
+      y: 6 - (slot % 7),
+      level: levelFromCount(day.count, thresholds),
+      count: day.count,
+      date: day.date,
+    });
   }
+  return cells;
+}
+
+function cellTitle(cell: Cell) {
+  return cell.count === 0
+    ? `No contributions on ${formatDay(cell.date)}`
+    : `${formatCount(cell.count)} contribution${cell.count === 1 ? "" : "s"} on ${formatDay(cell.date)}`;
 }
 
 export type ContributionPalette = "amber" | "emerald";
 
 const cellFillsByPalette: Record<ContributionPalette, string[]> = {
-  amber: ["var(--gh-0)", "var(--gh-1)", "var(--gh-2)", "var(--gh-3)", "var(--gh-4)"],
+  amber: [
+    "var(--gh-0)",
+    "var(--gh-1)",
+    "var(--gh-2)",
+    "var(--gh-3)",
+    "var(--gh-4)",
+  ],
   emerald: [
     "var(--gh-em-0)",
     "var(--gh-em-1)",
@@ -67,99 +111,94 @@ const cellFillsByPalette: Record<ContributionPalette, string[]> = {
   ],
 };
 
-export function ContributionGraph({
-  weeks = 52,
-  contributionCount,
-  palette = "amber",
-  username = "kayahickindev",
+const CELL = 11;
+const GAP = 3;
+const PITCH = CELL + GAP;
+
+const COMPACT_CELL = 10;
+const COMPACT_GAP = 4;
+const COMPACT_PITCH = COMPACT_CELL + COMPACT_GAP;
+
+// A static heatmap that fills its container's width. The home page uses it at
+// two lengths: the full year on wider screens, the last six months on phones so
+// the cells stay legible.
+function CompactHeatmap({
+  days,
+  weeks,
+  fills,
+  className,
 }: {
-  weeks?: number;
-  contributionCount?: string;
+  days: ContributionDay[];
+  weeks: number;
+  fills: string[];
+  className: string;
+}) {
+  const cells = useMemo(() => layoutCells(days, weeks), [days, weeks]);
+  const width = weeks * COMPACT_PITCH - COMPACT_GAP;
+  const height = 7 * COMPACT_PITCH - COMPACT_GAP;
+
+  return (
+    <svg
+      viewBox={`0 0 ${width} ${height}`}
+      className={className}
+      role="img"
+      aria-label={`GitHub contribution calendar for the last ${weeks === 26 ? "six months" : "year"}`}
+    >
+      {cells.map((cell) => (
+        <rect
+          key={cell.date}
+          x={cell.x * COMPACT_PITCH}
+          y={cell.y * COMPACT_PITCH}
+          width={COMPACT_CELL}
+          height={COMPACT_CELL}
+          rx={2}
+          fill={fills[cell.level]}
+        >
+          <title>{cellTitle(cell)}</title>
+        </rect>
+      ))}
+    </svg>
+  );
+}
+
+export function ContributionGraph({
+  calendar,
+  palette = "amber",
+  variant = "full",
+}: {
+  calendar: ContributionCalendar;
   palette?: ContributionPalette;
-  username?: string;
+  variant?: "full" | "compact";
 }) {
   const reducedMotion = useReducedMotion();
   const cellFills = cellFillsByPalette[palette];
-
-  const [remote, setRemote] = useState<RemoteDay[] | null>(null);
-  const [remoteTotal, setRemoteTotal] = useState<number | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    fetchContributions(username).then((days) => {
-      if (cancelled || !days) return;
-      setRemote(days);
-      setRemoteTotal(days.reduce((sum, d) => sum + d.count, 0));
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, [username]);
-
-  const cells = useMemo(() => {
-    const result: {
-      x: number;
-      y: number;
-      level: number;
-      commits: number;
-      daysAgo: number;
-    }[] = [];
-
-    if (remote && remote.length > 0) {
-      // Take the most recent (weeks * 7) days from the remote series and lay them out
-      // so the last cell is "today" (week 51, day 6).
-      const total = weeks * 7;
-      const slice = remote.slice(Math.max(0, remote.length - total));
-      slice.forEach((day, i) => {
-        const offsetFromEnd = slice.length - 1 - i;
-        const w = weeks - 1 - Math.floor(offsetFromEnd / 7);
-        const d = 6 - (offsetFromEnd % 7);
-        if (w < 0 || w >= weeks) return;
-        result.push({
-          x: w,
-          y: d,
-          level: levelFromCount(day.count),
-          commits: day.count,
-          daysAgo: offsetFromEnd,
-        });
-      });
-
-      // Fill any cells that didn't get assigned (older history not in slice) with 0s.
-      const seen = new Set(result.map((c) => `${c.x},${c.y}`));
-      for (let w = 0; w < weeks; w++) {
-        for (let d = 0; d < 7; d++) {
-          const key = `${w},${d}`;
-          if (!seen.has(key)) {
-            const daysAgo = (weeks - 1 - w) * 7 + (6 - d);
-            result.push({ x: w, y: d, level: 0, commits: 0, daysAgo });
-          }
-        }
-      }
-      return result;
-    }
-
-    // Fallback: deterministic heatmap until/if remote data arrives.
-    for (let w = 0; w < weeks; w++) {
-      for (let d = 0; d < 7; d++) {
-        const commits = fallbackCount(w, d);
-        const daysAgo = (weeks - 1 - w) * 7 + (6 - d);
-        result.push({ x: w, y: d, level: levelFromCount(commits), commits, daysAgo });
-      }
-    }
-    return result;
-  }, [weeks, remote]);
-
-  // Fallback only: shown when the live contribution API cannot be reached.
-  // 13,621 contributions from 2025-09-13 to 2026-09-13, read off the GitHub
-  // contribution graph on 2026-09-13. Contributions, never commits.
-  const displayCount = contributionCount ?? (
-    remoteTotal !== null ? `${remoteTotal.toLocaleString()}` : "13.6K+"
+  const weeks = 53;
+  const cells = useMemo(
+    () => layoutCells(calendar.days, weeks),
+    [calendar.days],
   );
 
-  const cellSize = 11;
-  const gap = 3;
-  const width = weeks * (cellSize + gap);
-  const height = 7 * (cellSize + gap);
+  if (variant === "compact") {
+    return (
+      <>
+        <CompactHeatmap
+          days={calendar.days}
+          weeks={weeks}
+          fills={cellFills}
+          className="hidden h-auto w-full sm:block"
+        />
+        <CompactHeatmap
+          days={calendar.days}
+          weeks={26}
+          fills={cellFills}
+          className="block h-auto w-full sm:hidden"
+        />
+      </>
+    );
+  }
+
+  const width = weeks * PITCH - GAP;
+  const height = 7 * PITCH - GAP;
 
   return (
     <div className="flex flex-col gap-2">
@@ -169,7 +208,7 @@ export function ContributionGraph({
         </p>
         <span aria-hidden className="h-3 w-px bg-neutral-400/30" />
         <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">
-          {displayCount} contributions
+          {formatCount(calendar.total)} contributions
         </p>
       </div>
       <div className="overflow-x-auto">
@@ -179,15 +218,16 @@ export function ContributionGraph({
           viewBox={`0 0 ${width} ${height}`}
           className="mx-auto block max-w-full"
           preserveAspectRatio="xMidYMid meet"
-          aria-label="GitHub-style contribution graph showing consistent activity"
+          role="img"
+          aria-label="GitHub contribution calendar for the last year"
         >
-          {cells.map((cell, i) => (
+          {cells.map((cell) => (
             <motion.rect
-              key={i}
-              x={cell.x * (cellSize + gap)}
-              y={cell.y * (cellSize + gap)}
-              width={cellSize}
-              height={cellSize}
+              key={cell.date}
+              x={cell.x * PITCH}
+              y={cell.y * PITCH}
+              width={CELL}
+              height={CELL}
               rx={2}
               fill={cellFills[cell.level]}
               className="cursor-pointer transition-opacity hover:opacity-80"
@@ -199,11 +239,7 @@ export function ContributionGraph({
                 ease: [0.21, 0.47, 0.32, 0.98],
               }}
             >
-              <title>
-                {cell.commits === 0
-                  ? `No contributions on ${formatCellDate(cell.daysAgo)}`
-                  : `${cell.commits} contribution${cell.commits === 1 ? "" : "s"} on ${formatCellDate(cell.daysAgo)}`}
-              </title>
+              <title>{cellTitle(cell)}</title>
             </motion.rect>
           ))}
         </svg>

@@ -27,9 +27,9 @@ type UsageTile = {
 // Only two figures here are checked against a primary source, so only two are
 // published. The token figure is reported cumulative usage across the Codex and
 // Claude coding tools as of 2026-09-13, and it measures coding-tool usage: it
-// has nothing to do with training the Dog AI model. The GitHub figure is 13,621
-// contributions from 2025-09-13 to 2026-09-13, read off the contribution graph
-// on 2026-09-13, and contributions are broader than commits.
+// has nothing to do with training the Dog AI model. The GitHub figure is 16,846
+// contributions in the last year (to September 2026), read from GitHub's
+// contribution calendar on 2026-09-23, and contributions are broader than commits.
 const usage: UsageTile[] = [
   {
     product: "Codex + Claude",
@@ -44,9 +44,9 @@ const usage: UsageTile[] = [
   {
     product: "GitHub",
     logos: [],
-    primary: "13.6K+",
+    primary: "16.8K+",
     primaryLabel: "contributions",
-    secondary: "Sep 2025 to Sep 2026 · not just commits",
+    secondary: "Last year, to Sep 2026 · not just commits",
   },
 ];
 
