@@ -13,6 +13,7 @@ const navItems = [
   { label: "About", href: "/about" },
   { label: "Work", href: "/work" },
   { label: "Stack", href: "/stack" },
+  { label: "Credentials", href: "/credentials" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -25,7 +26,7 @@ function ThemeToggle() {
   };
 
   return (
-    <div className="flex items-center justify-end">
+    <div className="col-start-2 row-start-1 flex items-center justify-end sm:col-start-3">
       <button
         type="button"
         onClick={toggleTheme}
@@ -49,7 +50,7 @@ export function TopNav() {
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.42, ease }}
-      className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 text-sm"
+      className="grid grid-cols-[1fr_auto] items-center gap-2 text-sm sm:grid-cols-[1fr_auto_1fr]"
     >
       <Link
         href="/"
@@ -59,12 +60,15 @@ export function TopNav() {
         <span className="grid h-7 w-7 place-items-center rounded bg-neutral-950 font-serif text-sm leading-none text-white dark:bg-white dark:text-neutral-950">
           KH
         </span>
-        <span className="hidden font-serif text-[17px] tracking-tight text-neutral-950 sm:inline dark:text-white">
+        <span className="hidden whitespace-nowrap font-serif text-[17px] tracking-tight text-neutral-950 md:inline dark:text-white">
           {siteConfig.name}
         </span>
       </Link>
 
-      <nav className="flex items-center gap-0.5 rounded-full border border-black/10 bg-white/45 px-1 py-1 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
+      <nav
+        aria-label="Primary"
+        className="col-span-2 row-start-2 flex items-center justify-self-center gap-0.5 rounded-full border border-black/10 bg-white/45 px-1 py-1 backdrop-blur sm:col-span-1 sm:col-start-2 sm:row-start-1 dark:border-white/10 dark:bg-white/[0.04]"
+      >
         {navItems.map((item) => {
           const active =
             item.href === pathname ||
@@ -74,7 +78,7 @@ export function TopNav() {
               key={item.href}
               href={item.href}
               aria-current={active ? "page" : undefined}
-              className={`relative rounded-full px-2 py-1.5 text-xs font-medium transition sm:px-3 sm:text-sm ${
+              className={`relative rounded-full px-1.5 py-2 text-xs font-medium transition sm:px-3 sm:text-sm ${
                 active
                   ? "text-neutral-950 dark:text-white"
                   : "text-neutral-700 hover:bg-neutral-950/[0.055] hover:text-neutral-950 dark:text-neutral-300 dark:hover:bg-white/[0.07] dark:hover:text-white"

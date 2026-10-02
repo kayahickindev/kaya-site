@@ -106,6 +106,7 @@ Joined the family landscaping business at age 14 and worked through high school 
 - **About**: https://www.kayahickin.com/about — background, education, and founder context.
 - **Work**: https://www.kayahickin.com/work — index of shipped products and companies.
 - **Stack**: https://www.kayahickin.com/stack — iOS, Android, AI, backend, web, and AI-native workflow.
+- Credentials: https://www.kayahickin.com/credentials - certifications, assessed credentials, and completed training.
 - **Contact**: https://www.kayahickin.com/contact — direct email and social links.
 - **MyFutureSelf**: https://www.kayahickin.com/work/myfutureself — flagship consumer AI case study.
 - **Dog AI**: https://www.kayahickin.com/work/dog-ai — shipped iOS computer-vision app.
@@ -149,6 +150,8 @@ Joined the family landscaping business at age 14 and worked through high school 
 
 ## Certifications & training
 
+Full credential list and verification links: https://www.kayahickin.com/credentials
+
 - DHS Trusted Tester Certification: Trusted Tester for Web on Windows. U.S. Department of Homeland Security. Earned 2026-08-21.
 - Microsoft Applied Skills: Secure AI solutions in the cloud. Microsoft. Earned 2026-08-24.
 - Fortinet NSE 1 Certified in Cybersecurity. Fortinet. Earned 2026-08; expires August 2028.
@@ -156,6 +159,9 @@ Joined the family landscaping business at age 14 and worked through high school 
 - Web Accessibility, the Business Case. The A11Y Collective. Earned 2026-08-24.
 - Cybersecurity and Cloud Fundamentals 1.0. Fortinet. Earned 2026-08-24.
 - FERPA 101 (Colleges and Universities), FERPA 101 (Local Education Agencies), and FERPA 201 (Data Sharing Under FERPA). usferpatraining. Earned 2026-08-24.
+- Social Media Simternship. Stukent. Completed 2026-04-22.
+- Learning Excel 2021. LinkedIn Learning. Completed 2023-09-16.
+- Excel Formulas and Functions Quick Tips (2020). LinkedIn Learning. Completed 2023-09-16.
 
 ## Travel
 

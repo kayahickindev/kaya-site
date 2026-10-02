@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowUpRight,
   GraduationCap,
@@ -86,6 +87,17 @@ export default async function AboutPage() {
               {paragraphs.map((p) => (
                 <p key={p}>{p}</p>
               ))}
+              <p>
+                DHS Trusted Tester with an assessed Microsoft credential in AI
+                security.{" "}
+                <Link
+                  href="/credentials"
+                  className="rounded-sm font-medium text-amber-800 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 dark:text-amber-200"
+                >
+                  View my credentials and training
+                </Link>
+                .
+              </p>
             </div>
           </div>
 
