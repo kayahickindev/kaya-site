@@ -28,6 +28,7 @@
 - About: https://www.kayahickin.com/about — background, education, and founder context.
 - Work: https://www.kayahickin.com/work — index of shipped products and companies.
 - Stack: https://www.kayahickin.com/stack — iOS, Android, AI, backend, web, and AI-native workflow.
+- Credentials: https://www.kayahickin.com/credentials - certifications, assessed credentials, and completed training.
 - Contact: https://www.kayahickin.com/contact — direct email and social links.
 - MyFutureSelf case study: https://www.kayahickin.com/work/myfutureself
 - Dog AI case study: https://www.kayahickin.com/work/dog-ai
