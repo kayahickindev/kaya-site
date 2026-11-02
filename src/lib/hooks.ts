@@ -67,7 +67,7 @@ export function useCountUp(
     formatted = count.toFixed(decimals);
   } else {
     const rounded = Math.floor(count);
-    formatted = format ? rounded.toLocaleString() : rounded.toString();
+    formatted = format ? rounded.toLocaleString("en-US") : rounded.toString();
   }
 
   return { count: formatted, ref };

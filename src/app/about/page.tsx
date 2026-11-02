@@ -13,12 +13,13 @@ import { PathTimeline } from "@/components/PathTimeline";
 import { SubpageShell } from "@/components/SubpageShell";
 import { siteConfig } from "@/data/content";
 import { getContributionCalendar } from "@/lib/github-contributions";
+import { getMarketingMetrics } from "@/lib/marketing-metrics";
 import { cardSurfaceFeatured } from "@/lib/surfaces";
 
 export const metadata: Metadata = {
   title: `About | ${siteConfig.name}`,
   description:
-    "About Kaya Hickin, co-founder and CTO of Cintrifuse-backed MyFutureSelf, AI-native builder, and three-for-three profitable founder.",
+    "About Kaya Hickin, co-founder and CTO of MyFutureSelf, an AI agent that is your future self. MyFutureSelf is his third profitable company.",
   alternates: {
     canonical: `${siteConfig.url}/about`,
   },
@@ -29,11 +30,6 @@ const SIDEBAR_ICONS: Record<string, LucideIcon> = {
   GraduationCap,
   Target,
 };
-
-const paragraphs = [
-  "Working full-time in my family's business at 14, valedictorian out of high school, shipping companies ever since. I build consumer AI for behavior change.",
-  "Shipped two iOS apps to the App Store and trained the custom multimodal model behind one of them. Self-funded my Miami University tuition. Graduated cum laude.",
-];
 
 // GitHub contributions are contributions, never commits: the figure counts
 // commits, pull requests, issues and reviews. 16,846 in the last year (to
@@ -48,8 +44,12 @@ const highlightStats = [
 ];
 
 export default async function AboutPage() {
-  const contributions = await getContributionCalendar(
-    siteConfig.github.username,
+  const [contributions, metrics] = await Promise.all([
+    getContributionCalendar(siteConfig.github.username),
+    getMarketingMetrics(),
+  ]);
+  const paragraphs = siteConfig.about.paragraphs(
+    metrics.metrics.payingSubscribers.display,
   );
 
   return (
@@ -73,7 +73,7 @@ export default async function AboutPage() {
                   Kaya Hickin
                 </span>
                 <span className="block text-xs text-neutral-500 dark:text-neutral-300">
-                  Co-founder &amp; CTO · Cleveland, OH
+                  Co-founder &amp; CTO · Cincinnati, OH
                 </span>
               </span>
             </div>

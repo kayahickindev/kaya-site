@@ -7,12 +7,17 @@ export const siteConfig = {
   url: "https://www.kayahickin.com",
 
   seo: {
-    title: "Kaya Hickin — Technical Co-founder & CTO, MyFutureSelf",
-    description:
-      "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, a Cintrifuse-backed consumer AI app with 4K+ active paid subscribers, $150K+ ARR, 72K+ downloads, and a 4.7★ App Store rating. Built the original iOS, backend, and voice-AI stack end to end. Building consumer AI for behavior change.",
+    title: "Kaya Hickin | Co-founder & CTO, MyFutureSelf",
+    // layout.tsx fills in the live paying subscriber and ARR figures, so the
+    // description never goes stale.
+    description: (payingSubscribers: string, arr: string) =>
+      "Kaya Hickin is the co-founder and CTO of MyFutureSelf, an AI agent that is your future self. " +
+      "It tells you what to do today and who can help you get there. " +
+      `MyFutureSelf has ${payingSubscribers} paying subscribers and ${arr} ARR, and it is his third profitable company. ` +
+      "He built the iOS and Android apps, the backend, the AI and the company brain the team's agents work off 24/7.",
   },
 
-  availability: "Cleveland, OH",
+  availability: "Cincinnati, OH",
 
   recognitions: [
     "Startup Catalyst Award, Miami University 2026",
@@ -21,11 +26,14 @@ export const siteConfig = {
   ],
 
   about: {
-    paragraphs: [
-      "I started my first company freshman year because I wanted to see if I could build something people would pay for. Turns out I could, so I kept going. Three companies later, I'm three for three on profitability.",
-      "My main focus right now is MyFutureSelf, an AI app that helps people define who they want to become and then become that person through a 90-day personalized roadmap, an AI mentor that speaks as their future self, and daily action. It is backed by Cintrifuse Capital. As CTO, I built the original product end to end and lead engineering across mobile, web, backend, and AI.",
-      "I'm AI-native in how I build. In the last year (to September 2026) I logged 16,846 GitHub contributions, most of them written alongside Claude Code and Codex, and 100B+ tokens across those two coding tools.",
-      "I graduated cum laude from Miami University with a B.S. in Business, a Marketing major and an Entrepreneurship minor, and I'm based in Cleveland, OH. Most of my time goes toward thinking about how AI can build consumer products that change real behavior, not just engagement metrics.",
+    // The LinkedIn About, verbatim. The about page passes in the live paying
+    // subscriber figure ("5,000+"), so the last paragraph never goes stale.
+    paragraphs: (payingSubscribers: string) => [
+      "I'm the co-founder and CTO of MyFutureSelf, an AI agent that is your future self. It tells you what to do today and who can help you get there.",
+      "I grew up poor in a farm town and started working in my dad's landscaping business at 13. That money bought my first computer, and I went from hacking Minecraft servers to learning how to code in middle school. I graduated valedictorian as a three-sport athlete, then paid my own way through Miami University and finished cum laude.",
+      "MyFutureSelf is my third profitable company. I co-founded a web development agency freshman year, then Appointra, a cold outreach agency for AI startups that hit $20K MRR in three months.",
+      "Giancarlo Sarti and I started MyFutureSelf together, and I lead development. I built our iOS and Android apps, the backend, the AI, and the company brain our agents work off 24/7, writing code, fixing bugs and shipping releases. In one month I merged over 3,000 PRs myself.",
+      `Today ${payingSubscribers} people pay for MyFutureSelf, and we're now bringing it to universities and corporations.`,
     ],
     sidebar: [
       { label: "Education", value: "Miami University · Cum laude", detail: "B.S. in Business, Marketing major, Entrepreneurship minor. Farmer School of Business, May 2026.", icon: "GraduationCap" },
@@ -72,14 +80,10 @@ export const siteConfig = {
     {
       slug: "myfutureself",
       name: "MyFutureSelf",
-      tagline: "AI mentorship for the person you're becoming.",
+      tagline:
+        "An AI agent that is your future self. It tells you what to do today and who can help you get there.",
       description:
-        "A 90-day roadmap and a voice AI mentor that speaks as your future self.",
-      highlights: [
-        "4K+ active paid subscribers · $150K+ ARR",
-        "72K+ downloads · 4.7★ from 1,762 ratings",
-        "Backed by Cintrifuse Capital",
-      ],
+        "MyFutureSelf is an AI agent that is your future self. It tells you what to do today and who can help you get there.",
       links: {
         website: "https://myfutureselfapp.com/",
         appStore:
@@ -121,7 +125,7 @@ export const siteConfig = {
       name: "Appointra",
       tagline: "B2B outbound, on autopilot.",
       description:
-        "Lead generation agency for SF, NYC, and Chicago startups. Scaled to $20k MRR in three months using AI-powered outbound, generating millions in pipeline and hundreds of qualified meetings.",
+        "Cold outreach agency for AI startups in SF, NYC, and Chicago. Scaled to $20K MRR in three months with AI-powered outbound, generating millions in pipeline and hundreds of qualified meetings.",
       links: {
         website: "https://appointra.net/",
       },
@@ -148,9 +152,9 @@ export const siteConfig = {
     {
       company: "MyFutureSelf",
       role: "Co-Founder · CTO",
-      period: "Jan 2025 to Present",
+      period: "Feb 2025 to Present",
       description:
-        "Consumer AI: a 90-day roadmap and a voice mentor that speaks as your future self. Built the original product end to end and lead engineering across mobile, web, backend, and AI.",
+        "An AI agent that is your future self, co-founded with Giancarlo Sarti. I lead development and built the iOS and Android apps, the university platform, the backend and the AI.",
       metrics: [],
       active: true,
     },

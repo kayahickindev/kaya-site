@@ -38,7 +38,7 @@ export const myFutureSelf = {
   store: [
     mfsShot(
       1,
-      "Become Your Best Self: the MyFutureSelf welcome screen, a clear system to become a better version of yourself in as little as 90 days, rated 4.7 on the App Store",
+      "Become Your Best Self: the MyFutureSelf welcome screen, a clear system to become a better version of yourself in as little as 90 days, with the listing's App Store rating and #1 app for life transformation laurels",
     ),
     mfsShot(
       2,

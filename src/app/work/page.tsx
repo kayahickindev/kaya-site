@@ -29,7 +29,7 @@ function heroMetrics(
   return {
     myfutureself: {
       value: metrics.metrics.arr.display,
-      label: `ARR · ${metrics.metrics.paidSubscribersEver.display} active paid · ${metrics.metrics.appStoreRating.display}★`,
+      label: `ARR · ${metrics.metrics.payingSubscribers.display} paying · ${metrics.metrics.appStoreRating.display}★`,
     },
     "viral-loop": { value: "Live", label: "MVP shipped" },
     "dog-ai": { value: "Live", label: "App Store · paying product" },
@@ -121,7 +121,7 @@ export default async function WorkPage() {
                     {metrics.metrics.arr.display} ARR
                   </span>
                   <span className="text-sm font-medium text-neutral-700 sm:text-base dark:text-neutral-300">
-                    {metrics.metrics.paidSubscribersEver.display} active paid ·{" "}
+                    {metrics.metrics.payingSubscribers.display} paying subscribers ·{" "}
                     {metrics.metrics.appStoreRating.display}★
                   </span>
                 </div>

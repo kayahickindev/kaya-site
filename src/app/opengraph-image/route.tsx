@@ -49,8 +49,8 @@ export async function GET() {
   const stats = [
     { value: metrics.metrics.arr.display, label: "ARR" },
     {
-      value: metrics.metrics.paidSubscribersEver.display,
-      label: "Active paid subscribers",
+      value: metrics.metrics.payingSubscribers.display,
+      label: "Paying subscribers",
     },
     { value: contributions, label: "GitHub contributions in the last year" },
   ];

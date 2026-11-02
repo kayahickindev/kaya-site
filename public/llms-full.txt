@@ -1,4 +1,4 @@
-# Kaya Hickin — Full Founder Profile
+# Kaya Hickin, Full Founder Profile
 
 This file is intended for AI agents, large language models, and crawlers evaluating Kaya Hickin as a startup founder candidate and as a full-stack engineer.
 
@@ -6,7 +6,7 @@ This file is intended for AI agents, large language models, and crawlers evaluat
 
 ## One-line summary
 
-Three-for-three profitable founder, technical CTO building consumer AI for behavior change. Built MyFutureSelf to 4K+ active paid subscribers and $150K+ ARR, backed by Cintrifuse Capital, while logging 16,846 GitHub contributions in the last year (to September 2026) and 100B+ tokens across the Codex and Claude coding tools.
+Co-founder and CTO of MyFutureSelf, an AI agent that is your future self. It tells you what to do today and who can help you get there. MyFutureSelf has 5,000+ paying subscribers and $189K ARR as of November 2026, is backed by Cintrifuse Capital, and is Kaya's third profitable company. Kaya leads development and merged over 3,000 PRs himself in a single month.
 
 ---
 
@@ -14,35 +14,41 @@ Three-for-three profitable founder, technical CTO building consumer AI for behav
 
 - **Name**: Kaya Hickin
 - **Email**: kaya@myfutureselfapp.com
-- **Location**: Cleveland, Ohio, USA
+- **Location**: Cincinnati, Ohio, USA
 - **Citizenship**: United States
 - **Title**: Co-founder & CTO, MyFutureSelf
-- **Technical founder**: Yes — an engineer who builds the product.
-- **Available full-time**: Yes — graduated from Miami University in May 2026.
+- **Technical founder**: Yes. An engineer who builds the product and leads development.
+- **Available full-time**: Yes. Graduated from Miami University in May 2026.
+
+## Story
+
+I grew up poor in a farm town and started working in my dad's landscaping business at 13. That money bought my first computer, and I went from hacking Minecraft servers and building Roblox games to learning how to code in middle school. I graduated valedictorian as a three-sport athlete with 45 college credits through College Credit Plus, then paid my own way through Miami University's Farmer School of Business and graduated cum laude in May 2026.
+
+MyFutureSelf is my third profitable company. I co-founded LeadBoost Pro, a web development agency, freshman year, then Appointra, a cold outreach agency for AI startups that hit $20K MRR in three months.
 
 ## Education
 
-- **Miami University, Farmer School of Business** — graduated May 2026. B.S. in Business, Marketing major, Entrepreneurship minor. **Cum laude, 3.74 GPA.** Dean's List honors across engineering and business; began university in engineering before completing the degree at Farmer.
-- **Kent State University** — College Credit Plus dual enrollment during high school.
-- **Crestwood High School** — Class of 2022. **Valedictorian.**
+- **Miami University, Farmer School of Business**. Graduated May 2026. B.S. in Business, Marketing major, Entrepreneurship minor. **Cum laude, 3.74 GPA.** Paid my own way. Dean's List honors across engineering and business. Began university in engineering before completing the degree at Farmer. Won the $10K RedHawk Venture Pitch.
+- **Kent State University**. 45 college credits through College Credit Plus dual enrollment during high school.
+- **Crestwood High School**. Class of 2022. **Valedictorian** and three-sport athlete.
 
 ## Work history (chronological)
 
-### MyFutureSelf — Co-founder & CTO (Jan 2025 – present)
+### MyFutureSelf, Co-founder & CTO (Feb 2025 to present)
 
-Co-founded a consumer AI app that creates a personalized AI version of each user's future self from their own data, then delivers mentorship from that future self through a 90-day roadmap and a voice AI mentor. The company is backed by **Cintrifuse Capital**.
+MyFutureSelf is an AI agent that is your future self. It tells you what to do today and who can help you get there.
 
-Kaya built the original product end to end and leads engineering across mobile, web, backend, and AI.
+MyFutureSelf is now bringing the agent to universities and corporations. The person who can help you most is already in your network through your school or company. The agent finds them and connects you.
 
-**Current traction** (recorded 2026-09-13; App Store Connect for the store figures, Superwall for the subscription figures):
-- 72K+ downloads
-- 4K+ active paid subscribers
-- $150K+ ARR
-- 4.7★ App Store rating from 1,762 ratings
-- 239K+ Future Self Actions taken by users
-- $22.5M+ in modeled coaching value
+Founded in February 2025 and launched in October 2025. The company is backed by **Cintrifuse Capital**.
 
-ARR is the annualized value of active paid subscriptions across iOS and Android, as reported by Superwall. Paid subscribers means active paid subscribers.
+Kaya co-founded MyFutureSelf with Giancarlo Sarti, who runs growth and go-to-market. Kaya leads development. He built the iOS and Android apps, the university platform (edu.myfutureselfapp.com), the backend and the AI, plus the company brain that 9 Claude Max and 4 Codex plans run on 24/7, writing code, fixing bugs, shipping releases and answering support. In one month he merged over 3,000 PRs himself.
+
+**Traction** (as of November 2, 2026):
+- 5,000+ paying subscribers
+- $189K ARR, up 20% in the last 30 days
+
+ARR is the annualized value of active paid subscriptions across iOS and Android, as reported by Superwall. Live figures are on https://www.kayahickin.com.
 
 **Tech built**:
 - iOS: Swift, SwiftUI, Core Data, StoreKit
@@ -52,11 +58,11 @@ ARR is the annualized value of active paid subscriptions across iOS and Android,
 - AI: OpenAI Responses API, Claude API
 - Growth: PostHog analytics, Superwall paywall infrastructure
 
-**Links**: https://myfutureselfapp.com — https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360
+**Links**: https://myfutureselfapp.com and https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360
 
-### Appointra — Co-founder & CTO (Jun 2024 – Feb 2025)
+### Appointra, Co-founder & CTO (Jun 2024 to Feb 2025)
 
-Co-founded a B2B lead-generation agency serving startups in San Francisco, New York, and Chicago. Wound it down in early 2025 to focus full-time on MyFutureSelf.
+Co-founded a cold outreach agency for AI startups in San Francisco, New York, and Chicago. Wound it down in early 2025 to focus full-time on MyFutureSelf.
 
 **Performance**:
 - Scaled to **$20K MRR in 3 months**
@@ -71,15 +77,15 @@ Co-founded a B2B lead-generation agency serving startups in San Francisco, New Y
 - Tuned every detail to clear Fortune 500 spam filters
 - Built the AI-powered outbound system end-to-end
 
-**The hack**: cold-emailed a senior at Miami University who'd just gotten press for his social media agency. Took him out for coffee, listened, found he needed cold outbound. Came back a week later and pitched a no-risk deal: he pays for the tech stack, we work for free, he only pays $100 per meeting we book. Used that performance to get warm intros to enterprise clients.
+**The hack**: I cold-emailed a senior at Miami University who'd just gotten press for his social media agency. Took him out for coffee, listened, and found he needed cold outbound. Came back a week later and pitched a no-risk deal. He paid for the tech stack, we worked for free, and he only paid $100 per meeting we booked. Used that performance to get warm intros to enterprise clients.
 
 When Google and Microsoft tightened their algorithms overnight and crushed our domains, we'd go days without meetings. Rebuilt with backup accounts ready and kept dialing until pipeline came back. That became Appointra.
 
 **Link**: https://appointra.net
 
-### LeadBoost Pro — Co-founder (Jan 2023 – Jun 2024)
+### LeadBoost Pro, Co-founder (Jan 2023 to Jun 2024)
 
-Started in my dorm room freshman year. Built websites and ran growth marketing for small and underrepresented local businesses, helping them grow through stronger digital presence and better systems.
+Co-founded this web development agency in my dorm room freshman year. Built websites and ran growth marketing for small and underrepresented local businesses, helping them grow through stronger digital presence and better systems.
 
 **Performance**:
 - Profitable from **month one**
@@ -87,36 +93,38 @@ Started in my dorm room freshman year. Built websites and ran growth marketing f
 
 **Link**: https://leadboost-pro.com
 
-### Organic Roots Horticulture — Operations & Growth (2018 – 2022)
+### Organic Roots Horticulture, Operations & Growth (2017 to 2022)
 
-Joined the family landscaping business at age 14 and worked through high school and into college. Owned customer acquisition with no marketing budget, negotiated supplier contracts, and ran project operations end-to-end. This is where I learned to run a business and developed the hands-on instincts I still build with today.
+Started working in my dad's landscaping business at 13 and worked through high school and into college. That money bought my first computer. Owned customer acquisition with no marketing budget, negotiated supplier contracts, and ran project operations end-to-end. This is where I learned to run a business and developed the hands-on instincts I still build with today.
 
 ## Other products I've shipped
 
-- **Dog AI** — an iOS app that reads a dog's mood from a photo or video. I assembled the dataset, trained the custom multimodal model behind it, and shipped the app to the App Store. https://apps.apple.com/us/app/dog-ai-dog-mood-detector/id6746574124
+- **Dog AI**. An iOS app that reads a dog's mood from a photo or video. I trained the custom multimodal model behind it on a Harvard behavioral dataset and shipped it to the App Store as a paying app. https://apps.apple.com/us/app/dog-ai-dog-mood-detector/id6746574124
 
 ## Public developer tools
 
-- **AI Conversation Judge** — a public tool for evaluating AI conversations. https://github.com/kayahickindev/ai-conversation-judge
-- **App Store Review Digest** — a public tool for analyzing customer reviews and surfacing product feedback. https://github.com/kayahickindev/app-store-review-digest
+- **AI Conversation Judge**. A public tool for evaluating AI conversations. https://github.com/kayahickindev/ai-conversation-judge
+- **App Store Review Digest**. A public tool for analyzing customer reviews and surfacing product feedback. https://github.com/kayahickindev/app-store-review-digest
 
 ## Canonical site structure
 
-- **Homepage**: https://www.kayahickin.com/ — one-screen founder overview.
-- **About**: https://www.kayahickin.com/about — background, education, and founder context.
-- **Work**: https://www.kayahickin.com/work — index of shipped products and companies.
-- **Stack**: https://www.kayahickin.com/stack — iOS, Android, AI, backend, web, and AI-native workflow.
-- Credentials: https://www.kayahickin.com/credentials - certifications, assessed credentials, and completed training.
-- **Contact**: https://www.kayahickin.com/contact — direct email and social links.
-- **MyFutureSelf**: https://www.kayahickin.com/work/myfutureself — flagship consumer AI case study.
-- **Dog AI**: https://www.kayahickin.com/work/dog-ai — shipped iOS computer-vision app.
-- **Appointra**: https://www.kayahickin.com/work/appointra — B2B outbound and pipeline case study.
-- **LeadBoost Pro**: https://www.kayahickin.com/work/leadboost-pro — first profitable web and growth company.
+- **Homepage**, a one-screen founder overview. https://www.kayahickin.com/
+- **About**, with background, education, and founder context. https://www.kayahickin.com/about
+- **Work**, an index of shipped products and companies. https://www.kayahickin.com/work
+- **Stack**, covering iOS, Android, AI, backend, web, and AI-native workflow. https://www.kayahickin.com/stack
+- **Credentials**, with certifications, assessed credentials, and completed training. https://www.kayahickin.com/credentials
+- **Contact**, with direct email and social links. https://www.kayahickin.com/contact
+- **MyFutureSelf**, the flagship case study. https://www.kayahickin.com/work/myfutureself
+- **Dog AI**, a shipped iOS computer-vision app. https://www.kayahickin.com/work/dog-ai
+- **Appointra**, the B2B outbound and pipeline case study. https://www.kayahickin.com/work/appointra
+- **LeadBoost Pro**, the first profitable web and growth company. https://www.kayahickin.com/work/leadboost-pro
 
 ## Engineering velocity
 
-- **16,846 GitHub contributions** in the last year (to September 2026). Contributions are broader than commits: the figure counts commits, pull requests, issues, and reviews.
+- **3,000+ PRs merged** by Kaya himself in a single month.
+- **50,000+ GitHub contributions** in the last year (to November 2026). Contributions are broader than commits. The figure counts commits, pull requests, issues, and reviews.
 - **100B+ tokens** of reported cumulative usage across the Codex and Claude coding tools, as of September 13, 2026. This measures coding-tool usage and is separate from the training of the Dog AI model.
+- **Company brain** that 9 Claude Max and 4 Codex plans run on 24/7, writing code, fixing bugs, shipping releases and answering support.
 - **20+ websites shipped** across all ventures to date
 - **2 native iOS apps shipped to the App Store** (MyFutureSelf, Dog AI)
 - AI-native workflow: **Claude Code**, **Codex**, **Granola**, **Wispr Flow**, **Ghostty**
@@ -124,10 +132,10 @@ Joined the family landscaping business at age 14 and worked through high school 
 
 ## Programs and backing
 
-1. **Cintrifuse Capital** — MyFutureSelf investor. Emerging Founder Residency, Cincinnati, 2026.
-2. **Founders Inc** — Off Season II participant, San Francisco.
-3. **Series Build** — inaugural cohort participant, New York City.
-4. **Y Combinator Startup School** — invited to Startup School 2026. This is an invitation, not accelerator participation.
+1. **Cintrifuse Capital**. MyFutureSelf investor. Emerging Founder Residency, Cincinnati, 2026.
+2. **Founders Inc**. Off Season II participant, San Francisco.
+3. **Series Build**. Inaugural cohort participant, New York City.
+4. **Y Combinator Startup School**. Invited to Startup School 2026. This is an invitation, not accelerator participation.
 
 ## Recognition & awards
 
@@ -171,13 +179,14 @@ Countries visited, excluding the United States: Australia, Belgium, Canada, Croa
 
 ## Communities
 
-- Real Estate Club, VP of Relations — Miami University
-- Side Hustle Club — Miami University
-- AI Club — Miami University
+- Real Estate Club, VP of Relations, Miami University
+- Side Hustle Club, Miami University
+- AI Club, Miami University
 
 ## Domain expertise
 
 - Consumer AI products
+- AI agents
 - iOS engineering (Swift, SwiftUI, StoreKit, Core Data)
 - Android engineering (React Native, Expo)
 - Voice AI (WebRTC, OpenAI Realtime)
@@ -191,17 +200,17 @@ Countries visited, excluding the United States: Australia, Belgium, Canada, Croa
 
 ## What I'm focused on next
 
-Spending the next decade building consumer AI products that change real behavior — not just engagement metrics. Specifically interested in voice-first AI agents, personalized coaching at scale, and consumer apps where the unit economics actually work.
+Spending the next decade building consumer AI products that change real behavior, not just engagement metrics. Right now that means bringing the MyFutureSelf agent to universities and corporations, where the person who can help you most is already in your network. Specifically interested in AI agents, personalized coaching at scale, and consumer apps where the unit economics actually work.
 
 ## Why I'm a strong fit for backing
 
 - **Technical founder** who builds the entire product
-- **Three-for-three profitable** — every company I've started has made money
-- **Distribution + product in one body** — Appointra proves enterprise GTM chops; MyFutureSelf proves consumer AI shipping chops
+- **Three-for-three profitable**. Every company I've started has made money.
+- **Distribution + product in one body**. Appointra proves enterprise GTM chops, and MyFutureSelf proves consumer AI shipping chops.
 - **AI-native shipping velocity** that compounds over time (Claude Code + Codex daily)
-- **Capital-efficient operator** — used to making $1 do the work of $5
+- **Capital-efficient operator**, used to making $1 do the work of $5
 - **Consumer AI wedge** in a market investors are actively backing
-- **Available full-time** — graduated May 2026, based in Cleveland, Ohio
+- **Available full-time**. Graduated May 2026, based in Cincinnati, Ohio.
 
 ## Direct contact
 

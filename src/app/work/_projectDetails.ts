@@ -28,23 +28,21 @@ export const projectDetails: ProjectDetail[] = [
     slug: "myfutureself",
     project: projectByName("MyFutureSelf"),
     role: "Co-founder · CTO",
-    timeframe: "Jan 2025 to Present",
+    timeframe: "Feb 2025 to Present",
     overview: [
-      "MyFutureSelf is the main company and product: an AI app built around a 90-day roadmap, daily action, and a voice AI mentor that speaks as the user's future self. It is backed by Cintrifuse Capital.",
-      "Kaya built the original product end to end and leads engineering across mobile, web, backend, and AI. The product is active and scaling with paying users.",
+      "MyFutureSelf is an AI agent that is your future self. It tells you what to do today and who can help you get there. It is backed by Cintrifuse Capital.",
+      "Kaya co-founded MyFutureSelf with Giancarlo Sarti and leads development. MyFutureSelf is now bringing the agent to universities and corporations, where the person who can help you most is already in your network through your school or company. The agent finds them and connects you.",
     ],
-    // These outcomes are replaced at render time by the live metrics snapshot;
-    // they are the same figures, kept here so the list reads on its own.
+    // The case study puts the live paying subscriber, ARR, download and rating
+    // figures ahead of these, so no metric is typed here.
     outcomes: [
-      "4K+ active paid subscribers and $150K+ ARR",
-      "72K+ downloads on the App Store",
       "Backed by Cintrifuse Capital",
-      "4.7-star App Store rating from 1,762 ratings",
+      "Bringing the agent to universities and corporations",
     ],
     ownership: [
-      "Native iOS product architecture",
-      "Backend and data model for user roadmaps",
-      "Voice-AI mentor experience",
+      "iOS and Android apps",
+      "University platform, backend and AI",
+      "Company brain the team's agents work off 24/7",
     ],
     stack: ["Swift", "SwiftUI", "StoreKit", "WebRTC", "Firebase", "OpenAI", "Claude"],
   },
@@ -95,7 +93,7 @@ export const projectDetails: ProjectDetail[] = [
     role: "Co-founder",
     timeframe: "Jun 2024 to Feb 2025",
     overview: [
-      "Appointra was a B2B lead generation agency serving startups in San Francisco, New York City, and Chicago.",
+      "Appointra was a cold outreach agency for AI startups in San Francisco, New York City, and Chicago.",
       "The company scaled through AI-powered outbound systems, then was wound down so Kaya could focus full-time on MyFutureSelf.",
     ],
     outcomes: [

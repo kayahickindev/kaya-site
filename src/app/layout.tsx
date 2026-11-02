@@ -28,17 +28,8 @@ const instrumentSerif = Instrument_Serif({
 });
 
 function tractionDescription(metrics: MarketingMetricsSnapshot) {
-  const { appDownloads, appStoreRating, appStoreReviews, paidSubscribersEver, arr } =
-    metrics.metrics;
-  return (
-    "Three-for-three profitable founder. Co-founder & CTO of MyFutureSelf, " +
-    `a Cintrifuse-backed consumer AI app with ${paidSubscribersEver.display} active paid ` +
-    `subscribers, ${arr.display} ARR, ${appDownloads.display} downloads, ` +
-    `and a ${appStoreRating.display}★ App Store rating from ` +
-    `${appStoreReviews.display} ratings. Built the original iOS, ` +
-    "backend, and voice-AI stack end to end. Building consumer AI for " +
-    "behavior change."
-  );
+  const { payingSubscribers, arr } = metrics.metrics;
+  return siteConfig.seo.description(payingSubscribers.display, arr.display);
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -69,7 +60,7 @@ export async function generateMetadata(): Promise<Metadata> {
       "Cintrifuse Capital",
       "Dog AI",
       "full-stack developer",
-      "Cleveland Ohio",
+      "Cincinnati Ohio",
       "consumer AI startup",
       "three-time founder",
     ],
@@ -110,17 +101,20 @@ function personJsonLd(metrics: MarketingMetricsSnapshot) {
     jobTitle: "Co-founder & CTO at MyFutureSelf",
     description:
       tractionDescription(metrics) +
-      " Previously co-founded Appointra (B2B AI outbound, scaled to $20K MRR " +
-      "in 3 months and $2M+ in client pipeline) and LeadBoost Pro (profitable " +
-      "from month one freshman year). 16,846 GitHub contributions in the last " +
-      "year (to September 2026) across product and infra, a figure that counts " +
+      " Freshman year he co-founded LeadBoost Pro, a web development agency " +
+      "that was profitable from month one. He then co-founded Appointra, a " +
+      "cold outreach agency for AI startups, and grew it to $20K MRR in three " +
+      "months. " +
+      "In one month he merged over 3,000 PRs himself. " +
+      "50,000+ GitHub contributions in the last " +
+      "year (to November 2026) across product and infra, a figure that counts " +
       "commits, pull requests, issues and reviews, and 100B+ tokens across " +
       "the Codex and Claude coding tools.",
     email: "kaya@myfutureselfapp.com",
     gender: "Male",
     nationality: "American",
-    homeLocation: { "@type": "Place", name: "Cleveland, Ohio, USA" },
-    workLocation: { "@type": "Place", name: "Cleveland, Ohio, USA" },
+    homeLocation: { "@type": "Place", name: "Cincinnati, Ohio, USA" },
+    workLocation: { "@type": "Place", name: "Cincinnati, Ohio, USA" },
     alumniOf: [
       {
         "@type": "CollegeOrUniversity",
@@ -163,7 +157,7 @@ function personJsonLd(metrics: MarketingMetricsSnapshot) {
       name: "MyFutureSelf",
       url: "https://myfutureselfapp.com",
       description:
-        "Consumer AI app delivering personalized future-self mentorship through a 90-day roadmap and a voice AI mentor.",
+        "MyFutureSelf is an AI agent that is your future self. It tells you what to do today and who can help you get there.",
       funder: { "@type": "Organization", name: "Cintrifuse Capital" },
     },
     sameAs: [
@@ -178,7 +172,7 @@ function personJsonLd(metrics: MarketingMetricsSnapshot) {
       {
         "@type": "Occupation",
         name: "Co-founder & CTO, MyFutureSelf",
-        occupationLocation: { "@type": "City", name: "Cleveland, Ohio" },
+        occupationLocation: { "@type": "City", name: "Cincinnati, Ohio" },
         skills:
           "iOS engineering (Swift/SwiftUI), backend (Node.js/Firebase/Cloud Functions), voice AI (WebRTC, OpenAI Realtime), AI integration (Claude, OpenAI), product design, growth, AI-native development with Claude Code and Codex",
       },
@@ -192,15 +186,19 @@ function orgJsonLd(metrics: MarketingMetricsSnapshot) {
     "@type": "Organization",
     name: "MyFutureSelf",
     url: "https://myfutureselfapp.com",
-    founder: { "@type": "Person", name: "Kaya Hickin", url: siteConfig.url },
+    founder: [
+      { "@type": "Person", name: "Kaya Hickin", url: siteConfig.url },
+      { "@type": "Person", name: "Giancarlo Sarti" },
+    ],
+    foundingDate: "2025-02",
     description:
-      "Consumer AI app that creates a personalized future-self mentor for each " +
-      "user, delivering a 90-day roadmap and voice-based AI coaching. " +
-      `Current traction: ${metrics.metrics.appDownloads.display} downloads, ` +
-      `${metrics.metrics.paidSubscribersEver.display} active paid subscribers, ` +
-      `${metrics.metrics.arr.display} ARR, ` +
-      `and a ${metrics.metrics.appStoreRating.display}★ App Store rating from ` +
-      `${metrics.metrics.appStoreReviews.display} ratings.`,
+      "MyFutureSelf is an AI agent that is your future self. It tells you " +
+      "what to do today and who can help you get there. MyFutureSelf is now " +
+      "bringing the agent to universities and corporations, where the person " +
+      "who can help you most is already in your network through your school " +
+      "or company. The agent finds them and connects you. " +
+      `It has ${metrics.metrics.payingSubscribers.display} paying subscribers and ` +
+      `${metrics.metrics.arr.display} ARR.`,
     funder: { "@type": "Organization", name: "Cintrifuse Capital" },
     sameAs: [
       "https://apps.apple.com/us/app/myfutureself-achieve-success/id6745573360",

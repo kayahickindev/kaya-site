@@ -13,7 +13,7 @@ import {
 } from "@/lib/github-contributions";
 import {
   parseMetricDisplay,
-  type MarketingMetricsSnapshot,
+  type PublicMarketingMetricsSnapshot,
 } from "@/lib/marketing-metrics";
 import { ContributionGraph } from "./ContributionGraph";
 import { Footer } from "./Footer";
@@ -147,12 +147,12 @@ function ramp(value: number, steps = 8) {
   return Array.from({ length: steps }, (_, i) => value / 2 ** (steps - 1 - i));
 }
 
-function metricTiles(metrics: MarketingMetricsSnapshot) {
+function metricTiles(metrics: PublicMarketingMetricsSnapshot) {
   // Every tile counts up to the number inside the published display string, so a
   // tile can never animate to a figure the site does not publish. The exact paid
   // subscriber count and ARR are private and are not in the payload.
   const subscribers = parseMetricDisplay(
-    metrics.metrics.paidSubscribersEver.display,
+    metrics.metrics.payingSubscribers.display,
   );
   const arr = parseMetricDisplay(metrics.metrics.arr.display);
   const downloads = parseMetricDisplay(metrics.metrics.appDownloads.display);
@@ -161,7 +161,9 @@ function metricTiles(metrics: MarketingMetricsSnapshot) {
   return [
     {
       ...subscribers,
-      label: "active paid subscribers",
+      // "5,000+" keeps its thousands separator while it counts up.
+      format: true,
+      label: "paying subscribers",
       sparkline: ramp(subscribers.value),
       accent: "rgb(34,197,94)",
     },
@@ -231,7 +233,7 @@ export function CommandCenter({
   metrics,
   contributions,
 }: {
-  metrics: MarketingMetricsSnapshot;
+  metrics: PublicMarketingMetricsSnapshot;
   contributions: ContributionCalendar | null;
 }) {
   const featured = siteConfig.projects.find((project) => project.featured);
@@ -269,7 +271,7 @@ export function CommandCenter({
                   Kaya Hickin
                 </span>
                 <span className="block text-[11px] text-neutral-500 dark:text-neutral-300">
-                  Co-founder &amp; CTO · Cleveland, OH
+                  Co-founder &amp; CTO · Cincinnati, OH
                 </span>
               </span>
             </div>
