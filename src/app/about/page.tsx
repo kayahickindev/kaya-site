@@ -32,15 +32,15 @@ const SIDEBAR_ICONS: Record<string, LucideIcon> = {
 };
 
 // GitHub contributions are contributions, never commits: the figure counts
-// commits, pull requests, issues and reviews. 16,846 in the last year (to
-// September 2026), read from GitHub's contribution calendar on 2026-09-23.
+// commits, pull requests, issues and reviews. 50,991 in the last year (to
+// November 2026), read from GitHub's contribution calendar on 2026-11-02.
 // The token figure is coding-tool usage across Codex and Claude, and is
 // separate from the training of the Dog AI model.
 const highlightStats = [
-  { value: "8 yrs", label: "professional experience" },
+  { value: "9 yrs", label: "professional experience" },
   { value: "3-for-3", label: "profitable companies" },
   { value: "100B+", label: "Codex and Claude tokens" },
-  { value: "16.8K+", label: "GitHub contributions" },
+  { value: "50K+", label: "GitHub contributions" },
 ];
 
 export default async function AboutPage() {
