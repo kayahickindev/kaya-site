@@ -42,9 +42,9 @@ export async function GET() {
       dataUrl("mfs-4.jpg", "image/jpeg"),
     ]);
 
-  // Contributions are read live; "16.8K+" is the floor published on the site
-  // (16,846 on 2026-09-23) for when GitHub's calendar cannot be read.
-  const contributions = calendar ? thousands(calendar.total) : "16.8K+";
+  // Contributions are read live; "50K+" is the floor published on the site
+  // (50,991 on 2026-11-02) for when GitHub's calendar cannot be read.
+  const contributions = calendar ? thousands(calendar.total) : "50K+";
 
   const stats = [
     { value: metrics.metrics.arr.display, label: "ARR" },
