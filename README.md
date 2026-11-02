@@ -49,6 +49,11 @@ and `/api/profile-metrics` fails with `503` instead of silently presenting a
 fresh timestamp with stale numbers. The public profile endpoint exposes only
 rounded display values for ARR and active paid subscribers.
 
+The site's paying subscriber figure is derived on the server from the feed's
+paid subscription count, floored to the thousand ("5,000+"), so the exact count
+is never published. Client Components receive `clientMarketingMetricsSnapshot`,
+which carries only the typed metrics and none of the private raw values.
+
 Edit this file to update:
 - Hero text and CTAs
 - Metrics / proof points

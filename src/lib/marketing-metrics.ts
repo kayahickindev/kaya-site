@@ -14,6 +14,9 @@ export type MarketingMetricsSnapshot = {
     coachingValueDelivered: MarketingMetric;
     paidSubscribersEver: MarketingMetric;
     arr: MarketingMetric;
+    // Derived on the server from the feed's `paidSubscribers` count, floored to
+    // the thousand ("5,000+"). `raw` is that published floor, never the exact count.
+    payingSubscribers: MarketingMetric;
   };
 };
 
@@ -30,46 +33,53 @@ export type PublicMarketingMetricsSnapshot = Omit<
   };
 };
 
-// Last recorded public snapshot, checked against primary sources on 2026-09-23.
-// Sources: App Store Connect (downloads, rating, ratings count), Superwall
-// (active paid subscribers, ARR), and the MyFutureSelf metrics function
-// (Future Self Actions, modeled coaching value).
+// Last recorded public snapshot, 2026-11-02. Store and product figures are the
+// live feed's snapshot generated 2026-11-02 05:16 UTC (App Store Connect for
+// downloads, rating and ratings count; the MyFutureSelf metrics function for
+// Future Self Actions and coaching value). Paying subscribers and ARR are the
+// figures Kaya verified on 2026-11-02.
 //
 // Production reads live figures through FOUNDER_METRICS_ACCESS_TOKEN. Without
 // the token every page renders this snapshot, so it has to be correct on its own.
 //
 // `raw` is deliberately 0 for the two private financial metrics: the exact
-// subscriber count and the exact ARR are not published, and this
-// object is serialized into the client payload. Everything the interface shows
-// for those two comes from `display`.
+// subscriber count and the exact ARR are not published. Everything the
+// interface shows for those two comes from `display`. `paidSubscribersEver`
+// is kept for the profile feed contract and is not rendered; the site shows
+// `payingSubscribers`.
 export const FALLBACK_MARKETING_METRICS: MarketingMetricsSnapshot = {
   generatedAt: "fallback",
   metrics: {
     // The live feed carries the exact download count; this raw is the floor of
-    // the published 72K+ and only ever feeds the `raw > 0` shape check.
-    appDownloads: { raw: 72000, display: "72K+", label: "Downloads" },
+    // the published 92K+ and only ever feeds the `raw > 0` shape check.
+    appDownloads: { raw: 92000, display: "92K+", label: "Downloads" },
     appStoreRating: {
-      raw: 4.68659565487275,
-      display: "4.7",
+      raw: 4.637945695931476,
+      display: "4.6",
       label: "App Store rating",
     },
-    appStoreReviews: { raw: 1762, display: "1,762", label: "Ratings" },
+    appStoreReviews: { raw: 2335, display: "2,335", label: "Ratings" },
     futureSelfActions: {
-      raw: 239109,
-      display: "239K+",
+      raw: 173355,
+      display: "173K+",
       label: "Future Self Actions",
     },
     coachingValueDelivered: {
-      raw: 22468229,
-      display: "$22.5M+",
+      raw: 15396532,
+      display: "$15.4M+",
       label: "Modeled Coaching Value",
     },
     paidSubscribersEver: {
       raw: 0,
-      display: "4K+",
+      display: "4.7K+",
       label: "Active Paid Subscribers",
     },
-    arr: { raw: 0, display: "$150K+", label: "ARR" },
+    arr: { raw: 0, display: "$189K", label: "ARR" },
+    payingSubscribers: {
+      raw: 5000,
+      display: "5,000+",
+      label: "Paying subscribers",
+    },
   },
 };
 
@@ -80,7 +90,7 @@ export type MetricDisplayParts = {
   decimals: number;
 };
 
-// Splits a published figure ("4K+", "$150K+", "72K+", "1,762") into the parts
+// Splits a published figure ("5,000+", "$189K", "92K+", "2,335") into the parts
 // the animated tiles need. The tiles count up to the number inside the published
 // string rather than to `raw`, so the animation can never land on a figure the
 // site does not publish, and the private financial raws stay out of the payload.
@@ -106,6 +116,8 @@ export function parseMetricDisplay(display: string): MetricDisplayParts {
 const DEFAULT_METRICS_URL =
   "https://us-central1-success-ai-dbdf7.cloudfunctions.net/getMarketingMetrics";
 
+// Upstream metrics a snapshot must carry. `paidSubscribers` is the exact paid
+// subscription count; the site only ever publishes its thousand floor.
 const REQUIRED_METRIC_NAMES = [
   "appDownloads",
   "appStoreRating",
@@ -113,8 +125,20 @@ const REQUIRED_METRIC_NAMES = [
   "futureSelfActions",
   "coachingValueDelivered",
   "paidSubscribersEver",
+  "paidSubscribers",
   "arr",
 ] as const;
+
+// 5093 -> "5,000+": floored to the thousand so the site never overstates the
+// count and never publishes the exact figure.
+export function payingSubscribersMetric(count: number): MarketingMetric {
+  const floor = Math.floor(count / 1000) * 1000;
+  return {
+    raw: floor,
+    display: `${floor.toLocaleString("en-US")}+`,
+    label: "Paying subscribers",
+  };
+}
 
 function isMetric(value: unknown): value is MarketingMetric {
   if (!value || typeof value !== "object") return false;
@@ -147,7 +171,15 @@ export function normalizeMarketingMetricsSnapshot(
   ) {
     return null;
   }
-  return value as MarketingMetricsSnapshot;
+  const paidSubscribers = snapshot.metrics.paidSubscribers as MarketingMetric;
+  if (paidSubscribers.raw < 1000) return null;
+  return {
+    ...(value as MarketingMetricsSnapshot),
+    metrics: {
+      ...(snapshot.metrics as MarketingMetricsSnapshot["metrics"]),
+      payingSubscribers: payingSubscribersMetric(paidSubscribers.raw),
+    },
+  };
 }
 
 export function publicMarketingMetricsSnapshot(
@@ -165,6 +197,37 @@ export function publicMarketingMetricsSnapshot(
         snapshot.metrics.paidSubscribersEver,
       ),
       arr: publicMetric(snapshot.metrics.arr),
+    },
+  };
+}
+
+// What a Client Component may receive. Props are serialized into the page's
+// RSC payload, so this keeps only the typed metrics, drops the raw values of the
+// two private financial figures, and leaves every other upstream field (the
+// exact paid subscription count among them) on the server.
+export function clientMarketingMetricsSnapshot(
+  snapshot: MarketingMetricsSnapshot,
+): PublicMarketingMetricsSnapshot {
+  const { metrics } = snapshot;
+  const keep = ({ raw, display, label }: MarketingMetric) => ({
+    raw,
+    display,
+    label,
+  });
+  return {
+    generatedAt: snapshot.generatedAt,
+    metrics: {
+      appDownloads: keep(metrics.appDownloads),
+      appStoreRating: keep(metrics.appStoreRating),
+      appStoreReviews: keep(metrics.appStoreReviews),
+      futureSelfActions: keep(metrics.futureSelfActions),
+      coachingValueDelivered: keep(metrics.coachingValueDelivered),
+      paidSubscribersEver: {
+        display: metrics.paidSubscribersEver.display,
+        label: metrics.paidSubscribersEver.label,
+      },
+      arr: { display: metrics.arr.display, label: metrics.arr.label },
+      payingSubscribers: keep(metrics.payingSubscribers),
     },
   };
 }

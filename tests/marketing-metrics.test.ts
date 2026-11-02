@@ -2,32 +2,37 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   FALLBACK_MARKETING_METRICS,
+  clientMarketingMetricsSnapshot,
   normalizeMarketingMetricsSnapshot,
   parseMetricDisplay,
+  payingSubscribersMetric,
   publicMarketingMetricsSnapshot,
 } from "../src/lib/marketing-metrics.ts";
 
 // Stands in for a live upstream response. Upstream still sends the exact
-// subscriber count and ARR; the site never publishes them, so the
-// two raw values here are deliberately made-up placeholders.
+// subscriber counts and ARR; the site never publishes them, so the
+// private raw values here are deliberately made-up placeholders.
 const currentSnapshot = {
-  generatedAt: "2026-09-23T04:15:58.000Z",
+  generatedAt: "2026-11-02T05:16:33.999Z",
   metrics: {
-    appDownloads: { raw: 72000, display: "72K+", label: "Downloads" },
-    appStoreRating: { raw: 4.68659565487275, display: "4.7", label: "App Store rating" },
-    appStoreReviews: { raw: 1762, display: "1,762", label: "Ratings" },
-    futureSelfActions: { raw: 239109, display: "239K+", label: "Future Self Actions" },
+    appDownloads: { raw: 92260, display: "92K+", label: "Downloads" },
+    appStoreRating: { raw: 4.637945695931476, display: "4.6", label: "App Store Rating" },
+    appStoreReviews: { raw: 2335, display: "2,335", label: "App Store Reviews" },
+    futureSelfActions: { raw: 173355, display: "173K+", label: "Future Self Actions" },
     coachingValueDelivered: {
-      raw: 22468229,
-      display: "$22.5M+",
-      label: "Modeled Coaching Value",
+      raw: 15396532,
+      display: "$15.4M+",
+      label: "Coaching Value Delivered",
     },
     paidSubscribersEver: {
       raw: 1,
-      display: "4K+",
+      display: "4.7K+",
       label: "Active Paid Subscribers",
     },
-    arr: { raw: 1, display: "$151K", label: "ARR" },
+    paidSubscribers: { raw: 5432, display: "5,432", label: "Paid Subscriptions" },
+    arr: { raw: 1, display: "$189K", label: "ARR" },
+    // An upstream field the site does not type; it must never reach a client.
+    annualizedSales: { raw: 7, display: "$7", label: "Annualized Sales" },
   },
 };
 
@@ -46,38 +51,93 @@ test("rejects a fresh upstream snapshot when private metrics are missing", () =>
   assert.equal(normalizeMarketingMetricsSnapshot(redactedSnapshot), null);
 });
 
-test("accepts a complete upstream snapshot", () => {
-  assert.deepEqual(
-    normalizeMarketingMetricsSnapshot(currentSnapshot),
-    currentSnapshot,
+test("rejects a snapshot without the paid subscription count", () => {
+  const metrics: Record<string, unknown> = { ...currentSnapshot.metrics };
+  delete metrics.paidSubscribers;
+  assert.equal(
+    normalizeMarketingMetricsSnapshot({ ...currentSnapshot, metrics }),
+    null,
   );
 });
 
+test("accepts a complete upstream snapshot and derives paying subscribers", () => {
+  assert.deepEqual(normalizeMarketingMetricsSnapshot(currentSnapshot), {
+    ...currentSnapshot,
+    metrics: {
+      ...currentSnapshot.metrics,
+      payingSubscribers: {
+        raw: 5000,
+        display: "5,000+",
+        label: "Paying subscribers",
+      },
+    },
+  });
+});
+
+test("paying subscribers are floored to the thousand, never the exact count", () => {
+  assert.deepEqual(payingSubscribersMetric(5093), {
+    raw: 5000,
+    display: "5,000+",
+    label: "Paying subscribers",
+  });
+  assert.equal(payingSubscribersMetric(5999).display, "5,000+");
+  assert.equal(payingSubscribersMetric(6000).display, "6,000+");
+  assert.equal(payingSubscribersMetric(12345).display, "12,000+");
+});
+
+test("the client snapshot carries only typed metrics and published figures", () => {
+  const normalized = normalizeMarketingMetricsSnapshot(currentSnapshot);
+  assert.ok(normalized);
+  const client = clientMarketingMetricsSnapshot(normalized);
+  const serialized = JSON.stringify(client);
+
+  assert.deepEqual(Object.keys(client.metrics).sort(), [
+    "appDownloads",
+    "appStoreRating",
+    "appStoreReviews",
+    "arr",
+    "coachingValueDelivered",
+    "futureSelfActions",
+    "paidSubscribersEver",
+    "payingSubscribers",
+  ]);
+  assert.deepEqual(client.metrics.arr, { display: "$189K", label: "ARR" });
+  assert.deepEqual(client.metrics.paidSubscribersEver, {
+    display: "4.7K+",
+    label: "Active Paid Subscribers",
+  });
+  assert.equal(client.metrics.payingSubscribers.display, "5,000+");
+  assert.equal(serialized.includes("5432"), false);
+  assert.equal(serialized.includes("annualizedSales"), false);
+});
+
 test("removes exact private values from the public profile snapshot", () => {
-  const publicSnapshot = publicMarketingMetricsSnapshot(currentSnapshot);
+  const normalized = normalizeMarketingMetricsSnapshot(currentSnapshot);
+  assert.ok(normalized);
+  const publicSnapshot = publicMarketingMetricsSnapshot(normalized);
 
   assert.deepEqual(publicSnapshot.metrics.arr, {
-    display: "$151K",
+    display: "$189K",
     label: "ARR",
   });
   assert.deepEqual(publicSnapshot.metrics.paidSubscribersEver, {
-    display: "4K+",
+    display: "4.7K+",
     label: "Active Paid Subscribers",
   });
-  assert.equal(publicSnapshot.metrics.appStoreReviews.raw, 1762);
+  assert.equal(publicSnapshot.metrics.appStoreReviews.raw, 2335);
 });
 
 
 test("the recorded snapshot carries the figures the site publishes", () => {
   const recorded = FALLBACK_MARKETING_METRICS.metrics;
 
-  assert.equal(recorded.appDownloads.display, "72K+");
-  assert.equal(recorded.appStoreRating.display, "4.7");
-  assert.equal(recorded.appStoreReviews.display, "1,762");
-  assert.equal(recorded.futureSelfActions.display, "239K+");
-  assert.equal(recorded.coachingValueDelivered.display, "$22.5M+");
-  assert.equal(recorded.paidSubscribersEver.display, "4K+");
-  assert.equal(recorded.arr.display, "$150K+");
+  assert.equal(recorded.appDownloads.display, "92K+");
+  assert.equal(recorded.appStoreRating.display, "4.6");
+  assert.equal(recorded.appStoreReviews.display, "2,335");
+  assert.equal(recorded.futureSelfActions.display, "173K+");
+  assert.equal(recorded.coachingValueDelivered.display, "$15.4M+");
+  assert.equal(recorded.payingSubscribers.display, "5,000+");
+  assert.equal(recorded.arr.display, "$189K");
   assert.equal(recorded.arr.label, "ARR");
 });
 
@@ -110,6 +170,12 @@ test("parses a published figure into the parts the tiles animate", () => {
     prefix: "",
     suffix: "",
     decimals: 1,
+  });
+  assert.deepEqual(parseMetricDisplay("5,000+"), {
+    value: 5000,
+    prefix: "",
+    suffix: "+",
+    decimals: 0,
   });
   assert.deepEqual(parseMetricDisplay("1,762"), {
     value: 1762,

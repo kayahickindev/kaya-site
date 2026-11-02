@@ -330,11 +330,12 @@ function outcomesForDetail(
 ) {
   if (detail.slug !== "myfutureself") return detail.outcomes;
 
+  // The live figures lead; the static outcomes follow.
   return [
-    `${metrics.metrics.paidSubscribersEver.display} active paid subscribers and ${metrics.metrics.arr.display} ARR`,
+    `${metrics.metrics.payingSubscribers.display} paying subscribers and ${metrics.metrics.arr.display} ARR`,
     `${metrics.metrics.appDownloads.display} downloads on the App Store`,
-    "Backed by Cintrifuse Capital",
     `${metrics.metrics.appStoreRating.display}-star App Store rating from ${metrics.metrics.appStoreReviews.display} ratings`,
+    ...detail.outcomes,
   ];
 }
 
