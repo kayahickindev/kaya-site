@@ -60,7 +60,7 @@ export async function generateMetadata(): Promise<Metadata> {
       "Cintrifuse Capital",
       "Dog AI",
       "full-stack developer",
-      "Cleveland Ohio",
+      "Cincinnati Ohio",
       "consumer AI startup",
       "three-time founder",
     ],
@@ -106,15 +106,15 @@ function personJsonLd(metrics: MarketingMetricsSnapshot) {
       "cold outreach agency for AI startups, and grew it to $20K MRR in three " +
       "months. " +
       "In one month he merged over 3,000 PRs himself. " +
-      "16,846 GitHub contributions in the last " +
-      "year (to September 2026) across product and infra, a figure that counts " +
+      "50,000+ GitHub contributions in the last " +
+      "year (to November 2026) across product and infra, a figure that counts " +
       "commits, pull requests, issues and reviews, and 100B+ tokens across " +
       "the Codex and Claude coding tools.",
     email: "kaya@myfutureselfapp.com",
     gender: "Male",
     nationality: "American",
-    homeLocation: { "@type": "Place", name: "Cleveland, Ohio, USA" },
-    workLocation: { "@type": "Place", name: "Cleveland, Ohio, USA" },
+    homeLocation: { "@type": "Place", name: "Cincinnati, Ohio, USA" },
+    workLocation: { "@type": "Place", name: "Cincinnati, Ohio, USA" },
     alumniOf: [
       {
         "@type": "CollegeOrUniversity",
@@ -172,7 +172,7 @@ function personJsonLd(metrics: MarketingMetricsSnapshot) {
       {
         "@type": "Occupation",
         name: "Co-founder & CTO, MyFutureSelf",
-        occupationLocation: { "@type": "City", name: "Cleveland, Ohio" },
+        occupationLocation: { "@type": "City", name: "Cincinnati, Ohio" },
         skills:
           "iOS engineering (Swift/SwiftUI), backend (Node.js/Firebase/Cloud Functions), voice AI (WebRTC, OpenAI Realtime), AI integration (Claude, OpenAI), product design, growth, AI-native development with Claude Code and Codex",
       },

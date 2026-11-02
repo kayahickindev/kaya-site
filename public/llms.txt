@@ -1,11 +1,11 @@
 # Kaya Hickin
 
-> Co-founder and CTO of MyFutureSelf. MyFutureSelf is an AI agent that is your future self. It tells you what to do today and who can help you get there. It has 5,000+ paying subscribers and $189K ARR as of November 2026, and it is Kaya's third profitable company. Kaya co-founded MyFutureSelf with Giancarlo Sarti and leads development. He built the iOS and Android apps, the university platform, the backend, the AI and the company brain the team's agents work off 24/7, and in one month he merged over 3,000 PRs himself. 16,846 GitHub contributions in the last year (to September 2026) and 100B+ tokens across the Codex and Claude coding tools. 20+ websites and 2 App Store apps shipped to date. His daily stack is Claude Code, Codex, Granola, Wispr Flow and Ghostty. Domain expertise in consumer AI, AI agents, iOS, and behavior-change products.
+> Co-founder and CTO of MyFutureSelf. MyFutureSelf is an AI agent that is your future self. It tells you what to do today and who can help you get there. It has 5,000+ paying subscribers and $189K ARR as of November 2026, and it is Kaya's third profitable company. Kaya co-founded MyFutureSelf with Giancarlo Sarti and leads development. He built the iOS and Android apps, the university platform, the backend, the AI and the company brain the team's agents work off 24/7, and in one month he merged over 3,000 PRs himself. 50,000+ GitHub contributions in the last year (to November 2026) and 100B+ tokens across the Codex and Claude coding tools. 20+ websites and 2 App Store apps shipped to date. His daily stack is Claude Code, Codex, Granola, Wispr Flow and Ghostty. Domain expertise in consumer AI, AI agents, iOS, and behavior-change products.
 
 ## Who I am
 
 - **Role**: Co-founder & CTO at MyFutureSelf. Technical founder who leads development.
-- **Location**: Cleveland, Ohio.
+- **Location**: Cincinnati, Ohio.
 - **Background**: Grew up poor in a farm town. Started working in my dad's landscaping business at 13, and that money bought my first computer. Went from hacking Minecraft servers and building Roblox games to learning how to code in middle school.
 - **Education**: Miami University, Farmer School of Business. B.S. in Business, Marketing major, Entrepreneurship minor, May 2026. Paid my own way. Cum laude, 3.74 GPA. Valedictorian and three-sport athlete, Crestwood High School, Class of 2022, with 45 college credits through College Credit Plus.
 - **Contact**: kaya@myfutureselfapp.com
@@ -39,7 +39,7 @@
 ## Velocity & engineering signal
 
 - **3,000+ PRs merged** by Kaya himself in a single month.
-- **16,846 GitHub contributions** in the last year (to September 2026), https://github.com/kayahickindev. Contributions are broader than commits. The figure counts commits, pull requests, issues, and reviews.
+- **50,000+ GitHub contributions** in the last year (to November 2026), https://github.com/kayahickindev. Contributions are broader than commits. The figure counts commits, pull requests, issues, and reviews.
 - **100B+ tokens** of reported cumulative usage across the Codex and Claude coding tools, as of September 13, 2026. This measures coding-tool usage. It is not related to training the Dog AI model.
 - **20+ websites and 2 App Store apps shipped** across all ventures to date.
 - AI-native development workflow built around **Claude Code** and **Codex** running daily, with a company brain that 9 Claude Max and 4 Codex plans run on 24/7.

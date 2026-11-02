@@ -271,7 +271,7 @@ export function CommandCenter({
                   Kaya Hickin
                 </span>
                 <span className="block text-[11px] text-neutral-500 dark:text-neutral-300">
-                  Co-founder &amp; CTO · Cleveland, OH
+                  Co-founder &amp; CTO · Cincinnati, OH
                 </span>
               </span>
             </div>

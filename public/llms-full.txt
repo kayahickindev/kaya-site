@@ -14,7 +14,7 @@ Co-founder and CTO of MyFutureSelf, an AI agent that is your future self. It tel
 
 - **Name**: Kaya Hickin
 - **Email**: kaya@myfutureselfapp.com
-- **Location**: Cleveland, Ohio, USA
+- **Location**: Cincinnati, Ohio, USA
 - **Citizenship**: United States
 - **Title**: Co-founder & CTO, MyFutureSelf
 - **Technical founder**: Yes. An engineer who builds the product and leads development.
@@ -93,7 +93,7 @@ Co-founded this web development agency in my dorm room freshman year. Built webs
 
 **Link**: https://leadboost-pro.com
 
-### Organic Roots Horticulture, Operations & Growth (2018 to 2022)
+### Organic Roots Horticulture, Operations & Growth (2017 to 2022)
 
 Started working in my dad's landscaping business at 13 and worked through high school and into college. That money bought my first computer. Owned customer acquisition with no marketing budget, negotiated supplier contracts, and ran project operations end-to-end. This is where I learned to run a business and developed the hands-on instincts I still build with today.
 
@@ -122,7 +122,7 @@ Started working in my dad's landscaping business at 13 and worked through high s
 ## Engineering velocity
 
 - **3,000+ PRs merged** by Kaya himself in a single month.
-- **16,846 GitHub contributions** in the last year (to September 2026). Contributions are broader than commits. The figure counts commits, pull requests, issues, and reviews.
+- **50,000+ GitHub contributions** in the last year (to November 2026). Contributions are broader than commits. The figure counts commits, pull requests, issues, and reviews.
 - **100B+ tokens** of reported cumulative usage across the Codex and Claude coding tools, as of September 13, 2026. This measures coding-tool usage and is separate from the training of the Dog AI model.
 - **Company brain** that 9 Claude Max and 4 Codex plans run on 24/7, writing code, fixing bugs, shipping releases and answering support.
 - **20+ websites shipped** across all ventures to date
@@ -210,7 +210,7 @@ Spending the next decade building consumer AI products that change real behavior
 - **AI-native shipping velocity** that compounds over time (Claude Code + Codex daily)
 - **Capital-efficient operator**, used to making $1 do the work of $5
 - **Consumer AI wedge** in a market investors are actively backing
-- **Available full-time**. Graduated May 2026, based in Cleveland, Ohio.
+- **Available full-time**. Graduated May 2026, based in Cincinnati, Ohio.
 
 ## Direct contact
 

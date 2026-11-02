@@ -17,7 +17,7 @@ export const siteConfig = {
       "He built the iOS and Android apps, the backend, the AI and the company brain the team's agents work off 24/7.",
   },
 
-  availability: "Cleveland, OH",
+  availability: "Cincinnati, OH",
 
   recognitions: [
     "Startup Catalyst Award, Miami University 2026",
