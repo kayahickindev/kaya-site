@@ -18,6 +18,7 @@ const currentSnapshot = {
     appDownloads: { raw: 92260, display: "92K+", label: "Downloads" },
     appStoreRating: { raw: 4.637945695931476, display: "4.6", label: "App Store Rating" },
     appStoreReviews: { raw: 2335, display: "2,335", label: "App Store Reviews" },
+    fiveStarRatings: { raw: 2003, display: "2,000+", label: "5-Star Ratings" },
     futureSelfActions: { raw: 173355, display: "173K+", label: "Future Self Actions" },
     coachingValueDelivered: {
       raw: 15396532,
@@ -74,6 +75,20 @@ test("accepts a complete upstream snapshot and derives paying subscribers", () =
   });
 });
 
+test("a snapshot without 5-star ratings keeps the recorded figure", () => {
+  const metrics: Record<string, unknown> = { ...currentSnapshot.metrics };
+  delete metrics.fiveStarRatings;
+  const normalized = normalizeMarketingMetricsSnapshot({
+    ...currentSnapshot,
+    metrics,
+  });
+  assert.ok(normalized);
+  assert.deepEqual(
+    normalized.metrics.fiveStarRatings,
+    FALLBACK_MARKETING_METRICS.metrics.fiveStarRatings,
+  );
+});
+
 test("paying subscribers are floored to the thousand, never the exact count", () => {
   assert.deepEqual(payingSubscribersMetric(5093), {
     raw: 5000,
@@ -97,6 +112,7 @@ test("the client snapshot carries only typed metrics and published figures", () 
     "appStoreReviews",
     "arr",
     "coachingValueDelivered",
+    "fiveStarRatings",
     "futureSelfActions",
     "paidSubscribersEver",
     "payingSubscribers",
@@ -134,6 +150,7 @@ test("the recorded snapshot carries the figures the site publishes", () => {
   assert.equal(recorded.appDownloads.display, "92K+");
   assert.equal(recorded.appStoreRating.display, "4.6");
   assert.equal(recorded.appStoreReviews.display, "2,335");
+  assert.equal(recorded.fiveStarRatings.display, "2,000+");
   assert.equal(recorded.futureSelfActions.display, "173K+");
   assert.equal(recorded.coachingValueDelivered.display, "$15.4M+");
   assert.equal(recorded.payingSubscribers.display, "5,000+");

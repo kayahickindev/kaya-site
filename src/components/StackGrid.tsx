@@ -60,7 +60,7 @@ export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
   // the same markup on the server and the client.
   return (
     <MotionConfig reducedMotion="user">
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+      <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-6">
         {grouped.map((group, columnIndex) => {
           const meta = categoryMeta[group.category];
           const Icon = meta.icon;
@@ -72,7 +72,7 @@ export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
               initial="hidden"
               animate="show"
               variants={columnVariants}
-              className={`${cardSurface} p-3`}
+              className={`${cardSurface} min-w-0 p-3`}
             >
               <div
                 aria-hidden
@@ -86,7 +86,7 @@ export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
                   {group.category}
                 </h2>
               </div>
-              <ul className="mt-3 grid gap-2.5">
+              <ul className="mt-2.5 grid grid-cols-1 gap-1.5">
                 {group.items.map((item, itemIndex) => (
                   <motion.li
                     key={item.name}
@@ -94,9 +94,10 @@ export function StackGrid({ grouped }: { grouped: GroupedItem[] }) {
                     initial="hidden"
                     animate="show"
                     variants={itemVariants}
-                    className="flex items-center gap-2.5 rounded-md bg-neutral-950/[0.04] px-2.5 py-3.5 text-sm text-neutral-800 transition hover:bg-neutral-950/[0.07] dark:bg-white/[0.04] dark:text-neutral-200 dark:hover:bg-white/[0.07]"
+                    title={item.name}
+                    className="flex min-w-0 items-center gap-2 rounded-md bg-neutral-950/[0.04] px-2 py-2 text-[13px] xl:gap-2.5 xl:px-2.5 2xl:text-sm text-neutral-800 transition hover:bg-neutral-950/[0.07] dark:bg-white/[0.04] dark:text-neutral-200 dark:hover:bg-white/[0.07]"
                   >
-                    <BrandLogo name={item.name} size={22} />
+                    <BrandLogo name={item.name} size={20} />
                     <span className="truncate">{item.name}</span>
                   </motion.li>
                 ))}

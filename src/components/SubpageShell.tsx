@@ -87,11 +87,11 @@ export function SubpageShell({ children, accent = "amber" }: Props) {
   return (
     <main className="relative min-h-dvh overflow-x-clip bg-[#f4f1ea] text-neutral-950 dark:bg-[#050505] dark:text-white">
       <SignalField accent={accent} />
-      <div className="relative z-10 flex min-h-dvh flex-col gap-6 px-4 py-3 sm:px-5 sm:py-4 lg:px-7">
+      <div className="relative z-10 flex min-h-dvh flex-col gap-4 px-4 py-3 sm:px-5 sm:py-4 lg:gap-5 lg:px-7">
         <TopNav />
 
         <section
-          className="intro-rise flex-1 pb-6"
+          className="intro-rise flex flex-1 flex-col pb-2 lg:justify-center"
           style={{ "--intro-y": "10px" } as CSSProperties}
         >
           {children}

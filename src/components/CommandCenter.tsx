@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MotionConfig, motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { myFutureSelf } from "@/data/assets";
+import { myFutureSelfScreens as screens } from "@/data/assets";
 import { siteConfig } from "@/data/content";
 import {
   formatCount,
@@ -18,7 +18,7 @@ import {
 import { ContributionGraph } from "./ContributionGraph";
 import { Footer } from "./Footer";
 import { MetricTiles } from "./MetricTiles";
-import { PhoneFan } from "./PhoneFan";
+import { PhoneMockups } from "./PhoneMockups";
 import { RevealHeadline } from "./RevealHeadline";
 import { TopNav } from "./TopNav";
 
@@ -156,7 +156,7 @@ function metricTiles(metrics: PublicMarketingMetricsSnapshot) {
   );
   const arr = parseMetricDisplay(metrics.metrics.arr.display);
   const downloads = parseMetricDisplay(metrics.metrics.appDownloads.display);
-  const rating = parseMetricDisplay(metrics.metrics.appStoreRating.display);
+  const fiveStars = parseMetricDisplay(metrics.metrics.fiveStarRatings.display);
 
   return [
     {
@@ -180,10 +180,11 @@ function metricTiles(metrics: PublicMarketingMetricsSnapshot) {
       accent: "rgb(34,211,238)",
     },
     {
-      ...rating,
-      label: "App Store rating",
-      suffix: `${rating.suffix}★`,
-      sparkline: [4.4, 4.44, 4.49, 4.53, 4.57, 4.61, 4.66, rating.value],
+      // iOS plus Android, summed by the feed.
+      ...fiveStars,
+      format: true,
+      label: "5-star ratings",
+      sparkline: ramp(fiveStars.value),
       accent: "rgb(251,191,36)",
     },
   ];
@@ -372,13 +373,11 @@ export function CommandCenter({
                 aria-label={`Open ${featured.name} case study`}
                 className="relative block w-full rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60"
               >
-                <PhoneFan
-                  shots={{
-                    left: myFutureSelf.store[2],
-                    center: myFutureSelf.store[1],
-                    right: myFutureSelf.store[3],
-                  }}
-                  sizeClassName="[--fan-h:max(240px,min(calc(100dvh-340px),82cqw,680px))]"
+                <PhoneMockups
+                  left={screens.actions}
+                  center={[screens.home, screens.reflect, screens.forYou]}
+                  right={screens.chat}
+                  sizeClassName="[--fan-h:max(260px,min(calc(100dvh-300px),74cqw,640px))]"
                 />
               </Link>
             </div>

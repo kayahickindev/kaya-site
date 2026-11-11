@@ -209,6 +209,13 @@ body {
     calc(0.1s + var(--word-index, 0) * 0.08s) backwards;
 }
 
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+}
+
 @keyframes signal-pulse {
   0%,
   100% {
@@ -233,7 +240,8 @@ body {
 
   .intro-rise,
   .reveal-word,
-  .signal-dot {
+  .signal-dot,
+  dialog[open] {
     animation: none;
   }
 

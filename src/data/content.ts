@@ -26,6 +26,12 @@ export const siteConfig = {
   ],
 
   about: {
+    // The short bio on the about page, in the speedrun voice: a trailer, each
+    // beat ending on a number. The full story sits behind "Read the full story".
+    summary: (payingSubscribers: string) => [
+      "I grew up poor in a farm town and started working in my dad's landscaping business at 13. That money bought my first computer, and I taught myself to code hacking Minecraft servers. I graduated valedictorian, paid my own way through Miami University and finished cum laude.",
+      `MyFutureSelf is my third profitable company. I built the iOS and Android apps, the backend, the AI and the company brain our agents run on 24/7, and I merged 2,800+ PRs in October. Today ${payingSubscribers} people pay for it.`,
+    ],
     // The LinkedIn About, verbatim. The about page passes in the live paying
     // subscriber figure ("5,000+"), so the last paragraph never goes stale.
     paragraphs: (payingSubscribers: string) => [
@@ -151,8 +157,11 @@ export const siteConfig = {
   timeline: [
     {
       company: "MyFutureSelf",
+      slug: "myfutureself",
       role: "Co-Founder · CTO",
       period: "Feb 2025 to Present",
+      start: "2025-02",
+      end: null,
       description:
         "An AI agent that is your future self, co-founded with Giancarlo Sarti. I lead development and built the iOS and Android apps, the university platform, the backend and the AI.",
       metrics: [],
@@ -160,8 +169,11 @@ export const siteConfig = {
     },
     {
       company: "Appointra",
+      slug: "appointra",
       role: "Co-Founder · CTO",
       period: "Jun 2024 to Feb 2025",
+      start: "2024-06",
+      end: "2025-02",
       description:
         "Co-founded with Giancarlo. Built cold-email infra that hit $20k MRR in three months and drove $2M+ in pipeline for 8/9-figure founders.",
       metrics: [],
@@ -169,8 +181,11 @@ export const siteConfig = {
     },
     {
       company: "LeadBoost Pro",
+      slug: "leadboost-pro",
       role: "Co-Founder",
       period: "Jan 2023 to Jun 2024",
+      start: "2023-01",
+      end: "2024-06",
       description:
         "Dorm-room start, profitable from month one. Built 20+ custom websites freshman year. Marketing, web dev, and consulting for blue collar businesses.",
       metrics: [],

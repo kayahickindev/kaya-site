@@ -10,6 +10,9 @@ export type MarketingMetricsSnapshot = {
     appDownloads: MarketingMetric;
     appStoreRating: MarketingMetric;
     appStoreReviews: MarketingMetric;
+    // iOS plus Android 5-star ratings, summed upstream. Optional in the feed:
+    // a snapshot without it keeps the fallback figure below.
+    fiveStarRatings: MarketingMetric;
     futureSelfActions: MarketingMetric;
     coachingValueDelivered: MarketingMetric;
     paidSubscribersEver: MarketingMetric;
@@ -59,6 +62,8 @@ export const FALLBACK_MARKETING_METRICS: MarketingMetricsSnapshot = {
       label: "App Store rating",
     },
     appStoreReviews: { raw: 2335, display: "2,335", label: "Ratings" },
+    // Feed snapshot 2026-11-10: 905 App Store plus 1,098 Google Play.
+    fiveStarRatings: { raw: 2003, display: "2,000+", label: "5-star ratings" },
     futureSelfActions: {
       raw: 173355,
       display: "173K+",
@@ -173,10 +178,14 @@ export function normalizeMarketingMetricsSnapshot(
   }
   const paidSubscribers = snapshot.metrics.paidSubscribers as MarketingMetric;
   if (paidSubscribers.raw < 1000) return null;
+  const fiveStarRatings = isMetric(snapshot.metrics.fiveStarRatings)
+    ? snapshot.metrics.fiveStarRatings
+    : FALLBACK_MARKETING_METRICS.metrics.fiveStarRatings;
   return {
     ...(value as MarketingMetricsSnapshot),
     metrics: {
       ...(snapshot.metrics as MarketingMetricsSnapshot["metrics"]),
+      fiveStarRatings,
       payingSubscribers: payingSubscribersMetric(paidSubscribers.raw),
     },
   };
@@ -220,6 +229,7 @@ export function clientMarketingMetricsSnapshot(
       appDownloads: keep(metrics.appDownloads),
       appStoreRating: keep(metrics.appStoreRating),
       appStoreReviews: keep(metrics.appStoreReviews),
+      fiveStarRatings: keep(metrics.fiveStarRatings),
       futureSelfActions: keep(metrics.futureSelfActions),
       coachingValueDelivered: keep(metrics.coachingValueDelivered),
       paidSubscribersEver: {
