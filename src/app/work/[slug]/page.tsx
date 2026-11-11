@@ -333,8 +333,8 @@ function outcomesForDetail(
   // The live figures lead; the static outcomes follow.
   return [
     `${metrics.metrics.payingSubscribers.display} paying subscribers and ${metrics.metrics.arr.display} ARR`,
-    `${metrics.metrics.appDownloads.display} downloads on the App Store`,
-    `${metrics.metrics.appStoreRating.display}-star App Store rating from ${metrics.metrics.appStoreReviews.display} ratings`,
+    `${metrics.metrics.appDownloads.display} downloads`,
+    `${metrics.metrics.fiveStarRatings.display} 5-star ratings across iOS and Android`,
     ...detail.outcomes,
   ];
 }

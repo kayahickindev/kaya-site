@@ -32,6 +32,40 @@ const mfsShot = (n: number, alt: string): StoreShot => ({
   height: STORE_HEIGHT,
 });
 
+// The app screens alone, cut from the composites above for the CSS phone
+// mockups: x 94 to 806 and y 505 to the bottom edge of each 900x1948 image,
+// the inside of the listing's own device frame. The bottom of each screen runs
+// off the composite, so the mockups fade their phones out before it.
+export type AppScreen = { src: string; alt: string };
+
+const mfsScreen = (n: number, alt: string): AppScreen => ({
+  src: `/products/myfutureself/screens/${n}.webp`,
+  alt,
+});
+
+export const myFutureSelfScreens = {
+  home: mfsScreen(
+    2,
+    "MyFutureSelf home: Future Giancarlo as an avatar, a 47% alignment score and his story",
+  ),
+  actions: mfsScreen(
+    3,
+    "MyFutureSelf on day 61: today's actions, from making your bed to deep work and eight hours of sleep",
+  ),
+  chat: mfsScreen(
+    4,
+    "MyFutureSelf chat: Future Giancarlo asks, ask me anything about today",
+  ),
+  reflect: mfsScreen(
+    5,
+    "MyFutureSelf check-in: how was today, a mood pick and the prompt of the day",
+  ),
+  forYou: mfsScreen(
+    6,
+    "MyFutureSelf For You: a message from your Future Self, a meditation, a video and an article",
+  ),
+};
+
 export const myFutureSelf = {
   icon: "/products/myfutureself/icon.png",
   iconAlt: "MyFutureSelf app icon",
